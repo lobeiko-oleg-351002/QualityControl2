@@ -8,14 +8,10 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface IUserRepository : IRepository<DalUser>
+    public interface IUserRepository : IRepository<DalUser, User>
     {
         DalUser GetUserByLogin(string login);
         DalUser Authorize(string login, string password);
-        new User Create(DalUser entity);
-        new void Delete(DalUser entity);
-        new DalUser Get(int id);
-        new IEnumerable<DalUser> GetAll();
-        new void Update(DalUser entity);
+
     }
 }

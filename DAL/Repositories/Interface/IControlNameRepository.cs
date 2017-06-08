@@ -8,13 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface IControlNameRepository : IRepository<DalControlName>
+    public interface IControlNameRepository : IRepository<DalControlName, ControlName>
     {
         DalControlName GetControlNameByName(string name);
-        new ControlName Create(DalControlName entity);
-        new void Delete(DalControlName entity);
-        new DalControlName Get(int id);
-        new IEnumerable<DalControlName> GetAll();
-        new void Update(DalControlName entity);
+
     }
 }

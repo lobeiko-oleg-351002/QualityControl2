@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping.Interfaces
 {
-    public interface IWeldJointMapper
+    public interface IWeldJointMapper : IMapper<DalWeldJoint, WeldJoint>
     {
-        DalWeldJoint MapToDal(WeldJoint entity);
-        WeldJoint MapToOrm(DalWeldJoint entity);
+       // DalWeldJoint MapToDal(WeldJoint entity);
+        //WeldJoint MapToOrm(DalWeldJoint entity);
     }
 }

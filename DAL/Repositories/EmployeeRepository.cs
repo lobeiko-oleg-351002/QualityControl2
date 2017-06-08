@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class EmployeeRepository : Repository<DalEmployee,Employee>, IEmployeeRepository
+    public class EmployeeRepository : Repository<DalEmployee,Employee, EmployeeMapper>, IEmployeeRepository
     {
         private readonly ServiceDB context;
         public EmployeeRepository(ServiceDB context) : base(context)
@@ -67,48 +67,6 @@ namespace DAL.Repositories
             return retElemets;
         }
 
-        EmployeeMapper mapper = new EmployeeMapper();
-
-        public new void Delete(DalEmployee entity)
-        {
-            var ormEntity = context.Set<Employee>().Single(Employee => Employee.id == entity.Id);
-            context.Set<Employee>().Remove(ormEntity);
-        }
-
-        public new DalEmployee Get(int id)
-        {
-            var ormEntity = context.Set<Employee>().FirstOrDefault(Employee => Employee.id == id);
-            return ormEntity != null ? (mapper.MapToDal(ormEntity)) : null;
-        }
-
-        public new IEnumerable<DalEmployee> GetAll()
-        {
-            var elements = context.Set<Employee>().Select(Employee => Employee);
-            var retElemets = new List<DalEmployee>();
-            if (elements.Any())
-            {
-                foreach (var element in elements)
-                {
-                    retElemets.Add(mapper.MapToDal(element));
-                }
-            }
-
-            return retElemets;
-        }
-
-        public new void Update(DalEmployee entity)
-        {
-            var ormEntity = context.Set<Employee>().Find(entity.Id);
-            if (ormEntity != null)
-            {
-                context.Entry(ormEntity).CurrentValues.SetValues(mapper.MapToOrm(entity));
-            }
-        }
-
-        public new Employee Create(DalEmployee entity)
-        {
-            var res = context.Set<Employee>().Add(mapper.MapToOrm(entity));
-            return res;
-        }
+     
     }
 }

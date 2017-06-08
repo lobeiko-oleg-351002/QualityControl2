@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class CertificateLibService : Service<BllCertificateLib, DalCertificateLib>, ICertificateLibService
+    public class CertificateLibService : Service<BllCertificateLib, DalCertificateLib, CertificateLib>, ICertificateLibService
     {
         private readonly IUnitOfWork uow;
 

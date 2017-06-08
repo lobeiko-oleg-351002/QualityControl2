@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class ControlMethodDocumentationLibService : Service<BllControlMethodDocumentationLib, DalControlMethodDocumentationLib>, IControlMethodDocumentationLibService
+    public class ControlMethodDocumentationLibService : Service<BllControlMethodDocumentationLib, DalControlMethodDocumentationLib, ControlMethodDocumentationLib>, IControlMethodDocumentationLibService
     {
         private readonly IUnitOfWork uow;
 

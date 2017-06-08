@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping.Interfaces
 {
-    public interface IResultMapper
+    public interface IResultMapper : IMapper<DalResult, Result>
     {
-        DalResult MapToDal(Result entity);
-        Result MapToOrm(DalResult entity);
+        //DalResult MapToDal(Result entity);
+       // Result MapToOrm(DalResult entity);
     }
 }

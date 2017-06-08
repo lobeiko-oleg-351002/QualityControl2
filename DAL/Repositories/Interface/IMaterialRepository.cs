@@ -8,13 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface IMaterialRepository : IRepository<DalMaterial>
+    public interface IMaterialRepository : IRepository<DalMaterial, Material>
     {
         DalMaterial GetMaterialByName(string name);
-        new Material Create(DalMaterial entity);
-        new void Delete(DalMaterial entity);
-        new DalMaterial Get(int id);
-        new IEnumerable<DalMaterial> GetAll();
-        new void Update(DalMaterial entity);
+
     }
 }

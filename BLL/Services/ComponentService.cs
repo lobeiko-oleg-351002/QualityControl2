@@ -4,6 +4,7 @@ using BLL.Mapping;
 using BLL.Services.Interface;
 using DAL.Entities;
 using DAL.Repositories.Interface;
+using ORM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class ComponentService : Service<BllComponent, DalComponent>, IComponentService
+    public class ComponentService : Service<BllComponent, DalComponent, Component>, IComponentService
     {
         private readonly IUnitOfWork uow;
         ComponentMapper bllMapper;
@@ -61,16 +62,16 @@ namespace BLL.Services
             return bllMapper.MapToBll(uow.Components.GetComponentByName(name));
         }
 
-        public IEnumerable<BllComponent> GetComponentsByTemplateId(int id)
-        {
-            var elements = uow.Components.GetComponentsByTemplateId(id);
-            var retElemets = new List<BllComponent>();
-            foreach (var element in elements)
-            {
-                retElemets.Add(bllMapper.MapToBll(element));
-            }
-            return retElemets;
-        }
+        //public IEnumerable<BllComponent> GetComponentsByTemplateId(int id)
+        //{
+        //    var elements = uow.Components.GetComponentsByTemplateId(id);
+        //    var retElemets = new List<BllComponent>();
+        //    foreach (var element in elements)
+        //    {
+        //        retElemets.Add(bllMapper.MapToBll(element));
+        //    }
+        //    return retElemets;
+        //}
 
         //private DalComponent MapBllToDal(BllComponent entity)
         //{

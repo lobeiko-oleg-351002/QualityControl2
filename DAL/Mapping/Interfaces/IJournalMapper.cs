@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping.Interfaces
 {
-    public interface IJournalMapper
+    public interface IJournalMapper : IMapper<DalJournal, Journal>
     {
-        DalJournal MapToDal(Journal entity);
-        Journal MapToOrm(DalJournal entity);
+        //DalJournal MapToDal(Journal entity);
+        //Journal MapToOrm(DalJournal entity);
     }
 }

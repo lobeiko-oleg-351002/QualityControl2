@@ -8,14 +8,10 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface IResultRepository : IRepository<DalResult>
+    public interface IResultRepository : IRepository<DalResult, Result>
     {
         DalResult GetResultByNumber(int number);
         IEnumerable<DalResult> GetResultsByLibId(int id);
-        new Result Create(DalResult entity);
-        new void Delete(DalResult entity);
-        new DalResult Get(int id);
-        new IEnumerable<DalResult> GetAll();
-        new void Update(DalResult entity);
+
     }
 }

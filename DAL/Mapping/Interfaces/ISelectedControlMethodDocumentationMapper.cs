@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping.Interfaces
 {
-    public interface ISelectedControlMethodDocumentationMapper
+    public interface ISelectedControlMethodDocumentationMapper : IMapper<DalSelectedControlMethodDocumentation, SelectedControlMethodDocumentation>
     {
-        DalSelectedControlMethodDocumentation MapToDal(SelectedControlMethodDocumentation entity);
-        SelectedControlMethodDocumentation MapToOrm(DalSelectedControlMethodDocumentation entity);
+        //DalSelectedControlMethodDocumentation MapToDal(SelectedControlMethodDocumentation entity);
+       // SelectedControlMethodDocumentation MapToOrm(DalSelectedControlMethodDocumentation entity);
     }
 }

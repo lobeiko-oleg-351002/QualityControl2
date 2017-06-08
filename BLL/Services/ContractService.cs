@@ -4,6 +4,7 @@ using BLL.Mapping.Interfaces;
 using BLL.Services.Interface;
 using DAL.Entities;
 using DAL.Repositories.Interface;
+using ORM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class ContractService : Service<BllContract, DalContract>, IContractService
+    public class ContractService : Service<BllContract, DalContract, Contract>, IContractService
     {
         private readonly IUnitOfWork uow;
 

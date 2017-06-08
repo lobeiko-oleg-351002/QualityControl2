@@ -8,12 +8,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface IRequirementDocumentationLibRepository : IRepository<DalRequirementDocumentationLib>
+    public interface IRequirementDocumentationLibRepository : IRepository<DalRequirementDocumentationLib, RequirementDocumentationLib>
     {
-        new RequirementDocumentationLib Create(DalRequirementDocumentationLib entity);
-        new void Delete(DalRequirementDocumentationLib entity);
-        new DalRequirementDocumentationLib Get(int id);
-        new IEnumerable<DalRequirementDocumentationLib> GetAll();
-        new void Update(DalRequirementDocumentationLib entity);
+
     }
 }

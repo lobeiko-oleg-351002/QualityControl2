@@ -1,11 +1,14 @@
 ﻿using DAL.Entities.Interface;
+using ORM;
 using System.Collections.Generic;
 
 namespace DAL.Repositories.Interface
 {
-    public interface IRepository<TEntity> where TEntity : IDalEntity
+    public interface IRepository<TEntity, UEntity> 
+        where TEntity : IDalEntity 
+        where UEntity : IOrmEntity
     {
-        void Create(TEntity entity);
+        UEntity Create(TEntity entity);
 
         IEnumerable<TEntity> GetAll();
 

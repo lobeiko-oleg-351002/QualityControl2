@@ -1,23 +1,21 @@
-﻿using AutoMapper;
-using BLL.Entities.Interface;
+﻿using BLL.Entities.Interface;
 using BLL.Services.Interface;
 using DAL.Entities.Interface;
 using DAL.Repositories.Interface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ORM;
 
 namespace BLL.Services
 {
-    public class Service<T, U> : IService<T>
+    public class Service<T, U, Y> : IService<T>
         where T : class, IBllEntity
         where U : class, IDalEntity
+        where Y : class, IOrmEntity
     {
         private readonly IUnitOfWork uow;
-        private readonly IRepository<U> repository;
-        public Service(IUnitOfWork uow, IRepository<U> repository)
+        private readonly IRepository<U, Y> repository;
+        public Service(IUnitOfWork uow, IRepository<U, Y> repository)
         {
             this.uow = uow;
             this.repository = repository;

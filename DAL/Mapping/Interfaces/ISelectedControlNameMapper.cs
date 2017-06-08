@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping.Interfaces
 {
-    public interface ISelectedControlNameMapper
+    public interface ISelectedControlNameMapper : IMapper<DalSelectedControlName, SelectedControlName>
     {
-        DalSelectedControlName MapToDal(SelectedControlName entity);
-        SelectedControlName MapToOrm(DalSelectedControlName entity);
+       // DalSelectedControlName MapToDal(SelectedControlName entity);
+       // SelectedControlName MapToOrm(DalSelectedControlName entity);
     }
 }

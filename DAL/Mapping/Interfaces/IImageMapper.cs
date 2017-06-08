@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping.Interfaces
 {
-    public interface IImageMapper
+    public interface IImageMapper : IMapper<DalImage, Image>
     {
-        DalImage MapToDal(Image entity);
-        Image MapToOrm(DalImage entity);
+        //DalImage MapToDal(Image entity);
+        //Image MapToOrm(DalImage entity);
     }
 }

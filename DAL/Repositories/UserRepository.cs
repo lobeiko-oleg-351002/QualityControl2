@@ -11,7 +11,7 @@ using DAL.Mapping;
 
 namespace DAL.Repositories
 {
-    public class UserRepository : Repository<DalUser, User>, IUserRepository
+    public class UserRepository : Repository<DalUser, User, UserMapper>, IUserRepository
     {
         private readonly ServiceDB context;
         public UserRepository(ServiceDB context) : base(context)
@@ -41,49 +41,7 @@ namespace DAL.Repositories
             return mapper.MapToDal(ormEntity);
         }
 
-        UserMapper mapper = new UserMapper();
 
-        public new void Delete(DalUser entity)
-        {
-            var ormEntity = context.Set<User>().Single(User => User.id == entity.Id);
-            context.Set<User>().Remove(ormEntity);
-        }
-
-        public new DalUser Get(int id)
-        {
-            var ormEntity = context.Set<User>().FirstOrDefault(User => User.id == id);
-            return ormEntity != null ? (mapper.MapToDal(ormEntity)) : null;
-        }
-
-        public new IEnumerable<DalUser> GetAll()
-        {
-            var elements = context.Set<User>().Select(User => User);
-            var retElemets = new List<DalUser>();
-            if (elements.Any())
-            {
-                foreach (var element in elements)
-                {
-                    retElemets.Add(mapper.MapToDal(element));
-                }
-            }
-
-            return retElemets;
-        }
-
-        public new void Update(DalUser entity)
-        {
-            var ormEntity = context.Set<User>().Find(entity.Id);
-            if (ormEntity != null)
-            {
-                context.Entry(ormEntity).CurrentValues.SetValues(mapper.MapToOrm(entity));
-            }
-        }
-
-        public new User Create(DalUser entity)
-        {
-            var res = context.Set<User>().Add(mapper.MapToOrm(entity));
-            return res;
-        }
 
 
     }

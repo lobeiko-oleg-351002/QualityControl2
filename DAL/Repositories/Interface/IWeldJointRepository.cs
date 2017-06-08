@@ -8,13 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface IWeldJointRepository : IRepository<DalWeldJoint>
+    public interface IWeldJointRepository : IRepository<DalWeldJoint, WeldJoint>
     {
         DalWeldJoint GetWeldJointByName(string name);
-        new WeldJoint Create(DalWeldJoint entity);
-        new void Delete(DalWeldJoint entity);
-        new DalWeldJoint Get(int id);
-        new IEnumerable<DalWeldJoint> GetAll();
-        new void Update(DalWeldJoint entity);
+
     }
 }

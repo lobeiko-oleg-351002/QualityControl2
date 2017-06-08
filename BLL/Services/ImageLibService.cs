@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class ImageLibService : Service<BllImageLib, DalImageLib>, IImageLibService
+    public class ImageLibService : Service<BllImageLib, DalImageLib, ImageLib>, IImageLibService
     {
         private readonly IUnitOfWork uow;
         IImageLibMapper bllMapper;

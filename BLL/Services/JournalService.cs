@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class JournalService : Service<BllJournal, DalJournal>, IJournalService
+    public class JournalService : Service<BllJournal, DalJournal, Journal>, IJournalService
     {
         private readonly IUnitOfWork uow;
 

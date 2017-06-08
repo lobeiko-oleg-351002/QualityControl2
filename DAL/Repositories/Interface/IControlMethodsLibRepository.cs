@@ -8,12 +8,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface IControlMethodsLibRepository : IRepository<DalControlMethodsLib>
+    public interface IControlMethodsLibRepository : IRepository<DalControlMethodsLib, ControlMethodsLib>
     {
-        new ControlMethodsLib Create(DalControlMethodsLib entity);
-        new void Delete(DalControlMethodsLib entity);
-        new DalControlMethodsLib Get(int id);
-        new IEnumerable<DalControlMethodsLib> GetAll();
-        new void Update(DalControlMethodsLib entity);
+
     }
 }

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class EmployeeLibService : Service<BllEmployeeLib, DalEmployeeLib>, IEmployeeLibService
+    public class EmployeeLibService : Service<BllEmployeeLib, DalEmployeeLib, EmployeeLib>, IEmployeeLibService
     {
         private readonly IUnitOfWork uow;
         EmployeeLibMapper bllMapper;

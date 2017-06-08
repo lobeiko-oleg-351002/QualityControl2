@@ -5,6 +5,7 @@ using BLL.Mapping.Interfaces;
 using BLL.Services.Interface;
 using DAL.Entities;
 using DAL.Repositories.Interface;
+using ORM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class RequirementDocumentationService : Service<BllRequirementDocumentation, DalRequirementDocumentation>, IRequirementDocumentationService
+    public class RequirementDocumentationService : Service<BllRequirementDocumentation, DalRequirementDocumentation, RequirementDocumentation>, IRequirementDocumentationService
     {
         private readonly IUnitOfWork uow;
         IRequirementDocumentationMapper bllMapper = new RequirementDocumentationMapper();

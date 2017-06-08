@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping.Interfaces
 {
-    public interface IMaterialMapper
+    public interface IMaterialMapper : IMapper<DalMaterial, Material>
     {
-        DalMaterial MapToDal(Material entity);
-        Material MapToOrm(DalMaterial entity);
+        //DalMaterial MapToDal(Material entity);
+       // Material MapToOrm(DalMaterial entity);
     }
 }

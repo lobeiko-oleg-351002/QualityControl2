@@ -8,13 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface ISelectedCertificateRepository : IRepository<DalSelectedCertificate>
+    public interface ISelectedCertificateRepository : IRepository<DalSelectedCertificate, SelectedCertificate>
     {
         IEnumerable<DalSelectedCertificate> GetCertificatesByLibId(int id);
-        new SelectedCertificate Create(DalSelectedCertificate entity);
-        new void Delete(DalSelectedCertificate entity);
-        new DalSelectedCertificate Get(int id);
-        new IEnumerable<DalSelectedCertificate> GetAll();
-        new void Update(DalSelectedCertificate entity);
+
     }
 }

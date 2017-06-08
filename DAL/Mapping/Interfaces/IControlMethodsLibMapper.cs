@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping.Interfaces
 {
-    public interface IControlMethodsLibMapper
+    public interface IControlMethodsLibMapper : IMapper<DalControlMethodsLib, ControlMethodsLib>
     {
-        DalControlMethodsLib MapToDal(ControlMethodsLib entity);
-        ControlMethodsLib MapToOrm(DalControlMethodsLib entity);
+       // DalControlMethodsLib MapToDal(ControlMethodsLib entity);
+       // ControlMethodsLib MapToOrm(DalControlMethodsLib entity);
     }
 }

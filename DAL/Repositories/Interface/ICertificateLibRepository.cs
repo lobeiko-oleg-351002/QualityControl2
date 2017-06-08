@@ -8,12 +8,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface ICertificateLibRepository : IRepository<DalCertificateLib>
+    public interface ICertificateLibRepository : IRepository<DalCertificateLib, CertificateLib>
     {
-        new CertificateLib Create(DalCertificateLib entity);
-        new void Delete(DalCertificateLib entity);
-        new DalCertificateLib Get(int id);
-        new IEnumerable<DalCertificateLib> GetAll();
-        new void Update(DalCertificateLib entity);
+
     }
 }

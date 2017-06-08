@@ -4,6 +4,7 @@ using BLL.Mapping;
 using BLL.Services.Interface;
 using DAL.Entities;
 using DAL.Repositories.Interface;
+using ORM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class ControlService : Service<BllControl, DalControl>, IControlService
+    public class ControlService : Service<BllControl, DalControl, Control>, IControlService
     {
         private readonly IUnitOfWork uow;
         ControlMapper bllMapper;

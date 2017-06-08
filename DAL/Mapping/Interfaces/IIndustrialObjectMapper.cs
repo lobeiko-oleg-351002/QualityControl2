@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping.Interfaces
 {
-    public interface IIndustrialObjectMapper
+    public interface IIndustrialObjectMapper : IMapper<DalIndustrialObject, IndustrialObject>
     {
-        DalIndustrialObject MapToDal(IndustrialObject entity);
-        IndustrialObject MapToOrm(DalIndustrialObject entity);
+       // DalIndustrialObject MapToDal(IndustrialObject entity);
+        //IndustrialObject MapToOrm(DalIndustrialObject entity);
     }
 }

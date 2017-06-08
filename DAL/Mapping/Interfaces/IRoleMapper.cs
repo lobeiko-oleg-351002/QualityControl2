@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping.Interfaces
 {
-    public interface IRoleMapper
+    public interface IRoleMapper : IMapper<DalRole, Role>
     {
-        DalRole MapToDal(Role entity);
-        Role MapToOrm(DalRole entity);
+        //DalRole MapToDal(Role entity);
+        //Role MapToOrm(DalRole entity);
     }
 }

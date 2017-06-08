@@ -14,10 +14,9 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class ComponentLibService : Service<BllComponentLib, DalComponentLib>, IComponentLibService
+    public class ComponentLibService : Service<BllComponentLib, DalComponentLib, ComponentLib>, IComponentLibService
     {
         private readonly IUnitOfWork uow;
-
 
         ComponentLibMapper bllMapper;
         DAL.Mapping.ComponentLibMapper dalMapper;

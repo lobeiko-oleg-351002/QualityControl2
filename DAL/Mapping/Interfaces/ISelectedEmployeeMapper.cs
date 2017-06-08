@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping.Interfaces
 {
-    public interface ISelectedEmployeeMapper
+    public interface ISelectedEmployeeMapper : IMapper<DalSelectedEmployee, SelectedEmployee>
     {
-        DalSelectedEmployee MapToDal(SelectedEmployee entity);
-        SelectedEmployee MapToOrm(DalSelectedEmployee entity);
+        //DalSelectedEmployee MapToDal(SelectedEmployee entity);
+        //SelectedEmployee MapToOrm(DalSelectedEmployee entity);
     }
 }

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping.Interfaces
 {
-    public interface ISelectedEquipmentMapper
+    public interface ISelectedEquipmentMapper : IMapper<DalSelectedEquipment, SelectedEquipment>
     {
-        DalSelectedEquipment MapToDal(SelectedEquipment entity);
-        SelectedEquipment MapToOrm(DalSelectedEquipment entity);
+       // DalSelectedEquipment MapToDal(SelectedEquipment entity);
+       // SelectedEquipment MapToOrm(DalSelectedEquipment entity);
     }
 }

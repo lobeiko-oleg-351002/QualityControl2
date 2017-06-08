@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class CertificateRepository : Repository<DalCertificate, Certificate>, ICertificateRepository
+    public class CertificateRepository : Repository<DalCertificate, Certificate, CertificateMapper>, ICertificateRepository
     {
         private readonly ServiceDB context;
         public CertificateRepository(ServiceDB context) : base(context)
@@ -19,7 +19,7 @@ namespace DAL.Repositories
             this.context = context;
         }
 
-        CertificateMapper mapper = new CertificateMapper();
+
 
         public DalCertificate GetCertificateByEmployeeIdAndControlId(int e_id, int c_id)
         {
@@ -33,47 +33,6 @@ namespace DAL.Repositories
             return mapper.MapToDal(ormEntity);
         }
 
-        public new void Delete(DalCertificate entity)
-        {
-            var ormEntity = context.Set<Certificate>().Single(Certificate => Certificate.id == entity.Id);
-            context.Set<Certificate>().Remove(ormEntity);
-        }
-
-        public new DalCertificate Get(int id)
-        {
-            var ormEntity = context.Set<Certificate>().FirstOrDefault(Certificate => Certificate.id == id);
-            return ormEntity != null ? (mapper.MapToDal(ormEntity)) : null;
-        }
-
-        public new IEnumerable<DalCertificate> GetAll()
-        {
-            var elements = context.Set<Certificate>().Select(Certificate => Certificate);
-            var retElemets = new List<DalCertificate>();
-            if (elements.Any())
-            {
-                foreach (var element in elements)
-                {
-                    retElemets.Add(mapper.MapToDal(element));
-                }
-            }
-
-            return retElemets;
-        }
-
-        public new void Update(DalCertificate entity)
-        {
-            var ormEntity = context.Set<Certificate>().Find(entity.Id);
-            if (ormEntity != null)
-            {
-                context.Entry(ormEntity).CurrentValues.SetValues(mapper.MapToOrm(entity));
-            }
-        }
-
-        public new Certificate Create(DalCertificate entity)
-        {
-            var res = context.Set<Certificate>().Add(mapper.MapToOrm(entity));
-            return res;
-        }
 
 
     }

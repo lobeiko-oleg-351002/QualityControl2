@@ -11,7 +11,8 @@ namespace DAL.Mapping
 {
     public class CertificateLibMapper : ICertificateLibMapper
     {
-        public DalCertificateLib MapToDal(CertificateLib entity)
+
+        public  DalCertificateLib MapToDal(CertificateLib entity)
         {
             return new DalCertificateLib
             {

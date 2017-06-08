@@ -5,6 +5,7 @@ using BLL.Mapping.Interfaces;
 using BLL.Services.Interface;
 using DAL.Entities;
 using DAL.Repositories.Interface;
+using ORM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class UserService : Service<BllUser, DalUser>, IUserService
+    public class UserService : Service<BllUser, DalUser, User>, IUserService
     {
         private readonly IUnitOfWork uow;
         IUserMapper bllMapper;

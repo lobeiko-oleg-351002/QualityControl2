@@ -8,13 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface IContractRepository : IRepository<DalContract>
+    public interface IContractRepository : IRepository<DalContract, Contract>
     {
         IEnumerable<DalContract> GetContractsByLibId(int id);
-        new Contract Create(DalContract entity);
-        new void Delete(DalContract entity);
-        new DalContract Get(int id);
-        new IEnumerable<DalContract> GetAll();
-        new void Update(DalContract entity);
+
     }
 }

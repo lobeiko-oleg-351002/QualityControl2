@@ -8,13 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface IIndustrialObjectRepository : IRepository<DalIndustrialObject>
+    public interface IIndustrialObjectRepository : IRepository<DalIndustrialObject, IndustrialObject>
     {
         DalIndustrialObject GetIndustrialObjectByName(string name);
-        new IndustrialObject Create(DalIndustrialObject entity);
-        new void Delete(DalIndustrialObject entity);
-        new DalIndustrialObject Get(int id);
-        new IEnumerable<DalIndustrialObject> GetAll();
-        new void Update(DalIndustrialObject entity);
+
     }
 }

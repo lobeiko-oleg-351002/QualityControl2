@@ -8,16 +8,12 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface ICustomerRepository : IRepository<DalCustomer>
+    public interface ICustomerRepository : IRepository<DalCustomer, Customer>
     {
         DalCustomer GetCustomerByOrganization(string organization);
         DalCustomer GetCustomerByAddress(string address);
         DalCustomer GetCustomerByPhone(string phone);
 
-        new Customer Create(DalCustomer entity);
-        new void Delete(DalCustomer entity);
-        new DalCustomer Get(int id);
-        new IEnumerable<DalCustomer> GetAll();
-        new void Update(DalCustomer entity);
+
     }
 }

@@ -8,13 +8,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public  interface ISelectedComponentRepository : IRepository<DalSelectedComponent>
+    public  interface ISelectedComponentRepository : IRepository<DalSelectedComponent, SelectedComponent>
     {
         IEnumerable<DalSelectedComponent> GetComponentsByLibId(int id);
-        new SelectedComponent Create(DalSelectedComponent entity);
-        new void Delete(DalSelectedComponent entity);
-        new DalSelectedComponent Get(int id);
-        new IEnumerable<DalSelectedComponent> GetAll();
-        new void Update(DalSelectedComponent entity);
     }
 }

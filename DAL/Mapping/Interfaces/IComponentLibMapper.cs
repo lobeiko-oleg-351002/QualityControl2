@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping.Interfaces
 {
-    public interface IComponentLibMapper
+    public interface IComponentLibMapper : IMapper<DalComponentLib, ComponentLib>
     {
-        DalComponentLib MapToDal(ComponentLib entity);
-        ComponentLib MapToOrm(DalComponentLib entity);
+       // DalComponentLib MapToDal(ComponentLib entity);
+       // ComponentLib MapToOrm(DalComponentLib entity);
     }
 }

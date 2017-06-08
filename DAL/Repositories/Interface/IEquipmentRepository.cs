@@ -8,18 +8,12 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface IEquipmentRepository : IRepository<DalEquipment>
+    public interface IEquipmentRepository : IRepository<DalEquipment, Equipment>
     {
         DalEquipment GetEquipmentByName(string name);
         IEnumerable<DalEquipment> GetEquipmentByType(string type);
         IEnumerable<DalEquipment> GetEquipmentByFactoryNumber(string number);
         IEnumerable<DalEquipment> GetCheckedEquipment();
         IEnumerable<DalEquipment> GetUncheckedEquipment();
-
-        new Equipment Create(DalEquipment entity);
-        new void Delete(DalEquipment entity);
-        new DalEquipment Get(int id);
-        new IEnumerable<DalEquipment> GetAll();
-        new void Update(DalEquipment entity);
     }
 }

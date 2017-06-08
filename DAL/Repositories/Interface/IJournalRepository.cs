@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface IJournalRepository : IRepository<DalJournal>
+    public interface IJournalRepository : IRepository<DalJournal, Journal>
     {
-        new Journal Create(DalJournal entity);
-        new void Delete(DalJournal entity);
-        new DalJournal Get(int id);
-        new IEnumerable<DalJournal> GetAll();
-        new void Update(DalJournal entity);
+
     }
 }

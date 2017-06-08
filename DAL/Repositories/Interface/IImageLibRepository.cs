@@ -8,12 +8,8 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface IImageLibRepository : IRepository<DalImageLib>
+    public interface IImageLibRepository : IRepository<DalImageLib, ImageLib>
     {
-        new ImageLib Create(DalImageLib entity);
-        new void Delete(DalImageLib entity);
-        new DalImageLib Get(int id);
-        new IEnumerable<DalImageLib> GetAll();
-        new void Update(DalImageLib entity);
+
     }
 }

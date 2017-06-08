@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping.Interfaces
 {
-    public interface ICertificateMapper
+    public interface ICertificateMapper : IMapper<DalCertificate, Certificate>
     {
-        DalCertificate MapToDal(Certificate entity);
-        Certificate MapToOrm(DalCertificate entity);
+        //DalCertificate MapToDal(Certificate entity);
+        //Certificate MapToOrm(DalCertificate entity);
     }
 }

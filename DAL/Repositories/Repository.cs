@@ -3,46 +3,65 @@ using DAL.Repositories.Interface;
 using ORM;
 using System.Collections.Generic;
 using System.Linq;
-using AutoMapper;
 using System;
+using DAL.Mapping.Interfaces;
 
 namespace DAL.Repositories
 {
-    public class Repository<TEntity, UEntity> : IRepository<TEntity>
+    public class Repository<TEntity, UEntity, Mapper> : IRepository<TEntity, UEntity>
         where TEntity : class, IDalEntity
         where UEntity : class, IOrmEntity
+        where Mapper : class, IMapper<TEntity, UEntity>, new()
     {
         private readonly ServiceDB context;
-
+        protected Mapper mapper;
 
         public Repository(ServiceDB context)
         {
             this.context = context;
+            mapper = new Mapper();
         }
 
-        public void Create(TEntity entity)
+        public UEntity Create(TEntity entity)
         {
-            throw new NotImplementedException();
+            var res = context.Set<UEntity>().Add(mapper.MapToOrm(entity));
+            return res;
         }
 
         public void Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            var ormEntity = context.Set<UEntity>().Single(e => e.id == entity.Id);
+            context.Set<UEntity>().Remove(ormEntity);
         }
 
         public TEntity Get(int id)
         {
-            throw new NotImplementedException();
+            var ormEntity = context.Set<UEntity>().FirstOrDefault(e => e.id == id);
+            return ormEntity != null ? (mapper.MapToDal(ormEntity)) : null;
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            var elements = context.Set<UEntity>().Select(e => e);
+            var retElemets = new List<TEntity>();
+            if (elements.Any())
+            {
+                foreach (var element in elements)
+                {
+                    retElemets.Add(mapper.MapToDal(element));
+                }
+            }
+
+            return retElemets;
         }
 
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            var ormEntity = context.Set<UEntity>().Find(entity.Id);
+            if (ormEntity != null)
+            {
+                context.Entry(ormEntity).CurrentValues.SetValues(mapper.MapToOrm(entity));
+            }
         }
     }
 }

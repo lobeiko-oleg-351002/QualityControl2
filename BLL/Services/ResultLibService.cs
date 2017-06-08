@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class ResultLibService : Service<BllResultLib, DalResultLib>, IResultLibService
+    public class ResultLibService : Service<BllResultLib, DalResultLib, ResultLib>, IResultLibService
     {
         private readonly IUnitOfWork uow;
         IResultLibMapper bllMapper;

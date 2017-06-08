@@ -8,13 +8,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface IRoleRepository : IRepository<DalRole>
+    public interface IRoleRepository : IRepository<DalRole, Role>
     {
         DalRole GetRoleByName(string name);
-        new Role Create(DalRole entity);
-        new void Delete(DalRole entity);
-        new DalRole Get(int id);
-        new IEnumerable<DalRole> GetAll();
-        new void Update(DalRole entity);
+
     }
 }

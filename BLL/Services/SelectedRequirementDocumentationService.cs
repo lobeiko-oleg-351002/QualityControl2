@@ -3,6 +3,7 @@ using BLL.Mapping;
 using BLL.Mapping.Interfaces;
 using DAL.Entities;
 using DAL.Repositories.Interface;
+using ORM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class SelectedRequirementDocumentationService : Service<BllSelectedRequirementDocumentation, DalSelectedRequirementDocumentation>, ISelectedRequirementDocumentationService
+    public class SelectedRequirementDocumentationService : Service<BllSelectedRequirementDocumentation, DalSelectedRequirementDocumentation, SelectedRequirementDocumentation>, ISelectedRequirementDocumentationService
     {
         private readonly IUnitOfWork uow;
 

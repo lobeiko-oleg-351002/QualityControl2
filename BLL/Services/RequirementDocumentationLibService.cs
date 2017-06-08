@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class RequirementDocumentationLibService : Service<BllRequirementDocumentationLib, DalRequirementDocumentationLib>, IRequirementDocumentationLibService
+    public class RequirementDocumentationLibService : Service<BllRequirementDocumentationLib, DalRequirementDocumentationLib, RequirementDocumentationLib>, IRequirementDocumentationLibService
     {
         private readonly IUnitOfWork uow;
         IRequirementDocumentationLibMapper bllMapper;

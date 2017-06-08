@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class ControlNameLibService : Service<BllControlNameLib, DalControlNameLib>, IControlNameLibService
+    public class ControlNameLibService : Service<BllControlNameLib, DalControlNameLib, ControlNameLib>, IControlNameLibService
     {
         private readonly IUnitOfWork uow;
 

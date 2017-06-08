@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories.Interface
 {
-    public interface IControlRepository : IRepository<DalControl>
+    public interface IControlRepository : IRepository<DalControl, Control>
     {
         IEnumerable<DalControl> GetAllControlled();
         IEnumerable<DalControl> GetAllUncontrolled();
@@ -16,10 +16,6 @@ namespace DAL.Repositories.Interface
         IEnumerable<DalControl> GetControlsByLibId(int id);
         int GetControlCountWithCurrentType(int controlNameId);
 
-        new Control Create(DalControl entity);
-        new void Delete(DalControl entity);
-        new DalControl Get(int id);
-        new IEnumerable<DalControl> GetAll();
-        new void Update(DalControl entity);
+
     }
 }
