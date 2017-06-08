@@ -1,0 +1,9 @@
+E:\Projects\VisualStudioProjects\29.05.17\QualityControl\ORM\bin\Debug\ORM.dll.config
+E:\Projects\VisualStudioProjects\29.05.17\QualityControl\ORM\bin\Debug\ORM.dll
+E:\Projects\VisualStudioProjects\29.05.17\QualityControl\ORM\bin\Debug\ORM.pdb
+E:\Projects\VisualStudioProjects\29.05.17\QualityControl\ORM\bin\Debug\EntityFramework.dll
+E:\Projects\VisualStudioProjects\29.05.17\QualityControl\ORM\bin\Debug\EntityFramework.SqlServer.dll
+E:\Projects\VisualStudioProjects\29.05.17\QualityControl\ORM\bin\Debug\EntityFramework.xml
+E:\Projects\VisualStudioProjects\29.05.17\QualityControl\ORM\bin\Debug\EntityFramework.SqlServer.xml
+E:\Projects\VisualStudioProjects\29.05.17\QualityControl\ORM\obj\Debug\ORM.dll
+E:\Projects\VisualStudioProjects\29.05.17\QualityControl\ORM\obj\Debug\ORM.pdb
