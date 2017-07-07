@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace BLL.Mapping.Interfaces
 {
-    public interface ICertificateMapper
+    public interface ICertificateMapper : IMapper<BllCertificate, DalCertificate>
     {
-        DalCertificate MapToDal(BllCertificate entity);
-        BllCertificate MapToBll(DalCertificate entity);
+
     }
 }

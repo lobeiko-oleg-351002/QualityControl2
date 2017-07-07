@@ -12,8 +12,8 @@ namespace BLL.Mapping
 {
     public class EquipmentMapper : IEquipmentMapper
     {
-
-        public EquipmentMapper()
+        public EquipmentMapper() { }
+        public EquipmentMapper(IUnitOfWork uow)
         {
 
         }

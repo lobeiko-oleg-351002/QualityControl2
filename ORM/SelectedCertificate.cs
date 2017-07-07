@@ -7,13 +7,13 @@ namespace ORM
     using System.Data.Entity.Spatial;
 
     [Table("SelectedCertificate")]
-    public partial class SelectedCertificate : IOrmEntity
+    public partial class SelectedCertificate : ISelectedEntity
     {
         public int id { get; set; }
 
-        public int? certificate_id { get; set; }
+        public int? entity_id { get; set; }
 
-        public int? certificateLib_id { get; set; }
+        public int? lib_id { get; set; }
 
         public virtual Certificate Certificate { get; set; }
 

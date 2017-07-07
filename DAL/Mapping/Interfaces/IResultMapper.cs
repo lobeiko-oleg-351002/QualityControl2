@@ -10,7 +10,6 @@ namespace DAL.Mapping.Interfaces
 {
     public interface IResultMapper : IMapper<DalResult, Result>
     {
-        //DalResult MapToDal(Result entity);
-       // Result MapToOrm(DalResult entity);
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAL.Entities.Interface;
+using ORM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,31 +22,31 @@ namespace DAL.Repositories.Interface
         ITemplateRepository Templates { get; }
         IControlMethodDocumentationRepository ControlMethodDocumentations { get; }
         IRequirementDocumentationRepository RequirementDocumentations { get; }
-        ICertificateLibRepository CertificateLibs { get; }
-        IComponentLibRepository ComponentLibs { get; }
-        IControlMethodsLibRepository ControlMethodsLibs { get; }
-        IControlNameLibRepository ControlNameLibs { get; }
         IControlNameRepository ControlNames { get; }
         IControlRepository Controls { get; }
-        IImageLibRepository ImageLibs { get; }
         IImageRepository Images { get; }
         IJournalRepository Journals { get; }
         IResultRepository Results { get; }
         IWeldJointRepository WeldJoints { get; }
-        ISelectedCertificateRepository SelectedCertificates { get; }
-        ISelectedComponentRepository SelectedComponents { get; }
-        ISelectedControlNameRepository SelectedControlNames { get; }
-        IResultLibRepository ResultLibs { get; }
-        IEquipmentLibRepository EquipmentLibs { get; }
-        ISelectedEquipmentRepository SelectedEquipments { get; }
-        IControlMethodDocumentationLibRepository ControlMethodDocumentationLibs { get; }
-        ISelectedControlMethodDocumentationRepository SelectedControlMethodDocumentations { get; }
-        IRequirementDocumentationLibRepository RequirementDocumentationLibs { get; }
-        ISelectedRequirementDocumentationRepository SelectedRequirementDocumentations { get; }
-        IEmployeeLibRepository EmployeeLibs { get; }
-        ISelectedEmployeeRepository SelectedEmployees { get; }
         IContractRepository Contracts { get; }
-        IContractLibRepository ContractLibs { get; }
+        ISelectedEntityRepository<SelectedCertificate> SelectedCertificates { get; }
+        ISelectedEntityRepository<SelectedComponent> SelectedComponents { get; }
+        ISelectedEntityRepository<SelectedControlMethodDocumentation> SelectedControlMethodDocumentations { get; }
+        ISelectedEntityRepository<SelectedControlName> SelectedControlNames { get; }
+        ISelectedEntityRepository<SelectedEmployee> SelectedEmployees { get; }
+        ISelectedEntityRepository<SelectedEquipment> SelectedEquipments { get; }
+        ISelectedEntityRepository<SelectedRequirementDocumentation> SelectedRequirementDocumentations { get; }
+        IRepository<IDalEntityLib, ContractLib> ContractLibs { get; }
+        IRepository<IDalEntityLib, ImageLib> ImageLibs { get; }
+        IRepository<IDalEntityLib, ResultLib> ResultLibs { get; }
+        IRepository<IDalEntityLib, CertificateLib> CertificateLibs { get; }
+        IRepository<IDalEntityLib, ComponentLib> ComponentLibs { get; }
+        IRepository<IDalEntityLib, ControlMethodDocumentationLib> ControlMethodDocumentationLibs { get; }
+        IRepository<IDalEntityLib, ControlNameLib> ControlNameLibs { get; }
+        IRepository<IDalEntityLib, EmployeeLib> EmployeeLibs { get; }
+        IRepository<IDalEntityLib, EquipmentLib> EquipmentLibs { get; }
+        IRepository<IDalEntityLib, RequirementDocumentationLib> RequirementDocumentationLibs { get; }
+        IRepository<IDalEntityLib, ControlMethodsLib> ControlMethodsLibs { get; }
 
         void Commit();
     }

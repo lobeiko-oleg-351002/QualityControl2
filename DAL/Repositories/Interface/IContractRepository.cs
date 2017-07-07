@@ -10,7 +10,6 @@ namespace DAL.Repositories.Interface
 {
     public interface IContractRepository : IRepository<DalContract, Contract>
     {
-        IEnumerable<DalContract> GetContractsByLibId(int id);
 
     }
 }

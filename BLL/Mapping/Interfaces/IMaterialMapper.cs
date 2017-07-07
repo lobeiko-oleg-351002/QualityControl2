@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace BLL.Mapping.Interfaces
 {
-    public interface IMaterialMapper
+    public interface IMaterialMapper : IMapper<BllMaterial, DalMaterial>
     {
-        DalMaterial MapToDal(BllMaterial entity);
-        BllMaterial MapToBll(DalMaterial entity);
+
     }
 }

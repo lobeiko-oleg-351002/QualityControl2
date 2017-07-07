@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace BLL.Services.Interface
 {
-    public interface IService<TBllEntity>
-        where TBllEntity : IBllEntity
+    public interface IService<TEntity>
+        where TEntity : IBllEntity
     {
-        IEnumerable<TBllEntity> GetAll();
+        IEnumerable<TEntity> GetAll();
 
-        TBllEntity Get(int id);
+        TEntity Get(int id);
 
-        void Create(TBllEntity entity);
+        void Create(TEntity entity);
 
-        void Delete(TBllEntity entity);
+        void Delete(TEntity entity);
 
-        void Update(TBllEntity entity);
+        void Update(TEntity entity);
 
     }
 }

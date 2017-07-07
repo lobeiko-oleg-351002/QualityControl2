@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class DalControl : IDalEntity
+    public class DalControl : IDalEntityWithLibId
     {
         public int Id { get; set; }
 
@@ -33,7 +33,7 @@ namespace DAL.Entities
 
         public int? ControlName_id { get; set; }
 
-        public int? ControlMethodsLib_id { get; set; }
+        public int Lib_id { get; set; }
 
         public int? EquipmentLib_id { get; set; }
 

@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace BLL.Entities
 {
-    public class BllResultLib : IBllEntity
+    public class BllResultLib : IBllEntitySimpleLib<BllResult>
     {
         public int Id { get; set; }
 
-        public List<BllResult> Result { get; set; }
+        public List<BllResult> Entities { get; set; }
 
         public BllResultLib()
         {
-            Result = new List<BllResult>();
+            Entities = new List<BllResult>();
         }
     }
 }

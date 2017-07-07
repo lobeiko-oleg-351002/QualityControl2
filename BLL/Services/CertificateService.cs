@@ -13,60 +13,28 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class CertificateService : Service<BllCertificate, DalCertificate, Certificate>, ICertificateService
+    public class CertificateService : Service<BllCertificate, DalCertificate, Certificate, CertificateMapper>, ICertificateService
     {
-        private readonly IUnitOfWork uow;
 
         public CertificateService(IUnitOfWork uow) : base(uow, uow.Certificates)
         {
-            this.uow = uow;
-            bllMapper = new CertificateMapper(uow);
+           // this.uow = uow;
         }
 
-        CertificateMapper bllMapper;
+        protected override void InitMapper()
+        {
+            mapper = new CertificateMapper(uow);
+        }
 
         public BllCertificate GetCertificateByTitle(string title)
         {
-            return bllMapper.MapToBll(uow.Certificates.GetCertificateByTitle(title));
+            return mapper.MapToBll(uow.Certificates.GetCertificateByTitle(title));
         }
 
-        public override void Create(BllCertificate entity)
-        {
-            uow.Certificates.Create(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override void Update(BllCertificate entity)
-        {
-            uow.Certificates.Update(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override void Delete(BllCertificate entity)
-        {
-            uow.Certificates.Delete(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override IEnumerable<BllCertificate> GetAll()
-        {
-            var elements = uow.Certificates.GetAll();
-            var retElemets = new List<BllCertificate>();
-            foreach (var element in elements)
-            {
-                retElemets.Add(bllMapper.MapToBll(element));
-            }
-            return retElemets;
-        }
-
-        public override BllCertificate Get(int id)
-        {
-            return bllMapper.MapToBll(uow.Certificates.Get(id));
-        }
 
         public BllCertificate GetCertificateByEmployeeAndControlName(BllEmployee employee, BllControlName name)
         {
-            return bllMapper.MapToBll(uow.Certificates.GetCertificateByEmployeeIdAndControlId(employee.Id, name.Id));
+            return mapper.MapToBll(uow.Certificates.GetCertificateByEmployeeIdAndControlId(employee.Id, name.Id));
         }
     }
 }

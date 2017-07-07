@@ -14,46 +14,19 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class RoleService : Service<BllRole, DalRole, Role>, IRoleService
+    public class RoleService : Service<BllRole, DalRole, Role, RoleMapper>, IRoleService
     {
-        private readonly IUnitOfWork uow;
-        IRoleMapper bllMapper = new RoleMapper();
+        //private readonly IUnitOfWork uow;
+
         public RoleService(IUnitOfWork uow) : base(uow, uow.Roles)
         {
-            this.uow = uow;
+         //   this.uow = uow;
         }
 
-        public override void Create(BllRole entity)
-        {
-            uow.Roles.Create(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override void Delete(BllRole entity)
-        {
-            uow.Roles.Delete(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override IEnumerable<BllRole> GetAll()
-        {
-            var elements = uow.Roles.GetAll();
-            var retElemets = new List<BllRole>();
-            foreach (var element in elements)
-            {
-                retElemets.Add(bllMapper.MapToBll(element));
-            }
-            return retElemets;
-        }
-
-        public override BllRole Get(int id)
-        {
-            return bllMapper.MapToBll(uow.Roles.Get(id));
-        }
 
         public BllRole GetRoleByName(string name)
         {
-            return bllMapper.MapToBll(uow.Roles.GetRoleByName(name));
+            return mapper.MapToBll(uow.Roles.GetRoleByName(name));
         }
     }
 }

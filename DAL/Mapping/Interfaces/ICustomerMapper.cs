@@ -10,7 +10,6 @@ namespace DAL.Mapping.Interfaces
 {
     public interface ICustomerMapper : IMapper<DalCustomer, Customer>
     {
-        //DalCustomer MapToDal(Customer entity);
-        //Customer MapToOrm(DalCustomer entity);
+
     }
 }

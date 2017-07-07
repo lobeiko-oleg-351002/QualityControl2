@@ -13,7 +13,7 @@ using BLL.Services.Interface;
 using BLL.Services;
 using DAL.Repositories.Interface;
 
-namespace QualityControl_Client
+namespace QualityControl_Server
 {
     public partial class ExportControlResultForm : Form
     {

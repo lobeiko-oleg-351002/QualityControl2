@@ -36,6 +36,8 @@ namespace BLL.Mapping
             weldJointService = new WeldJointService(uow);
         }
 
+        public JournalMapper() { }
+
         public DalJournal MapToDal(BllJournal entity)
         {
             DalJournal dalEntity = new DalJournal

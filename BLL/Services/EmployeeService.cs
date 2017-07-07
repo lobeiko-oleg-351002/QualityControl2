@@ -13,48 +13,17 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class EmployeeService : Service<BllEmployee, DalEmployee, Employee>, IEmployeeService
+    public class EmployeeService : Service<BllEmployee, DalEmployee, Employee, EmployeeMapper>, IEmployeeService
     {
-        private readonly IUnitOfWork uow;
-        EmployeeMapper bllMapper = new EmployeeMapper();
+      //  private readonly IUnitOfWork uow;
         public EmployeeService(IUnitOfWork uow) : base(uow, uow.Employees)
         {
-            this.uow = uow;
+          //  this.uow = uow;
         }
 
-        public override void Create(BllEmployee entity)
+        protected override void InitMapper()
         {
-            uow.Employees.Create(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override void Delete(BllEmployee entity)
-        {
-            uow.Employees.Delete(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override void Update(BllEmployee entity)
-        {
-            uow.Employees.Update(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override BllEmployee Get(int id)
-        {
-            DalEmployee dalEntity = uow.Employees.Get(id);
-            return bllMapper.MapToBll(dalEntity);
-        }
-
-        public override IEnumerable<BllEmployee> GetAll()
-        {
-            var elements = uow.Employees.GetAll();
-            var retElemets = new List<BllEmployee>();
-            foreach (var element in elements)
-            {
-                retElemets.Add(bllMapper.MapToBll(element));
-            }
-            return retElemets;
+            mapper = new EmployeeMapper(uow);
         }
 
         public IEnumerable<BllEmployee> GetEmployeesByFatherName(string name)
@@ -63,7 +32,7 @@ namespace BLL.Services
             var retElemets = new List<BllEmployee>();
             foreach (var element in elements)
             {
-                retElemets.Add(bllMapper.MapToBll(element));
+                retElemets.Add(mapper.MapToBll(element));
             }
             return retElemets;
         }
@@ -74,7 +43,7 @@ namespace BLL.Services
             var retElemets = new List<BllEmployee>();
             foreach (var element in elements)
             {
-                retElemets.Add(bllMapper.MapToBll(element));
+                retElemets.Add(mapper.MapToBll(element));
             }
             return retElemets;
         }
@@ -85,7 +54,7 @@ namespace BLL.Services
             var retElemets = new List<BllEmployee>();
             foreach (var element in elements)
             {
-                retElemets.Add(bllMapper.MapToBll(element));
+                retElemets.Add(mapper.MapToBll(element));
             }
             return retElemets;
         }
@@ -96,33 +65,9 @@ namespace BLL.Services
             var retElemets = new List<BllEmployee>();
             foreach (var element in elements)
             {
-                retElemets.Add(bllMapper.MapToBll(element));
+                retElemets.Add(mapper.MapToBll(element));
             }
             return retElemets;
         }
-
-        //private DalEmployee MapBllToDal(BllEmployee entity)
-        //{
-        //    Mapper.Initialize(cfg =>
-        //    {
-        //        cfg.CreateMap<BllEmployee, DalEmployee>();
-        //    });
-
-        //    DalEmployee dalEntity = Mapper.Map<DalEmployee>(entity);
-        //    //dalEntity.Certificate_lib_id = entity.CertificateLib != null ? entity.CertificateLib.Id : (int?)null;
-        //    return dalEntity;
-        //}
-
-        //private BllEmployee MapDalToBll(DalEmployee entity)
-        //{
-        //    Mapper.Initialize(cfg =>
-        //    {
-        //        cfg.CreateMap<DalEmployee, BllEmployee>();
-        //    });
-        //    BllEmployee bllEmployee = Mapper.Map<BllEmployee>(entity);
-        //    //CertificateLibService certificateLibService = new CertificateLibService(uow);
-        //    //bllEmployee.CertificateLib = entity.Certificate_lib_id != null ? certificateLibService.Get((int)entity.Certificate_lib_id) : null;
-        //    return bllEmployee;
-        //}
     }
 }

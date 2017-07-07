@@ -10,7 +10,6 @@ namespace DAL.Mapping.Interfaces
 {
     public interface IIndustrialObjectMapper : IMapper<DalIndustrialObject, IndustrialObject>
     {
-       // DalIndustrialObject MapToDal(IndustrialObject entity);
-        //IndustrialObject MapToOrm(DalIndustrialObject entity);
+
     }
 }

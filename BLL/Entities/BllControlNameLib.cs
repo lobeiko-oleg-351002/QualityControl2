@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace BLL.Entities
 {
-    public class BllControlNameLib : IBllEntity
+    public class BllControlNameLib : IBllEntityLib<BllControlName>
     {
         public int Id { get; set; }
 
-        public List<BllSelectedControlName> SelectedControlName { get; set; }
+        public List<BllSelectedEntity<BllControlName>> SelectedEntities { get; set; }
 
         public BllControlNameLib()
         {
-            SelectedControlName = new List<BllSelectedControlName>();
+            SelectedEntities = new List<BllSelectedEntity<BllControlName>>();
         }
     }
 }

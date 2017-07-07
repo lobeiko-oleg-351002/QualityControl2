@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QualityControl_Client
+namespace QualityControl_Server
 {
     public partial class DebugForm : Form
     {

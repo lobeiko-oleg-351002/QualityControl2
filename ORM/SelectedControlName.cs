@@ -7,13 +7,13 @@ namespace ORM
     using System.Data.Entity.Spatial;
 
     [Table("SelectedControlName")]
-    public partial class SelectedControlName : IOrmEntity
+    public partial class SelectedControlName : ISelectedEntity
     {
         public int id { get; set; }
 
-        public int? controlName_id { get; set; }
+        public int? entity_id { get; set; }
 
-        public int? controlNameLib_id { get; set; }
+        public int? lib_id { get; set; }
 
         public virtual ControlName ControlName { get; set; }
 

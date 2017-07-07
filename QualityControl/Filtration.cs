@@ -1,8 +1,8 @@
-﻿using QualityControl_Client.Forms.ComponentDirectory;
-using QualityControl_Client.Forms.IndustrialObjectDirectory;
-using QualityControl_Client.Forms.MaterialDirectory;
-using QualityControl_Client.Forms.WeldJointDirectory;
-using QualityControl_Client.Forms.CustomerDirectory;
+﻿using QualityControl_Server.Forms.ComponentDirectory;
+using QualityControl_Server.Forms.IndustrialObjectDirectory;
+using QualityControl_Server.Forms.MaterialDirectory;
+using QualityControl_Server.Forms.WeldJointDirectory;
+using QualityControl_Server.Forms.CustomerDirectory;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +15,7 @@ using System.Windows.Forms;
 using BLL.Entities;
 using DAL.Repositories.Interface;
 
-namespace QualityControl_Client
+namespace QualityControl_Server
 {
     public partial class Filtration : Form
     {
@@ -631,7 +631,7 @@ namespace QualityControl_Client
 
         private bool VikFiltration(BllJournal journal)
         {
-            var controls = journal.ControlMethodsLib.Control;
+            var controls = journal.ControlMethodsLib.Entities;
             foreach(var control in controls)
             {
                 if (control.ControlName.Name == "ВИК")
@@ -647,7 +647,7 @@ namespace QualityControl_Client
 
         private bool UzkFiltration(BllJournal journal)
         {
-            var controls = journal.ControlMethodsLib.Control;
+            var controls = journal.ControlMethodsLib.Entities;
             foreach (var control in controls)
             {
                 if (control.ControlName.Name == "УЗК")
@@ -663,7 +663,7 @@ namespace QualityControl_Client
 
         private bool PvkFiltration(BllJournal journal)
         {
-            var controls = journal.ControlMethodsLib.Control;
+            var controls = journal.ControlMethodsLib.Entities;
             foreach (var control in controls)
             {
                 if (control.ControlName.Name == "ПВК")
@@ -679,7 +679,7 @@ namespace QualityControl_Client
 
         private bool RgkFiltration(BllJournal journal)
         {
-            var controls = journal.ControlMethodsLib.Control;
+            var controls = journal.ControlMethodsLib.Entities;
             foreach (var control in controls)
             {
                 if (control.ControlName.Name == "РГК")

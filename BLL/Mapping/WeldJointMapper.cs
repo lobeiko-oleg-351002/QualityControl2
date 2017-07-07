@@ -16,6 +16,7 @@ namespace BLL.Mapping
         {
 
         }
+        public WeldJointMapper(IUnitOfWork uow) { }
 
         public DalWeldJoint MapToDal(BllWeldJoint entity)
         {

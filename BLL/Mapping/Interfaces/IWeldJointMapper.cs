@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace BLL.Mapping.Interfaces
 {
-    public interface IWeldJointMapper
+    public interface IWeldJointMapper : IMapper<BllWeldJoint, DalWeldJoint>
     {
-        DalWeldJoint MapToDal(BllWeldJoint entity);
-        BllWeldJoint MapToBll(DalWeldJoint entity);
+
     }
 }

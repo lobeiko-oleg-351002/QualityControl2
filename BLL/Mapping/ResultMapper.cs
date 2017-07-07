@@ -1,6 +1,7 @@
 ﻿using BLL.Entities;
 using BLL.Mapping.Interfaces;
 using DAL.Entities;
+using DAL.Repositories.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace BLL.Mapping
         {
 
         }
+
+        public ResultMapper(IUnitOfWork uow) { }
 
         public DalResult MapToDal(BllResult entity)
         {

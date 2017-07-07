@@ -13,7 +13,6 @@ namespace DAL.Repositories.Interface
         IEnumerable<DalControl> GetAllControlled();
         IEnumerable<DalControl> GetAllUncontrolled();
         DalControl GetControlByNumber(int number);
-        IEnumerable<DalControl> GetControlsByLibId(int id);
         int GetControlCountWithCurrentType(int controlNameId);
 
 

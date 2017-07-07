@@ -15,6 +15,6 @@ namespace BLL.Entities
 
         public int? Creator_id { get; set; }
 
-        public BllComponentLib ComponentLib { get; set; }
+        //public BllComponentLib ComponentLib { get; set; }
     }
 }

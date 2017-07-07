@@ -10,7 +10,6 @@ namespace DAL.Mapping.Interfaces
 {
     public interface IContractMapper : IMapper<DalContract, Contract>
     {
-        //DalContract MapToDal(Contract entity);
-       // Contract MapToOrm(DalContract entity);
+
     }
 }

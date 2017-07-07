@@ -16,7 +16,7 @@ namespace DAL.Mapping
             return new DalIndustrialObject
             {
                 Id = entity.id,
-                ComponentLib_id = entity.componentLib_id,
+               // ComponentLib_id = entity.componentLib_id,
                 Name = entity.name,
                
             };
@@ -27,7 +27,7 @@ namespace DAL.Mapping
             return new IndustrialObject
             {
                 id = entity.Id,
-                componentLib_id = entity.ComponentLib_id,
+              //  componentLib_id = entity.ComponentLib_id,
                 name = entity.Name
             };
         }

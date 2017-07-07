@@ -10,7 +10,6 @@ namespace DAL.Mapping.Interfaces
 {
     public interface IMaterialMapper : IMapper<DalMaterial, Material>
     {
-        //DalMaterial MapToDal(Material entity);
-       // Material MapToOrm(DalMaterial entity);
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BLL.Entities;
 using BLL.Mapping.Interfaces;
 using DAL.Entities;
+using DAL.Repositories.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,12 @@ namespace BLL.Mapping
     public class ContractMapper : IContractMapper
     {
 
+        public ContractMapper() { }
+        public ContractMapper(IUnitOfWork uow)
+        {
+
+        }
+
         public DalContract MapToDal(BllContract entity)
         {
             return new DalContract
@@ -20,7 +27,7 @@ namespace BLL.Mapping
                 Name = entity.Name,
                 BeginDate = entity.BeginDate,
                 EndDate = entity.EndDate,
-                ContractLib_id = entity.ContractLib_id
+                Lib_id = entity.ContractLib_id != null ? entity.ContractLib_id.Value : 0
             };
         }
 
@@ -33,7 +40,7 @@ namespace BLL.Mapping
                 Name = entity.Name,
                 BeginDate = entity.BeginDate,
                 EndDate = entity.EndDate,
-                ContractLib_id = entity.ContractLib_id
+                ContractLib_id = entity.Lib_id
             };
 
             return bllEntity;

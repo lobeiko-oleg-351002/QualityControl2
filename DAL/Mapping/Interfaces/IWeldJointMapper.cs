@@ -10,7 +10,6 @@ namespace DAL.Mapping.Interfaces
 {
     public interface IWeldJointMapper : IMapper<DalWeldJoint, WeldJoint>
     {
-       // DalWeldJoint MapToDal(WeldJoint entity);
-        //WeldJoint MapToOrm(DalWeldJoint entity);
+
     }
 }

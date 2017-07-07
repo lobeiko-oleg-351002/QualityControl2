@@ -14,52 +14,19 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class MaterialService : Service<BllMaterial, DalMaterial, Material>, IMaterialService
+    public class MaterialService : Service<BllMaterial, DalMaterial, Material, MaterialMapper>, IMaterialService
     {
-        private readonly IUnitOfWork uow;
-        IMaterialMapper bllMapper = new MaterialMapper();
+      //  private readonly IUnitOfWork uow;
+
         public MaterialService(IUnitOfWork uow) : base(uow, uow.Materials)
         {
-            this.uow = uow;
+           // this.uow = uow;
         }
 
-        public override void Create(BllMaterial entity)
-        {
-            uow.Materials.Create(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override void Update(BllMaterial entity)
-        {
-            uow.Materials.Update(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override void Delete(BllMaterial entity)
-        {
-            uow.Materials.Delete(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override IEnumerable<BllMaterial> GetAll()
-        {
-            var elements = uow.Materials.GetAll();
-            var retElemets = new List<BllMaterial>();
-            foreach (var element in elements)
-            {
-                retElemets.Add(bllMapper.MapToBll(element));
-            }
-            return retElemets;
-        }
-
-        public override BllMaterial Get(int id)
-        {
-            return bllMapper.MapToBll(uow.Materials.Get(id));
-        }
 
         public BllMaterial GetMaterialByName(string name)
         {
-            return bllMapper.MapToBll(uow.Materials.GetMaterialByName(name));
+            return mapper.MapToBll(uow.Materials.GetMaterialByName(name));
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class ControlRepository : Repository<DalControl, Control, ControlMapper>, IControlRepository
+    public class ControlRepository : Repository<DalControl, Control, ControlMapper>, IControlRepository, IGetterByLibId<DalControl>
     {
         private readonly ServiceDB context;
         public ControlRepository(ServiceDB context) : base(context)
@@ -53,7 +53,7 @@ namespace DAL.Repositories
             return controls.Count();
         }
 
-        public IEnumerable<DalControl> GetControlsByLibId(int id)
+        public IEnumerable<DalControl> GetEntitiesByLibId(int id)
         {
             var elements = context.Set<Control>().Where(entity => entity.controlMethodsLib_id == id);
             var retElemets = new List<DalControl>();

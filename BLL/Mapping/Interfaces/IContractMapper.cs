@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace BLL.Mapping.Interfaces
 {
-    public interface IContractMapper
+    public interface IContractMapper : IMapper<BllContract, DalContract>
     {
-        DalContract MapToDal(BllContract entity);
-        BllContract MapToBll(DalContract entity);
+
     }
 }

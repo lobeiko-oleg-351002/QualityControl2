@@ -18,8 +18,10 @@ namespace BLL.Mapping
         public IndustrialObjectMapper(IUnitOfWork uow)
         {
             this.uow = uow;
-            componentLibService = new ComponentLibService(uow);
+           // componentLibService = new ComponentLibService(uow);
         }
+
+        public IndustrialObjectMapper() { }
 
         public DalIndustrialObject MapToDal(BllIndustrialObject entity)
         {
@@ -27,13 +29,13 @@ namespace BLL.Mapping
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                ComponentLib_id = entity.ComponentLib != null ? entity.ComponentLib.Id : (int?)null,
+                //ComponentLib_id = entity.ComponentLib != null ? entity.ComponentLib.Id : (int?)null,
             };
 
             return dalEntity;
         }
 
-        IComponentLibService componentLibService;
+        //ComponentLibService componentLibService;
 
         public BllIndustrialObject MapToBll(DalIndustrialObject entity)
         {
@@ -41,7 +43,7 @@ namespace BLL.Mapping
             {
                 Id = entity.Id,
                 Name = entity.Name,
-                ComponentLib = entity.ComponentLib_id != null ? componentLibService.Get((int)entity.ComponentLib_id) : null,
+               // ComponentLib = entity.ComponentLib_id != null ? componentLibService.Get((int)entity.ComponentLib_id) : null,
             };
 
             return bllEntity;

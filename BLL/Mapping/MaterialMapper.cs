@@ -12,8 +12,8 @@ namespace BLL.Mapping
 {
     public class MaterialMapper : IMaterialMapper
     {
-
-        public MaterialMapper()
+        public MaterialMapper() { }
+        public MaterialMapper(IUnitOfWork uow)
         {
 
         }

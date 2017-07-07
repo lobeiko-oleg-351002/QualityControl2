@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class DalResult : IDalEntity
+    public class DalResult : IDalEntityWithLibId
     {
         public int Id { get; set; }
 
@@ -23,6 +23,6 @@ namespace DAL.Entities
 
         public string Quality { get; set; }
 
-        public int ResultLib_id { get; set; }
+        public int Lib_id { get; set; }
     }
 }

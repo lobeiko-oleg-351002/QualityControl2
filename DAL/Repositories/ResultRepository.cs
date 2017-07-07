@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class ResultRepository : Repository<DalResult, Result, ResultMapper>, IResultRepository
+    public class ResultRepository : Repository<DalResult, Result, ResultMapper>, IResultRepository, IGetterByLibId<DalResult>
     {
         private readonly ServiceDB context;
         public ResultRepository(ServiceDB context) : base(context)
@@ -25,7 +25,7 @@ namespace DAL.Repositories
             return mapper.MapToDal(ormEntity);
         }
 
-        public IEnumerable<DalResult> GetResultsByLibId(int id)
+        public IEnumerable<DalResult> GetEntitiesByLibId(int id)
         {
             var elements = context.Set<Result>().Where(entity => entity.resultLib_id == id);
             var retElemets = new List<DalResult>();

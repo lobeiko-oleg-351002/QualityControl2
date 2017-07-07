@@ -12,8 +12,8 @@ namespace BLL.Mapping
 {
     public class EmployeeMapper : IEmployeeMapper
     {
-
-        public EmployeeMapper()
+        public EmployeeMapper() { }
+        public EmployeeMapper(IUnitOfWork uow)
         {
 
         }

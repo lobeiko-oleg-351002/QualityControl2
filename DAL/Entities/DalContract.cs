@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class DalContract : IDalEntity
+    public class DalContract : IDalEntityWithLibId
     {
         public int Id { get; set; }
 
@@ -17,6 +17,6 @@ namespace DAL.Entities
 
         public DateTime? EndDate { get; set; }
 
-        public int? ContractLib_id { get; set; }
+        public int Lib_id { get; set; }
     }
 }

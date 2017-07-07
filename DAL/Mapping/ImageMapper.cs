@@ -17,7 +17,7 @@ namespace DAL.Mapping
             {
                 Id = entity.id,
                 Image = entity.image,
-                ImageLib_id = entity.imageLib_id
+                Lib_id = entity.imageLib_id.Value
             };
         }
 
@@ -27,7 +27,7 @@ namespace DAL.Mapping
             {
                 id = entity.Id,
                 image = entity.Image,
-                imageLib_id = entity.ImageLib_id
+                imageLib_id = entity.Lib_id
             };
         }
     }

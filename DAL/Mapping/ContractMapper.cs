@@ -17,7 +17,7 @@ namespace DAL.Mapping
             {
                 Id = entity.id,
                 Name = entity.name,
-                ContractLib_id = entity.contractLib_id,
+                Lib_id = entity.contractLib_id.Value,
                 BeginDate = entity.beginDate,
                 EndDate = entity.endDate                
             };
@@ -29,7 +29,7 @@ namespace DAL.Mapping
             {
                 id = entity.Id,
                 name = entity.Name,
-                contractLib_id = entity.ContractLib_id,
+                contractLib_id = entity.Lib_id,
                 beginDate = entity.BeginDate,
                 endDate = entity.EndDate
             };

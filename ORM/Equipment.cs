@@ -24,6 +24,7 @@ namespace ORM
         [StringLength(50)]
         public string type { get; set; }
 
+        [StringLength(50)]
         public string factoryNumber { get; set; }
 
         [Column(TypeName = "date")]

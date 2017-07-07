@@ -10,7 +10,6 @@ namespace DAL.Mapping.Interfaces
 {
     public interface ITemplateMapper : IMapper<DalTemplate, Template>
     {
-        //DalTemplate MapToDal(Template entity);
-        //Template MapToOrm(DalTemplate entity);
+
     }
 }

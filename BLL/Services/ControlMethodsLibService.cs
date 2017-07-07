@@ -14,51 +14,48 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class ControlMethodsLibService : Service<BllControlMethodsLib, DalControlMethodsLib, ControlMethodsLib>, IControlMethodsLibService
+    public class ControlMethodsLibService : EntitySimpleLibService<BllControl, BllControlMethodsLib, DalControl, ControlMapper, ControlMethodsLib, Control>, IControlMethodsLibService
     {
-        private readonly IUnitOfWork uow;
 
-        public ControlMethodsLibService(IUnitOfWork uow) : base(uow, uow.ControlMethodsLibs)
+        public ControlMethodsLibService(IUnitOfWork uow) : base(uow, uow.ControlMethodsLibs, uow.Controls)
         {
-            this.uow = uow;
-            bllMapper = new ControlMethodsLibMapper(uow);
+
         }
 
-        ControlMethodsLibMapper bllMapper;
+        //ControlMethodsLibMapper bllMapper;
 
         public new BllControlMethodsLib Create(BllControlMethodsLib entity)
         {
-            var ormEntity = uow.ControlMethodsLibs.Create(bllMapper.MapToDal(entity));
+            var ormEntity = uow.ControlMethodsLibs.Create(mapper.MapToDal(entity));
             uow.Commit();
             entity.Id = ormEntity.id;
             ControlService controlService = new ControlService(uow);
             IControlMapper controlMapper = new ControlMapper(uow);
-            foreach (var Control in entity.Control)
+            foreach (var Control in entity.Entities)
             {
                 var control = controlService.Create(Control);
                 var dalControl = controlMapper.MapToDal(Control);                
-                dalControl.ControlMethodsLib_id = ormEntity.id;
+                dalControl.Lib_id = ormEntity.id;
                 var ormControl = uow.Controls.Create(dalControl);
                 uow.Commit();
                 Control.Id = ormControl.id;
                 Control.ProtocolNumber = ormControl.protocolNumber;
-               // bllEntity.Control.Add(ControlService.MapDalToBll(dalControl));
             }
 
             return entity;           
         }
 
-        public override BllControlMethodsLib Get(int id)
-        {
-            var retElement = bllMapper.MapToBll(uow.ControlMethodsLibs.Get(id));
+        //public override BllControlMethodsLib Get(int id)
+        //{
+        //    var retElement = bllMapper.MapToBll(uow.ControlMethodsLibs.Get(id));
 
-            return retElement;
-        }
+        //    return retElement;
+        //}
 
         public new BllControlMethodsLib Update(BllControlMethodsLib entity)
         {
             IControlMapper controlMapper = new ControlMapper(uow);
-            foreach (var Control in entity.Control)
+            foreach (var Control in entity.Entities)
             {
                 var currentControl = Control;
                 if (Control.Id == 0)
@@ -66,7 +63,7 @@ namespace BLL.Services
                     ControlService service = new ControlService(uow);
                     currentControl = service.Create(Control);
                     var dal = controlMapper.MapToDal(currentControl);
-                    dal.ControlMethodsLib_id = entity.Id;
+                    dal.Lib_id = entity.Id;
                     var ormControl = uow.Controls.Create(dal);
                     uow.Commit();
                     Control.Id = ormControl.id;
@@ -75,7 +72,7 @@ namespace BLL.Services
                 else
                 {
                     var dalControl = controlMapper.MapToDal(currentControl);
-                    dalControl.ControlMethodsLib_id = entity.Id;
+                    dalControl.Lib_id = entity.Id;
 
                     ImageLibService imageLibService = new ImageLibService(uow);
                     Control.ImageLib = imageLibService.Update(Control.ImageLib);
@@ -94,11 +91,11 @@ namespace BLL.Services
                 
             }
 
-            var ControlsWithLibId = uow.Controls.GetControlsByLibId(entity.Id);
+            var ControlsWithLibId = ((IGetterByLibId<DalControl>)entityRepository).GetEntitiesByLibId(entity.Id);
             foreach (var Control in ControlsWithLibId)
             {
                 bool isTrashControl = true;
-                foreach (var control in entity.Control)
+                foreach (var control in entity.Entities)
                 {
                     if (control.Id == Control.Id)
                     {
@@ -117,19 +114,5 @@ namespace BLL.Services
             return entity;
         }
 
-        //private BllControlMethodsLib MapDalToBll(DalControlMethodsLib dalEntity)
-        //{
-        //    Mapper.Initialize(cfg =>
-        //    {
-        //        cfg.CreateMap<DalControlMethodsLib, BllControlMethodsLib>().ForMember(x => x.Control, opt => opt.Ignore());
-        //    });
-        //    BllControlMethodsLib bllEntity = Mapper.Map<BllControlMethodsLib>(dalEntity);
-        //    ControlService controlService = new ControlService(uow);
-        //    foreach (var Control in uow.Controls.GetControlsByLibId(dalEntity.Id))
-        //    {
-        //        bllEntity.Control.Add(controlService.Get(Control.Id));
-        //    }
-        //    return bllEntity;
-        //}
     }
 }

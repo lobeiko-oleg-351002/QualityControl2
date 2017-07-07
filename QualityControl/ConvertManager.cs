@@ -12,7 +12,7 @@ using Microsoft.Office.Interop;
 using Microsoft.Office.Interop.Excel;
 using BLL.Entities;
 
-namespace QualityControl_Client
+namespace QualityControl_Server
 {
     public class ConvertManager
     {
@@ -100,7 +100,7 @@ namespace QualityControl_Client
             BaseFont baseFont = BaseFont.CreateFont(fontsfolder + "\\arial.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
             iTextSharp.text.Font font = new iTextSharp.text.Font(baseFont, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL);
 
-            List<BllResult> results = control.ResultLib.Result;
+            List<BllResult> results = control.ResultLib.Entities;
             //Creating iTextSharp Table from the DataTable data
             const int amountOfColumns = 9;
             PdfPTable pdfTable = new PdfPTable(amountOfColumns);
@@ -129,7 +129,7 @@ namespace QualityControl_Client
             Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
             //ExcelApp = InitResultExcelTable(ExcelApp);
 
-            List<BllResult> results = control.ResultLib.Result;
+            List<BllResult> results = control.ResultLib.Entities;
 
             for (var i = 0; i < results.Count; i++)
             {
@@ -215,11 +215,11 @@ namespace QualityControl_Client
             int rowNumber = -1;
             foreach (var journal in journals)
             {
-                foreach (var control in journal.ControlMethodsLib.Control)
+                foreach (var control in journal.ControlMethodsLib.Entities)
                 {
                     if (control.ControlName.Id == controlName.Id)
                     {
-                        foreach (var result in control.ResultLib.Result)
+                        foreach (var result in control.ResultLib.Entities)
                         {
                             rowNumber++;
                            // ExcelApp = AddRowToExcelTable(ExcelApp, result, journal, rowNumber);
@@ -247,11 +247,11 @@ namespace QualityControl_Client
             //Adding DataRow
             foreach (var journal in journals)
             {
-                foreach (var control in journal.ControlMethodsLib.Control)
+                foreach (var control in journal.ControlMethodsLib.Entities)
                 {
                     if (control.ControlName.Id == controlName.Id)
                     {
-                        foreach(var result in control.ResultLib.Result)
+                        foreach(var result in control.ResultLib.Entities)
                         {
                             pdfTable = AddResultToPdfTable(pdfTable, result, journal, font);
                         }
@@ -343,7 +343,7 @@ namespace QualityControl_Client
             {
                 journalNum++;
                 int sheetNum = 0;    
-                foreach (var control in journal.ControlMethodsLib.Control)
+                foreach (var control in journal.ControlMethodsLib.Entities)
                 {
                     sheetNum++;
                     foreach(Worksheet currentSheet in workbook.Sheets)
@@ -352,11 +352,11 @@ namespace QualityControl_Client
                         {
                             Microsoft.Office.Interop.Excel.Range last = currentSheet.Cells.SpecialCells(Microsoft.Office.Interop.Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
                             rowNumber = last.Row + 1;
-                            if (control.ResultLib.Result.Count != 0)
+                            if (control.ResultLib.Entities.Count != 0)
                             {
                                 currentSheet.Cells[rowNumber , 1] = control.ProtocolNumber.ToString();
                             }
-                            foreach (var result in control.ResultLib.Result)
+                            foreach (var result in control.ResultLib.Entities)
                             {
                                 AddRowToExcelTable(currentSheet, result, journal, rowNumber, control.IsControlled.Value);
                                 rowNumber++;

@@ -13,8 +13,8 @@ namespace BLL.Mapping
 {
     public class ImageMapper : IImageMapper
     {
-
-        public ImageMapper()
+        public ImageMapper() { }
+        public ImageMapper(IUnitOfWork uow)
         {
 
         }

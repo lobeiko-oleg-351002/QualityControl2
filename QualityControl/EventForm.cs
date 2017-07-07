@@ -1,4 +1,4 @@
-﻿using QualityControl_Client.Forms;
+﻿using QualityControl_Server.Forms;
 
 using System;
 using System.Collections.Generic;
@@ -9,17 +9,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QualityControl_Client.Forms.SertificateDirectory;
-using QualityControl_Client.Forms.CustomerDirectory;
-using QualityControl_Client.Forms.EquipmentDirectory;
-using QualityControl_Client.Forms.EmployeeDirectory;
+using QualityControl_Server.Forms.SertificateDirectory;
+using QualityControl_Server.Forms.CustomerDirectory;
+using QualityControl_Server.Forms.EquipmentDirectory;
+using QualityControl_Server.Forms.EmployeeDirectory;
 using BLL.Services.Interface;
 using BLL.Services;
 using DAL.Repositories.Interface;
 using BLL.Entities.Interface;
 using QualityControl_Server;
 
-namespace QualityControl_Client
+namespace QualityControl_Server
 {
     public partial class EventForm : Form
     {
@@ -89,7 +89,7 @@ namespace QualityControl_Client
             var Customers = CustomerService.GetAll();
             foreach (var item in Customers)
             {
-                foreach(var contract in item.ContractLib.Contract)
+                foreach(var contract in item.ContractLib.Entities)
                 {
                     if (contract.EndDate.Value.CompareTo(DateTime.Now) < 0)
                     {

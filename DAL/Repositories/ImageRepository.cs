@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    public class ImageRepository : Repository<DalImage, Image, ImageMapper>, IImageRepository
+    public class ImageRepository : Repository<DalImage, Image, ImageMapper>, IImageRepository, IGetterByLibId<DalImage>
     {
         private readonly ServiceDB context;
         public ImageRepository(ServiceDB context) : base(context)
@@ -19,7 +19,7 @@ namespace DAL.Repositories
             this.context = context;
         }
 
-        public IEnumerable<DalImage> GetImagesByLibId(int id)
+        public IEnumerable<DalImage> GetEntitiesByLibId(int id)
         {
             ImageMapper mapper = new ImageMapper();
             var elements = context.Set<Image>().Where(entity => entity.imageLib_id == id);

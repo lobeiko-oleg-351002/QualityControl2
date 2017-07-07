@@ -17,6 +17,8 @@ namespace BLL.Mapping
         {
         }
 
+        public RoleMapper(IUnitOfWork uow) { }
+
         public DalRole MapToDal(BllRole entity)
         {
             DalRole dalEntity = new DalRole

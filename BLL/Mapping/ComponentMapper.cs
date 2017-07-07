@@ -21,6 +21,8 @@ namespace BLL.Mapping
             templateService = new TemplateService(uow);
         }
 
+        public ComponentMapper() { }
+
         public DalComponent MapToDal(BllComponent entity)
         {
             return new DalComponent

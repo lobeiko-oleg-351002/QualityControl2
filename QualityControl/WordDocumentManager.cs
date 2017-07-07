@@ -1,5 +1,5 @@
 ﻿using Microsoft.Office.Interop.Word;
-using QualityControl_Client;
+using QualityControl_Server;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,7 +26,7 @@ namespace QualityControl_Server
         private void FillVIKReport(Application wordApp, List<BllJournal> journals, BllUser user)
         {
             //Find and replace:
-            this.FindAndReplace(wordApp, "ProtocolNumber", journals[0].ControlMethodsLib.Control[0].ProtocolNumber.ToString());
+            this.FindAndReplace(wordApp, "ProtocolNumber", journals[0].ControlMethodsLib.Entities[0].ProtocolNumber.ToString());
             this.FindAndReplace(wordApp, "ControlDate_Day", journals[0].ControlDate.Value.Day.ToString());
             string month = "";
             switch(journals[0].ControlDate.Value.Month.ToString())
@@ -79,16 +79,16 @@ namespace QualityControl_Server
             this.FindAndReplace(wordApp, "Component", journals[0].Component != null ? journals[0].Component.Name : "<не указан>");
 
             string code = "";
-            foreach(var doc in journals[0].ControlMethodsLib.Control[0].RequirementDocumentationLib.SelectedRequirementDocumentation)
+            foreach(var doc in journals[0].ControlMethodsLib.Entities[0].RequirementDocumentationLib.SelectedEntities)
             {
-                code += doc.RequirementDocumentation.Pressmark + "; ";
+                code += doc.Entity.Pressmark + "; ";
             }
             this.FindAndReplace(wordApp, "RequirementDocCode", code);
 
             code = "";
-            foreach (var doc in journals[0].ControlMethodsLib.Control[0].ControlMethodDocumentationLib.SelectedControlMethodDocumentation)
+            foreach (var doc in journals[0].ControlMethodsLib.Entities[0].ControlMethodDocumentationLib.SelectedEntities)
             {
-                code += doc.ControlMethodDocumentation.Pressmark + "; ";
+                code += doc.Entity.Pressmark + "; ";
             }
             this.FindAndReplace(wordApp, "ControlMethodDocCode", code);
 
@@ -102,20 +102,20 @@ namespace QualityControl_Server
             }
             else
             {
-                this.FindAndReplace(wordApp, "Employee", journals[0].ControlMethodsLib.Control[0].EmployeeLib.SelectedEmployee.Count != 0 ?
-                    journals[0].ControlMethodsLib.Control[0].EmployeeLib.SelectedEmployee[0].Employee.Sirname + " " +
-                    journals[0].ControlMethodsLib.Control[0].EmployeeLib.SelectedEmployee[0].Employee.Name[0] + ". " +
-                    journals[0].ControlMethodsLib.Control[0].EmployeeLib.SelectedEmployee[0].Employee.Fathername[0] + "." : "<не указано>");
+                this.FindAndReplace(wordApp, "Employee", journals[0].ControlMethodsLib.Entities[0].EmployeeLib.SelectedEntities.Count != 0 ?
+                    journals[0].ControlMethodsLib.Entities[0].EmployeeLib.SelectedEntities[0].Entity.Sirname + " " +
+                    journals[0].ControlMethodsLib.Entities[0].EmployeeLib.SelectedEntities[0].Entity.Name[0] + ". " +
+                    journals[0].ControlMethodsLib.Entities[0].EmployeeLib.SelectedEntities[0].Entity.Fathername[0] + "." : "<не указано>");
             }
 
-            this.FindAndReplace(wordApp, "Light", journals[0].ControlMethodsLib.Control[0].Light.Value.ToString());
+            this.FindAndReplace(wordApp, "Light", journals[0].ControlMethodsLib.Entities[0].Light.Value.ToString());
 
             BllCertificate certificate = null;
-            if (journals[0].ControlMethodsLib.Control[0].EmployeeLib.SelectedEmployee.Count != 0)
+            if (journals[0].ControlMethodsLib.Entities[0].EmployeeLib.SelectedEntities.Count != 0)
             {
                 ICertificateService service = new CertificateService(uow);
                 certificate =  service.GetCertificateByEmployeeAndControlName(
-                    journals[0].ControlMethodsLib.Control[0].EmployeeLib.SelectedEmployee[0].Employee, journals[0].ControlMethodsLib.Control[0].ControlName);
+                    journals[0].ControlMethodsLib.Entities[0].EmployeeLib.SelectedEntities[0].Entity, journals[0].ControlMethodsLib.Entities[0].ControlName);
             }
             this.FindAndReplace(wordApp, "Certificate", certificate != null ? certificate.Title : "-");
             this.FindAndReplace(wordApp, "CertificateDate", certificate != null ? certificate.CheckDate.ToString("dd.MM.yyyy") : "-");
@@ -221,7 +221,7 @@ namespace QualityControl_Server
                     for (int i = 0; i < journals.Count; i++)
                     {
                         BllControl vik = null;
-                        foreach(var control in journals[i].ControlMethodsLib.Control)
+                        foreach(var control in journals[i].ControlMethodsLib.Entities)
                         {
                             if (control.ControlName.Name == "ВИК")
                             {
@@ -231,12 +231,12 @@ namespace QualityControl_Server
                         }
                         if (vik != null)
                         {
-                            foreach(var eq in vik.EquipmentLib.SelectedEquipment)
+                            foreach(var eq in vik.EquipmentLib.SelectedEntities)
                             {
                                 bool isUsed = false;
                                 foreach(var item in usedEq)
                                 {
-                                    if (eq.Equipment.Id == item.Id)
+                                    if (eq.Entity.Id == item.Id)
                                     {
                                         isUsed = true;
                                         break;
@@ -247,13 +247,13 @@ namespace QualityControl_Server
                                 {
                                     Row row = tableEquipment.Rows.Add(ref missing);
 
-                                    row.Cells[1].Range.Text = eq.Equipment.Name + ", " + eq.Equipment.Type;
-                                    row.Cells[2].Range.Text = eq.Equipment.FactoryNumber.ToString();
-                                    row.Cells[3].Range.Text = eq.Equipment.NumberOfTechnicalCheck + ", " + eq.Equipment.NextTechnicalCheckDate.Value.ToString("dd.MM.yyyy");
-                                    usedEq.Add(eq.Equipment);
+                                    row.Cells[1].Range.Text = eq.Entity.Name + ", " + eq.Entity.Type;
+                                    row.Cells[2].Range.Text = eq.Entity.FactoryNumber.ToString();
+                                    row.Cells[3].Range.Text = eq.Entity.NumberOfTechnicalCheck + ", " + eq.Entity.NextTechnicalCheckDate.Value.ToString("dd.MM.yyyy");
+                                    usedEq.Add(eq.Entity);
                                 }
                             }
-                            foreach (var res in vik.ResultLib.Result)
+                            foreach (var res in vik.ResultLib.Entities)
                             {
                                 Row row = tableResult.Rows.Add(ref missing);
 

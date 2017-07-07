@@ -10,7 +10,6 @@ namespace DAL.Mapping.Interfaces
 {
     public interface IComponentMapper : IMapper<DalComponent, Component>
     {
-        //DalComponent MapToDal(Component entity);
-        //Component MapToOrm(DalComponent entity);
+
     }
 }

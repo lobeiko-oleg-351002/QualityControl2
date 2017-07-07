@@ -9,7 +9,6 @@ namespace DAL.Mapping.Interfaces
 {
     public interface IJournalMapper : IMapper<DalJournal, Journal>
     {
-        //DalJournal MapToDal(Journal entity);
-        //Journal MapToOrm(DalJournal entity);
+
     }
 }

@@ -18,6 +18,8 @@ namespace BLL.Mapping
             this.uow = uow;
         }
 
+        public ControlNameMapper() { }
+
         public DalControlName MapToDal(BllControlName entity)
         {
             DalControlName dalEntity = new DalControlName

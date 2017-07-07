@@ -12,7 +12,8 @@ namespace BLL.Mapping
 {
     public class RequirementDocumentationMapper : IRequirementDocumentationMapper
     {
-        public RequirementDocumentationMapper()
+        public RequirementDocumentationMapper() { }
+        public RequirementDocumentationMapper(IUnitOfWork uow)
         {
 
         }

@@ -10,7 +10,6 @@ namespace DAL.Mapping.Interfaces
 {
     public interface IRequirementDocumentationMapper : IMapper<DalRequirementDocumentation, RequirementDocumentation>
     {
-       // DalRequirementDocumentation MapToDal(RequirementDocumentation entity);
-        //RequirementDocumentation MapToOrm(DalRequirementDocumentation entity);
+
     }
 }

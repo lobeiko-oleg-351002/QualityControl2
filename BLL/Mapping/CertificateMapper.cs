@@ -23,6 +23,8 @@ namespace BLL.Mapping
             employeeService = new EmployeeService(uow);
         }
 
+        public CertificateMapper() { }
+
         public DalCertificate MapToDal(BllCertificate entity)
         {
             DalCertificate dalEntity = new DalCertificate

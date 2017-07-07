@@ -10,7 +10,6 @@ namespace DAL.Mapping.Interfaces
 {
     public interface ICertificateMapper : IMapper<DalCertificate, Certificate>
     {
-        //DalCertificate MapToDal(Certificate entity);
-        //Certificate MapToOrm(DalCertificate entity);
+
     }
 }

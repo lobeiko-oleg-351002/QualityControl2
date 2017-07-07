@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace BLL.Mapping.Interfaces
 {
-    public interface IControlMethodDocumentationMapper
+    public interface IControlMethodDocumentationMapper : IMapper<BllControlMethodDocumentation, DalControlMethodDocumentation>
     {
-        DalControlMethodDocumentation MapToDal(BllControlMethodDocumentation entity);
-        BllControlMethodDocumentation MapToBll(DalControlMethodDocumentation entity);
+
     }
 }

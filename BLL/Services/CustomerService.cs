@@ -13,67 +13,51 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class CustomerService : Service<BllCustomer, DalCustomer, Customer>, ICustomerService
+    public class CustomerService : Service<BllCustomer, DalCustomer, Customer, CustomerMapper>, ICustomerService
     {
-        private readonly IUnitOfWork uow;
-        CustomerMapper bllMapper;
+        //private readonly IUnitOfWork uow;
+
         public CustomerService(IUnitOfWork uow) : base(uow, uow.Customers)
         {
-            this.uow = uow;
-            bllMapper = new CustomerMapper(uow);
+         //   this.uow = uow;
         }
 
         public override void Create(BllCustomer entity)
         {
-            ContractLibService service = new ContractLibService(uow);
-            entity.ContractLib = service.Create(entity.ContractLib);
-            uow.Customers.Create(bllMapper.MapToDal(entity));
+            ContractLibService contractLibService = new ContractLibService(uow);
+            var contractLib = contractLibService.Create(entity.ContractLib);
+            entity.ContractLib = contractLib;
+            uow.Customers.Create(mapper.MapToDal(entity));
             uow.Commit();
         }
+
 
         public override void Update(BllCustomer entity)
         {
-            ContractLibService service = new ContractLibService(uow);
-            entity.ContractLib = service.Update(entity.ContractLib);
-            uow.Customers.Update(bllMapper.MapToDal(entity));
+            ContractLibService contractLibService = new ContractLibService(uow);
+            contractLibService.Update(entity.ContractLib);
+            uow.Customers.Update(mapper.MapToDal(entity));
             uow.Commit();
         }
 
-        public override void Delete(BllCustomer entity)
+        protected override void InitMapper()
         {
-            uow.Customers.Delete(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override IEnumerable<BllCustomer> GetAll()
-        {
-            var elements = uow.Customers.GetAll();
-            var retElemets = new List<BllCustomer>();
-            foreach (var element in elements)
-            {
-                retElemets.Add(bllMapper.MapToBll(element));
-            }
-            return retElemets;
-        }
-
-        public override BllCustomer Get(int id)
-        {
-            return bllMapper.MapToBll(uow.Customers.Get(id));
+            mapper = new CustomerMapper(uow);
         }
 
         public BllCustomer GetCustomerByAddress(string address)
         {
-            return bllMapper.MapToBll(uow.Customers.GetCustomerByAddress(address));
+            return mapper.MapToBll(uow.Customers.GetCustomerByAddress(address));
         }
 
         public BllCustomer GetCustomerByOrganization(string organization)
         {
-            return bllMapper.MapToBll(uow.Customers.GetCustomerByOrganization(organization));
+            return mapper.MapToBll(uow.Customers.GetCustomerByOrganization(organization));
         }
 
         public BllCustomer GetCustomerByPhone(string phone)
         {
-            return bllMapper.MapToBll(uow.Customers.GetCustomerByPhone(phone));
+            return mapper.MapToBll(uow.Customers.GetCustomerByPhone(phone));
         }
     }
 }

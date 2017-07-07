@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace BLL.Entities
 {
-    public class BllCertificateLib : IBllEntity
+    public class BllCertificateLib : IBllEntityLib<BllCertificate>
     {
         public int Id { get; set; }
 
-        public List<BllSelectedCertificate> SelectedCertificate { get; set; }
+        public List<BllSelectedEntity<BllCertificate>> SelectedEntities { get; set; }
 
         public BllCertificateLib()
         {
-            SelectedCertificate = new List<BllSelectedCertificate>();
+            SelectedEntities = new List<BllSelectedEntity<BllCertificate>>();
         }
     }
 }

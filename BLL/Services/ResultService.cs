@@ -14,52 +14,18 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class ResultService : Service<BllResult, DalResult, Result>, IResultService
+    public class ResultService : Service<BllResult, DalResult, Result, ResultMapper>, IResultService
     {
-        private readonly IUnitOfWork uow;
-        IResultMapper bllMapper = new ResultMapper();
+       // private readonly IUnitOfWork uow;
+
         public ResultService(IUnitOfWork uow) : base(uow, uow.Results)
         {
-            this.uow = uow;
-        }
-
-        public override void Create(BllResult entity)
-        {
-            uow.Results.Create(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override void Update(BllResult entity)
-        {
-            uow.Results.Update(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override void Delete(BllResult entity)
-        {
-            uow.Results.Delete(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override IEnumerable<BllResult> GetAll()
-        {
-            var elements = uow.Results.GetAll();
-            var retElemets = new List<BllResult>();
-            foreach (var element in elements)
-            {
-                retElemets.Add(bllMapper.MapToBll(element));
-            }
-            return retElemets;
-        }
-
-        public override BllResult Get(int id)
-        {
-            return bllMapper.MapToBll(uow.Results.Get(id));
+         //   this.uow = uow;
         }
 
         public BllResult GetResultByNumber(int number)
         {
-            return bllMapper.MapToBll(uow.Results.GetResultByNumber(number));
+            return mapper.MapToBll(uow.Results.GetResultByNumber(number));
         }
     }
 }

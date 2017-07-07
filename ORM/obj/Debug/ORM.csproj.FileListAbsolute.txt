@@ -1,3 +1,4 @@
+E:\Projects\VisualStudioProjects\29.05.17\QualityControl\ORM\obj\Debug\ORM.csprojResolveAssemblyReference.cache
 E:\Projects\VisualStudioProjects\29.05.17\QualityControl\ORM\bin\Debug\ORM.dll.config
 E:\Projects\VisualStudioProjects\29.05.17\QualityControl\ORM\bin\Debug\ORM.dll
 E:\Projects\VisualStudioProjects\29.05.17\QualityControl\ORM\bin\Debug\ORM.pdb

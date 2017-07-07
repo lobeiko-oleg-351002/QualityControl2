@@ -10,7 +10,6 @@ namespace DAL.Mapping.Interfaces
 {
     public interface IEquipmentMapper : IMapper<DalEquipment, Equipment>
     {
-        //DalEquipment MapToDal(Equipment entity);
-        //Equipment MapToOrm(DalEquipment entity);
+
     }
 }

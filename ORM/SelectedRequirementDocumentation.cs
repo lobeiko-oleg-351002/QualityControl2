@@ -7,13 +7,13 @@ namespace ORM
     using System.Data.Entity.Spatial;
 
     [Table("SelectedRequirementDocumentation")]
-    public partial class SelectedRequirementDocumentation : IOrmEntity
+    public partial class SelectedRequirementDocumentation : ISelectedEntity
     {
         public int id { get; set; }
+    
+        public int? entity_id { get; set; }
 
-        public int? requirementDocumentation_id { get; set; }
-
-        public int? requirementDocumentationLib_id { get; set; }
+        public int? lib_id { get; set; }
 
         public virtual RequirementDocumentation RequirementDocumentation { get; set; }
 

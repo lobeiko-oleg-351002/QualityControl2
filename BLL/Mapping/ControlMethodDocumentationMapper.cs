@@ -21,6 +21,8 @@ namespace BLL.Mapping
             controlNameService = new ControlNameService(uow);
         }
 
+        public ControlMethodDocumentationMapper() { }
+
         public DalControlMethodDocumentation MapToDal(BllControlMethodDocumentation entity)
         {
             DalControlMethodDocumentation dalEntity = new DalControlMethodDocumentation

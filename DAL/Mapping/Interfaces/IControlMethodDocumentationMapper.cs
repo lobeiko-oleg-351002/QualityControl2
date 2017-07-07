@@ -10,7 +10,6 @@ namespace DAL.Mapping.Interfaces
 {
     public interface IControlMethodDocumentationMapper : IMapper<DalControlMethodDocumentation, ControlMethodDocumentation>
     {
-        //DalControlMethodDocumentation MapToDal(ControlMethodDocumentation entity);
-        //ControlMethodDocumentation MapToOrm(DalControlMethodDocumentation entity);
+
     }
 }

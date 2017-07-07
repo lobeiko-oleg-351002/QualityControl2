@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace BLL.Entities
 {
-    public class BllImageLib : IBllEntity
+    public class BllImageLib : IBllEntitySimpleLib<BllImage>
     {
         public int Id { get; set; }
 
-        public List<BllImage> Image { get; set; }
+        public List<BllImage> Entities { get; set; }
 
         public BllImageLib()
         {
-            Image = new List<BllImage>();
+            Entities = new List<BllImage>();
         }
     }
 }

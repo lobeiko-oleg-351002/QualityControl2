@@ -1,4 +1,4 @@
-﻿using QualityControl_Client.Forms.EmployeeDirectory;
+﻿using QualityControl_Server.Forms.EmployeeDirectory;
 
 using System;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ using BLL.Services;
 using BLL.Services.Interface;
 using DAL.Repositories.Interface;
 
-namespace QualityControl_Client
+namespace QualityControl_Server
 {
     public partial class RegistrationForm : Form
     {

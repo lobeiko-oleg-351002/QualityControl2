@@ -21,6 +21,8 @@ namespace BLL.Mapping
             contractLibService = new ContractLibService(uow);
         }
 
+        public CustomerMapper() { }
+
         public DalCustomer MapToDal(BllCustomer entity)
         {
             DalCustomer dalEntity = new DalCustomer

@@ -7,13 +7,13 @@ namespace ORM
     using System.Data.Entity.Spatial;
 
     [Table("SelectedControlMethodDocumentation")]
-    public partial class SelectedControlMethodDocumentation : IOrmEntity
+    public partial class SelectedControlMethodDocumentation : ISelectedEntity
     {
         public int id { get; set; }
 
-        public int? controlMethodDocumentation_id { get; set; }
+        public int? entity_id { get; set; }
 
-        public int? controlMethodDocumentationLib_id { get; set; }
+        public int? lib_id { get; set; }
 
         public virtual ControlMethodDocumentation ControlMethodDocumentation { get; set; }
 

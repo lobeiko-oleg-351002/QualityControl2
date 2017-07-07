@@ -24,6 +24,8 @@ namespace BLL.Mapping
             employeeService = new EmployeeService(uow);
         }
 
+        public UserMapper() { }
+
         public DalUser MapToDal(BllUser entity)
         {
             DalUser dalEntity = new DalUser

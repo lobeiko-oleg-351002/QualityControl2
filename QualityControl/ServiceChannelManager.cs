@@ -5,7 +5,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QualityControl_Client
+namespace QualityControl_Server
 {
     public class ServiceChannelManager
     {

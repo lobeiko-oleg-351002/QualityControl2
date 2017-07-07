@@ -7,13 +7,13 @@ namespace ORM
     using System.Data.Entity.Spatial;
 
     [Table("SelectedEmployee")]
-    public partial class SelectedEmployee : IOrmEntity
+    public partial class SelectedEmployee : ISelectedEntity
     {
         public int id { get; set; }
 
-        public int? employee_id { get; set; }
+        public int? entity_id { get; set; }
 
-        public int? employeeLib_id { get; set; }
+        public int? lib_id { get; set; }
 
         public virtual Employee Employee { get; set; }
 

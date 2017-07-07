@@ -14,7 +14,7 @@ using DAL.Repositories.Interface;
 using BLL.Services.Interface;
 using BLL.Services;
 
-namespace QualityControl_Client
+namespace QualityControl_Server
 {
     public partial class LogInForm : Form
     {

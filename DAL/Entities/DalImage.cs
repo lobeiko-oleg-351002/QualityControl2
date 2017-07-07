@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class DalImage : IDalEntity
+    public class DalImage : IDalEntityWithLibId
     {
         public int Id { get; set; }
 
         public byte[] Image { get; set; }
 
-        public int? ImageLib_id { get; set; }
+        public int Lib_id { get; set; }
     }
 }

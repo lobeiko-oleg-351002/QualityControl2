@@ -10,7 +10,6 @@ namespace DAL.Mapping.Interfaces
 {
     public interface IEmployeeMapper : IMapper<DalEmployee, Employee>
     {
-        //DalEmployee MapToDal(Employee entity);
-        //Employee MapToOrm(DalEmployee entity);
+
     }
 }

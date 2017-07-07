@@ -10,7 +10,6 @@ namespace DAL.Mapping.Interfaces
 {
     public interface IRoleMapper : IMapper<DalRole, Role>
     {
-        //DalRole MapToDal(Role entity);
-        //Role MapToOrm(DalRole entity);
+
     }
 }

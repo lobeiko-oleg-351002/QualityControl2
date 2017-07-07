@@ -14,14 +14,16 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class TemplateService : Service<BllTemplate, DalTemplate, Template>, ITemplateService
+    public class TemplateService : Service<BllTemplate, DalTemplate, Template, TemplateMapper>, ITemplateService
     {
-        private readonly IUnitOfWork uow;
-        ITemplateMapper bllMapper;
         public TemplateService(IUnitOfWork uow) : base(uow, uow.Templates)
         {
-            this.uow = uow;
-            bllMapper = new TemplateMapper(uow);
+    
+        }
+
+        protected override void InitMapper()
+        {
+            mapper = new TemplateMapper(uow);
         }
 
         public override void Create(BllTemplate entity)
@@ -29,44 +31,23 @@ namespace BLL.Services
             ControlMethodsLibService controlMethodsLibService = new ControlMethodsLibService(uow);
             var controlMethodsLib = controlMethodsLibService.Create(entity.ControlMethodsLib);
             entity.ControlMethodsLib = controlMethodsLib;
-            uow.Templates.Create(bllMapper.MapToDal(entity));
+            uow.Templates.Create(mapper.MapToDal(entity));
             uow.Commit();
         }
 
-        public override void Delete(BllTemplate entity)
-        {
-            uow.Templates.Delete(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
 
         public override void Update(BllTemplate entity)
         {
             ControlMethodsLibService controlMethodsLibService = new ControlMethodsLibService(uow);
             controlMethodsLibService.Update(entity.ControlMethodsLib);
-            uow.Templates.Update(bllMapper.MapToDal(entity));
+            uow.Templates.Update(mapper.MapToDal(entity));
             uow.Commit();
         }
 
-        public override BllTemplate Get(int id)
-        {
-            DalTemplate dalEntity = uow.Templates.Get(id);
-            return bllMapper.MapToBll(dalEntity);
-        }
-
-        public override IEnumerable<BllTemplate> GetAll()
-        {
-            var elements = uow.Templates.GetAll();
-            var retElemets = new List<BllTemplate>();
-            foreach (var element in elements)
-            {
-                retElemets.Add(bllMapper.MapToBll(element));
-            }
-            return retElemets;
-        }
         public BllTemplate GetTemplateByName(string name)
         {
             DalTemplate dalEntity = uow.Templates.GetTemplateByName(name);
-            return bllMapper.MapToBll(dalEntity);
+            return mapper.MapToBll(dalEntity);
         }
     }
 }

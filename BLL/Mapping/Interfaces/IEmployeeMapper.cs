@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace BLL.Mapping.Interfaces
 {
-    public interface IEmployeeMapper
+    public interface IEmployeeMapper : IMapper<BllEmployee, DalEmployee>
     {
-        DalEmployee MapToDal(BllEmployee entity);
-        BllEmployee MapToBll(DalEmployee entity);
+
     }
 }

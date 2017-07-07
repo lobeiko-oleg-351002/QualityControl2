@@ -11,7 +11,6 @@ namespace DAL.Repositories.Interface
     public interface IResultRepository : IRepository<DalResult, Result>
     {
         DalResult GetResultByNumber(int number);
-        IEnumerable<DalResult> GetResultsByLibId(int id);
 
     }
 }

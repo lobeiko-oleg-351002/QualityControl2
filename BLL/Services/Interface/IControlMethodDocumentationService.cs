@@ -9,6 +9,6 @@ namespace BLL.Services.Interface
 {
     public interface IControlMethodDocumentationService : IService<BllControlMethodDocumentation>
     {
-        BllControlMethodDocumentation GetControlMethodDocumentationByName(string name);
+      //  BllControlMethodDocumentation GetControlMethodDocumentationByName(string name);
     }
 }

@@ -25,6 +25,8 @@ namespace BLL.Mapping
             controlMethodsLibService = new ControlMethodsLibService(uow);
         }
 
+        public TemplateMapper() { }
+
         public DalTemplate MapToDal(BllTemplate entity)
         {
             DalTemplate dalEntity = new DalTemplate

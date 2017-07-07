@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace BLL.Entities
 {
-    public class BllContractLib : IBllEntity
+    public class BllContractLib : IBllEntitySimpleLib<BllContract>
     {
         public int Id { get; set; }
 
-        public List<BllContract> Contract { get; set; }
+        public List<BllContract> Entities { get; set; }
 
         public BllContractLib()
         {
-            Contract = new List<BllContract>();
+            Entities = new List<BllContract>();
         }
     }
 }

@@ -28,6 +28,8 @@ namespace BLL.Mapping
             controlMethodDocumentationLibService = new ControlMethodDocumentationLibService(uow);
         }
 
+        public ControlMapper() { }
+
         public DalControl MapToDal(BllControl entity)
         {
             DalControl dalEntity = new DalControl
@@ -52,14 +54,14 @@ namespace BLL.Mapping
             return dalEntity;
         }
 
-        IControlNameService controlNameService;
-        IControlMethodDocumentationLibService controlMethodDocumentationLibService;
-        IEmployeeLibService employeeLibService;
-        IEmployeeService employeeService;
-        IEquipmentLibService equipmentLibService;
-        IImageLibService imageLibService;
-        IRequirementDocumentationLibService requirementDocumentationLibService;
-        IResultLibService resultLibService;
+        ControlNameService controlNameService;
+        ControlMethodDocumentationLibService controlMethodDocumentationLibService;
+        EmployeeLibService employeeLibService;
+        EmployeeService employeeService;
+        EquipmentLibService equipmentLibService;
+        ImageLibService imageLibService;
+        RequirementDocumentationLibService requirementDocumentationLibService;
+        ResultLibService resultLibService;
 
         public BllControl MapToBll(DalControl entity)
         {

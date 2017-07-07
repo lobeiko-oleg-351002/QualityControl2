@@ -83,18 +83,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddJournalForm.cs">
+    <Compile Include="JournalForms\AddJournalForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddJournalForm.Designer.cs">
+    <Compile Include="JournalForms\AddJournalForm.Designer.cs">
       <DependentUpon>AddJournalForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AppConfigManager.cs" />
-    <Compile Include="ChangeJournalForm.cs">
+    <Compile Include="JournalForms\ChangeJournalForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChangeJournalForm.Designer.cs">
+    <Compile Include="JournalForms\ChangeJournalForm.Designer.cs">
       <DependentUpon>ChangeJournalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JournalForms\JournalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JournalForms\JournalForm.Designer.cs">
+      <DependentUpon>JournalForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ContinueChoiceForm.cs">
       <SubType>Form</SubType>
@@ -142,334 +148,340 @@
     <Compile Include="Filtration.Designer.cs">
       <DependentUpon>Filtration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AddForm.cs">
+    <Compile Include="DirectoryForms\AddForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AddForm.Designer.cs">
+    <Compile Include="DirectoryForms\AddForm.Designer.cs">
       <DependentUpon>AddForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ChangeForm.cs">
+    <Compile Include="DirectoryForms\ChangeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ChangeForm.Designer.cs">
+    <Compile Include="DirectoryForms\ChangeForm.Designer.cs">
       <DependentUpon>ChangeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ComponentDirectory\AddComponentForm.cs">
+    <Compile Include="DirectoryForms\ComponentDirectory\AddComponentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ComponentDirectory\AddComponentForm.Designer.cs">
+    <Compile Include="DirectoryForms\ComponentDirectory\AddComponentForm.Designer.cs">
       <DependentUpon>AddComponentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ComponentDirectory\ChangeComponentForm.cs">
+    <Compile Include="DirectoryForms\ComponentDirectory\ChangeComponentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ComponentDirectory\ChangeComponentForm.Designer.cs">
+    <Compile Include="DirectoryForms\ComponentDirectory\ChangeComponentForm.Designer.cs">
       <DependentUpon>ChangeComponentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ComponentDirectory\ChooseComponentForm.cs">
+    <Compile Include="DirectoryForms\ComponentDirectory\ChooseComponentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ComponentDirectory\ChooseComponentForm.Designer.cs">
+    <Compile Include="DirectoryForms\ComponentDirectory\ChooseComponentForm.Designer.cs">
       <DependentUpon>ChooseComponentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ComponentDirectory\ComponentDirectoryForm.cs">
+    <Compile Include="DirectoryForms\ComponentDirectory\ComponentDirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ComponentDirectory\ComponentDirectoryForm.Designer.cs">
+    <Compile Include="DirectoryForms\ComponentDirectory\ComponentDirectoryForm.Designer.cs">
       <DependentUpon>ComponentDirectoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ContractDirectory\AddContractForm.cs">
+    <Compile Include="DirectoryForms\ContractDirectory\AddContractForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ContractDirectory\AddContractForm.Designer.cs">
+    <Compile Include="DirectoryForms\ContractDirectory\AddContractForm.Designer.cs">
       <DependentUpon>AddContractForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ContractDirectory\ChangeContractForm.cs">
+    <Compile Include="DirectoryForms\ContractDirectory\ChangeContractForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ContractDirectory\ChangeContractForm.Designer.cs">
+    <Compile Include="DirectoryForms\ContractDirectory\ChangeContractForm.Designer.cs">
       <DependentUpon>ChangeContractForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ContractDirectory\ChooseContractForm.cs">
+    <Compile Include="DirectoryForms\ContractDirectory\ChooseContractForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ContractDirectory\ChooseContractForm.Designer.cs">
+    <Compile Include="DirectoryForms\ContractDirectory\ChooseContractForm.Designer.cs">
       <DependentUpon>ChooseContractForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ContractDirectory\ContractDirectoryForm.cs">
+    <Compile Include="DirectoryForms\ContractDirectory\ContractDirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ContractDirectory\ContractDirectoryForm.Designer.cs">
+    <Compile Include="DirectoryForms\ContractDirectory\ContractDirectoryForm.Designer.cs">
       <DependentUpon>ContractDirectoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ControlMethodDocumentationDirectory\AddControlMethodDocumentationForm.cs">
+    <Compile Include="DirectoryForms\ControlMethodDocumentationDirectory\AddControlMethodDocumentationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ControlMethodDocumentationDirectory\AddControlMethodDocumentationForm.Designer.cs">
+    <Compile Include="DirectoryForms\ControlMethodDocumentationDirectory\AddControlMethodDocumentationForm.Designer.cs">
       <DependentUpon>AddControlMethodDocumentationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ControlMethodDocumentationDirectory\ChangeControlMethodDocumentationForm.cs">
+    <Compile Include="DirectoryForms\ControlMethodDocumentationDirectory\ChangeControlMethodDocumentationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ControlMethodDocumentationDirectory\ChangeControlMethodDocumentationForm.Designer.cs">
+    <Compile Include="DirectoryForms\ControlMethodDocumentationDirectory\ChangeControlMethodDocumentationForm.Designer.cs">
       <DependentUpon>ChangeControlMethodDocumentationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ControlMethodDocumentationDirectory\ChooseControlMethodDocumentationForm.cs">
+    <Compile Include="DirectoryForms\ControlMethodDocumentationDirectory\ChooseControlMethodDocumentationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ControlMethodDocumentationDirectory\ChooseControlMethodDocumentationForm.Designer.cs">
+    <Compile Include="DirectoryForms\ControlMethodDocumentationDirectory\ChooseControlMethodDocumentationForm.Designer.cs">
       <DependentUpon>ChooseControlMethodDocumentationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ControlMethodDocumentationDirectory\ControlMethodDocumentationDirectoryForm.cs">
+    <Compile Include="DirectoryForms\ControlMethodDocumentationDirectory\ControlMethodDocumentationDirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ControlMethodDocumentationDirectory\ControlMethodDocumentationDirectoryForm.Designer.cs">
+    <Compile Include="DirectoryForms\ControlMethodDocumentationDirectory\ControlMethodDocumentationDirectoryForm.Designer.cs">
       <DependentUpon>ControlMethodDocumentationDirectoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CustomerDirectory\AddCustomerForm.cs">
+    <Compile Include="DirectoryForms\CustomerDirectory\AddCustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CustomerDirectory\AddCustomerForm.Designer.cs">
+    <Compile Include="DirectoryForms\CustomerDirectory\AddCustomerForm.Designer.cs">
       <DependentUpon>AddCustomerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CustomerDirectory\ChangeCustomerForm.cs">
+    <Compile Include="DirectoryForms\CustomerDirectory\ChangeCustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CustomerDirectory\ChangeCustomerForm.Designer.cs">
+    <Compile Include="DirectoryForms\CustomerDirectory\ChangeCustomerForm.Designer.cs">
       <DependentUpon>ChangeCustomerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CustomerDirectory\ChooseCustomerForm.cs">
+    <Compile Include="DirectoryForms\CustomerDirectory\ChooseCustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CustomerDirectory\ChooseCustomerForm.Designer.cs">
+    <Compile Include="DirectoryForms\CustomerDirectory\ChooseCustomerForm.Designer.cs">
       <DependentUpon>ChooseCustomerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CustomerDirectory\CustomerDirectoryForm.cs">
+    <Compile Include="DirectoryForms\CustomerDirectory\CustomerDirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CustomerDirectory\CustomerDirectoryForm.Designer.cs">
+    <Compile Include="DirectoryForms\CustomerDirectory\CustomerDirectoryForm.Designer.cs">
       <DependentUpon>CustomerDirectoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DirectoryForm.cs">
+    <Compile Include="DirectoryForms\DirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DirectoryForm.Designer.cs">
+    <Compile Include="DirectoryForms\DirectoryForm.Designer.cs">
       <DependentUpon>DirectoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EmployeeDirectory\AddEmployeeForm.cs">
+    <Compile Include="DirectoryForms\EmployeeDirectory\AddEmployeeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EmployeeDirectory\AddEmployeeForm.Designer.cs">
+    <Compile Include="DirectoryForms\EmployeeDirectory\AddEmployeeForm.Designer.cs">
       <DependentUpon>AddEmployeeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EmployeeDirectory\ChangeEmployeeForm.cs">
+    <Compile Include="DirectoryForms\EmployeeDirectory\ChangeEmployeeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EmployeeDirectory\ChangeEmployeeForm.Designer.cs">
+    <Compile Include="DirectoryForms\EmployeeDirectory\ChangeEmployeeForm.Designer.cs">
       <DependentUpon>ChangeEmployeeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EmployeeDirectory\ChooseEmployeeForm.cs">
+    <Compile Include="DirectoryForms\EmployeeDirectory\ChooseEmployeeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EmployeeDirectory\ChooseEmployeeForm.Designer.cs">
+    <Compile Include="DirectoryForms\EmployeeDirectory\ChooseEmployeeForm.Designer.cs">
       <DependentUpon>ChooseEmployeeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EmployeeDirectory\EmployeeDirectoryForm.cs">
+    <Compile Include="DirectoryForms\EmployeeDirectory\EmployeeDirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EmployeeDirectory\EmployeeDirectoryForm.Designer.cs">
+    <Compile Include="DirectoryForms\EmployeeDirectory\EmployeeDirectoryForm.Designer.cs">
       <DependentUpon>EmployeeDirectoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EquipmentDirectory\AddEquipmentForm.cs">
+    <Compile Include="DirectoryForms\EquipmentDirectory\AddEquipmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EquipmentDirectory\AddEquipmentForm.Designer.cs">
+    <Compile Include="DirectoryForms\EquipmentDirectory\AddEquipmentForm.Designer.cs">
       <DependentUpon>AddEquipmentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EquipmentDirectory\ChangeEquipmentForm.cs">
+    <Compile Include="DirectoryForms\EquipmentDirectory\ChangeEquipmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EquipmentDirectory\ChangeEquipmentForm.Designer.cs">
+    <Compile Include="DirectoryForms\EquipmentDirectory\ChangeEquipmentForm.Designer.cs">
       <DependentUpon>ChangeEquipmentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EquipmentDirectory\ChooseEquipmentForm.cs">
+    <Compile Include="DirectoryForms\EquipmentDirectory\ChooseEquipmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EquipmentDirectory\ChooseEquipmentForm.Designer.cs">
+    <Compile Include="DirectoryForms\EquipmentDirectory\ChooseEquipmentForm.Designer.cs">
       <DependentUpon>ChooseEquipmentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EquipmentDirectory\EquipmentDirectoryForm.cs">
+    <Compile Include="DirectoryForms\EquipmentDirectory\EquipmentDirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EquipmentDirectory\EquipmentDirectoryForm.Designer.cs">
+    <Compile Include="DirectoryForms\EquipmentDirectory\EquipmentDirectoryForm.Designer.cs">
       <DependentUpon>EquipmentDirectoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\IndustrialObjectDirectory\AddIndustrialObjectForm.cs">
+    <Compile Include="DirectoryForms\GeneralForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\IndustrialObjectDirectory\AddIndustrialObjectForm.Designer.cs">
+    <Compile Include="DirectoryForms\GeneralForm.Designer.cs">
+      <DependentUpon>GeneralForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DirectoryForms\IndustrialObjectDirectory\AddIndustrialObjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DirectoryForms\IndustrialObjectDirectory\AddIndustrialObjectForm.Designer.cs">
       <DependentUpon>AddIndustrialObjectForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\IndustrialObjectDirectory\ChangeIndustrialObjectForm.cs">
+    <Compile Include="DirectoryForms\IndustrialObjectDirectory\ChangeIndustrialObjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\IndustrialObjectDirectory\ChangeIndustrialObjectForm.Designer.cs">
+    <Compile Include="DirectoryForms\IndustrialObjectDirectory\ChangeIndustrialObjectForm.Designer.cs">
       <DependentUpon>ChangeIndustrialObjectForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\IndustrialObjectDirectory\ChooseIndustrialObjectForm.cs">
+    <Compile Include="DirectoryForms\IndustrialObjectDirectory\ChooseIndustrialObjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\IndustrialObjectDirectory\ChooseIndustrialObjectForm.Designer.cs">
+    <Compile Include="DirectoryForms\IndustrialObjectDirectory\ChooseIndustrialObjectForm.Designer.cs">
       <DependentUpon>ChooseIndustrialObjectForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\IndustrialObjectDirectory\IndustrialObjectDirectoryForm.cs">
+    <Compile Include="DirectoryForms\IndustrialObjectDirectory\IndustrialObjectDirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\IndustrialObjectDirectory\IndustrialObjectDirectoryForm.Designer.cs">
+    <Compile Include="DirectoryForms\IndustrialObjectDirectory\IndustrialObjectDirectoryForm.Designer.cs">
       <DependentUpon>IndustrialObjectDirectoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MaterialDirectory\AddMaterialForm.cs">
+    <Compile Include="DirectoryForms\MaterialDirectory\AddMaterialForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MaterialDirectory\AddMaterialForm.Designer.cs">
+    <Compile Include="DirectoryForms\MaterialDirectory\AddMaterialForm.Designer.cs">
       <DependentUpon>AddMaterialForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MaterialDirectory\ChangeMaterialForm.cs">
+    <Compile Include="DirectoryForms\MaterialDirectory\ChangeMaterialForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MaterialDirectory\ChangeMaterialForm.Designer.cs">
+    <Compile Include="DirectoryForms\MaterialDirectory\ChangeMaterialForm.Designer.cs">
       <DependentUpon>ChangeMaterialForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MaterialDirectory\ChooseMaterialForm.cs">
+    <Compile Include="DirectoryForms\MaterialDirectory\ChooseMaterialForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MaterialDirectory\ChooseMaterialForm.Designer.cs">
+    <Compile Include="DirectoryForms\MaterialDirectory\ChooseMaterialForm.Designer.cs">
       <DependentUpon>ChooseMaterialForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MaterialDirectory\MaterialDirectoryForm.cs">
+    <Compile Include="DirectoryForms\MaterialDirectory\MaterialDirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MaterialDirectory\MaterialDirectoryForm.Designer.cs">
+    <Compile Include="DirectoryForms\MaterialDirectory\MaterialDirectoryForm.Designer.cs">
       <DependentUpon>MaterialDirectoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RequirementDocumentationDirectory\AddRequirementDocumentationForm.cs">
+    <Compile Include="DirectoryForms\RequirementDocumentationDirectory\AddRequirementDocumentationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RequirementDocumentationDirectory\AddRequirementDocumentationForm.Designer.cs">
+    <Compile Include="DirectoryForms\RequirementDocumentationDirectory\AddRequirementDocumentationForm.Designer.cs">
       <DependentUpon>AddRequirementDocumentationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RequirementDocumentationDirectory\ChangeRequirementDocumentationForm.cs">
+    <Compile Include="DirectoryForms\RequirementDocumentationDirectory\ChangeRequirementDocumentationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RequirementDocumentationDirectory\ChangeRequirementDocumentationForm.Designer.cs">
+    <Compile Include="DirectoryForms\RequirementDocumentationDirectory\ChangeRequirementDocumentationForm.Designer.cs">
       <DependentUpon>ChangeRequirementDocumentationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RequirementDocumentationDirectory\ChooseRequirementDocumentationForm.cs">
+    <Compile Include="DirectoryForms\RequirementDocumentationDirectory\ChooseRequirementDocumentationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RequirementDocumentationDirectory\ChooseRequirementDocumentationForm.Designer.cs">
+    <Compile Include="DirectoryForms\RequirementDocumentationDirectory\ChooseRequirementDocumentationForm.Designer.cs">
       <DependentUpon>ChooseRequirementDocumentationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RequirementDocumentationDirectory\RequirementDocumentationDirectoryForm.cs">
+    <Compile Include="DirectoryForms\RequirementDocumentationDirectory\RequirementDocumentationDirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RequirementDocumentationDirectory\RequirementDocumentationDirectoryForm.Designer.cs">
+    <Compile Include="DirectoryForms\RequirementDocumentationDirectory\RequirementDocumentationDirectoryForm.Designer.cs">
       <DependentUpon>RequirementDocumentationDirectoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ResultDirectory\ResultDirectoryForm.cs">
+    <Compile Include="DirectoryForms\ResultDirectory\ResultDirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ResultDirectory\ResultDirectoryForm.Designer.cs">
+    <Compile Include="DirectoryForms\ResultDirectory\ResultDirectoryForm.Designer.cs">
       <DependentUpon>ResultDirectoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SertificateDirectory\CertificateAddForm.cs">
+    <Compile Include="DirectoryForms\SertificateDirectory\CertificateAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SertificateDirectory\CertificateAddForm.Designer.cs">
+    <Compile Include="DirectoryForms\SertificateDirectory\CertificateAddForm.Designer.cs">
       <DependentUpon>CertificateAddForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SertificateDirectory\ChangeCertificateForm.cs">
+    <Compile Include="DirectoryForms\SertificateDirectory\ChangeCertificateForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SertificateDirectory\ChangeCertificateForm.Designer.cs">
+    <Compile Include="DirectoryForms\SertificateDirectory\ChangeCertificateForm.Designer.cs">
       <DependentUpon>ChangeCertificateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SertificateDirectory\ChooseCertificateForm.cs">
+    <Compile Include="DirectoryForms\SertificateDirectory\ChooseCertificateForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SertificateDirectory\ChooseCertificateForm.Designer.cs">
+    <Compile Include="DirectoryForms\SertificateDirectory\ChooseCertificateForm.Designer.cs">
       <DependentUpon>ChooseCertificateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SertificateDirectory\SertificateDirectoryForm.cs">
+    <Compile Include="DirectoryForms\SertificateDirectory\SertificateDirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SertificateDirectory\SertificateDirectoryForm.Designer.cs">
+    <Compile Include="DirectoryForms\SertificateDirectory\SertificateDirectoryForm.Designer.cs">
       <DependentUpon>SertificateDirectoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TemplateDirectory\AddTemplateForm.cs">
+    <Compile Include="DirectoryForms\TemplateDirectory\AddTemplateForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TemplateDirectory\AddTemplateForm.Designer.cs">
+    <Compile Include="DirectoryForms\TemplateDirectory\AddTemplateForm.Designer.cs">
       <DependentUpon>AddTemplateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TemplateDirectory\ChangeTemplateForm.cs">
+    <Compile Include="DirectoryForms\TemplateDirectory\ChangeTemplateForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TemplateDirectory\ChangeTemplateForm.Designer.cs">
+    <Compile Include="DirectoryForms\TemplateDirectory\ChangeTemplateForm.Designer.cs">
       <DependentUpon>ChangeTemplateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TemplateDirectory\ChooseTemplateForm.cs">
+    <Compile Include="DirectoryForms\TemplateDirectory\ChooseTemplateForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TemplateDirectory\ChooseTemplateForm.Designer.cs">
+    <Compile Include="DirectoryForms\TemplateDirectory\ChooseTemplateForm.Designer.cs">
       <DependentUpon>ChooseTemplateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TemplateDirectory\TemplateDirectoryForm.cs">
+    <Compile Include="DirectoryForms\TemplateDirectory\TemplateDirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TemplateDirectory\TemplateDirectoryForm.Designer.cs">
+    <Compile Include="DirectoryForms\TemplateDirectory\TemplateDirectoryForm.Designer.cs">
       <DependentUpon>TemplateDirectoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserDirectory\ChangeUserForm.cs">
+    <Compile Include="DirectoryForms\UserDirectory\ChangeUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\UserDirectory\ChangeUserForm.Designer.cs">
+    <Compile Include="DirectoryForms\UserDirectory\ChangeUserForm.Designer.cs">
       <DependentUpon>ChangeUserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserDirectory\UserAddForm.cs">
+    <Compile Include="DirectoryForms\UserDirectory\UserAddForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\UserDirectory\UserAddForm.Designer.cs">
+    <Compile Include="DirectoryForms\UserDirectory\UserAddForm.Designer.cs">
       <DependentUpon>UserAddForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\UserDirectory\UserDirectoryForm.cs">
+    <Compile Include="DirectoryForms\UserDirectory\UserDirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\UserDirectory\UserDirectoryForm.Designer.cs">
+    <Compile Include="DirectoryForms\UserDirectory\UserDirectoryForm.Designer.cs">
       <DependentUpon>UserDirectoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\WeldJointDirectory\AddWeldJointForm.cs">
+    <Compile Include="DirectoryForms\WeldJointDirectory\AddWeldJointForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\WeldJointDirectory\AddWeldJointForm.Designer.cs">
+    <Compile Include="DirectoryForms\WeldJointDirectory\AddWeldJointForm.Designer.cs">
       <DependentUpon>AddWeldJointForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\WeldJointDirectory\ChangeWeldJointForm.cs">
+    <Compile Include="DirectoryForms\WeldJointDirectory\ChangeWeldJointForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\WeldJointDirectory\ChangeWeldJointForm.Designer.cs">
+    <Compile Include="DirectoryForms\WeldJointDirectory\ChangeWeldJointForm.Designer.cs">
       <DependentUpon>ChangeWeldJointForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\WeldJointDirectory\ChooseWeldJointForm.cs">
+    <Compile Include="DirectoryForms\WeldJointDirectory\ChooseWeldJointForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\WeldJointDirectory\ChooseWeldJointForm.Designer.cs">
+    <Compile Include="DirectoryForms\WeldJointDirectory\ChooseWeldJointForm.Designer.cs">
       <DependentUpon>ChooseWeldJointForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\WeldJointDirectory\WeldJointDirectoryForm.cs">
+    <Compile Include="DirectoryForms\WeldJointDirectory\WeldJointDirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\WeldJointDirectory\WeldJointDirectoryForm.Designer.cs">
+    <Compile Include="DirectoryForms\WeldJointDirectory\WeldJointDirectoryForm.Designer.cs">
       <DependentUpon>WeldJointDirectoryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LogInForm.cs">
@@ -478,10 +490,10 @@
     <Compile Include="LogInForm.Designer.cs">
       <DependentUpon>LogInForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="JournalForms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="JournalForms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -519,11 +531,8 @@
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="WordDocumentManager.cs" />
-    <EmbeddedResource Include="AddJournalForm.resx">
-      <DependentUpon>AddJournalForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ChangeJournalForm.resx">
-      <DependentUpon>ChangeJournalForm.cs</DependentUpon>
+    <EmbeddedResource Include="JournalForms\JournalForm.resx">
+      <DependentUpon>JournalForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ContinueChoiceForm.resx">
       <DependentUpon>ContinueChoiceForm.cs</DependentUpon>
@@ -546,175 +555,178 @@
     <EmbeddedResource Include="Filtration.resx">
       <DependentUpon>Filtration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AddForm.resx">
+    <EmbeddedResource Include="DirectoryForms\AddForm.resx">
       <DependentUpon>AddForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ChangeForm.resx">
+    <EmbeddedResource Include="DirectoryForms\ChangeForm.resx">
       <DependentUpon>ChangeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ComponentDirectory\AddComponentForm.resx">
+    <EmbeddedResource Include="DirectoryForms\ComponentDirectory\AddComponentForm.resx">
       <DependentUpon>AddComponentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ComponentDirectory\ChangeComponentForm.resx">
+    <EmbeddedResource Include="DirectoryForms\ComponentDirectory\ChangeComponentForm.resx">
       <DependentUpon>ChangeComponentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ComponentDirectory\ChooseComponentForm.resx">
+    <EmbeddedResource Include="DirectoryForms\ComponentDirectory\ChooseComponentForm.resx">
       <DependentUpon>ChooseComponentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ComponentDirectory\ComponentDirectoryForm.resx">
+    <EmbeddedResource Include="DirectoryForms\ComponentDirectory\ComponentDirectoryForm.resx">
       <DependentUpon>ComponentDirectoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ContractDirectory\AddContractForm.resx">
+    <EmbeddedResource Include="DirectoryForms\ContractDirectory\AddContractForm.resx">
       <DependentUpon>AddContractForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ContractDirectory\ChangeContractForm.resx">
+    <EmbeddedResource Include="DirectoryForms\ContractDirectory\ChangeContractForm.resx">
       <DependentUpon>ChangeContractForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ContractDirectory\ChooseContractForm.resx">
+    <EmbeddedResource Include="DirectoryForms\ContractDirectory\ChooseContractForm.resx">
       <DependentUpon>ChooseContractForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ContractDirectory\ContractDirectoryForm.resx">
+    <EmbeddedResource Include="DirectoryForms\ContractDirectory\ContractDirectoryForm.resx">
       <DependentUpon>ContractDirectoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ControlMethodDocumentationDirectory\AddControlMethodDocumentationForm.resx">
+    <EmbeddedResource Include="DirectoryForms\ControlMethodDocumentationDirectory\AddControlMethodDocumentationForm.resx">
       <DependentUpon>AddControlMethodDocumentationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ControlMethodDocumentationDirectory\ChangeControlMethodDocumentationForm.resx">
+    <EmbeddedResource Include="DirectoryForms\ControlMethodDocumentationDirectory\ChangeControlMethodDocumentationForm.resx">
       <DependentUpon>ChangeControlMethodDocumentationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ControlMethodDocumentationDirectory\ChooseControlMethodDocumentationForm.resx">
+    <EmbeddedResource Include="DirectoryForms\ControlMethodDocumentationDirectory\ChooseControlMethodDocumentationForm.resx">
       <DependentUpon>ChooseControlMethodDocumentationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ControlMethodDocumentationDirectory\ControlMethodDocumentationDirectoryForm.resx">
+    <EmbeddedResource Include="DirectoryForms\ControlMethodDocumentationDirectory\ControlMethodDocumentationDirectoryForm.resx">
       <DependentUpon>ControlMethodDocumentationDirectoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CustomerDirectory\AddCustomerForm.resx">
+    <EmbeddedResource Include="DirectoryForms\CustomerDirectory\AddCustomerForm.resx">
       <DependentUpon>AddCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CustomerDirectory\ChangeCustomerForm.resx">
+    <EmbeddedResource Include="DirectoryForms\CustomerDirectory\ChangeCustomerForm.resx">
       <DependentUpon>ChangeCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CustomerDirectory\ChooseCustomerForm.resx">
+    <EmbeddedResource Include="DirectoryForms\CustomerDirectory\ChooseCustomerForm.resx">
       <DependentUpon>ChooseCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CustomerDirectory\CustomerDirectoryForm.resx">
+    <EmbeddedResource Include="DirectoryForms\CustomerDirectory\CustomerDirectoryForm.resx">
       <DependentUpon>CustomerDirectoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DirectoryForm.resx">
+    <EmbeddedResource Include="DirectoryForms\DirectoryForm.resx">
       <DependentUpon>DirectoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EmployeeDirectory\AddEmployeeForm.resx">
+    <EmbeddedResource Include="DirectoryForms\EmployeeDirectory\AddEmployeeForm.resx">
       <DependentUpon>AddEmployeeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EmployeeDirectory\ChangeEmployeeForm.resx">
+    <EmbeddedResource Include="DirectoryForms\EmployeeDirectory\ChangeEmployeeForm.resx">
       <DependentUpon>ChangeEmployeeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EmployeeDirectory\ChooseEmployeeForm.resx">
+    <EmbeddedResource Include="DirectoryForms\EmployeeDirectory\ChooseEmployeeForm.resx">
       <DependentUpon>ChooseEmployeeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EmployeeDirectory\EmployeeDirectoryForm.resx">
+    <EmbeddedResource Include="DirectoryForms\EmployeeDirectory\EmployeeDirectoryForm.resx">
       <DependentUpon>EmployeeDirectoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EquipmentDirectory\AddEquipmentForm.resx">
+    <EmbeddedResource Include="DirectoryForms\EquipmentDirectory\AddEquipmentForm.resx">
       <DependentUpon>AddEquipmentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EquipmentDirectory\ChangeEquipmentForm.resx">
+    <EmbeddedResource Include="DirectoryForms\EquipmentDirectory\ChangeEquipmentForm.resx">
       <DependentUpon>ChangeEquipmentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EquipmentDirectory\ChooseEquipmentForm.resx">
+    <EmbeddedResource Include="DirectoryForms\EquipmentDirectory\ChooseEquipmentForm.resx">
       <DependentUpon>ChooseEquipmentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EquipmentDirectory\EquipmentDirectoryForm.resx">
+    <EmbeddedResource Include="DirectoryForms\EquipmentDirectory\EquipmentDirectoryForm.resx">
       <DependentUpon>EquipmentDirectoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\IndustrialObjectDirectory\AddIndustrialObjectForm.resx">
+    <EmbeddedResource Include="DirectoryForms\GeneralForm.resx">
+      <DependentUpon>GeneralForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DirectoryForms\IndustrialObjectDirectory\AddIndustrialObjectForm.resx">
       <DependentUpon>AddIndustrialObjectForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\IndustrialObjectDirectory\ChangeIndustrialObjectForm.resx">
+    <EmbeddedResource Include="DirectoryForms\IndustrialObjectDirectory\ChangeIndustrialObjectForm.resx">
       <DependentUpon>ChangeIndustrialObjectForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\IndustrialObjectDirectory\ChooseIndustrialObjectForm.resx">
+    <EmbeddedResource Include="DirectoryForms\IndustrialObjectDirectory\ChooseIndustrialObjectForm.resx">
       <DependentUpon>ChooseIndustrialObjectForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\IndustrialObjectDirectory\IndustrialObjectDirectoryForm.resx">
+    <EmbeddedResource Include="DirectoryForms\IndustrialObjectDirectory\IndustrialObjectDirectoryForm.resx">
       <DependentUpon>IndustrialObjectDirectoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MaterialDirectory\AddMaterialForm.resx">
+    <EmbeddedResource Include="DirectoryForms\MaterialDirectory\AddMaterialForm.resx">
       <DependentUpon>AddMaterialForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MaterialDirectory\ChangeMaterialForm.resx">
+    <EmbeddedResource Include="DirectoryForms\MaterialDirectory\ChangeMaterialForm.resx">
       <DependentUpon>ChangeMaterialForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MaterialDirectory\ChooseMaterialForm.resx">
+    <EmbeddedResource Include="DirectoryForms\MaterialDirectory\ChooseMaterialForm.resx">
       <DependentUpon>ChooseMaterialForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MaterialDirectory\MaterialDirectoryForm.resx">
+    <EmbeddedResource Include="DirectoryForms\MaterialDirectory\MaterialDirectoryForm.resx">
       <DependentUpon>MaterialDirectoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RequirementDocumentationDirectory\AddRequirementDocumentationForm.resx">
+    <EmbeddedResource Include="DirectoryForms\RequirementDocumentationDirectory\AddRequirementDocumentationForm.resx">
       <DependentUpon>AddRequirementDocumentationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RequirementDocumentationDirectory\ChangeRequirementDocumentationForm.resx">
+    <EmbeddedResource Include="DirectoryForms\RequirementDocumentationDirectory\ChangeRequirementDocumentationForm.resx">
       <DependentUpon>ChangeRequirementDocumentationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RequirementDocumentationDirectory\ChooseRequirementDocumentationForm.resx">
+    <EmbeddedResource Include="DirectoryForms\RequirementDocumentationDirectory\ChooseRequirementDocumentationForm.resx">
       <DependentUpon>ChooseRequirementDocumentationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RequirementDocumentationDirectory\RequirementDocumentationDirectoryForm.resx">
+    <EmbeddedResource Include="DirectoryForms\RequirementDocumentationDirectory\RequirementDocumentationDirectoryForm.resx">
       <DependentUpon>RequirementDocumentationDirectoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ResultDirectory\ResultDirectoryForm.resx">
+    <EmbeddedResource Include="DirectoryForms\ResultDirectory\ResultDirectoryForm.resx">
       <DependentUpon>ResultDirectoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SertificateDirectory\CertificateAddForm.resx">
+    <EmbeddedResource Include="DirectoryForms\SertificateDirectory\CertificateAddForm.resx">
       <DependentUpon>CertificateAddForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SertificateDirectory\ChangeCertificateForm.resx">
+    <EmbeddedResource Include="DirectoryForms\SertificateDirectory\ChangeCertificateForm.resx">
       <DependentUpon>ChangeCertificateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SertificateDirectory\ChooseCertificateForm.resx">
+    <EmbeddedResource Include="DirectoryForms\SertificateDirectory\ChooseCertificateForm.resx">
       <DependentUpon>ChooseCertificateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SertificateDirectory\SertificateDirectoryForm.resx">
+    <EmbeddedResource Include="DirectoryForms\SertificateDirectory\SertificateDirectoryForm.resx">
       <DependentUpon>SertificateDirectoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TemplateDirectory\AddTemplateForm.resx">
+    <EmbeddedResource Include="DirectoryForms\TemplateDirectory\AddTemplateForm.resx">
       <DependentUpon>AddTemplateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TemplateDirectory\ChangeTemplateForm.resx">
+    <EmbeddedResource Include="DirectoryForms\TemplateDirectory\ChangeTemplateForm.resx">
       <DependentUpon>ChangeTemplateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TemplateDirectory\ChooseTemplateForm.resx">
+    <EmbeddedResource Include="DirectoryForms\TemplateDirectory\ChooseTemplateForm.resx">
       <DependentUpon>ChooseTemplateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TemplateDirectory\TemplateDirectoryForm.resx">
+    <EmbeddedResource Include="DirectoryForms\TemplateDirectory\TemplateDirectoryForm.resx">
       <DependentUpon>TemplateDirectoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserDirectory\ChangeUserForm.resx">
+    <EmbeddedResource Include="DirectoryForms\UserDirectory\ChangeUserForm.resx">
       <DependentUpon>ChangeUserForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserDirectory\UserAddForm.resx">
+    <EmbeddedResource Include="DirectoryForms\UserDirectory\UserAddForm.resx">
       <DependentUpon>UserAddForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\UserDirectory\UserDirectoryForm.resx">
+    <EmbeddedResource Include="DirectoryForms\UserDirectory\UserDirectoryForm.resx">
       <DependentUpon>UserDirectoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\WeldJointDirectory\AddWeldJointForm.resx">
+    <EmbeddedResource Include="DirectoryForms\WeldJointDirectory\AddWeldJointForm.resx">
       <DependentUpon>AddWeldJointForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\WeldJointDirectory\ChangeWeldJointForm.resx">
+    <EmbeddedResource Include="DirectoryForms\WeldJointDirectory\ChangeWeldJointForm.resx">
       <DependentUpon>ChangeWeldJointForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\WeldJointDirectory\ChooseWeldJointForm.resx">
+    <EmbeddedResource Include="DirectoryForms\WeldJointDirectory\ChooseWeldJointForm.resx">
       <DependentUpon>ChooseWeldJointForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\WeldJointDirectory\WeldJointDirectoryForm.resx">
+    <EmbeddedResource Include="DirectoryForms\WeldJointDirectory\WeldJointDirectoryForm.resx">
       <DependentUpon>WeldJointDirectoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogInForm.resx">
       <DependentUpon>LogInForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="JournalForms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -782,7 +794,7 @@
       <Name>DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\ORM\ORM.csproj">
-      <Project>{fd50ebb3-f5ea-46e4-b338-fc8fec7a061b}</Project>
+      <Project>{ce0b047e-210e-4426-b8f9-01e8f29d3822}</Project>
       <Name>ORM</Name>
     </ProjectReference>
   </ItemGroup>

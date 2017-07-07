@@ -1,4 +1,4 @@
-﻿namespace QualityControl_Client
+﻿namespace QualityControl_Server
 {
     partial class ControlMethodTabForm
     {

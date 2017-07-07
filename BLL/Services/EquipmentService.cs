@@ -13,47 +13,12 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class EquipmentService :Service<BllEquipment, DalEquipment, Equipment>, IEquipmentService
+    public class EquipmentService :Service<BllEquipment, DalEquipment, Equipment, EquipmentMapper>, IEquipmentService
     {
-        private readonly IUnitOfWork uow;
-        EquipmentMapper bllMapper = new EquipmentMapper();
+      //  private readonly IUnitOfWork uow;
         public EquipmentService(IUnitOfWork uow) : base(uow, uow.Equipments)
         {
-            this.uow = uow;
-        }
-
-        public override void Create(BllEquipment entity)
-        {
-            uow.Equipments.Create(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override void Update(BllEquipment entity)
-        {
-            uow.Equipments.Update(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override void Delete(BllEquipment entity)
-        {
-            uow.Equipments.Delete(bllMapper.MapToDal(entity));
-            uow.Commit();
-        }
-
-        public override IEnumerable<BllEquipment> GetAll()
-        {
-            var elements = uow.Equipments.GetAll();
-            var retElemets = new List<BllEquipment>();
-            foreach (var element in elements)
-            {
-                retElemets.Add(bllMapper.MapToBll(element));
-            }
-            return retElemets;
-        }
-
-        public override BllEquipment Get(int id)
-        {
-            return bllMapper.MapToBll(uow.Equipments.Get(id));
+         //   this.uow = uow;
         }
 
         public IEnumerable<BllEquipment> GetCheckedEquipment()
@@ -62,7 +27,7 @@ namespace BLL.Services
             var retElemets = new List<BllEquipment>();
             foreach (var element in elements)
             {
-                retElemets.Add(bllMapper.MapToBll(element));
+                retElemets.Add(mapper.MapToBll(element));
             }
             return retElemets;
         }
@@ -73,14 +38,14 @@ namespace BLL.Services
             var retElemets = new List<BllEquipment>();
             foreach (var element in elements)
             {
-                retElemets.Add(bllMapper.MapToBll(element));
+                retElemets.Add(mapper.MapToBll(element));
             }
             return retElemets;
         }
 
         public BllEquipment GetEquipmentByName(string name)
         {
-            return bllMapper.MapToBll(uow.Equipments.GetEquipmentByName(name));
+            return mapper.MapToBll(uow.Equipments.GetEquipmentByName(name));
         }
 
         public IEnumerable<BllEquipment> GetEquipmentByType(string type)
@@ -89,7 +54,7 @@ namespace BLL.Services
             var retElemets = new List<BllEquipment>();
             foreach (var element in elements)
             {
-                retElemets.Add(bllMapper.MapToBll(element));
+                retElemets.Add(mapper.MapToBll(element));
             }
             return retElemets;
         }
@@ -100,7 +65,7 @@ namespace BLL.Services
             var retElemets = new List<BllEquipment>();
             foreach (var element in elements)
             {
-                retElemets.Add(bllMapper.MapToBll(element));
+                retElemets.Add(mapper.MapToBll(element));
             }
             return retElemets;
         }

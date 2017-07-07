@@ -10,7 +10,6 @@ namespace DAL.Repositories.Interface
 {
     public interface IImageRepository : IRepository<DalImage, Image>
     {
-        IEnumerable<DalImage> GetImagesByLibId(int id);
 
     }
 }

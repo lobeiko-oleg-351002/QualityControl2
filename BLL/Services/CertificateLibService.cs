@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using BLL.Entities;
+﻿using BLL.Entities;
+using BLL.Entities.Interface;
 using BLL.Mapping;
-using BLL.Mapping.Interfaces;
-using BLL.Services.Interface;
 using DAL.Entities;
 using DAL.Repositories.Interface;
 using ORM;
@@ -14,83 +12,11 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class CertificateLibService : Service<BllCertificateLib, DalCertificateLib, CertificateLib>, ICertificateLibService
+    public class CertificateLibService : EntityLibService<BllCertificate, CertificateLib, BllCertificateLib, SelectedCertificate, EntityLibMapper<BllCertificate, BllCertificateLib, CertificateService>, CertificateService >
     {
-        private readonly IUnitOfWork uow;
-
-        public CertificateLibService(IUnitOfWork uow) : base(uow, uow.CertificateLibs)
+        public CertificateLibService(IUnitOfWork uow) : base(uow, uow.CertificateLibs, uow.SelectedCertificates )
         {
-            this.uow = uow;
-            bllMapper = new CertificateLibMapper(uow);
-
+            // this.uow = uow;
         }
-
-        CertificateLibMapper bllMapper;
-
-        public new BllCertificateLib Create(BllCertificateLib entity)
-        {
-            var ormEntity = uow.CertificateLibs.Create(bllMapper.MapToDal(entity));
-            uow.Commit();
-            entity.Id = ormEntity.id;
-            ISelectedCertificateMapper selectedCertificateMapper = new SelectedCertificateMapper(uow);
-            foreach (var Certificate in entity.SelectedCertificate)
-            {
-                var dalCertificate = selectedCertificateMapper.MapToDal(Certificate);
-                dalCertificate.CertificateLib_id = entity.Id;
-                var ormCertificate = uow.SelectedCertificates.Create(dalCertificate);
-                uow.Commit();
-                Certificate.Id = ormCertificate.id;
-            }
-
-            return entity;
-        }
-
-        public override BllCertificateLib Get(int id)
-        {
-            return bllMapper.MapToBll(uow.CertificateLibs.Get(id));
-        }
-
-        public override void Update(BllCertificateLib entity)
-        {
-            ISelectedCertificateMapper selectedCertificateMapper = new SelectedCertificateMapper(uow);
-            foreach (var Certificate in entity.SelectedCertificate)
-            {
-                if (Certificate.Id == 0)
-                {
-                    var dalCertificate = selectedCertificateMapper.MapToDal(Certificate);
-                    dalCertificate.CertificateLib_id = entity.Id;
-                    uow.SelectedCertificates.Create(dalCertificate);
-                }
-            }
-            var certificatesWithLibId = uow.SelectedCertificates.GetCertificatesByLibId(entity.Id);
-            foreach (var certificate in certificatesWithLibId)
-            {
-                bool isTrashCertificate = true;
-                foreach (var selectedCertificate in entity.SelectedCertificate)
-                {
-                    if (certificate.Id == selectedCertificate.Id)
-                    {
-                        isTrashCertificate = false;
-                        break;
-                    }
-                }
-                if (isTrashCertificate == true)
-                {
-                    uow.SelectedCertificates.Delete(certificate);
-                }
-            }
-            uow.Commit();
-        }
-
-        //private DalCertificateLib MapBllToDal(BllCertificateLib entity)
-        //{
-        //    Mapper.Initialize(cfg =>
-        //    {
-        //        cfg.CreateMap<BllCertificateLib, DalCertificateLib>();
-        //        cfg.CreateMap<BllCertificate, DalCertificate>();
-        //        cfg.CreateMap<BllSelectedCertificate, DalSelectedCertificate>();
-        //    });
-        //    DalCertificateLib dalEntity = Mapper.Map<DalCertificateLib>(entity);
-        //}
     }
 }

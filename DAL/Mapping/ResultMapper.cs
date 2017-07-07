@@ -21,7 +21,7 @@ namespace DAL.Mapping
                 Norm = entity.norm,
                 Number = entity.number,
                 Quality = entity.quality,
-                ResultLib_id = entity.resultLib_id.Value,
+                Lib_id = entity.resultLib_id.Value,
                 Welder = entity.welder
             };
         }
@@ -36,7 +36,7 @@ namespace DAL.Mapping
                 norm = entity.Norm,
                 number = entity.Number,
                 quality = entity.Quality,
-                resultLib_id = entity.ResultLib_id,
+                resultLib_id = entity.Lib_id,
                 welder = entity.Welder
             };
         }

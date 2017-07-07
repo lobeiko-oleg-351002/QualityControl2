@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace BLL.Mapping.Interfaces
 {
-    public interface IJournalMapper
+    public interface IJournalMapper : IMapper<BllJournal, DalJournal>
     {
-        DalJournal MapToDal(BllJournal entity);
-        BllJournal MapToBll(DalJournal entity);
+
     }
 }
