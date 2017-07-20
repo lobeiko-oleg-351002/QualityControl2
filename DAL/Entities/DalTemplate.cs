@@ -21,7 +21,7 @@ namespace DAL.Entities
 
         public string Description { get; set; }
 
-        public string Size { get; set; }
+        public string Weight { get; set; }
 
         public string WeldingType { get; set; }
 
@@ -29,8 +29,10 @@ namespace DAL.Entities
         
         public int? Customer_id { get; set; }
 
-        public string Contract { get; set; }
-
         public int? ControlMethodsLib_id { get; set; }
+
+        public int? ScheduleOrganization_id { get; set; }
+
+        public int? Contract_id { get; set; }
     }
 }

@@ -10,10 +10,10 @@ namespace ORM
     public partial class SelectedRequirementDocumentation : ISelectedEntity
     {
         public int id { get; set; }
-    
-        public int? entity_id { get; set; }
 
-        public int? lib_id { get; set; }
+        public int entity_id { get; set; }
+
+        public int lib_id { get; set; }
 
         public virtual RequirementDocumentation RequirementDocumentation { get; set; }
 

@@ -36,12 +36,12 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(48, 192);
+            this.button1.Location = new System.Drawing.Point(161, 192);
             this.button1.TabIndex = 4;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(165, 192);
+            this.button2.Location = new System.Drawing.Point(59, 192);
             this.button2.TabIndex = 3;
             // 
             // textBox1
@@ -86,6 +86,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "AddMaterialForm";
             this.Text = "Добавить материал";
             this.Controls.SetChildIndex(this.button1, 0);

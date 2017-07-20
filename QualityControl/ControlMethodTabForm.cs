@@ -35,6 +35,20 @@ namespace QualityControl_Server
 
         }
 
+        private void HideControlsForVIK()
+        {
+            if (controlName == "ВИК")
+            {
+                groupBox2.Visible = false;
+                button14.Visible = false;
+                button15.Visible = false;
+                label15.Visible = false;
+                textBox2.Visible = false;
+                groupBox4.Location = new Point(16, 67);
+                groupBox3.Location = new Point(16, 170);
+            }
+        }
+        string controlName;
         public ControlMethodTabForm(string controlName, IUnitOfWork uow, AddJournalForm parent)
         {
             InitializeComponent();
@@ -42,6 +56,8 @@ namespace QualityControl_Server
             this.uow = uow;
             panel = panel1;
             label1.Text = controlName;
+            this.controlName = controlName;
+            HideControlsForVIK();
             DisableFormControls();
             
         }
@@ -55,6 +71,8 @@ namespace QualityControl_Server
             this.uow = uow;
             panel = panel1;
             SetCurrentControlAndJournal(control, journal);
+            controlName = control.ControlName.Name;
+            HideControlsForVIK();
             DisableFormControls();
         }
 
@@ -90,6 +108,10 @@ namespace QualityControl_Server
             //SetControlMethodDocumentation(control.ControlMethodDocumentationLib);
             SetEmployee(control.EmployeeLib);
             SetChiefEmployee(control.ChiefEmployee);
+
+            textBox3.Text = control.Light.ToString();
+            textBox1.Text = control.Temperature.ToString();
+            textBox4.Text = control.Additionally;
         }
 
         public void EnableValidateCheckBox()
@@ -514,7 +536,7 @@ namespace QualityControl_Server
             pictureBox1.Image = null;
             listBox4.Items.Clear();
             isRejected = null;
-            label11.Text = "";
+            ClearProtocolNumber();
             currentControl = null;
         }
 
@@ -523,7 +545,12 @@ namespace QualityControl_Server
             if (currentControl != null)
             {
                 ResultDirectoryForm resultDirectoryForm = new ResultDirectoryForm(currentControl.ResultLib);
+                if (controlName == "ВИК")
+                {
+                    resultDirectoryForm.RenameColumnsForVIK();
+                }
                 resultDirectoryForm.ShowDialog(this);
+
             }
         }
 
@@ -598,7 +625,7 @@ namespace QualityControl_Server
             textBox3.ReadOnly = true;
             textBox4.ReadOnly = true;
             textBox1.ReadOnly = true;
-            label11.Text = "";
+            //ClearProtocolNumber();
             
         }
 
@@ -622,7 +649,8 @@ namespace QualityControl_Server
             textBox1.ReadOnly = false;
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
-            label11.Text = "";
+            //ClearProtocolNumber();
+            HideControlsForVIK();
         }
 
         public void ClearProtocolNumber()

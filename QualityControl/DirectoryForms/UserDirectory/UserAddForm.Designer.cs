@@ -108,8 +108,9 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "UserAddForm";
-            this.Text = "UserAddForm";
+            this.Text = "Добавить польщователя";
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.button2, 0);
             this.Controls.SetChildIndex(this.label1, 0);

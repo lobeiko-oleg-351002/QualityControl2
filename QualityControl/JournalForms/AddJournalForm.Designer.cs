@@ -28,9 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(311, 625);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(109, 625);
+            // 
+            // AddJournalForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "AddJournalForm1";
+            this.ClientSize = new System.Drawing.Size(882, 667);
+            this.Name = "AddJournalForm";
+            this.Text = "Добавить объект контроля";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion

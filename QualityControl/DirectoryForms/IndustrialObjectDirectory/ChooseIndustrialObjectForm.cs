@@ -36,23 +36,21 @@ namespace QualityControl_Server.Forms.IndustrialObjectDirectory
             dataGridView1.Rows.Clear();
             IIndustrialObjectService Service = new IndustrialObjectService(uow);
             IndustrialObjects = Service.GetAll().ToList();
+            IComponentService componentService = new ComponentService(uow);
             foreach (var IndustrialObject in IndustrialObjects)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dataGridView1);
                 row.Cells[0].Value = IndustrialObject.Name;
-                //if (IndustrialObject.ComponentLib != null)
-                //{
-                //    foreach (var component in IndustrialObject.ComponentLib.SelectedEntities)
-                //    {
-                //        ((DataGridViewComboBoxCell)row.Cells[1]).Items.Add(component.Entity.Name);
-                //    }
-                //    if (IndustrialObject.ComponentLib.SelectedEntities.Count != 0)
-                //    {
-                //        ((DataGridViewComboBoxCell)row.Cells[1]).Value = ((DataGridViewComboBoxCell)row.Cells[1]).Items[0];
-                //    }
-
-                //}
+                var components = componentService.GetComponentsByIndustrialObject(IndustrialObject.Id);
+                foreach (var component in components)
+                {
+                    ((DataGridViewComboBoxCell)row.Cells[1]).Items.Add(component.Name);
+                }
+                if (components.Count != 0)
+                {
+                    ((DataGridViewComboBoxCell)row.Cells[1]).Value = ((DataGridViewComboBoxCell)row.Cells[1]).Items[0];
+                }
 
                 dataGridView1.Rows.Add(row);
             }

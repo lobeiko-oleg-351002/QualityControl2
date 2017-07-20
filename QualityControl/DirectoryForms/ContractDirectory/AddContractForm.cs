@@ -42,8 +42,10 @@ namespace QualityControl_Server.Forms.ContractDirectory
             {
                 MessageBox.Show(errorMessage, "Оповещение");
             }
-            Close();
-
+            else
+            {
+                Close();
+            }
         }
 
     }

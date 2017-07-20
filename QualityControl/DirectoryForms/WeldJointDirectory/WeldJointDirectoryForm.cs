@@ -78,7 +78,7 @@ namespace QualityControl_Server.Forms.WeldJointDirectory
             }
             for (int i = rowsList.Count - 1; i >= 0; i--)
             {
-                ChangeWeldJointForm changeWeldJointForm = new ChangeWeldJointForm(this, WeldJoints[rowsList[i].Index], rowsList[i]);
+                ChangeWeldJointForm changeWeldJointForm = new ChangeWeldJointForm(uow, this, WeldJoints[rowsList[i].Index]);
                 changeWeldJointForm.ShowDialog(this);
             }
             RefreshData();

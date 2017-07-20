@@ -18,8 +18,8 @@ namespace QualityControl_Server.Forms.IndustrialObjectDirectory
 {
     public partial class AddIndustrialObjectForm : AddForm
     {
-        BllComponentLib ComponentLib;
-        List<BllComponent> Components = new List<BllComponent>();
+
+
         public AddIndustrialObjectForm() : base()
         {
             InitializeComponent();
@@ -29,7 +29,7 @@ namespace QualityControl_Server.Forms.IndustrialObjectDirectory
         {
             InitializeComponent();
             this.uow = uow;
-            ComponentLib = new BllComponentLib();
+
         }
 
         protected override void button2_Click(object sender, EventArgs e)
@@ -40,15 +40,7 @@ namespace QualityControl_Server.Forms.IndustrialObjectDirectory
             }
             else
             {
-                List<BllSelectedEntity<BllComponent>> selectedComponents = new List<BllSelectedEntity<BllComponent>>();
-                foreach (var element in Components)
-                {
-                    selectedComponents.Add(new BllSelectedEntity<BllComponent>
-                    {
-                        Entity = element
-                    });
-                }
-                ComponentLib.SelectedEntities = selectedComponents;
+                
                 BllIndustrialObject IndustrialObject = new BllIndustrialObject
                 {
                     Name = textBox1.Text,
@@ -60,27 +52,6 @@ namespace QualityControl_Server.Forms.IndustrialObjectDirectory
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            ChooseComponentForm ComponentForm = new ChooseComponentForm(uow);
-            ComponentForm.ShowDialog(this);
-            BllComponent Component = ComponentForm.GetChosenComponent();
-            if (Component != null)
-            {
-                Components.Add(Component);
-                comboBox1.Items.Add(Component.Name);
-                comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Components.RemoveAt(comboBox1.SelectedIndex);
-            comboBox1.Items.RemoveAt(comboBox1.SelectedIndex);
-            if (comboBox1.Items.Count > 0)
-            {
-                comboBox1.SelectedIndex = 0;
-            }
-        }
+       
     }
 }

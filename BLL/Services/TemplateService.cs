@@ -29,7 +29,7 @@ namespace BLL.Services
         public override void Create(BllTemplate entity)
         {
             ControlMethodsLibService controlMethodsLibService = new ControlMethodsLibService(uow);
-            var controlMethodsLib = controlMethodsLibService.Create(entity.ControlMethodsLib);
+            var controlMethodsLib = controlMethodsLibService.Create(entity.ControlMethodsLib, true);
             entity.ControlMethodsLib = controlMethodsLib;
             uow.Templates.Create(mapper.MapToDal(entity));
             uow.Commit();

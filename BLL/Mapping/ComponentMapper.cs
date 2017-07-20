@@ -19,6 +19,7 @@ namespace BLL.Mapping
         {
             this.uow = uow;
             templateService = new TemplateService(uow);
+            industrialObjectService = new IndustrialObjectService(uow);
         }
 
         public ComponentMapper() { }
@@ -30,11 +31,14 @@ namespace BLL.Mapping
                 Id = entity.Id,
                 Name = entity.Name,
                 Pressmark = entity.Pressmark,
-                Template_id = entity.Template != null ? entity.Template.Id : (int?)null               
+                Template_id = entity.Template != null ? entity.Template.Id : (int?)null,
+                IndustrialObject_id = entity.IndustrialObject != null ? entity.IndustrialObject.Id : (int?)null
+                
             };
         }
 
         ITemplateService templateService;
+        IIndustrialObjectService industrialObjectService;
 
         public BllComponent MapToBll(DalComponent entity)
         {
@@ -43,7 +47,8 @@ namespace BLL.Mapping
                 Id = entity.Id,
                 Name = entity.Name,
                 Pressmark = entity.Pressmark,
-                Template = entity.Template_id != null ? templateService.Get((int)entity.Template_id) : null
+                Template = entity.Template_id != null ? templateService.Get((int)entity.Template_id) : null,
+                IndustrialObject = entity.IndustrialObject_id != null ? industrialObjectService.Get((int)entity.IndustrialObject_id) : null
             };
 
             return bllEntity;

@@ -37,6 +37,7 @@ namespace QualityControl_Server.Forms.ResultDirectory
             normHistory = ParseString(history);
             history = cfg.GetTagValue(cfg.quality);
             qualityHistory = ParseString(history);
+
         }
 
         public ResultDirectoryForm()
@@ -46,6 +47,28 @@ namespace QualityControl_Server.Forms.ResultDirectory
         }
 
         BllResultLib resultLib;
+        
+        public void RenameColumnsForVIK()
+        {
+            dataGridView1.Columns[0].HeaderText = "Стадия контроля";
+            dataGridView1.Columns[1].HeaderText = "Исполнитель";
+            dataGridView1.Columns[2].HeaderText = "Результат приёмки";
+            dataGridView1.Columns[3].HeaderText = "Особые отметки";
+            dataGridView1.Columns[4].HeaderText = "Примечание";
+            dataGridView1.Columns[5].HeaderText = "Дата контроля";
+
+            if (weldingTypeHistory.Count() == 0)
+            {
+                weldingTypeHistory.Add("Принят");
+                weldingTypeHistory.Add("Не принят");
+            }
+            if (numberHistory.Count() == 0)
+            {
+                numberHistory.Add("Сборка");
+                numberHistory.Add("Сварка");
+                numberHistory.Add("Приёмочный");
+            }
+        }
 
         public ResultDirectoryForm(BllResultLib lib)
         {
@@ -92,7 +115,7 @@ namespace QualityControl_Server.Forms.ResultDirectory
         private void SetAutocompleteCell(DataGridViewEditingControlShowingEventArgs e, List<string> history)
         {
             TextBox autoText = e.Control as TextBox;
-            autoText.AutoCompleteMode = AutoCompleteMode.Suggest;
+            autoText.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             autoText.AutoCompleteSource = AutoCompleteSource.CustomSource;
             AutoCompleteStringCollection DataCollection = new AutoCompleteStringCollection();
             TransformHistoryToCollection(DataCollection, history);
@@ -124,9 +147,7 @@ namespace QualityControl_Server.Forms.ResultDirectory
             var rows = dataGridView1.Rows;
             for (int i = 0; i < results.Count; i++)
             {
-                var number = 0;
-                bool isInt = rows[i].Cells[0].Value != null ? int.TryParse(rows[i].Cells[0].Value.ToString(), out number) : false;
-                results[i].Number = isInt ? number : 0;
+                results[i].Number = (string)rows[i].Cells[0].Value;
                 RefreshHistoryList(numberHistory, results[i].Number.ToString());
                 results[i].Welder = (string)rows[i].Cells[1].Value;
                 RefreshHistoryList(welderHistory, results[i].Welder);

@@ -40,7 +40,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(453, 381);
+            this.button4.Location = new System.Drawing.Point(464, 381);
             // 
             // dataGridView1
             // 
@@ -99,7 +99,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(552, 381);
+            this.button5.Location = new System.Drawing.Point(561, 381);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 7;

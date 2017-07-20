@@ -41,13 +41,12 @@ namespace QualityControl_Server
 
 
             User = user;
-            dateTimePicker1.Focus();
+            dateTimePicker2.Focus();
             this.AddRowToDataGridDelegate = AddRowToDataGridDelegate;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             CenterToScreen();
             Journal = new BllJournal
             {
-                RequestDate = DateTime.Now,
                 ControlDate = DateTime.Now,
                 RequestNumber = 0,
                 Amount = 0,
@@ -90,16 +89,9 @@ namespace QualityControl_Server
                 ControlMethodTabForms[i].AddEmployee(user.Employee);
             }
 
-            IndustrialObjects = new List<BllIndustrialObject>();
-            IIndustrialObjectService industrialObjectService = new IndustrialObjectService(uow);
-            var industrialObjects = industrialObjectService.GetAll();
-            foreach (var element in industrialObjects)
-            {
-                IndustrialObjects.Add(element);
-                comboBox1.Items.Add(element.Name);
-            }
 
             Customers = new List<BllCustomer>();
+            Contracts = new List<BllContract>();
             ICustomerService CustomerService = new CustomerService(uow);
             var customers = CustomerService.GetAll();
             foreach (var element in customers)
@@ -155,7 +147,7 @@ namespace QualityControl_Server
                 }
 
 
-                for (int i = 0; i < ControlNames.Count; i++)
+                for (int i = 0; i < Journal.ControlMethodsLib.Entities.Count; i++)
                 {
                     var control = Journal.ControlMethodsLib.Entities[i];
                     ControlMethodTabForms[i].SetCurrentControlAndJournal(control, Journal);
@@ -246,10 +238,9 @@ namespace QualityControl_Server
             target.Id = source.Id;
             target.IndustrialObject = source.IndustrialObject;
             target.Material = source.Material;
-            target.RequestDate = source.RequestDate;
             target.RequestNumber = source.RequestNumber;
-            target.Size = source.Size;
-            target.WeldJoint = source.WeldJoint;
+            target.Weight = source.Weight;
+            target.ScheduleOrganization = source.ScheduleOrganization;
             target.ControlMethodsLib = new BllControlMethodsLib();
             return target;
         }
@@ -266,13 +257,13 @@ namespace QualityControl_Server
             {
                 unfilledInfo += "\n Материал";
             }
-            if (Journal.Size == "")
+            if (Journal.Weight == "")
             {
-                unfilledInfo += "\n Типовой размер";
+                unfilledInfo += "\n Масса";
             }
-            if (Journal.WeldJoint == null)
+            if (Journal.ScheduleOrganization == null)
             {
-                unfilledInfo += "\n Тип сварного соединения";
+                unfilledInfo += "\n Организация, вып. чертежи";
             }
             if (Journal.IndustrialObject == null)
             {

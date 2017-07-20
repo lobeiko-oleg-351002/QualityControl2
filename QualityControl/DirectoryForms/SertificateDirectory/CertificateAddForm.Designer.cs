@@ -45,12 +45,12 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(41, 209);
+            this.button1.Location = new System.Drawing.Point(166, 217);
             this.button1.TabIndex = 7;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(164, 209);
+            this.button2.Location = new System.Drawing.Point(57, 217);
             this.button2.TabIndex = 6;
             // 
             // label1
@@ -80,6 +80,7 @@
             // 
             // dateTimePicker1
             // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker1.Location = new System.Drawing.Point(138, 51);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(128, 20);
@@ -158,7 +159,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(294, 237);
+            this.ClientSize = new System.Drawing.Size(294, 252);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label3);
@@ -171,6 +172,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "CertificateAddForm";
             this.Text = "Добавить сертификат";
             this.Controls.SetChildIndex(this.button1, 0);

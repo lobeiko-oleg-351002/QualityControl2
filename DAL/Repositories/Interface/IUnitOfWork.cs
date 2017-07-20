@@ -47,6 +47,8 @@ namespace DAL.Repositories.Interface
         IRepository<IDalEntityLib, EquipmentLib> EquipmentLibs { get; }
         IRepository<IDalEntityLib, RequirementDocumentationLib> RequirementDocumentationLibs { get; }
         IRepository<IDalEntityLib, ControlMethodsLib> ControlMethodsLibs { get; }
+        IRawRepository Raws { get; }
+        IScheduleOrganizationRepository ScheduleOrganizations { get; }
 
         void Commit();
     }

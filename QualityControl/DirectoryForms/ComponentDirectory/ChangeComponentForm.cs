@@ -12,13 +12,14 @@ using BLL.Services;
 using BLL.Services.Interface;
 using BLL.Entities;
 using DAL.Repositories.Interface;
+using QualityControl_Server.Forms.IndustrialObjectDirectory;
 
 namespace QualityControl_Server.Forms.ComponentDirectory
 {
     public partial class ChangeComponentForm : ChangeForm
     {
         BllComponent oldComponent;
-        BllTemplate template;
+
         public ChangeComponentForm() : base()
         {
             InitializeComponent();
@@ -31,6 +32,7 @@ namespace QualityControl_Server.Forms.ComponentDirectory
             textBox1.Text = oldComponent.Name;
             textBox2.Text = oldComponent.Pressmark;
             maskedTextBox1.Text = oldComponent.Template != null ? oldComponent.Template.Name : "<отсутствует>";
+            maskedTextBox2.Text = oldComponent.IndustrialObject != null ? oldComponent.IndustrialObject.Name : "<не указан>";
         }
 
         protected override void button2_Click(object sender, EventArgs e)
@@ -42,7 +44,6 @@ namespace QualityControl_Server.Forms.ComponentDirectory
             else
             {
                 oldComponent.Name = textBox1.Text;
-                oldComponent.Template = template;
                 oldComponent.Pressmark = textBox2.Text;
                 IComponentService Service = new ComponentService(uow);
                 Service.Update(oldComponent);
@@ -54,10 +55,21 @@ namespace QualityControl_Server.Forms.ComponentDirectory
         {
             ChooseTemplateForm templateForm = new ChooseTemplateForm(uow);
             templateForm.ShowDialog(this);
-            template = templateForm.GetChosenTemplate();
-            if (template != null)
+            oldComponent.Template = templateForm.GetChosenTemplate();
+            if (oldComponent.Template != null)
             {
-                maskedTextBox1.Text = template.Name;
+                maskedTextBox1.Text = oldComponent.Template.Name;
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ChooseIndustrialObjectForm templateForm = new ChooseIndustrialObjectForm(uow);
+            templateForm.ShowDialog(this);
+            oldComponent.IndustrialObject = templateForm.GetChosenIndustrialObject();
+            if (oldComponent.IndustrialObject!= null)
+            {
+                maskedTextBox2.Text = oldComponent.IndustrialObject.Name;
             }
         }
     }

@@ -13,15 +13,19 @@ namespace DAL.Mapping
     {
         public DalCertificate MapToDal(Certificate entity)
         {
-            return new DalCertificate
+            if (entity != null)
             {
-                Id = entity.id,
-                CheckDate = entity.checkDate,
-                ControlName_id = entity.controlName_id,
-                Duration = entity.duration,
-                Employee_id = entity.employee_id,
-                Title = entity.title
-            };
+                return new DalCertificate
+                {
+                    Id = entity.id,
+                    CheckDate = entity.checkDate,
+                    ControlName_id = entity.controlName_id,
+                    Duration = entity.duration,
+                    Employee_id = entity.employee_id,
+                    Title = entity.title
+                };
+            }
+            return null;
         }
 
         public Certificate MapToOrm(DalCertificate entity)

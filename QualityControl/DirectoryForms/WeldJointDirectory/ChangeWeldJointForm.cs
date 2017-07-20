@@ -23,8 +23,7 @@ namespace QualityControl_Server.Forms.WeldJointDirectory
         public ChangeWeldJointForm(IUnitOfWork uow) : base()
         {
             InitializeComponent();
-            this.uow = uow;
-            openFileDialog1.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+
         }
 
         public ChangeWeldJointForm() : base()
@@ -32,12 +31,14 @@ namespace QualityControl_Server.Forms.WeldJointDirectory
             InitializeComponent();
         }
 
-        public ChangeWeldJointForm(DirectoryForm parent, BllWeldJoint oldWeldJoint, DataGridViewRow currentRow) : base(parent)
+        public ChangeWeldJointForm(IUnitOfWork uow, DirectoryForm parent, BllWeldJoint oldWeldJoint) : base(parent)
         {
             InitializeComponent();
+            this.uow = uow;
+            openFileDialog1.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
             this.oldWeldJoint = oldWeldJoint;
-            textBox1.Text = (string)currentRow.Cells[0].Value;
-            richTextBox1.Text = (string)currentRow.Cells[1].Value;
+            textBox1.Text = oldWeldJoint.Name;
+            richTextBox1.Text = oldWeldJoint.Description;
             pictureBox1.Image = byteArrayToImage(oldWeldJoint.Image);
 
         }

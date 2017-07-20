@@ -12,9 +12,6 @@ namespace ORM
         public int id { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime? requestDate { get; set; }
-
-        [Column(TypeName = "date")]
         public DateTime? controlDate { get; set; }
 
         public int? requestNumber { get; set; }
@@ -24,18 +21,13 @@ namespace ORM
         public int? amount { get; set; }
 
         [StringLength(50)]
-        public string size { get; set; }
+        public string weight { get; set; }
 
         public int? material_id { get; set; }
-
-        public int? weldJoint_id { get; set; }
 
         public int? component_id { get; set; }
 
         public int? customer_id { get; set; }
-
-        [StringLength(50)]
-        public string contract { get; set; }
 
         [StringLength(200)]
         public string description { get; set; }
@@ -50,7 +42,13 @@ namespace ORM
         [Column(TypeName = "date")]
         public DateTime? modifiedDate { get; set; }
 
+        public int? scheduleOrganization_id { get; set; }
+
+        public int? contract_id { get; set; }
+
         public virtual Component Component { get; set; }
+
+        public virtual Contract Contract { get; set; }
 
         public virtual ControlMethodsLib ControlMethodsLib { get; set; }
 
@@ -60,8 +58,8 @@ namespace ORM
 
         public virtual Material Material { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual ScheduleOrganization ScheduleOrganization { get; set; }
 
-        public virtual WeldJoint WeldJoint { get; set; }
+        public virtual User User { get; set; }
     }
 }

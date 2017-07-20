@@ -28,9 +28,15 @@ namespace BLL.Services
         }
 
 
-        public BllComponent GetComponentByName(string name)
+        public List<BllComponent> GetComponentsByIndustrialObject(int id)
         {
-            return mapper.MapToBll(uow.Components.GetComponentByName(name));
+            List<BllComponent> res = new List<BllComponent>();
+            var components = uow.Components.GetComponentsByIndustrialObject(id);
+            foreach(var item in components)
+            {
+                res.Add(mapper.MapToBll(item));
+            }
+            return res;
         }
     }
 

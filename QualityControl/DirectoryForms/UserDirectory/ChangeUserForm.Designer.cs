@@ -39,10 +39,12 @@
             // 
             // button1
             // 
+            this.button1.Location = new System.Drawing.Point(153, 226);
             this.button1.TabIndex = 5;
             // 
             // button2
             // 
+            this.button2.Location = new System.Drawing.Point(50, 226);
             this.button2.TabIndex = 4;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -119,8 +121,9 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "ChangeUserForm";
-            this.Text = "ChangeUserForm";
+            this.Text = "Изменить пользователя";
             this.Controls.SetChildIndex(this.button1, 0);
             this.Controls.SetChildIndex(this.button2, 0);
             this.Controls.SetChildIndex(this.label1, 0);

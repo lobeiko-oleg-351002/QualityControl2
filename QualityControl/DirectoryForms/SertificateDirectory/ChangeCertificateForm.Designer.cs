@@ -45,11 +45,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(40, 234);
+            this.button1.Location = new System.Drawing.Point(162, 233);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(175, 233);
+            this.button2.Location = new System.Drawing.Point(60, 233);
             // 
             // label8
             // 
@@ -95,6 +95,7 @@
             // 
             // dateTimePicker1
             // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker1.Location = new System.Drawing.Point(141, 49);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(128, 20);
@@ -168,6 +169,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "ChangeCertificateForm";
             this.Text = "Изменить сертификат";
             this.Controls.SetChildIndex(this.button1, 0);

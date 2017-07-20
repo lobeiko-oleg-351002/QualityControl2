@@ -18,8 +18,8 @@ namespace DAL.Mapping
             return new DalSelectedEntity
             {
                 Id = entity.id,
-                Lib_id = entity.lib_id.Value,
-                Entity_id = entity.entity_id.Value
+                Lib_id = entity.lib_id,
+                Entity_id = entity.entity_id
             };
         }
 

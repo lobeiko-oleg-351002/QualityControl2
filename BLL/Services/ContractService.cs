@@ -15,11 +15,9 @@ namespace BLL.Services
 {
     public class ContractService : Service<BllContract, DalContract, Contract, ContractMapper>, IContractService
     {
-      //  private readonly IUnitOfWork uow;
 
         public ContractService(IUnitOfWork uow) : base(uow, uow.Contracts)
         {
-        //    this.uow = uow;
         }
 
     }

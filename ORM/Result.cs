@@ -11,7 +11,8 @@ namespace ORM
     {
         public int id { get; set; }
 
-        public int? number { get; set; }
+        [StringLength(50)]
+        public string number { get; set; }
 
         [StringLength(100)]
         public string welder { get; set; }

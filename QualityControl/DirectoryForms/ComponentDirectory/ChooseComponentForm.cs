@@ -53,6 +53,7 @@ namespace QualityControl_Server.Forms.ComponentDirectory
                 row.Cells[0].Value = Component.Name;
                 row.Cells[1].Value = Component.Pressmark;
                 row.Cells[2].Value = Component.Template != null ? Component.Template.Name : "<отсутствует>";
+                row.Cells[3].Value = Component.IndustrialObject != null ? Component.IndustrialObject.Name : "<не указан>";
                 dataGridView1.Rows.Add(row);
             }
         }

@@ -46,17 +46,21 @@ namespace BLL.Mapping
 
         public BllCertificate MapToBll(DalCertificate entity)
         {
-            BllCertificate bllEntity = new BllCertificate
+            if (entity != null)
             {
-                Id = entity.Id,
-                CheckDate = entity.CheckDate,
-                Duration = entity.Duration,
-                Title = entity.Title,
-                ControlName = entity.ControlName_id != null ? controlNameService.Get((int)entity.ControlName_id) : null,
-                Employee = entity.Employee_id != null ? employeeService.Get((int)entity.Employee_id) : null
-            };
+                BllCertificate bllEntity = new BllCertificate
+                {
+                    Id = entity.Id,
+                    CheckDate = entity.CheckDate,
+                    Duration = entity.Duration,
+                    Title = entity.Title,
+                    ControlName = entity.ControlName_id != null ? controlNameService.Get((int)entity.ControlName_id) : null,
+                    Employee = entity.Employee_id != null ? employeeService.Get((int)entity.Employee_id) : null
+                };
 
-            return bllEntity;
+                return bllEntity;
+            }
+            return null;
         }
     }
 }

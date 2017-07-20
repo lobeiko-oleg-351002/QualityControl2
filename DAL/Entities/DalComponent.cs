@@ -18,5 +18,7 @@ namespace DAL.Entities
         public int? Creator_id { get; set; }
 
         public string Pressmark { get; set; }
+
+        public int ? IndustrialObject_id { get; set; }
     }
 }

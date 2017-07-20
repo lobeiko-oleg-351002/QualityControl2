@@ -43,12 +43,12 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(42, 271);
+            this.button1.Location = new System.Drawing.Point(205, 271);
             this.button1.TabIndex = 8;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(235, 271);
+            this.button2.Location = new System.Drawing.Point(108, 271);
             this.button2.TabIndex = 7;
             // 
             // label1
@@ -162,6 +162,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "AddCustomerForm";
             this.Text = "Добавить заказчика";
             this.Controls.SetChildIndex(this.label1, 0);

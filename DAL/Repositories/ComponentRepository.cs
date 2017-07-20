@@ -19,10 +19,18 @@ namespace DAL.Repositories
             this.context = context;
         }
 
-        public DalComponent GetComponentByName(string name)
+        public IEnumerable<DalComponent> GetComponentsByIndustrialObject(int id)
         {
-            var ormEntity = context.Components.FirstOrDefault(entity => entity.name == name);
-            return mapper.MapToDal(ormEntity);
+            var ormComponents = context.Set<Component>().Where(entity => entity.industrialObject_id == id);
+            var res = new List<DalComponent>();
+            if (ormComponents.Any())
+            {
+                foreach (var item in ormComponents)
+                {
+                    res.Add(mapper.MapToDal(item));
+                }
+            }
+            return res;
         }
 
 

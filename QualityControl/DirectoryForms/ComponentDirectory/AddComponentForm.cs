@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QualityControl_Server.Forms.IndustrialObjectDirectory;
 
 namespace QualityControl_Server.Forms.ComponentDirectory
 {
@@ -30,6 +31,7 @@ namespace QualityControl_Server.Forms.ComponentDirectory
         }
 
         BllTemplate template;
+        BllIndustrialObject industrialObject;
         private void button3_Click(object sender, EventArgs e)
         {
             ChooseTemplateForm templateForm = new ChooseTemplateForm(uow);
@@ -53,11 +55,23 @@ namespace QualityControl_Server.Forms.ComponentDirectory
                 {
                     Name = textBox1.Text,
                     Template = template,
-                    Pressmark = textBox2.Text
+                    Pressmark = textBox2.Text,
+                    IndustrialObject = industrialObject
                 };
                 IComponentService Service = new ComponentService(uow);
                 Service.Create(component);
                 base.button2_Click(sender, e);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ChooseIndustrialObjectForm templateForm = new ChooseIndustrialObjectForm(uow);
+            templateForm.ShowDialog(this);
+            industrialObject = templateForm.GetChosenIndustrialObject();
+            if (industrialObject != null)
+            {
+                maskedTextBox2.Text = industrialObject.Name;
             }
         }
     }

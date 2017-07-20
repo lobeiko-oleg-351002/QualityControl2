@@ -38,17 +38,17 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(40, 179);
+            this.button1.Location = new System.Drawing.Point(157, 136);
             this.button1.TabIndex = 5;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(156, 179);
+            this.button2.Location = new System.Drawing.Point(56, 136);
             this.button2.TabIndex = 4;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(122, 48);
+            this.textBox1.Location = new System.Drawing.Point(122, 20);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(150, 20);
             this.textBox1.TabIndex = 1;
@@ -56,7 +56,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 51);
+            this.label1.Location = new System.Drawing.Point(16, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 4;
@@ -64,7 +64,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(122, 90);
+            this.textBox2.Location = new System.Drawing.Point(122, 57);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(150, 20);
             this.textBox2.TabIndex = 2;
@@ -72,7 +72,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 93);
+            this.label2.Location = new System.Drawing.Point(16, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 6;
@@ -81,7 +81,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 130);
+            this.label3.Location = new System.Drawing.Point(16, 97);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 13);
             this.label3.TabIndex = 8;
@@ -90,7 +90,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(122, 130);
+            this.comboBox1.Location = new System.Drawing.Point(122, 97);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(150, 21);
             this.comboBox1.TabIndex = 3;
@@ -99,13 +99,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 214);
+            this.ClientSize = new System.Drawing.Size(284, 163);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "AddControlMethodDocumentationForm";
             this.Text = "Добавить документацию метода контроля";
             this.Controls.SetChildIndex(this.button1, 0);

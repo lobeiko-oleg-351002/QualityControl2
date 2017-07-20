@@ -112,8 +112,8 @@ namespace QualityControl_Server
 
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
-                    string path = Directory.GetFiles(fbd.SelectedPath)[0];
-                    textBox2.Text = path.Substring(0, path.LastIndexOf("\\") + 1);
+                    string path = fbd.SelectedPath;
+                    textBox2.Text = path;
 
                     // System.Windows.Forms.MessageBox.Show("Files found: " + files.Length.ToString(), "Message");
                 }

@@ -27,7 +27,9 @@ namespace ORM
         [StringLength(50)]
         public string pressmark { get; set; }
 
-        public virtual Template Template { get; set; }
+        public int? industrialObject_id { get; set; }
+
+        public virtual IndustrialObject IndustrialObject { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Journal> Journal { get; set; }
