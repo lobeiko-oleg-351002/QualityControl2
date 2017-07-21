@@ -221,23 +221,8 @@ namespace QualityControl
 
         private void SetCurrentControlsInControlMethodTabs(BllControlMethodsLib lib, BllJournal currentJournal)
         {
-            // IJournalService Service = Snew JournalService;
             for (int i = 0; i < ControlNames.Count; i++)
             {
-                //if (i+1 > lib.Control.Count)
-                //{
-                //    lib.Control.Add(new BllControl
-                //    {
-                //        ImageLib = new BllImageLib(),
-                //        EquipmentLib = new BllEquipmentLib(),
-                //        ResultLib = new BllResultLib(),
-                //        ControlMethodDocumentationLib = new BllControlMethodDocumentationLib(),
-                //        RequirementDocumentationLib = new BllRequirementDocumentationLib(),
-                //        EmployeeLib = new BllEmployeeLib(),
-                //        ControlName = ControlNames[i]
-                //    });
-                //    Service.Update(currentJournal);
-                //}
                 foreach (var control in lib.Entities)
                 {
                     if (ControlNames[i].Id == control.ControlName.Id)

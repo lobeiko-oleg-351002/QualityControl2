@@ -72,6 +72,7 @@ namespace QualityControl_Server
             panel = panel1;
             SetCurrentControlAndJournal(control, journal, false);
             controlName = control.ControlName.Name;
+            isEditing = true;
             HideControlsForVIK();
             DisableFormControls();
         }

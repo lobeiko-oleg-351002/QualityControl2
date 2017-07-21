@@ -123,9 +123,36 @@ namespace QualityControl_Server
             BllComponent Component = ComponentForm.GetChosenComponent();
             if (Component != null)
             {
-                Journal.Component = Component;
-                textBox2.Text = Component.Name;
+                SetComponent(Component);
+                if (Component.IndustrialObject != null)
+                {
+                    SetIndustrialObject(Component.IndustrialObject);
+                }
             }
+        }
+
+        private void SetComponent(BllComponent entity)
+        {
+            Journal.Component = entity;
+            textBox2.Text = entity.Name;
+        }
+
+        private void SetIndustrialObject(BllIndustrialObject entity)
+        {
+            Journal.IndustrialObject = entity;
+            textBox1.Text = entity.Name;
+        }
+
+        private void SetMaterial(BllMaterial entity)
+        {
+            Journal.Material = entity;
+            textBox4.Text = entity.Name;
+        }
+
+        private void SetScheduleOrganization(BllScheduleOrganization entity)
+        {
+            Journal.ScheduleOrganization = entity;
+            textBox5.Text = entity.Name;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -135,8 +162,7 @@ namespace QualityControl_Server
             BllMaterial Material = MaterialForm.GetChosenMaterial();
             if (Material != null)
             {
-                Journal.Material = Material;
-                textBox4.Text = Material.Name;
+                SetMaterial(Material);
             }
         }
 
@@ -147,8 +173,7 @@ namespace QualityControl_Server
             BllScheduleOrganization ScheduleOrganization = ScheduleOrganizationForm.GetChosenScheduleOrganization();
             if (ScheduleOrganization != null)
             {
-                Journal.ScheduleOrganization = ScheduleOrganization;
-                textBox5.Text = ScheduleOrganization.Name;
+                SetScheduleOrganization(ScheduleOrganization);
             }
         }
 
@@ -199,6 +224,7 @@ namespace QualityControl_Server
         }
 
         public bool isClosed { get; protected set; }
+
         protected virtual void button5_Click(object sender, EventArgs e)
         {
             isClosed = true;
@@ -337,8 +363,7 @@ namespace QualityControl_Server
             BllIndustrialObject industrialObject = IndustrialObjectForm.GetChosenIndustrialObject();
             if (industrialObject != null)
             {
-                Journal.IndustrialObject = industrialObject;
-                textBox1.Text = industrialObject.Name;
+                SetIndustrialObject(industrialObject);
             }
         }
 
