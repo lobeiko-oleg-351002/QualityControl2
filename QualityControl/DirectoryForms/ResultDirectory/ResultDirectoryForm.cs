@@ -69,12 +69,20 @@ namespace QualityControl_Server.Forms.ResultDirectory
                 numberHistory.Add("Приёмочный");
             }
         }
-
-        public ResultDirectoryForm(BllResultLib lib)
+        private bool isEditing;
+        public ResultDirectoryForm(BllResultLib lib, bool isEditing)
         {
             InitializeComponent();
             InitHistoryLists();
             resultLib = lib;
+            this.isEditing = isEditing;
+            if (!isEditing)
+            {
+                dataGridView1.ReadOnly = true;
+                button1.Visible = false;
+                button2.Visible = false;
+                button5.Visible = false;
+            }
             foreach (var result in lib.Entities)
             {
                 AddResultRowToDataGrid(result);
@@ -143,24 +151,27 @@ namespace QualityControl_Server.Forms.ResultDirectory
 
         protected override void button4_Click(object sender, EventArgs e)
         {
-            var results = resultLib.Entities;
-            var rows = dataGridView1.Rows;
-            for (int i = 0; i < results.Count; i++)
+            if (isEditing)
             {
-                results[i].Number = (string)rows[i].Cells[0].Value;
-                RefreshHistoryList(numberHistory, results[i].Number.ToString());
-                results[i].Welder = (string)rows[i].Cells[1].Value;
-                RefreshHistoryList(welderHistory, results[i].Welder);
-                results[i].WeldingType = (string)rows[i].Cells[2].Value;
-                RefreshHistoryList(weldingTypeHistory, results[i].WeldingType);
-                results[i].DefectDescription = (string)rows[i].Cells[3].Value;
-                RefreshHistoryList(defectHistory, results[i].DefectDescription);
-                results[i].Norm = (string)rows[i].Cells[4].Value;
-                RefreshHistoryList(normHistory, results[i].Norm);
-                results[i].Quality = (string)rows[i].Cells[5].Value;
-                RefreshHistoryList(qualityHistory, results[i].Quality);
+                var results = resultLib.Entities;
+                var rows = dataGridView1.Rows;
+                for (int i = 0; i < results.Count; i++)
+                {
+                    results[i].Number = (string)rows[i].Cells[0].Value;
+                    RefreshHistoryList(numberHistory, results[i].Number);
+                    results[i].Welder = (string)rows[i].Cells[1].Value;
+                    RefreshHistoryList(welderHistory, results[i].Welder);
+                    results[i].WeldingType = (string)rows[i].Cells[2].Value;
+                    RefreshHistoryList(weldingTypeHistory, results[i].WeldingType);
+                    results[i].DefectDescription = (string)rows[i].Cells[3].Value;
+                    RefreshHistoryList(defectHistory, results[i].DefectDescription);
+                    results[i].Norm = (string)rows[i].Cells[4].Value;
+                    RefreshHistoryList(normHistory, results[i].Norm);
+                    results[i].Quality = (string)rows[i].Cells[5].Value;
+                    RefreshHistoryList(qualityHistory, results[i].Quality);
+                }
+                SaveHistoryLists();
             }
-            SaveHistoryLists();
             base.button4_Click(sender, e);
         }
 

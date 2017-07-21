@@ -221,7 +221,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.textBox1);
@@ -470,7 +469,6 @@
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(101, 10);
@@ -481,7 +479,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
@@ -522,7 +519,6 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox4.Controls.Add(this.button7);
             this.groupBox4.Controls.Add(this.button8);
             this.groupBox4.Controls.Add(this.button10);
@@ -544,6 +540,7 @@
             this.button7.TabStop = false;
             this.button7.Text = "Удалить";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button8
             // 
@@ -554,6 +551,7 @@
             this.button8.TabStop = false;
             this.button8.Text = ">";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button10
             // 
@@ -564,6 +562,7 @@
             this.button10.TabStop = false;
             this.button10.Text = "<";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // pictureBox1
             // 
@@ -583,6 +582,7 @@
             this.button11.TabIndex = 42;
             this.button11.Text = "Добавить";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // ControlMethodTabForm
             // 

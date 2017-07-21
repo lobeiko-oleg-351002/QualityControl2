@@ -44,8 +44,8 @@ namespace QualityControl_Server
                 button15.Visible = false;
                 label15.Visible = false;
                 textBox2.Visible = false;
-                groupBox4.Location = new Point(16, 67);
-                groupBox3.Location = new Point(16, 170);
+                groupBox4.Location = new Point(13, 67);
+                groupBox3.Location = new Point(13, 170);
             }
         }
         string controlName;
@@ -61,7 +61,7 @@ namespace QualityControl_Server
             DisableFormControls();
             
         }
-
+        bool isEditing = true; 
         IUnitOfWork uow;
         AddJournalForm addJournalForm;
         public ControlMethodTabForm(BllControl control, BllJournal journal, IUnitOfWork uow, AddJournalForm parent)
@@ -70,15 +70,16 @@ namespace QualityControl_Server
             addJournalForm = parent;
             this.uow = uow;
             panel = panel1;
-            SetCurrentControlAndJournal(control, journal);
+            SetCurrentControlAndJournal(control, journal, false);
             controlName = control.ControlName.Name;
             HideControlsForVIK();
             DisableFormControls();
         }
 
 
-        public void SetCurrentControlAndJournal(BllControl control, BllJournal journal)
+        public void SetCurrentControlAndJournal(BllControl control, BllJournal journal, bool isEditing)
         {
+            this.isEditing = isEditing;
             SetCurrentControl(control);
             currentJournal = journal;
         }
@@ -544,7 +545,7 @@ namespace QualityControl_Server
         {
             if (currentControl != null)
             {
-                ResultDirectoryForm resultDirectoryForm = new ResultDirectoryForm(currentControl.ResultLib);
+                ResultDirectoryForm resultDirectoryForm = new ResultDirectoryForm(currentControl.ResultLib, isEditing);
                 if (controlName == "ВИК")
                 {
                     resultDirectoryForm.RenameColumnsForVIK();

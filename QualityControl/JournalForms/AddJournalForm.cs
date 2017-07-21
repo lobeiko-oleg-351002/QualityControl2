@@ -85,7 +85,7 @@ namespace QualityControl_Server
             for (int i = 0; i < ControlNames.Count; i++)
             {
                 var control = Journal.ControlMethodsLib.Entities[i];
-                ControlMethodTabForms[i].SetCurrentControlAndJournal(control, Journal);
+                ControlMethodTabForms[i].SetCurrentControlAndJournal(control, Journal, true);
                 ControlMethodTabForms[i].AddEmployee(user.Employee);
             }
 
@@ -150,7 +150,7 @@ namespace QualityControl_Server
                 for (int i = 0; i < Journal.ControlMethodsLib.Entities.Count; i++)
                 {
                     var control = Journal.ControlMethodsLib.Entities[i];
-                    ControlMethodTabForms[i].SetCurrentControlAndJournal(control, Journal);
+                    ControlMethodTabForms[i].SetCurrentControlAndJournal(control, Journal, true);
                 }
                 isClosed = false;
             }

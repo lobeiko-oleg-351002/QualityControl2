@@ -72,6 +72,7 @@
             this.button7.TabIndex = 81;
             this.button7.Text = "Копировать данные в остальные вкладки";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Visible = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
@@ -101,7 +102,7 @@
             // 
             this.button5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button5.Location = new System.Drawing.Point(308, 602);
+            this.button5.Location = new System.Drawing.Point(321, 625);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(103, 30);
             this.button5.TabIndex = 78;
@@ -113,7 +114,7 @@
             // 
             this.button4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button4.Location = new System.Drawing.Point(106, 602);
+            this.button4.Location = new System.Drawing.Point(119, 625);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(103, 30);
             this.button4.TabIndex = 77;

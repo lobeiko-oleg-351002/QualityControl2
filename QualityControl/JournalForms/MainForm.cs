@@ -242,7 +242,7 @@ namespace QualityControl
                 {
                     if (ControlNames[i].Id == control.ControlName.Id)
                     {
-                        ControlMethodTabForms[i].SetCurrentControlAndJournal(control, currentJournal);
+                        ControlMethodTabForms[i].SetCurrentControlAndJournal(control, currentJournal, false);
                         ControlMethodTabForms[i].FillComponents();
                         ControlMethodTabForms[i].DisableFormControls();
                         break;

@@ -353,25 +353,28 @@ namespace QualityControl_Server
             //workbook = InitResultExcelTable(workbook, ExcelApp, "РГК");
             workbook = InitResultExcelTable(workbook, ExcelApp, "УЗК");
             workbook = InitResultExcelTable(workbook, ExcelApp, "ВИК");
-
-
-
+            List<int> objectNumbers = new List<int>();
+            objectNumbers.Add(0);
+            objectNumbers.Add(0);
             foreach (var journal in journals)
             {
-                journalNum++;
-                int sheetNum = 0;    
+                int sheetNum = 0;
+                //journalNum++;
                 foreach (var control in journal.ControlMethodsLib.Entities)
                 {
                     sheetNum++;
-                    foreach(Worksheet currentSheet in workbook.Sheets)
+                    objectNumbers[sheetNum - 1]++;
+                    foreach (Worksheet currentSheet in workbook.Sheets)
                     {
                         if (currentSheet.Name == control.ControlName.Name)
                         {
                             Microsoft.Office.Interop.Excel.Range last = currentSheet.Cells.SpecialCells(Microsoft.Office.Interop.Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
                             rowNumber = last.Row + 1;
-                            if (control.ResultLib.Entities.Count != 0)
+
+                            if (control.ResultLib.Entities.Count == 0)
                             {
-                                currentSheet.Cells[rowNumber , 1] = control.ProtocolNumber.ToString();
+                                //currentSheet.Cells[rowNumber , 1] = control.ProtocolNumber.ToString();
+                                objectNumbers[sheetNum - 1]--;
                             }
                             foreach (var result in control.ResultLib.Entities)
                             {
@@ -380,7 +383,7 @@ namespace QualityControl_Server
                                 {
                                     chief = control.EmployeeLib.SelectedEntities[0].Entity;
                                 }
-                                AddRowToExcelTable(currentSheet, result, chief, journal,  rowNumber, journalNum, control.IsControlled.Value);
+                                AddRowToExcelTable(currentSheet, result, chief, journal, objectNumbers[sheetNum - 1], rowNumber, control.IsControlled.Value);
                                 rowNumber++;
                             }
                         }
