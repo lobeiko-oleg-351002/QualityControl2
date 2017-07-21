@@ -23,6 +23,8 @@ namespace BLL.Mapping
             industrialObjectService = new IndustrialObjectService(uow);
             customerService = new CustomerService(uow);
             controlMethodsLibService = new ControlMethodsLibService(uow);
+            contractService = new ContractService(uow);
+            scheduleOrganizationService = new ScheduleOrganizationService(uow);
         }
 
         public TemplateMapper() { }
@@ -36,12 +38,13 @@ namespace BLL.Mapping
                 Name = entity.Name,
                 WeldJoint_id = entity.WeldJoint != null ? entity.WeldJoint.Id : (int?)null,
                 Material_id = entity.Material != null ? entity.Material.Id : (int?)null,
-                Contract = entity.Contract,
+                Contract_id = entity.Contract != null ? entity.Contract.Id : (int?)null,
                 ControlMethodsLib_id = entity.ControlMethodsLib.Id,
                 Customer_id = entity.Customer != null ? entity.Customer.Id : (int?)null,
                 IndustrialObject_id = entity.IndustrialObject != null ? entity.IndustrialObject.Id : (int?)null,
-                Size = entity.Size,
-                WeldingType = entity.WeldingType
+                Weight = entity.Weight,
+                WeldingType = entity.WeldingType,
+                ScheduleOrganization_id = entity.ScheduleOrganization != null ? entity.ScheduleOrganization.Id : (int?)null,
             };
 
             return dalEntity;
@@ -52,6 +55,8 @@ namespace BLL.Mapping
         IIndustrialObjectService industrialObjectService;
         ICustomerService customerService;
         IControlMethodsLibService controlMethodsLibService;
+        IContractService contractService;
+        IScheduleOrganizationService scheduleOrganizationService;
 
         public BllTemplate MapToBll(DalTemplate entity)
         {
@@ -63,11 +68,12 @@ namespace BLL.Mapping
                 WeldJoint = entity.WeldJoint_id != null ? weldJointService.Get((int)entity.WeldJoint_id) : null,
                 Material = entity.Material_id != null ? materialService.Get((int)entity.Material_id) : null,
                 Customer = entity.Customer_id != null ? customerService.Get((int)entity.Customer_id) : null,
-                Contract = entity.Contract,
+                Contract = entity.Contract_id != null ? contractService.Get((int)entity.Contract_id) : null,
                 ControlMethodsLib = entity.ControlMethodsLib_id != null ? controlMethodsLibService.Get((int)entity.ControlMethodsLib_id) : null,
                 IndustrialObject = entity.IndustrialObject_id != null ? industrialObjectService.Get((int)entity.IndustrialObject_id) : null,
-                Size = entity.Size,
-                WeldingType = entity.WeldingType
+                Weight = entity.Weight,
+                WeldingType = entity.WeldingType,
+                ScheduleOrganization = entity.ScheduleOrganization_id != null ? scheduleOrganizationService.Get((int)entity.ScheduleOrganization_id) : null,
             };
 
             return bllEntity;

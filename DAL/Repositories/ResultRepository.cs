@@ -19,7 +19,7 @@ namespace DAL.Repositories
             this.context = context;
         }
 
-        public DalResult GetResultByNumber(int number)
+        public DalResult GetResultByNumber(string number)
         {
             var ormEntity = context.Results.FirstOrDefault(entity => entity.number == number);
             return mapper.MapToDal(ormEntity);

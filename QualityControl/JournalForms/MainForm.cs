@@ -13,7 +13,6 @@ using QualityControl_Server.Forms.RequirementDocumentationDirectory;
 using QualityControl_Server.Forms.TemplateDirectory;
 using QualityControl_Server.Forms.UserDirectory;
 using QualityControl_Server.Forms.WeldJointDirectory;
-using QualityControl_Server;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,6 +32,8 @@ using BLL.Services;
 using DAL.Repositories.Interface;
 using DAL.Repositories;
 using System.Configuration;
+using QualityControl_Server.DirectoryForms.RawDirectory;
+using QualityControl_Server.DirectoryForms.ScheduleOrganizationDirectory;
 
 namespace QualityControl
 {
@@ -178,7 +179,7 @@ namespace QualityControl
                         controlNameService.Create(new BllControlName { Name = "ВИК" });
                         controlNames = controlNameService.GetAll();
                     }
-                    if (controlNames.Count() < 4)
+                    if (controlNames.Count() < 2)
                     {
                         if (isFirstStart)
                         {
@@ -188,8 +189,6 @@ namespace QualityControl
                         if (isActivatedLicense)
                         {
                             controlNameService.Create(new BllControlName { Name = "УЗК" });
-                            controlNameService.Create(new BllControlName { Name = "ПВК" });
-                            controlNameService.Create(new BllControlName { Name = "РГК" });
                             controlNames = controlNameService.GetAll();
                         }
                     }
@@ -222,28 +221,13 @@ namespace QualityControl
 
         private void SetCurrentControlsInControlMethodTabs(BllControlMethodsLib lib, BllJournal currentJournal)
         {
-            // IJournalService Service = Snew JournalService;
             for (int i = 0; i < ControlNames.Count; i++)
             {
-                //if (i+1 > lib.Control.Count)
-                //{
-                //    lib.Control.Add(new BllControl
-                //    {
-                //        ImageLib = new BllImageLib(),
-                //        EquipmentLib = new BllEquipmentLib(),
-                //        ResultLib = new BllResultLib(),
-                //        ControlMethodDocumentationLib = new BllControlMethodDocumentationLib(),
-                //        RequirementDocumentationLib = new BllRequirementDocumentationLib(),
-                //        EmployeeLib = new BllEmployeeLib(),
-                //        ControlName = ControlNames[i]
-                //    });
-                //    Service.Update(currentJournal);
-                //}
                 foreach (var control in lib.Entities)
                 {
                     if (ControlNames[i].Id == control.ControlName.Id)
                     {
-                        ControlMethodTabForms[i].SetCurrentControlAndJournal(control, currentJournal);
+                        ControlMethodTabForms[i].SetCurrentControlAndJournal(control, currentJournal, false);
                         ControlMethodTabForms[i].FillComponents();
                         ControlMethodTabForms[i].DisableFormControls();
                         break;
@@ -285,16 +269,15 @@ namespace QualityControl
                 row.Cells[0].Value = dataGridView1.Rows.Count + 1;
             }
             
-            row.Cells[1].Value = journal.RequestDate;
-            row.Cells[2].Value = journal.ControlDate;
-            row.Cells[3].Value = journal.RequestNumber;
-            row.Cells[4].Value = journal.Component != null ? journal.Component.Name : null;
-            row.Cells[5].Value = journal.Amount;
-            row.Cells[6].Value = journal.Size;
-            row.Cells[7].Value = journal.Material != null ? journal.Material.Name : null;
-            row.Cells[8].Value = journal.WeldJoint != null ? journal.WeldJoint.Name : null;
-            const int numCell = 9;
-            const int controlsCount = 4;
+            row.Cells[1].Value = journal.ControlDate;
+            row.Cells[2].Value = journal.RequestNumber;
+            row.Cells[3].Value = journal.Component != null ? journal.Component.Pressmark : null;
+            row.Cells[4].Value = journal.Amount;
+            row.Cells[5].Value = journal.Weight;
+            row.Cells[6].Value = journal.Material != null ? journal.Material.Name : null;
+            row.Cells[7].Value = journal.ScheduleOrganization != null ? journal.ScheduleOrganization.Name : null;
+            const int numCell = 8;
+            const int controlsCount = 2;
             for(int i = numCell; i < numCell + controlsCount; i++)
             {
                 row.Cells[i].Value = "";
@@ -349,7 +332,7 @@ namespace QualityControl
             //dataGridView1.Rows.Clear();
             textBox1.Clear();
             textBox2.Clear();
-            listBox1.Items.Clear();
+            textBox3.Clear();
             richTextBox2.Clear();
             foreach(ControlMethodTab tab in tabControl1.TabPages)
             {
@@ -467,24 +450,21 @@ namespace QualityControl
 
         const string dateFormat = "dd.MM.yyyy";
 
-        private void FillContracts(BllCustomer customer)
+        private void FillContract(BllContract contract)
         {
-            if (customer != null)
+            if (contract != null)
             {
-                foreach (var contract in customer.ContractLib.Entities)
-                {
-                    listBox1.Items.Add(contract.Name + " " + contract.BeginDate.Value.ToString(dateFormat) + " - " + contract.EndDate.Value.ToString(dateFormat));
-                }
+                textBox3.Text = contract.Name;
             }
         }
 
         private void dataGridView1_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
         {
-            if ((dataGridView1.SelectedRows.Count == 0) )
+            if (e.StateChanged != DataGridViewElementStates.Selected) return;
+            if (!isAnyRowSelected() )
             {
                 clearDataContainers();
                 tabControl1.Enabled = false;
-                flag *= -1;
                 return;
             }
 
@@ -500,7 +480,7 @@ namespace QualityControl
                 textBox2.Text = currentJournal.Customer.Organization + " " + currentJournal.Customer.Address + " " + currentJournal.Customer.Phone;
             }
 
-            FillContracts(currentJournal.Customer);
+            FillContract(currentJournal.Contract);
             richTextBox2.Text = currentJournal.Description;
 
             SetCurrentControlsInControlMethodTabs(currentJournal.ControlMethodsLib, currentJournal);
@@ -536,7 +516,7 @@ namespace QualityControl
         {
             textBox1.Text = "";
             textBox2.Text = "";
-            listBox1.Items.Clear();
+            textBox3.Clear();
             richTextBox2.Text = "";
             if (ControlMethodTabForms != null)
             {
@@ -877,7 +857,7 @@ namespace QualityControl
             CenterToScreen();
             tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
             dataGridView1.Columns[1].DefaultCellStyle.Format = "dd.MM.yyyy";
-            dataGridView1.Columns[2].DefaultCellStyle.Format = "dd.MM.yyyy";
+            //dataGridView1.Columns[2].DefaultCellStyle.Format = "dd.MM.yyyy";
             ConnectToServer();
             if (isConnectedToServer)
             {
@@ -990,6 +970,18 @@ namespace QualityControl
                 ServiceInfo form = new ServiceInfo();
                 form.ShowDialog();
             }
+        }
+
+        private void сырьёToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RawDirectoryForm form = new RawDirectoryForm(uow);
+            form.ShowDialog();
+        }
+
+        private void организацииВыпЧертежиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ScheduleOrganizationDirectoryForm form = new ScheduleOrganizationDirectoryForm(uow);
+            form.ShowDialog();
         }
     }
 }

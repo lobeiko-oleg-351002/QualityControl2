@@ -24,7 +24,7 @@ namespace BLL.Services
 
         //ControlMethodsLibMapper bllMapper;
 
-        public new BllControlMethodsLib Create(BllControlMethodsLib entity)
+        public BllControlMethodsLib Create(BllControlMethodsLib entity, bool isTemplate)
         {
             var ormEntity = uow.ControlMethodsLibs.Create(mapper.MapToDal(entity));
             uow.Commit();
@@ -36,7 +36,7 @@ namespace BLL.Services
                 var control = controlService.Create(Control);
                 var dalControl = controlMapper.MapToDal(Control);                
                 dalControl.Lib_id = ormEntity.id;
-                var ormControl = uow.Controls.Create(dalControl);
+                var ormControl = uow.Controls.Create(dalControl, isTemplate);
                 uow.Commit();
                 Control.Id = ormControl.id;
                 Control.ProtocolNumber = ormControl.protocolNumber;

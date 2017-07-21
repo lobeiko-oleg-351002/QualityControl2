@@ -18,5 +18,7 @@ namespace BLL.Entities
         public int? Creator_id { get; set; }
 
         public string Pressmark { get; set; }
+
+        public BllIndustrialObject IndustrialObject { get; set; }
     }
 }

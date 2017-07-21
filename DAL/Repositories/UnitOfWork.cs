@@ -51,6 +51,8 @@ namespace DAL.Repositories
         private EntityLibRepository<EquipmentLib> equipmentLibRepository;
         private EntityLibRepository<RequirementDocumentationLib> requirementDocumentationLibRepository;
         private EntityLibRepository<ControlMethodsLib> controlMethodsLibRepository;
+        private RawRepository rawRepository;
+        private ScheduleOrganizationRepository scheduleOrganizationRepository;
 
         public IRoleRepository Roles 
             => roleRepository ?? (roleRepository = new RoleRepository(context));
@@ -126,6 +128,10 @@ namespace DAL.Repositories
             => requirementDocumentationLibRepository ?? (requirementDocumentationLibRepository = new EntityLibRepository<RequirementDocumentationLib>(context));
         public IRepository<IDalEntityLib, ControlMethodsLib> ControlMethodsLibs
             => controlMethodsLibRepository ?? (controlMethodsLibRepository = new EntityLibRepository<ControlMethodsLib>(context));
+        public IRawRepository Raws
+            => rawRepository ?? (rawRepository = new RawRepository(context));
+        public IScheduleOrganizationRepository ScheduleOrganizations
+            => scheduleOrganizationRepository ?? (scheduleOrganizationRepository = new ScheduleOrganizationRepository(context));
 
         public UnitOfWork(ServiceDB context)
         {

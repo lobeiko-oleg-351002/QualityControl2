@@ -64,9 +64,11 @@
     <Compile Include="Entities\DalImage.cs" />
     <Compile Include="Entities\DalIndustrialObject.cs" />
     <Compile Include="Entities\DalMaterial.cs" />
+    <Compile Include="Entities\DalRaw.cs" />
     <Compile Include="Entities\DalRequirementDocumentation.cs" />
     <Compile Include="Entities\DalResult.cs" />
     <Compile Include="Entities\DalRole.cs" />
+    <Compile Include="Entities\DalScheduleOrganization.cs" />
     <Compile Include="Entities\DalSelectedEntity.cs" />
     <Compile Include="Entities\DalTemplate.cs" />
     <Compile Include="Entities\DalUser.cs" />
@@ -101,17 +103,21 @@
     <Compile Include="Mapping\Interfaces\IJournalMapper.cs" />
     <Compile Include="Mapping\Interfaces\IMapper.cs" />
     <Compile Include="Mapping\Interfaces\IMaterialMapper.cs" />
+    <Compile Include="Mapping\Interfaces\IRawMapper.cs" />
     <Compile Include="Mapping\Interfaces\IRequirementDocumentationMapper.cs" />
     <Compile Include="Mapping\Interfaces\IResultMapper.cs" />
     <Compile Include="Mapping\Interfaces\IRoleMapper.cs" />
+    <Compile Include="Mapping\Interfaces\IScheduleOrganizationMapper.cs" />
     <Compile Include="Mapping\Interfaces\ITemplateMapper.cs" />
     <Compile Include="Mapping\Interfaces\IUserMapper.cs" />
     <Compile Include="Mapping\Interfaces\IWeldJointMapper.cs" />
     <Compile Include="Mapping\JournalMapper.cs" />
     <Compile Include="Mapping\MaterialMapper.cs" />
+    <Compile Include="Mapping\RawMapper.cs" />
     <Compile Include="Mapping\RequirementDocumentationMapper.cs" />
     <Compile Include="Mapping\ResultMapper.cs" />
     <Compile Include="Mapping\RoleMapper.cs" />
+    <Compile Include="Mapping\ScheduleOrganizationMapper.cs" />
     <Compile Include="Mapping\SelectedEntityMapper.cs" />
     <Compile Include="Mapping\TemplateMapper.cs" />
     <Compile Include="Mapping\UserMapper.cs" />
@@ -143,10 +149,12 @@
     <Compile Include="Repositories\Interface\IIndustrialObjectRepository.cs" />
     <Compile Include="Repositories\Interface\IJournalRepository.cs" />
     <Compile Include="Repositories\Interface\IMaterialRepository.cs" />
+    <Compile Include="Repositories\Interface\IRawRepository.cs" />
     <Compile Include="Repositories\Interface\IRepository.cs" />
     <Compile Include="Repositories\Interface\IRequirementDocumentationRepository.cs" />
     <Compile Include="Repositories\Interface\IResultRepository.cs" />
     <Compile Include="Repositories\Interface\IRoleRepository.cs" />
+    <Compile Include="Repositories\Interface\IScheduleOrganizationRepository.cs" />
     <Compile Include="Repositories\Interface\ISelectedEntityRepository.cs" />
     <Compile Include="Repositories\Interface\ITemplateRepository.cs" />
     <Compile Include="Repositories\Interface\IUnitOfWork.cs" />
@@ -154,10 +162,12 @@
     <Compile Include="Repositories\Interface\IWeldJointRepository.cs" />
     <Compile Include="Repositories\JournalRepository.cs" />
     <Compile Include="Repositories\MaterialRepository.cs" />
+    <Compile Include="Repositories\RawRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
     <Compile Include="Repositories\RequirementDocumentationRepository.cs" />
     <Compile Include="Repositories\ResultRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
+    <Compile Include="Repositories\ScheduleOrganizationRepository.cs" />
     <Compile Include="Repositories\SelectedEntityRepository.cs" />
     <Compile Include="Repositories\TemplateRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
@@ -170,7 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ORM\ORM.csproj">
-      <Project>{ce0b047e-210e-4426-b8f9-01e8f29d3822}</Project>
+      <Project>{c99fe4a4-c020-4e30-bcaf-24c140ccf98f}</Project>
       <Name>ORM</Name>
     </ProjectReference>
   </ItemGroup>

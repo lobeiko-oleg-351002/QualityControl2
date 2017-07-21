@@ -12,6 +12,7 @@ namespace ORM
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public IndustrialObject()
         {
+            Component = new HashSet<Component>();
             Journal = new HashSet<Journal>();
             Template = new HashSet<Template>();
         }
@@ -22,9 +23,8 @@ namespace ORM
         [StringLength(50)]
         public string name { get; set; }
 
-        public int? componentLib_id { get; set; }
-
-        public virtual ComponentLib ComponentLib { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Component> Component { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Journal> Journal { get; set; }

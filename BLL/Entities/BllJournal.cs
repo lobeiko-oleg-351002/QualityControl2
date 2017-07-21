@@ -11,8 +11,6 @@ namespace BLL.Entities
     {
         public int Id { get; set; }
 
-        public DateTime? RequestDate { get; set; }
-
         public DateTime? ControlDate { get; set; }
 
         public int? RequestNumber { get; set; }
@@ -21,19 +19,17 @@ namespace BLL.Entities
 
         public int? Amount { get; set; }
 
-        public string Size { get; set; }
+        public string Weight { get; set; }
 
         public BllMaterial Material { get; set; }
 
-        public BllWeldJoint WeldJoint { get; set; }
+        public BllScheduleOrganization ScheduleOrganization { get; set; }
 
         public BllControlMethodsLib ControlMethodsLib { get; set; }
 
         public BllComponent Component { get; set; }
 
         public BllCustomer Customer { get; set; }
-
-        public string Contract { get; set; }
 
         public string Description { get; set; }
 
@@ -42,5 +38,7 @@ namespace BLL.Entities
         public string UserModifierLogin { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
+
+        public BllContract Contract { get; set; }
     }
 }

@@ -20,7 +20,15 @@ namespace DAL.Repositories
         }
 
 
-
+        public Control Create(DalControl entity, bool isTemplate)
+        {
+            var ormEntity = mapper.MapToOrm(entity);
+            if (!isTemplate)
+            {
+                ormEntity.protocolNumber = GetLastProtocolNumberOfCurrentType(entity.ControlName_id.Value) + 1;
+            }
+            return context.Set<Control>().Add(ormEntity);
+        }
 
         public IEnumerable<DalControl> GetAllControlled()
         {
@@ -47,10 +55,10 @@ namespace DAL.Repositories
             return mapper.MapToDal(ormEntity);
         }
 
-        public int GetControlCountWithCurrentType(int controlNameId)
+        private int GetLastProtocolNumberOfCurrentType(int controlNameId)
         {
-            var controls = context.Set<Control>().Where(entity => entity.controlName_id == controlNameId);
-            return controls.Count();
+            var controls = context.Set<Control>().Where(entity => entity.controlName_id == controlNameId && entity.protocolNumber != null);
+            return controls.Count() > 0 ? controls.AsEnumerable().Last().protocolNumber.Value : 0;
         }
 
         public IEnumerable<DalControl> GetEntitiesByLibId(int id)

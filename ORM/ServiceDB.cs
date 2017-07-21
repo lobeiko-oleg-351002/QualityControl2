@@ -34,11 +34,13 @@ namespace ORM
         public virtual DbSet<IndustrialObject> IndustrialObjects { get; set; }
         public virtual DbSet<Journal> Journals { get; set; }
         public virtual DbSet<Material> Materials { get; set; }
+        public virtual DbSet<Raw> Raws { get; set; }
         public virtual DbSet<RequirementDocumentation> RequirementDocumentations { get; set; }
         public virtual DbSet<RequirementDocumentationLib> RequirementDocumentationLibs { get; set; }
         public virtual DbSet<Result> Results { get; set; }
         public virtual DbSet<ResultLib> ResultLibs { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<ScheduleOrganization> ScheduleOrganizations { get; set; }
         public virtual DbSet<SelectedCertificate> SelectedCertificates { get; set; }
         public virtual DbSet<SelectedComponent> SelectedComponents { get; set; }
         public virtual DbSet<SelectedControlMethodDocumentation> SelectedControlMethodDocumentations { get; set; }
@@ -54,14 +56,14 @@ namespace ORM
         {
             modelBuilder.Entity<Certificate>()
                 .HasMany(e => e.SelectedCertificate)
-                .WithOptional(e => e.Certificate)
-                .HasForeignKey(e => e.entity_id);
+                .WithRequired(e => e.Certificate)
+                .HasForeignKey(e => e.entity_id)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<CertificateLib>()
                 .HasMany(e => e.SelectedCertificate)
-                .WithOptional(e => e.CertificateLib)
-                .HasForeignKey(e => e.lib_id)
-                .WillCascadeOnDelete();
+                .WithRequired(e => e.CertificateLib)
+                .HasForeignKey(e => e.lib_id);
 
             modelBuilder.Entity<Component>()
                 .HasMany(e => e.Journal)
@@ -70,20 +72,24 @@ namespace ORM
 
             modelBuilder.Entity<Component>()
                 .HasMany(e => e.SelectedComponent)
-                .WithOptional(e => e.Component)
-                .HasForeignKey(e => e.entity_id)
-                .WillCascadeOnDelete();
-
-            modelBuilder.Entity<ComponentLib>()
-                .HasMany(e => e.IndustrialObject)
-                .WithOptional(e => e.ComponentLib)
-                .HasForeignKey(e => e.componentLib_id);
+                .WithRequired(e => e.Component)
+                .HasForeignKey(e => e.entity_id);
 
             modelBuilder.Entity<ComponentLib>()
                 .HasMany(e => e.SelectedComponent)
-                .WithOptional(e => e.ComponentLib)
-                .HasForeignKey(e => e.lib_id)
+                .WithRequired(e => e.ComponentLib)
+                .HasForeignKey(e => e.lib_id);
+
+            modelBuilder.Entity<Contract>()
+                .HasMany(e => e.Journal)
+                .WithOptional(e => e.Contract)
+                .HasForeignKey(e => e.contract_id)
                 .WillCascadeOnDelete();
+
+            modelBuilder.Entity<Contract>()
+                .HasMany(e => e.Template)
+                .WithOptional(e => e.Contract)
+                .HasForeignKey(e => e.contract_id);
 
             modelBuilder.Entity<ContractLib>()
                 .HasMany(e => e.Contract)
@@ -99,9 +105,8 @@ namespace ORM
 
             modelBuilder.Entity<ControlMethodDocumentation>()
                 .HasMany(e => e.SelectedControlMethodDocumentation)
-                .WithOptional(e => e.ControlMethodDocumentation)
-                .HasForeignKey(e => e.entity_id)
-                .WillCascadeOnDelete();
+                .WithRequired(e => e.ControlMethodDocumentation)
+                .HasForeignKey(e => e.entity_id);
 
             modelBuilder.Entity<ControlMethodDocumentationLib>()
                 .HasMany(e => e.Control)
@@ -111,9 +116,8 @@ namespace ORM
 
             modelBuilder.Entity<ControlMethodDocumentationLib>()
                 .HasMany(e => e.SelectedControlMethodDocumentation)
-                .WithOptional(e => e.ControlMethodDocumentationLib)
-                .HasForeignKey(e => e.lib_id)
-                .WillCascadeOnDelete();
+                .WithRequired(e => e.ControlMethodDocumentationLib)
+                .HasForeignKey(e => e.lib_id);
 
             modelBuilder.Entity<ControlMethodsLib>()
                 .HasMany(e => e.Control)
@@ -130,7 +134,8 @@ namespace ORM
             modelBuilder.Entity<ControlMethodsLib>()
                 .HasMany(e => e.Template)
                 .WithOptional(e => e.ControlMethodsLib)
-                .HasForeignKey(e => e.controlMethodsLib_id);
+                .HasForeignKey(e => e.controlMethodsLib_id)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<ControlName>()
                 .HasMany(e => e.Certificate)
@@ -152,15 +157,13 @@ namespace ORM
 
             modelBuilder.Entity<ControlName>()
                 .HasMany(e => e.SelectedControlName)
-                .WithOptional(e => e.ControlName)
-                .HasForeignKey(e => e.entity_id)
-                .WillCascadeOnDelete();
+                .WithRequired(e => e.ControlName)
+                .HasForeignKey(e => e.entity_id);
 
             modelBuilder.Entity<ControlNameLib>()
                 .HasMany(e => e.SelectedControlName)
-                .WithOptional(e => e.ControlNameLib)
-                .HasForeignKey(e => e.lib_id)
-                .WillCascadeOnDelete();
+                .WithRequired(e => e.ControlNameLib)
+                .HasForeignKey(e => e.lib_id);
 
             modelBuilder.Entity<Customer>()
                 .HasMany(e => e.Journal)
@@ -170,7 +173,8 @@ namespace ORM
             modelBuilder.Entity<Customer>()
                 .HasMany(e => e.Template)
                 .WithOptional(e => e.Customer)
-                .HasForeignKey(e => e.customer_id);
+                .HasForeignKey(e => e.customer_id)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<Employee>()
                 .HasMany(e => e.Certificate)
@@ -184,9 +188,8 @@ namespace ORM
 
             modelBuilder.Entity<Employee>()
                 .HasMany(e => e.SelectedEmployee)
-                .WithOptional(e => e.Employee)
-                .HasForeignKey(e => e.entity_id)
-                .WillCascadeOnDelete();
+                .WithRequired(e => e.Employee)
+                .HasForeignKey(e => e.entity_id);
 
             modelBuilder.Entity<EmployeeLib>()
                 .HasMany(e => e.Control)
@@ -196,15 +199,13 @@ namespace ORM
 
             modelBuilder.Entity<EmployeeLib>()
                 .HasMany(e => e.SelectedEmployee)
-                .WithOptional(e => e.EmployeeLib)
-                .HasForeignKey(e => e.lib_id)
-                .WillCascadeOnDelete();
+                .WithRequired(e => e.EmployeeLib)
+                .HasForeignKey(e => e.lib_id);
 
             modelBuilder.Entity<Equipment>()
                 .HasMany(e => e.SelectedEquipment)
-                .WithOptional(e => e.Equipment)
-                .HasForeignKey(e => e.entity_id)
-                .WillCascadeOnDelete();
+                .WithRequired(e => e.Equipment)
+                .HasForeignKey(e => e.entity_id);
 
             modelBuilder.Entity<EquipmentLib>()
                 .HasMany(e => e.Control)
@@ -214,9 +215,8 @@ namespace ORM
 
             modelBuilder.Entity<EquipmentLib>()
                 .HasMany(e => e.SelectedEquipment)
-                .WithOptional(e => e.EquipmentLib)
-                .HasForeignKey(e => e.lib_id)
-                .WillCascadeOnDelete();
+                .WithRequired(e => e.EquipmentLib)
+                .HasForeignKey(e => e.lib_id);
 
             modelBuilder.Entity<ImageLib>()
                 .HasMany(e => e.Control)
@@ -231,6 +231,11 @@ namespace ORM
                 .WillCascadeOnDelete();
 
             modelBuilder.Entity<IndustrialObject>()
+                .HasMany(e => e.Component)
+                .WithOptional(e => e.IndustrialObject)
+                .HasForeignKey(e => e.industrialObject_id);
+
+            modelBuilder.Entity<IndustrialObject>()
                 .HasMany(e => e.Journal)
                 .WithOptional(e => e.IndustrialObject)
                 .HasForeignKey(e => e.industrialObject_id);
@@ -238,23 +243,18 @@ namespace ORM
             modelBuilder.Entity<IndustrialObject>()
                 .HasMany(e => e.Template)
                 .WithOptional(e => e.IndustrialObject)
-                .HasForeignKey(e => e.industrialObject_id);
+                .HasForeignKey(e => e.industrialObject_id)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<Material>()
                 .HasMany(e => e.Journal)
                 .WithOptional(e => e.Material)
                 .HasForeignKey(e => e.material_id);
 
-            modelBuilder.Entity<Material>()
-                .HasMany(e => e.Template)
-                .WithOptional(e => e.Material)
-                .HasForeignKey(e => e.material_id);
-
             modelBuilder.Entity<RequirementDocumentation>()
                 .HasMany(e => e.SelectedRequirementDocumentation)
-                .WithOptional(e => e.RequirementDocumentation)
-                .HasForeignKey(e => e.entity_id)
-                .WillCascadeOnDelete();
+                .WithRequired(e => e.RequirementDocumentation)
+                .HasForeignKey(e => e.entity_id);
 
             modelBuilder.Entity<RequirementDocumentationLib>()
                 .HasMany(e => e.Control)
@@ -264,9 +264,8 @@ namespace ORM
 
             modelBuilder.Entity<RequirementDocumentationLib>()
                 .HasMany(e => e.SelectedRequirementDocumentation)
-                .WithOptional(e => e.RequirementDocumentationLib)
-                .HasForeignKey(e => e.lib_id)
-                .WillCascadeOnDelete();
+                .WithRequired(e => e.RequirementDocumentationLib)
+                .HasForeignKey(e => e.lib_id);
 
             modelBuilder.Entity<ResultLib>()
                 .HasMany(e => e.Control)
@@ -285,25 +284,21 @@ namespace ORM
                 .WithRequired(e => e.Role)
                 .HasForeignKey(e => e.role_id);
 
-            modelBuilder.Entity<Template>()
-                .HasMany(e => e.Component)
-                .WithOptional(e => e.Template)
-                .HasForeignKey(e => e.template_id);
+            modelBuilder.Entity<ScheduleOrganization>()
+                .HasMany(e => e.Journal)
+                .WithOptional(e => e.ScheduleOrganization)
+                .HasForeignKey(e => e.scheduleOrganization_id)
+                .WillCascadeOnDelete();
+
+            modelBuilder.Entity<ScheduleOrganization>()
+                .HasMany(e => e.Template)
+                .WithOptional(e => e.ScheduleOrganization)
+                .HasForeignKey(e => e.scheduleOrganization_id);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Journal)
                 .WithOptional(e => e.User)
                 .HasForeignKey(e => e.userOwner_id);
-
-            modelBuilder.Entity<WeldJoint>()
-                .HasMany(e => e.Journal)
-                .WithOptional(e => e.WeldJoint)
-                .HasForeignKey(e => e.weldJoint_id);
-
-            modelBuilder.Entity<WeldJoint>()
-                .HasMany(e => e.Template)
-                .WithOptional(e => e.WeldJoint)
-                .HasForeignKey(e => e.weldJoint_id);
         }
     }
 }

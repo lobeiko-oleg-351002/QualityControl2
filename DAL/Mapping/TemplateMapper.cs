@@ -19,13 +19,14 @@ namespace DAL.Mapping
                 Description = entity.description,
                 Material_id = entity.material_id,
                 Name = entity.name,
-                WeldJoint_id = entity.weldJoint_id,
-                Contract = entity.contract,
+                //WeldJoint_id = entity.weldJoint_id,
                 ControlMethodsLib_id = entity.controlMethodsLib_id,
                 Customer_id = entity.customer_id,
                 IndustrialObject_id = entity.industrialObject_id,
-                Size = entity.size,
-                WeldingType = entity.weldingType
+                Weight = entity.weight,
+                //WeldingType = entity.weldingType,
+                Contract_id = entity.contract_id,
+                ScheduleOrganization_id = entity.scheduleOrganization_id
             };
         }
 
@@ -37,13 +38,14 @@ namespace DAL.Mapping
                 description = entity.Description,
                 material_id = entity.Material_id,
                 name = entity.Name,
-                weldJoint_id = entity.WeldJoint_id,
+               // weldJoint_id = entity.WeldJoint_id,
                 customer_id = entity.Customer_id,
-                contract = entity.Contract,
+                contract_id = entity.Contract_id,
                 controlMethodsLib_id = entity.ControlMethodsLib_id,
                 industrialObject_id = entity.IndustrialObject_id,
-                size = entity.Size,
-                weldingType = entity.WeldingType,
+                weight = entity.Weight,
+                scheduleOrganization_id = entity.ScheduleOrganization_id
+                //weldingType = entity.WeldingType,
             };
         }
     }

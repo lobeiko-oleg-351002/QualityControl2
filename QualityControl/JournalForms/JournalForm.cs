@@ -15,15 +15,18 @@ using BLL.Entities;
 using BLL.Services.Interface;
 using DAL.Repositories.Interface;
 using BLL.Services;
+using QualityControl_Server.DirectoryForms.ScheduleOrganizationDirectory;
+using QualityControl_Server.Forms.IndustrialObjectDirectory;
 
 namespace QualityControl_Server
 {
     public partial class JournalForm : Form
     {
         protected List<ControlMethodTabForm> ControlMethodTabForms;
-        protected List<BllIndustrialObject> IndustrialObjects;
         protected List<BllCustomer> Customers;
+        protected List<BllContract> Contracts;
         protected BllUser User;
+        //protected BllIndustrialObject IndustrialObject;
 
         public BllJournal Journal { get; protected set; }
 
@@ -86,20 +89,9 @@ namespace QualityControl_Server
                 tabControl1.TabPages.Add(new ControlMethodTab(tabForm, controlName));
             }
 
-            IndustrialObjects = new List<BllIndustrialObject>();
-            IIndustrialObjectService industrialObjectService = new IndustrialObjectService(uow);
-            var industrialObjects = industrialObjectService.GetAll();
-            foreach (var element in industrialObjects)
-            {
-                IndustrialObjects.Add(element);
-                comboBox1.Items.Add(element.Name);
-            }
-            if (IndustrialObjects.Count > 0)
-            {
-                comboBox1.SelectedItem = Journal.IndustrialObject != null ? Journal.IndustrialObject.Name : "";
-            }
 
             Customers = new List<BllCustomer>();
+            Contracts = new List<BllContract>();
             ICustomerService CustomerService = new CustomerService(uow);
             var customers = CustomerService.GetAll();
             foreach (var element in customers)
@@ -113,14 +105,13 @@ namespace QualityControl_Server
                 comboBox2.SelectedItem = Journal.Customer != null ? Journal.Customer.Organization + " " + Journal.Customer.Address + " " + Journal.Customer.Phone : "";
             }
 
-            dateTimePicker1.Value = Journal.RequestDate.Value;
             dateTimePicker2.Value = Journal.ControlDate.Value;
             numericUpDown2.Value = Journal.RequestNumber.Value;
             numericUpDown1.Value = Journal.Amount.Value < 100 ? Journal.Amount.Value : 0;
-            textBox3.Text = Journal.Size;
+            textBox3.Text = Journal.Weight;
             textBox2.Text = Journal.Component != null ? Journal.Component.Name : "";
             textBox4.Text = Journal.Material != null ? Journal.Material.Name : "";
-            textBox5.Text = Journal.WeldJoint != null ? Journal.WeldJoint.Name : "";
+            textBox5.Text = Journal.ScheduleOrganization != null ? Journal.ScheduleOrganization.Name : "";
             FillContracts(Journal.Customer);
             richTextBox2.Text = Journal.Description;
         }
@@ -132,9 +123,36 @@ namespace QualityControl_Server
             BllComponent Component = ComponentForm.GetChosenComponent();
             if (Component != null)
             {
-                Journal.Component = Component;
-                textBox2.Text = Component.Name;
+                SetComponent(Component);
+                if (Component.IndustrialObject != null)
+                {
+                    SetIndustrialObject(Component.IndustrialObject);
+                }
             }
+        }
+
+        private void SetComponent(BllComponent entity)
+        {
+            Journal.Component = entity;
+            textBox2.Text = entity.Name;
+        }
+
+        private void SetIndustrialObject(BllIndustrialObject entity)
+        {
+            Journal.IndustrialObject = entity;
+            textBox1.Text = entity.Name;
+        }
+
+        private void SetMaterial(BllMaterial entity)
+        {
+            Journal.Material = entity;
+            textBox4.Text = entity.Name;
+        }
+
+        private void SetScheduleOrganization(BllScheduleOrganization entity)
+        {
+            Journal.ScheduleOrganization = entity;
+            textBox5.Text = entity.Name;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -144,20 +162,18 @@ namespace QualityControl_Server
             BllMaterial Material = MaterialForm.GetChosenMaterial();
             if (Material != null)
             {
-                Journal.Material = Material;
-                textBox4.Text = Material.Name;
+                SetMaterial(Material);
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ChooseWeldJointForm WeldJointForm = new ChooseWeldJointForm(uow);
-            WeldJointForm.ShowDialog(this);
-            BllWeldJoint WeldJoint = WeldJointForm.GetChosenWeldJoint();
-            if (WeldJoint != null)
+            ChooseScheduleOrganizationForm ScheduleOrganizationForm = new ChooseScheduleOrganizationForm(uow);
+            ScheduleOrganizationForm.ShowDialog(this);
+            BllScheduleOrganization ScheduleOrganization = ScheduleOrganizationForm.GetChosenScheduleOrganization();
+            if (ScheduleOrganization != null)
             {
-                Journal.WeldJoint = WeldJoint;
-                textBox5.Text = WeldJoint.Name;
+                SetScheduleOrganization(ScheduleOrganization);
             }
         }
 
@@ -208,6 +224,7 @@ namespace QualityControl_Server
         }
 
         public bool isClosed { get; protected set; }
+
         protected virtual void button5_Click(object sender, EventArgs e)
         {
             isClosed = true;
@@ -218,36 +235,30 @@ namespace QualityControl_Server
 
         protected void InitializeJournalViaFormControls()
         {
-            Journal.RequestDate = dateTimePicker1.Value;
             Journal.ControlDate = dateTimePicker2.Value;
             Journal.RequestNumber = (int)numericUpDown2.Value;
             Journal.Amount = (int)numericUpDown1.Value;
-            Journal.Size = textBox3.Text;
+            Journal.Weight = textBox3.Text;
             Journal.Description = richTextBox2.Text;
-            Journal.Customer = comboBox2.SelectedIndex != -1 ? Customers[comboBox2.SelectedIndex] : null;
-            Journal.IndustrialObject = comboBox1.SelectedIndex != -1 ? IndustrialObjects[comboBox1.SelectedIndex] : null;
+
         }
 
         protected void InitializeFormControlsViaJournal(BllJournal Journal)
         {
-            if (IndustrialObjects.Count > 0)
-            {
-                comboBox1.SelectedItem = Journal.IndustrialObject != null ? Journal.IndustrialObject.Name : "";
-            }
             if (Customers.Count > 0)
             {
                 comboBox2.SelectedItem = Journal.Customer != null ? Journal.Customer.Organization + " " + Journal.Customer.Address + " " + Journal.Customer.Phone : "";
                 FillContracts(Journal.Customer);
             }
 
-            dateTimePicker1.Value = Journal.RequestDate.Value;
             dateTimePicker2.Value = Journal.ControlDate.Value;
             numericUpDown2.Value = Journal.RequestNumber.Value;
             numericUpDown1.Value = Journal.Amount.Value;
-            textBox3.Text = Journal.Size;
+            textBox3.Text = Journal.Weight;
             textBox2.Text = Journal.Component != null ? Journal.Component.Name : "";
             textBox4.Text = Journal.Material != null ? Journal.Material.Name : "";
-            textBox5.Text = Journal.WeldJoint != null ? Journal.WeldJoint.Name : "";
+            textBox5.Text = Journal.ScheduleOrganization != null ? Journal.ScheduleOrganization.Name : "";
+            textBox1.Text = Journal.IndustrialObject != null ? Journal.IndustrialObject.Name : "";
             richTextBox2.Text = Journal.Description;
         }
 
@@ -259,13 +270,22 @@ namespace QualityControl_Server
                 if (template != null)
                 {
                     Journal.Material = template.Material;
-                    Journal.WeldJoint = template.WeldJoint;
+                    Journal.ScheduleOrganization = template.ScheduleOrganization;
                     Journal.Contract = template.Contract;
                     Journal.ControlMethodsLib = template.ControlMethodsLib;
                     Journal.Customer = template.Customer;
                     Journal.Description = template.Description;
                     Journal.IndustrialObject = template.IndustrialObject;
-                    Journal.Size = template.Size;
+                    Journal.Weight = template.Weight;
+
+                    if (Journal.Component != null)
+                    {
+                        if (Journal.Component.IndustrialObject != null)
+                        {
+                            Journal.IndustrialObject = Journal.Component.IndustrialObject;                           
+                        }
+                    }
+
 
                     InitializeFormControlsViaJournal(Journal);
 
@@ -298,17 +318,21 @@ namespace QualityControl_Server
         protected void FillContracts(BllCustomer customer)
         {
             const string format = "dd.MM.yyyy";
-            listBox1.Items.Clear();
+            comboBox1.Items.Clear();
+            Contracts.Clear();
             if (comboBox2.SelectedIndex != -1)
             {
                 foreach (var contract in Customers[comboBox2.SelectedIndex].ContractLib.Entities)
                 {
-                    listBox1.Items.Add(contract.Name + " " + contract.BeginDate.Value.ToString(format) + " - " + contract.EndDate.Value.ToString(format));
+                    Contracts.Add(contract);
+                    comboBox1.Items.Add(contract.Name + " " + contract.BeginDate.Value.ToString(format) + " - " + contract.EndDate.Value.ToString(format));
+                    comboBox1.SelectedIndex = 0;
                 }
             }
         }
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Journal.Customer = comboBox2.SelectedIndex != -1 ? Customers[comboBox2.SelectedIndex] : null;
             FillContracts(Customers[comboBox2.SelectedIndex]);
         }
 
@@ -332,6 +356,20 @@ namespace QualityControl_Server
             }
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            ChooseIndustrialObjectForm IndustrialObjectForm = new ChooseIndustrialObjectForm(uow);
+            IndustrialObjectForm.ShowDialog(this);
+            BllIndustrialObject industrialObject = IndustrialObjectForm.GetChosenIndustrialObject();
+            if (industrialObject != null)
+            {
+                SetIndustrialObject(industrialObject);
+            }
+        }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Journal.Contract = comboBox1.SelectedIndex != -1 ? Contracts[comboBox1.SelectedIndex] : null;
+        }
     }
 }

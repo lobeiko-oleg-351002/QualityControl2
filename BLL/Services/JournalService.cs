@@ -18,24 +18,8 @@ namespace BLL.Services
     public class JournalService : Service<BllJournal, DalJournal, Journal, JournalMapper>, IJournalService
     {
 
-
-        ComponentService ComponentService;
-        CustomerService customerService;
-        IndustrialObjectService industrialObjectService;
-        MaterialService materialService;
-        WeldJointService weldJointService;
-        ControlMethodsLibService controlMethodsLibService;
-        UserService userService;
-
         public JournalService(IUnitOfWork uow) : base(uow, uow.Journals)
         {
-            ComponentService = new ComponentService(uow);
-            customerService = new CustomerService(uow);
-            industrialObjectService = new IndustrialObjectService(uow);
-            materialService = new MaterialService(uow);
-            weldJointService = new WeldJointService(uow);
-            controlMethodsLibService = new ControlMethodsLibService(uow);
-            userService = new UserService(uow);
         }
 
         protected override void InitMapper()
@@ -46,7 +30,7 @@ namespace BLL.Services
         public new BllJournal Create(BllJournal entity)
         {
             ControlMethodsLibService controlMethodsLibService = new ControlMethodsLibService(uow);
-            entity.ControlMethodsLib = controlMethodsLibService.Create(entity.ControlMethodsLib);
+            entity.ControlMethodsLib = controlMethodsLibService.Create(entity.ControlMethodsLib, false);
             DalJournal dalEntity = mapper.MapToDal(entity);
             Journal ormEntity = uow.Journals.Create(dalEntity);
             uow.Commit();

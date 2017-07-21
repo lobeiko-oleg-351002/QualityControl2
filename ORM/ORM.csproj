@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CE0B047E-210E-4426-B8F9-01E8F29D3822}</ProjectGuid>
+    <ProjectGuid>{C99FE4A4-C020-4E30-BCAF-24C140CCF98F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ORM</RootNamespace>
@@ -74,11 +74,13 @@
     <Compile Include="Journal.cs" />
     <Compile Include="Material.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Raw.cs" />
     <Compile Include="RequirementDocumentation.cs" />
     <Compile Include="RequirementDocumentationLib.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="ResultLib.cs" />
     <Compile Include="Role.cs" />
+    <Compile Include="ScheduleOrganization.cs" />
     <Compile Include="SelectedCertificate.cs" />
     <Compile Include="SelectedComponent.cs" />
     <Compile Include="SelectedControlMethodDocumentation.cs" />

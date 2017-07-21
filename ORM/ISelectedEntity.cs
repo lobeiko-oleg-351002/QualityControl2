@@ -8,7 +8,7 @@ namespace ORM
 {
     public interface ISelectedEntity : IOrmEntity
     {
-        int? entity_id { get; set; }
-        int? lib_id { get; set; }
+        int entity_id { get; set; }
+        int lib_id { get; set; }
     }
 }

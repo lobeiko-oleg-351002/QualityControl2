@@ -19,7 +19,7 @@ namespace BLL.Entities
 
         public string Description { get; set; }
 
-        public string Size { get; set; }
+        public string Weight { get; set; }
 
         public string WeldingType { get; set; }
 
@@ -27,8 +27,10 @@ namespace BLL.Entities
 
         public BllCustomer Customer { get; set; }
 
-        public string Contract { get; set; }
-
         public BllControlMethodsLib ControlMethodsLib { get; set; }
+
+        public BllContract Contract { get; set; }
+
+        public BllScheduleOrganization ScheduleOrganization { get; set; }
     }
 }

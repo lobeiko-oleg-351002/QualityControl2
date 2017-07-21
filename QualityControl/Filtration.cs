@@ -14,25 +14,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BLL.Entities;
 using DAL.Repositories.Interface;
+using QualityControl_Server.DirectoryForms.ScheduleOrganizationDirectory;
 
 namespace QualityControl_Server
 {
     public partial class Filtration : Form
     {
-        DateTime requestDateLeft = DateTime.Now, requestDateRight = DateTime.Now, controlDateLeft = DateTime.Now, controlDateRight = DateTime.Now;
+        DateTime controlDateLeft = DateTime.Now, controlDateRight = DateTime.Now;
         int amountLeft, amountRight;
         int requestNumber;
         BllComponent component;
         BllMaterial material;
-        BllWeldJoint weldJoint;
+        BllScheduleOrganization scheduleOrganization;
         BllIndustrialObject industrialObject;
         BllCustomer customer;
-        string contract;
         string size;
         IUnitOfWork uow;
         List<Func<BllJournal, bool>> filters = new List<Func<BllJournal, bool>>();
 
-        bool fit_vik, fit_uzk, fit_pvk, fit_rgk, unfit_vik, unfit_uzk, unfit_pvk, unfit_rgk;
+        bool fit_vik, fit_uzk, unfit_vik, unfit_uzk;
 
         public Filtration()
         {
@@ -45,28 +45,11 @@ namespace QualityControl_Server
         {
             InitializeComponent();
             this.RefreshDataGrid = RefreshDataGrid;
-            dateTimePicker1.Value = DateTime.Now;
-            dateTimePicker2.Value = DateTime.Now;
             dateTimePicker3.Value = DateTime.Now;
             dateTimePicker4.Value = DateTime.Now;
             this.uow = uow;
         }
 
-        private void checkBox9_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox9.Checked)
-            {
-                dateTimePicker1.Enabled = true;
-                dateTimePicker2.Enabled = true;
-                filters.Add(RequestDateFiltration);
-            }
-            else
-            {
-                filters.Remove(RequestDateFiltration);
-                dateTimePicker1.Enabled = false;
-                dateTimePicker2.Enabled = false;
-            }
-        }
 
         private void checkBox10_CheckedChanged(object sender, EventArgs e)
         {
@@ -150,13 +133,13 @@ namespace QualityControl_Server
         {
             if (checkBox15.Checked)
             {
-                filters.Add(WeldJointFiltration);
+                filters.Add(ScheduleOrganizationFiltration);
                 textBox3.Enabled = true;
                 button3.Enabled = true;
             }
             else
             {
-                filters.Remove(WeldJointFiltration);
+                filters.Remove(ScheduleOrganizationFiltration);
                 textBox3.Enabled = false;
                 button3.Enabled = false;
             }
@@ -240,53 +223,7 @@ namespace QualityControl_Server
             }
         }
 
-        private void checkBox6_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox6.Checked)
-            {
-                fit_pvk = true;
-            }
-            else
-            {
-                fit_pvk = false;
-            }
-        }
-
-        private void checkBox5_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox5.Checked)
-            {
-                unfit_pvk = true;
-            }
-            else
-            {
-                unfit_pvk = false;
-            }
-        }
-
-        private void checkBox8_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox8.Checked)
-            {
-                fit_rgk = true;
-            }
-            else
-            {
-                fit_rgk = false;
-            }
-        }
-
-        private void checkBox7_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox7.Checked)
-            {
-                unfit_rgk = true;
-            }
-            else
-            {
-                unfit_rgk = false;
-            }
-        }
+       
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -333,19 +270,6 @@ namespace QualityControl_Server
             }
         }
 
-        private void checkBox20_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox20.Checked)
-            {
-                filters.Add(ContractFiltration);
-                textBox7.Enabled = true;
-            }
-            else
-            {
-                filters.Remove(ContractFiltration);
-                textBox7.Enabled = false;
-            }
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -371,12 +295,12 @@ namespace QualityControl_Server
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ChooseWeldJointForm form = new ChooseWeldJointForm(uow);
+            ChooseScheduleOrganizationForm form = new ChooseScheduleOrganizationForm(uow);
             form.ShowDialog();
-            weldJoint = form.GetChosenWeldJoint();
-            if (weldJoint != null)
+            scheduleOrganization = form.GetChosenScheduleOrganization();
+            if (scheduleOrganization != null)
             {
-                textBox3.Text = weldJoint.Name;
+                textBox3.Text = scheduleOrganization.Name;
             }
         }
 
@@ -434,50 +358,11 @@ namespace QualityControl_Server
             }
         }
 
-        private void checkBox21_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox21.Checked)
-            {
-                filters.Add(PvkFiltration);
-                checkBox5.Enabled = true;
-                checkBox6.Enabled = true;
-            }
-            else
-            {
-                filters.Remove(PvkFiltration);
-                checkBox5.Enabled = false;
-                checkBox6.Enabled = false;
-            }
-        }
-
-        private void checkBox18_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox18.Checked)
-            {
-                filters.Add(RgkFiltration);             
-                checkBox7.Enabled = true;
-                checkBox8.Enabled = true;
-            }
-            else
-            {
-                filters.Remove(RgkFiltration);
-                checkBox7.Enabled = false;
-                checkBox8.Enabled = false;
-            }
-        }
+      
 
 
 
         //FILTRATION____________________________________________
-
-        private bool RequestDateFiltration(BllJournal journal)
-        {
-            if (journal.RequestDate.Value.Date.CompareTo(requestDateLeft.Date) >= 0 && journal.RequestDate.Value.Date.CompareTo(requestDateRight.Date) <= 0)
-            {
-                return true;
-            }
-            return false;
-        }
 
         private bool ControlDateFiltration(BllJournal journal)
         {
@@ -516,15 +401,6 @@ namespace QualityControl_Server
             amountRight = (int)numericUpDown2.Value;
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-            requestDateLeft = dateTimePicker1.Value;
-        }
-
-        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
-        {
-            requestDateRight = dateTimePicker2.Value;
-        }
 
         private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
         {
@@ -546,10 +422,7 @@ namespace QualityControl_Server
             size = textBox4.Text;
         }
 
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-            contract = textBox7.Text;
-        }
+ 
 
         private bool ComponentFiltration(BllJournal journal)
         {
@@ -575,11 +448,11 @@ namespace QualityControl_Server
             return false;
         }
 
-        private bool WeldJointFiltration(BllJournal journal)
+        private bool ScheduleOrganizationFiltration(BllJournal journal)
         {
-            if (journal.WeldJoint != null && weldJoint != null)
+            if (journal.ScheduleOrganization != null && scheduleOrganization != null)
             {
-                if (journal.WeldJoint.Id == weldJoint.Id)
+                if (journal.ScheduleOrganization.Id == scheduleOrganization.Id)
                 {
                     return true;
                 }
@@ -589,11 +462,16 @@ namespace QualityControl_Server
 
         private bool SizeFiltration(BllJournal journal)
         {
-            if (journal.Size == size)
+            if (journal.Weight == size)
             {
                 return true;
             }
             return false;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
         }
 
         private bool IndustrialObjectFiltration(BllJournal journal)
@@ -620,14 +498,6 @@ namespace QualityControl_Server
             return false;
         }
 
-        private bool ContractFiltration(BllJournal journal)
-        {
-            if (journal.Contract == contract)
-            {
-                return true;
-            }
-            return false;
-        }
 
         private bool VikFiltration(BllJournal journal)
         {
@@ -658,38 +528,6 @@ namespace QualityControl_Server
                 }
             }
             if (!fit_uzk && !unfit_uzk) return true;
-            return false;
-        }
-
-        private bool PvkFiltration(BllJournal journal)
-        {
-            var controls = journal.ControlMethodsLib.Entities;
-            foreach (var control in controls)
-            {
-                if (control.ControlName.Name == "ПВК")
-                {
-                    if (fit_pvk && control.IsControlled.Value) return true;
-                    if (unfit_pvk && !control.IsControlled.Value) return true;
-                    break;
-                }
-            }
-            if (!fit_pvk && !unfit_pvk) return true;
-            return false;
-        }
-
-        private bool RgkFiltration(BllJournal journal)
-        {
-            var controls = journal.ControlMethodsLib.Entities;
-            foreach (var control in controls)
-            {
-                if (control.ControlName.Name == "РГК")
-                {
-                    if (fit_rgk && control.IsControlled.Value) return true;
-                    if (unfit_rgk && !control.IsControlled.Value) return true;
-                    break;
-                }
-            }
-            if (!fit_rgk && !unfit_rgk) return true;
             return false;
         }
     }

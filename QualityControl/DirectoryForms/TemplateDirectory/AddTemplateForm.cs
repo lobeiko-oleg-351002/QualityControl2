@@ -2,6 +2,7 @@
 using BLL.Services;
 using BLL.Services.Interface;
 using DAL.Repositories.Interface;
+using QualityControl_Server.DirectoryForms.ScheduleOrganizationDirectory;
 using QualityControl_Server.Forms.EquipmentDirectory;
 using QualityControl_Server.Forms.MaterialDirectory;
 using QualityControl_Server.Forms.RequirementDocumentationDirectory;
@@ -24,7 +25,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
     {
       
         BllMaterial material;
-        BllWeldJoint weldJoint = null;
+        BllScheduleOrganization scheduleOrganization;
         BllControlMethodsLib controlMethodsLib;
         List<ControlMethodTabForm> ControlMethodTabForms;
         List<BllIndustrialObject> IndustrialObjects;
@@ -112,12 +113,12 @@ namespace QualityControl_Server.Forms.TemplateDirectory
 
         private void button5_Click(object sender, EventArgs e)
         {           
-            ChooseWeldJointForm chooseWeldJointForm = new ChooseWeldJointForm(uow);
-            chooseWeldJointForm.ShowDialog(this);
-            weldJoint = chooseWeldJointForm.GetChosenWeldJoint();
-            if (weldJoint != null)
+            ChooseScheduleOrganizationForm chooseScheduleOrganizationForm = new ChooseScheduleOrganizationForm(uow);
+            chooseScheduleOrganizationForm.ShowDialog(this);
+            scheduleOrganization = chooseScheduleOrganizationForm.GetChosenScheduleOrganization();
+            if (scheduleOrganization != null)
             {
-                textBox5.Text = weldJoint.Name;
+                textBox5.Text = scheduleOrganization.Name;
             }
         }
 
@@ -152,21 +153,30 @@ namespace QualityControl_Server.Forms.TemplateDirectory
                 RemoveUncontrolledMethods();
                 BllTemplate template = new BllTemplate
                 {
-                    Contract = textBox9.Text,
+                    Contract = comboBox3.SelectedIndex != -1 ? Customers[comboBox2.SelectedIndex].ContractLib.Entities[comboBox3.SelectedIndex] : null,
                     ControlMethodsLib = controlMethodsLib,
-                    Customer = comboBox2.SelectedIndex != -1 ? Customers[comboBox1.SelectedIndex] : null,
+                    Customer = comboBox2.SelectedIndex != -1 ? Customers[comboBox2.SelectedIndex] : null,
                     Description = richTextBox2.Text,
                     IndustrialObject = comboBox1.SelectedIndex != -1 ? IndustrialObjects[comboBox1.SelectedIndex] : null,
                     Material = material,
-                    Size = textBox3.Text,
+                    Weight = textBox3.Text,
                     Name = textBox1.Text,
-                    WeldingType = textBox6.Text,
-                    WeldJoint = weldJoint
+                    ScheduleOrganization = scheduleOrganization
                 };
 
                 ITemplateService service = new TemplateService(uow);
                 service.Create(template);
                 base.button2_Click(sender, e);
+            }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox3.Items.Clear();
+            foreach (var item in Customers[comboBox2.SelectedIndex].ContractLib.Entities)
+            {
+                comboBox3.Items.Add(item.Name);
+                comboBox3.SelectedIndex = 0;
             }
         }
     }

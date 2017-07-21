@@ -11,7 +11,7 @@ namespace DAL.Entities
     {
         public int Id { get; set; }
 
-        public int? Number { get; set; }
+        public string Number { get; set; }
 
         public string Welder { get; set; }
 

@@ -23,7 +23,7 @@ namespace BLL.Services
          //   this.uow = uow;
         }
 
-        public BllResult GetResultByNumber(int number)
+        public BllResult GetResultByNumber(string number)
         {
             return mapper.MapToBll(uow.Results.GetResultByNumber(number));
         }

@@ -2,6 +2,7 @@
 using BLL.Services;
 using BLL.Services.Interface;
 using DAL.Repositories.Interface;
+using QualityControl_Server.DirectoryForms.ScheduleOrganizationDirectory;
 using QualityControl_Server.Forms.EquipmentDirectory;
 using QualityControl_Server.Forms.MaterialDirectory;
 using QualityControl_Server.Forms.RequirementDocumentationDirectory;
@@ -24,7 +25,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
     {
         BllTemplate oldTemplate;
         BllMaterial material;
-        BllWeldJoint weldJoint = null;
+        BllScheduleOrganization scheduleOrganization;
         BllCustomer customer;
         BllIndustrialObject industrialObject;
         BllControlMethodsLib controlMethodsLib;
@@ -32,6 +33,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
         List<BllIndustrialObject> IndustrialObjects;
         List<BllControlName> ControlNames;
         List<BllCustomer> Customers;
+        BllContract contract;
 
 
         public ChangeTemplateForm() : base()
@@ -54,10 +56,9 @@ namespace QualityControl_Server.Forms.TemplateDirectory
             controlMethodsLib = new BllControlMethodsLib();
 
             textBox1.Text = oldTemplate.Name;
-            textBox3.Text = oldTemplate.Size;
+            textBox3.Text = oldTemplate.Weight;
             textBox4.Text = oldTemplate.Material != null ? oldTemplate.Material.Name : "";
             textBox5.Text = oldTemplate.WeldJoint != null ? oldTemplate.WeldJoint.Name : "";
-            textBox6.Text = oldTemplate.WeldingType;
 
             IndustrialObjects = new List<BllIndustrialObject>();
             IIndustrialObjectService industrialObjectService = new IndustrialObjectService(uow);
@@ -86,12 +87,23 @@ namespace QualityControl_Server.Forms.TemplateDirectory
                 comboBox2.SelectedItem = oldTemplate.Customer != null ? oldTemplate.Customer.Organization + " " + oldTemplate.Customer.Address + " " + oldTemplate.Customer.Phone : "";
             }
 
-            textBox9.Text = oldTemplate.Contract;
             richTextBox2.Text = oldTemplate.Description;
 
             material = oldTemplate.Material;
-            weldJoint = oldTemplate.WeldJoint;
+            scheduleOrganization = oldTemplate.ScheduleOrganization;
             customer = oldTemplate.Customer;
+            contract = oldTemplate.Contract;
+            if (customer != null)
+            {
+                foreach(var item in customer.ContractLib.Entities)
+                {
+                    comboBox3.Items.Add(item.Name);
+                }
+                if (comboBox3.Items.Count > 0)
+                {
+                    comboBox3.SelectedItem = oldTemplate.Contract;
+                }
+            }
             industrialObject = oldTemplate.IndustrialObject;
             controlMethodsLib = oldTemplate.ControlMethodsLib;
 
@@ -171,16 +183,16 @@ namespace QualityControl_Server.Forms.TemplateDirectory
                 RemoveUncontrolledMethods();
                 BllTemplate template = new BllTemplate
                 {
-                    Contract = textBox9.Text,
+                    Contract = comboBox3.SelectedIndex != -1 ? Customers[comboBox2.SelectedIndex].ContractLib.Entities[comboBox3.SelectedIndex] : null,
                     ControlMethodsLib = controlMethodsLib,
-                    Customer = comboBox2.SelectedIndex != -1 ? Customers[comboBox1.SelectedIndex] : null,
+                    Customer = comboBox2.SelectedIndex != -1 ? Customers[comboBox2.SelectedIndex] : null,
                     Description = richTextBox2.Text,
                     IndustrialObject = comboBox1.SelectedIndex != -1 ? IndustrialObjects[comboBox1.SelectedIndex] : null,
                     Material = material,
-                    Size = textBox3.Text,
+                    Weight = textBox3.Text,
                     Name = textBox1.Text,
-                    WeldingType = textBox6.Text,
-                    WeldJoint = weldJoint
+ 
+                    ScheduleOrganization = scheduleOrganization
                 };
                 ITemplateService Service = new TemplateService(uow);
                 Service.Update(template);
@@ -202,16 +214,28 @@ namespace QualityControl_Server.Forms.TemplateDirectory
 
         private void button5_Click(object sender, EventArgs e)
         {
-            ChooseWeldJointForm chooseWeldJointForm = new ChooseWeldJointForm(uow);
-            chooseWeldJointForm.ShowDialog(this);
-            weldJoint = chooseWeldJointForm.GetChosenWeldJoint();
-            if (weldJoint != null)
+            ChooseScheduleOrganizationForm chooseScheduleOrganizationForm = new ChooseScheduleOrganizationForm(uow);
+            chooseScheduleOrganizationForm.ShowDialog(this);
+            scheduleOrganization = chooseScheduleOrganizationForm.GetChosenScheduleOrganization();
+            if (scheduleOrganization != null)
             {
-                textBox5.Text = weldJoint.Name;
+                textBox5.Text = scheduleOrganization.Name;
             }
         }
 
+        private void ChangeTemplateForm_Load(object sender, EventArgs e)
+        {
 
-      
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox3.Items.Clear();
+            foreach (var item in Customers[comboBox2.SelectedIndex].ContractLib.Entities)
+            {
+                comboBox3.Items.Add(item.Name);
+                comboBox3.SelectedIndex = 0;
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace BLL.Services.Interface
 {
     public interface IControlMethodsLibService : IService<BllControlMethodsLib>
     {
-        new BllControlMethodsLib Create(BllControlMethodsLib entity);
+        BllControlMethodsLib Create(BllControlMethodsLib entity, bool isTemplate);
         new BllControlMethodsLib Update(BllControlMethodsLib entity);
     }
 }

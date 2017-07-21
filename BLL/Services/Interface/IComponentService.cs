@@ -9,7 +9,7 @@ namespace BLL.Services.Interface
 {
     public interface IComponentService : IService<BllComponent>
     {
-        BllComponent GetComponentByName(string name);
+        List<BllComponent> GetComponentsByIndustrialObject(int id);
        // IEnumerable<BllComponent> GetComponentsByTemplateId(int id);
     }
 }

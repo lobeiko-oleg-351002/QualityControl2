@@ -43,7 +43,7 @@ namespace QualityControl_Server
 
         private static string ConvertDateTimeToString(DateTime date)
         {
-            string res = date.ToString("dd.MM.yyy");
+            string res = date.ToString("dd.MM.yyyy");
             return res;
         }
             
@@ -152,33 +152,50 @@ namespace QualityControl_Server
             var worksheet = workbook.Worksheets.Add();
             worksheet.Name = controlName;
             ExcelApp.Columns.ColumnWidth = 20;
-            ExcelApp.Cells[1, 1] = "№ п/п";
-            ExcelApp.Cells[1, 2] = "№ св.соед.";
-            ExcelApp.Cells[1, 3] = "Дата";
-            ExcelApp.Cells[1, 4] = "№ заявки";
-            ExcelApp.Cells[1, 5] = "Контролёр";
-            ExcelApp.Cells[1, 6] = "Наименование изделия";
-            ExcelApp.Cells[1, 7] = "Типовой размер";
-            ExcelApp.Cells[1, 8] = "Тип сварного соединения";
-            ExcelApp.Cells[1, 9] = "Обнаруженные дефекты";
-            ExcelApp.Cells[1, 10] = "Годен / не годен";
-            ExcelApp.Cells[1, 11] = "Подпись";
+            if (controlName != "ВИК")
+            {
+                ExcelApp.Cells[1, 1] = "№ п/п";
+                ExcelApp.Cells[1, 2] = "Объект";
+                ExcelApp.Cells[1, 3] = "Код объекта";
+                ExcelApp.Cells[1, 4] = "Исполнитель";
+                ExcelApp.Cells[1, 5] = "Дата контроля";
+                ExcelApp.Cells[1, 6] = "Номер соединения";
+                ExcelApp.Cells[1, 7] = "Дефект";
+                ExcelApp.Cells[1, 8] = "Оценка качества";
+                ExcelApp.Cells[1, 9] = "Тип соединения";
+                ExcelApp.Cells[1, 10] = "Контроль провёл, ФИО, подпись";
+            }
+            else
+            {
+                ExcelApp.Cells[1, 1] = "№ п/п";
+                ExcelApp.Cells[1, 2] = "Объект";
+                ExcelApp.Cells[1, 3] = "Код объекта";
+                ExcelApp.Cells[1, 4] = "Исполнитель";
+                ExcelApp.Cells[1, 5] = "Дата контроля";
+                ExcelApp.Cells[1, 6] = "Стадия контроля";
+                ExcelApp.Cells[1, 7] = "Особые отметки";
+                ExcelApp.Cells[1, 8] = "Приёмочный контроль, дата";
+                ExcelApp.Cells[1, 9] = "Результат приёмки";
+                ExcelApp.Cells[1, 10] = "Контроль провёл, ФИО, подпись";
+            }
 
             return workbook;
         }
 
-        private static Microsoft.Office.Interop.Excel.Worksheet AddRowToExcelTable(Microsoft.Office.Interop.Excel.Worksheet ExcelApp, BllResult result, BllJournal journal, int row, bool isControlled)
+        private static Microsoft.Office.Interop.Excel.Worksheet AddRowToExcelTable(Microsoft.Office.Interop.Excel.Worksheet ExcelApp, BllResult result, BllEmployee employee, BllJournal journal, int journalNum, int row, bool isControlled)
         {
-            ExcelApp.Cells[row , 2] = result.Number.ToString();
-            ExcelApp.Cells[row , 3] = journal.ControlDate != null ? ConvertDateTimeToString((DateTime)journal.ControlDate) : "<не указано>";
-            ExcelApp.Cells[row , 4] = journal.RequestNumber.ToString();
-            ExcelApp.Cells[row , 5] = result.Welder;
-            ExcelApp.Cells[row , 6] = journal.Component != null ? journal.Component.Name : "<не указано>";
-            ExcelApp.Cells[row , 7] = journal.Size;
-            ExcelApp.Cells[row , 8] = result.WeldingType != null ? result.WeldingType.ToString() : "<не указано>";
-            ExcelApp.Cells[row , 9] = result.DefectDescription;
-            ExcelApp.Cells[row , 10] = isControlled ? "годен" : "не годен";
-            ExcelApp.Cells[row , 11] = "";
+            ExcelApp.Cells[row, 1] = journalNum;
+            ExcelApp.Cells[row, 2] = journal.Component != null ? journal.Component.Name : "<не указано>";
+            ExcelApp.Cells[row, 3] = journal.Component != null ? journal.Component.Pressmark : "<не указано>";
+            ExcelApp.Cells[row, 4] = result.Welder;
+            ExcelApp.Cells[row, 5] = journal.ControlDate != null ? ConvertDateTimeToString((DateTime)journal.ControlDate) : "<не указано>";
+            //ExcelApp.Cells[row , 4] = journal.RequestNumber.ToString();
+            ExcelApp.Cells[row, 6] = result.Number;
+            ExcelApp.Cells[row, 7] = result.DefectDescription;
+            ExcelApp.Cells[row, 8] = result.Quality;
+            ExcelApp.Cells[row, 9] = result.WeldingType;
+            ExcelApp.Cells[row, 10] = employee != null ? employee.Sirname : "";
+
 
             return ExcelApp;
         }
@@ -330,35 +347,43 @@ namespace QualityControl_Server
         {
             Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
             var workbook = ExcelApp.Application.Workbooks.Add(Type.Missing);
-            int journalNum = -1;
+            int journalNum = 0;
             int rowNumber = 0;
-            workbook = InitResultExcelTable(workbook, ExcelApp, "ПВК");
-            workbook = InitResultExcelTable(workbook, ExcelApp, "РГК");
+           // workbook = InitResultExcelTable(workbook, ExcelApp, "ПВК");
+            //workbook = InitResultExcelTable(workbook, ExcelApp, "РГК");
             workbook = InitResultExcelTable(workbook, ExcelApp, "УЗК");
             workbook = InitResultExcelTable(workbook, ExcelApp, "ВИК");
-
-
-
+            List<int> objectNumbers = new List<int>();
+            objectNumbers.Add(0);
+            objectNumbers.Add(0);
             foreach (var journal in journals)
             {
-                journalNum++;
-                int sheetNum = 0;    
+                int sheetNum = 0;
+                //journalNum++;
                 foreach (var control in journal.ControlMethodsLib.Entities)
                 {
                     sheetNum++;
-                    foreach(Worksheet currentSheet in workbook.Sheets)
+                    objectNumbers[sheetNum - 1]++;
+                    foreach (Worksheet currentSheet in workbook.Sheets)
                     {
                         if (currentSheet.Name == control.ControlName.Name)
                         {
                             Microsoft.Office.Interop.Excel.Range last = currentSheet.Cells.SpecialCells(Microsoft.Office.Interop.Excel.XlCellType.xlCellTypeLastCell, Type.Missing);
                             rowNumber = last.Row + 1;
-                            if (control.ResultLib.Entities.Count != 0)
+
+                            if (control.ResultLib.Entities.Count == 0)
                             {
-                                currentSheet.Cells[rowNumber , 1] = control.ProtocolNumber.ToString();
+                                //currentSheet.Cells[rowNumber , 1] = control.ProtocolNumber.ToString();
+                                objectNumbers[sheetNum - 1]--;
                             }
                             foreach (var result in control.ResultLib.Entities)
                             {
-                                AddRowToExcelTable(currentSheet, result, journal, rowNumber, control.IsControlled.Value);
+                                BllEmployee chief = null;
+                                if (control.EmployeeLib.SelectedEntities.Count() > 0)
+                                {
+                                    chief = control.EmployeeLib.SelectedEntities[0].Entity;
+                                }
+                                AddRowToExcelTable(currentSheet, result, chief, journal, objectNumbers[sheetNum - 1], rowNumber, control.IsControlled.Value);
                                 rowNumber++;
                             }
                         }

@@ -43,7 +43,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
                 row.CreateCells(dataGridView1);
                 row.Cells[0].Value = Template.Name;
                 row.Cells[1].Value = Template.Material != null ? Template.Material.Name : "";
-                row.Cells[2].Value = Template.WeldJoint != null ? Template.WeldJoint.Name : "";
+                row.Cells[2].Value = Template.ScheduleOrganization != null ? Template.ScheduleOrganization.Name : "";
 
                 DataGridViewComboBoxCell comboBoxCell = (DataGridViewComboBoxCell)row.Cells[3];
                 if (Template.ControlMethodsLib != null)
@@ -61,8 +61,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
                 row.Cells[4].Value = Template.Description;
                 row.Cells[5].Value = Template.IndustrialObject != null ? Template.IndustrialObject.Name : "";
                 row.Cells[6].Value = Template.Customer != null ? Template.Customer.Organization : "";
-                row.Cells[7].Value = Template.Size;
-                row.Cells[8].Value = Template.WeldingType;
+                row.Cells[7].Value = Template.Weight;
 
                 dataGridView1.Rows.Add(row);
             }

@@ -37,6 +37,7 @@ namespace QualityControl_Server.Forms.ResultDirectory
             normHistory = ParseString(history);
             history = cfg.GetTagValue(cfg.quality);
             qualityHistory = ParseString(history);
+
         }
 
         public ResultDirectoryForm()
@@ -46,12 +47,42 @@ namespace QualityControl_Server.Forms.ResultDirectory
         }
 
         BllResultLib resultLib;
+        
+        public void RenameColumnsForVIK()
+        {
+            dataGridView1.Columns[0].HeaderText = "Стадия контроля";
+            dataGridView1.Columns[1].HeaderText = "Исполнитель";
+            dataGridView1.Columns[2].HeaderText = "Результат приёмки";
+            dataGridView1.Columns[3].HeaderText = "Особые отметки";
+            dataGridView1.Columns[4].HeaderText = "Примечание";
+            dataGridView1.Columns[5].HeaderText = "Дата контроля";
 
-        public ResultDirectoryForm(BllResultLib lib)
+            if (weldingTypeHistory.Count() == 0)
+            {
+                weldingTypeHistory.Add("Принят");
+                weldingTypeHistory.Add("Не принят");
+            }
+            if (numberHistory.Count() == 0)
+            {
+                numberHistory.Add("Сборка");
+                numberHistory.Add("Сварка");
+                numberHistory.Add("Приёмочный");
+            }
+        }
+        private bool isEditing;
+        public ResultDirectoryForm(BllResultLib lib, bool isEditing)
         {
             InitializeComponent();
             InitHistoryLists();
             resultLib = lib;
+            this.isEditing = isEditing;
+            if (!isEditing)
+            {
+                dataGridView1.ReadOnly = true;
+                button1.Visible = false;
+                button2.Visible = false;
+                button5.Visible = false;
+            }
             foreach (var result in lib.Entities)
             {
                 AddResultRowToDataGrid(result);
@@ -92,7 +123,7 @@ namespace QualityControl_Server.Forms.ResultDirectory
         private void SetAutocompleteCell(DataGridViewEditingControlShowingEventArgs e, List<string> history)
         {
             TextBox autoText = e.Control as TextBox;
-            autoText.AutoCompleteMode = AutoCompleteMode.Suggest;
+            autoText.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             autoText.AutoCompleteSource = AutoCompleteSource.CustomSource;
             AutoCompleteStringCollection DataCollection = new AutoCompleteStringCollection();
             TransformHistoryToCollection(DataCollection, history);
@@ -120,26 +151,27 @@ namespace QualityControl_Server.Forms.ResultDirectory
 
         protected override void button4_Click(object sender, EventArgs e)
         {
-            var results = resultLib.Entities;
-            var rows = dataGridView1.Rows;
-            for (int i = 0; i < results.Count; i++)
+            if (isEditing)
             {
-                var number = 0;
-                bool isInt = rows[i].Cells[0].Value != null ? int.TryParse(rows[i].Cells[0].Value.ToString(), out number) : false;
-                results[i].Number = isInt ? number : 0;
-                RefreshHistoryList(numberHistory, results[i].Number.ToString());
-                results[i].Welder = (string)rows[i].Cells[1].Value;
-                RefreshHistoryList(welderHistory, results[i].Welder);
-                results[i].WeldingType = (string)rows[i].Cells[2].Value;
-                RefreshHistoryList(weldingTypeHistory, results[i].WeldingType);
-                results[i].DefectDescription = (string)rows[i].Cells[3].Value;
-                RefreshHistoryList(defectHistory, results[i].DefectDescription);
-                results[i].Norm = (string)rows[i].Cells[4].Value;
-                RefreshHistoryList(normHistory, results[i].Norm);
-                results[i].Quality = (string)rows[i].Cells[5].Value;
-                RefreshHistoryList(qualityHistory, results[i].Quality);
+                var results = resultLib.Entities;
+                var rows = dataGridView1.Rows;
+                for (int i = 0; i < results.Count; i++)
+                {
+                    results[i].Number = (string)rows[i].Cells[0].Value;
+                    RefreshHistoryList(numberHistory, results[i].Number);
+                    results[i].Welder = (string)rows[i].Cells[1].Value;
+                    RefreshHistoryList(welderHistory, results[i].Welder);
+                    results[i].WeldingType = (string)rows[i].Cells[2].Value;
+                    RefreshHistoryList(weldingTypeHistory, results[i].WeldingType);
+                    results[i].DefectDescription = (string)rows[i].Cells[3].Value;
+                    RefreshHistoryList(defectHistory, results[i].DefectDescription);
+                    results[i].Norm = (string)rows[i].Cells[4].Value;
+                    RefreshHistoryList(normHistory, results[i].Norm);
+                    results[i].Quality = (string)rows[i].Cells[5].Value;
+                    RefreshHistoryList(qualityHistory, results[i].Quality);
+                }
+                SaveHistoryLists();
             }
-            SaveHistoryLists();
             base.button4_Click(sender, e);
         }
 

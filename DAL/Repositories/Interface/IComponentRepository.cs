@@ -10,7 +10,7 @@ namespace DAL.Repositories.Interface
 {
     public interface IComponentRepository : IRepository<DalComponent, Component>
     {
-        DalComponent GetComponentByName(string name);
+        IEnumerable<DalComponent> GetComponentsByIndustrialObject(int id);
 
     }
 }

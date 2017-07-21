@@ -63,6 +63,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\itextsharp.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Word.15.0.4797.1003\lib\net20\Microsoft.Office.Interop.Word.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -83,6 +91,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DirectoryForms\RawDirectory\AddRawForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DirectoryForms\RawDirectory\AddRawForm.Designer.cs">
+      <DependentUpon>AddRawForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DirectoryForms\RawDirectory\ChangeRawForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DirectoryForms\RawDirectory\ChangeRawForm.Designer.cs">
+      <DependentUpon>ChangeRawForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DirectoryForms\RawDirectory\RawDirectoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DirectoryForms\RawDirectory\RawDirectoryForm.Designer.cs">
+      <DependentUpon>RawDirectoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DirectoryForms\ScheduleOrganizationDirectory\AddScheduleOrganizationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DirectoryForms\ScheduleOrganizationDirectory\AddScheduleOrganizationForm.Designer.cs">
+      <DependentUpon>AddScheduleOrganizationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DirectoryForms\ScheduleOrganizationDirectory\ChangeScheduleOrganizationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DirectoryForms\ScheduleOrganizationDirectory\ChangeScheduleOrganizationForm.Designer.cs">
+      <DependentUpon>ChangeScheduleOrganizationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DirectoryForms\ScheduleOrganizationDirectory\ChooseScheduleOrganizationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DirectoryForms\ScheduleOrganizationDirectory\ChooseScheduleOrganizationForm.Designer.cs">
+      <DependentUpon>ChooseScheduleOrganizationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DirectoryForms\ScheduleOrganizationDirectory\ScheduleOrganizationDirectoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DirectoryForms\ScheduleOrganizationDirectory\ScheduleOrganizationDirectoryForm.Designer.cs">
+      <DependentUpon>ScheduleOrganizationDirectoryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="JournalForms\AddJournalForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -531,6 +581,33 @@
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="WordDocumentManager.cs" />
+    <EmbeddedResource Include="DirectoryForms\RawDirectory\AddRawForm.resx">
+      <DependentUpon>AddRawForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DirectoryForms\RawDirectory\ChangeRawForm.resx">
+      <DependentUpon>ChangeRawForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DirectoryForms\RawDirectory\RawDirectoryForm.resx">
+      <DependentUpon>RawDirectoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DirectoryForms\ScheduleOrganizationDirectory\AddScheduleOrganizationForm.resx">
+      <DependentUpon>AddScheduleOrganizationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DirectoryForms\ScheduleOrganizationDirectory\ChangeScheduleOrganizationForm.resx">
+      <DependentUpon>ChangeScheduleOrganizationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DirectoryForms\ScheduleOrganizationDirectory\ChooseScheduleOrganizationForm.resx">
+      <DependentUpon>ChooseScheduleOrganizationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DirectoryForms\ScheduleOrganizationDirectory\ScheduleOrganizationDirectoryForm.resx">
+      <DependentUpon>ScheduleOrganizationDirectoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JournalForms\AddJournalForm.resx">
+      <DependentUpon>AddJournalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JournalForms\ChangeJournalForm.resx">
+      <DependentUpon>ChangeJournalForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="JournalForms\JournalForm.resx">
       <DependentUpon>JournalForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -794,7 +871,7 @@
       <Name>DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\ORM\ORM.csproj">
-      <Project>{ce0b047e-210e-4426-b8f9-01e8f29d3822}</Project>
+      <Project>{c99fe4a4-c020-4e30-bcaf-24c140ccf98f}</Project>
       <Name>ORM</Name>
     </ProjectReference>
   </ItemGroup>

@@ -9,6 +9,6 @@ namespace BLL.Services.Interface
 {
     public interface IResultService : IService<BllResult>
     {
-        BllResult GetResultByNumber(int number);
+        BllResult GetResultByNumber(string number);
     }
 }

@@ -65,11 +65,13 @@
     <Compile Include="Entities\BllIndustrialObject.cs" />
     <Compile Include="Entities\BllJournal.cs" />
     <Compile Include="Entities\BllMaterial.cs" />
+    <Compile Include="Entities\BllRaw.cs" />
     <Compile Include="Entities\BllRequirementDocumentation.cs" />
     <Compile Include="Entities\BllRequirementDocumentationLib.cs" />
     <Compile Include="Entities\BllResult.cs" />
     <Compile Include="Entities\BllResultLib.cs" />
     <Compile Include="Entities\BllRole.cs" />
+    <Compile Include="Entities\BllScheduleOrganization.cs" />
     <Compile Include="Entities\BllTemplate.cs" />
     <Compile Include="Entities\BllUser.cs" />
     <Compile Include="Entities\BllWeldJoint.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Entities\Interface\IBllEntitySimpleLib.cs" />
     <Compile Include="Entities\Interface\IBllSelectedEntity.cs" />
     <Compile Include="Mapping\CertificateMapper.cs" />
+    <Compile Include="Mapping\ScheduleOrganizationMapper.cs" />
     <Compile Include="Mapping\ComponentMapper.cs" />
     <Compile Include="Mapping\ContractMapper.cs" />
     <Compile Include="Mapping\ControlMapper.cs" />
@@ -107,15 +110,18 @@
     <Compile Include="Mapping\Interfaces\IJournalMapper.cs" />
     <Compile Include="Mapping\Interfaces\IMapper.cs" />
     <Compile Include="Mapping\Interfaces\IMaterialMapper.cs" />
+    <Compile Include="Mapping\Interfaces\IRawMapper.cs" />
     <Compile Include="Mapping\Interfaces\IRequirementDocumentationMapper.cs" />
     <Compile Include="Mapping\Interfaces\IResultMapper.cs" />
     <Compile Include="Mapping\Interfaces\IRoleMapper.cs" />
+    <Compile Include="Mapping\Interfaces\IScheduleOrganizationMapper.cs" />
     <Compile Include="Mapping\Interfaces\ISelectedEntityMapper.cs" />
     <Compile Include="Mapping\Interfaces\ITemplateMapper.cs" />
     <Compile Include="Mapping\Interfaces\IUserMapper.cs" />
     <Compile Include="Mapping\Interfaces\IWeldJointMapper.cs" />
     <Compile Include="Mapping\JournalMapper.cs" />
     <Compile Include="Mapping\MaterialMapper.cs" />
+    <Compile Include="Mapping\RawMapper.cs" />
     <Compile Include="Mapping\RequirementDocumentationMapper.cs" />
     <Compile Include="Mapping\ResultMapper.cs" />
     <Compile Include="Mapping\RoleMapper.cs" />
@@ -162,9 +168,11 @@
     <Compile Include="Services\Interface\IIndustrialObjectService.cs" />
     <Compile Include="Services\Interface\IJournalService.cs" />
     <Compile Include="Services\Interface\IMaterialService.cs" />
+    <Compile Include="Services\Interface\IRawService.cs" />
     <Compile Include="Services\Interface\IRequirementDocumentationService.cs" />
     <Compile Include="Services\Interface\IResultService.cs" />
     <Compile Include="Services\Interface\IRoleService.cs" />
+    <Compile Include="Services\Interface\IScheduleOrganizationService.cs" />
     <Compile Include="Services\Interface\ISelectedEntityService.cs" />
     <Compile Include="Services\Interface\IService.cs" />
     <Compile Include="Services\Interface\ITemplateService.cs" />
@@ -173,11 +181,13 @@
     <Compile Include="Services\JournalService.cs" />
     <Compile Include="Services\EntityLibService.cs" />
     <Compile Include="Services\MaterialService.cs" />
+    <Compile Include="Services\RawService.cs" />
     <Compile Include="Services\RequirementDocumentationLibService.cs" />
     <Compile Include="Services\RequirementDocumentationService.cs" />
     <Compile Include="Services\ResultLibService.cs" />
     <Compile Include="Services\ResultService.cs" />
     <Compile Include="Services\RoleService.cs" />
+    <Compile Include="Services\ScheduleOrganizationService.cs" />
     <Compile Include="Services\SelectedEntityService.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\TemplateService.cs" />
@@ -193,7 +203,7 @@
       <Name>DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\ORM\ORM.csproj">
-      <Project>{ce0b047e-210e-4426-b8f9-01e8f29d3822}</Project>
+      <Project>{c99fe4a4-c020-4e30-bcaf-24c140ccf98f}</Project>
       <Name>ORM</Name>
     </ProjectReference>
   </ItemGroup>

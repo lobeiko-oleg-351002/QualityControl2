@@ -16,7 +16,6 @@ namespace DAL.Mapping
             {
                 Id = entity.id,
                 Component_id = entity.component_id,
-                Contract = entity.contract,
                 ControlDate = entity.controlDate,
                 ControlMethodsLib_id = entity.controlMethodsLib_id,
                 Customer_id = entity.customer_id,
@@ -25,12 +24,12 @@ namespace DAL.Mapping
                 IndustrialObject_id = entity.industrialObject_id,
                 Material_id = entity.material_id,
                 ModifiedDate = entity.modifiedDate,
-                RequestDate = entity.requestDate,
                 RequestNumber = entity.requestNumber,
-                Size = entity.size,
+                Weight = entity.weight,
                 UserModifierLogin = entity.userModifierLogin,
                 UserOwner_id = entity.userOwner_id,
-                WeldJoint_id = entity.weldJoint_id
+                ScheduleOrganization_id = entity.scheduleOrganization_id,
+                Contract_id = entity.contract_id                
             };
         }
 
@@ -40,7 +39,6 @@ namespace DAL.Mapping
             {
                 id = entity.Id,
                 component_id = entity.Component_id,
-                contract = entity.Contract,
                 controlDate = entity.ControlDate,
                 controlMethodsLib_id = entity.ControlMethodsLib_id,
                 customer_id = entity.Customer_id,
@@ -49,12 +47,12 @@ namespace DAL.Mapping
                 industrialObject_id = entity.IndustrialObject_id,
                 material_id = entity.Material_id,
                 modifiedDate = entity.ModifiedDate,
-                requestDate = entity.RequestDate,
                 requestNumber = entity.RequestNumber,
-                size = entity.Size,
+                weight = entity.Weight,
                 userModifierLogin = entity.UserModifierLogin,
                 userOwner_id = entity.UserOwner_id,
-                weldJoint_id = entity.WeldJoint_id
+                scheduleOrganization_id = entity.ScheduleOrganization_id,
+                contract_id = entity.Contract_id
             };
         }
     }

@@ -36,11 +36,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(46, 170);
+            this.button1.Location = new System.Drawing.Point(160, 170);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(170, 170);
+            this.button2.Location = new System.Drawing.Point(60, 170);
             // 
             // richTextBox1
             // 
@@ -84,6 +84,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "ChangeMaterialForm";
             this.Text = "Изменить материал";
             this.Controls.SetChildIndex(this.button1, 0);

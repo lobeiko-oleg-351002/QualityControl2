@@ -41,12 +41,12 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(42, 410);
+            this.button1.Location = new System.Drawing.Point(159, 410);
             this.button1.TabIndex = 5;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(171, 410);
+            this.button2.Location = new System.Drawing.Point(60, 410);
             this.button2.TabIndex = 4;
             // 
             // label1
@@ -122,6 +122,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "AddWeldJointForm";
             this.Text = "Добавить сварное соединение";
             this.Controls.SetChildIndex(this.button1, 0);
