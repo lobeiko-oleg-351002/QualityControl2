@@ -72,7 +72,7 @@ namespace QualityControl_Server
             this.FindAndReplace(wordApp, "ControlDate_Month", month);
             this.FindAndReplace(wordApp, "ControlDate_Year", journals[0].ControlDate.Value.Year.ToString());
             this.FindAndReplace(wordApp, "RequestNum", journals[0].RequestNumber.Value.ToString());
-            this.FindAndReplace(wordApp, "RequestDate", "");
+            this.FindAndReplace(wordApp, "RequestDate", journals[0].RequestDate.Value.ToString("dd.MM.yyyy"));
             this.FindAndReplace(wordApp, "Customer", journals[0].Customer != null ? journals[0].Customer.Organization : "<не указан>");
             this.FindAndReplace(wordApp, "IndustrialObject", journals[0].IndustrialObject != null ? journals[0].IndustrialObject.Name : "<не указан>");
             this.FindAndReplace(wordApp, "Component", journals[0].Component != null ? journals[0].Component.Name : "<не указан>");
@@ -257,7 +257,7 @@ namespace QualityControl_Server
                                 Row row = tableResult.Rows.Add(ref missing);
 
                                 row.Cells[1].Range.Text = (tableResult.Rows.Count - 2).ToString();
-                                row.Cells[2].Range.Text = journals[i].Weight + ", " + (journals[i].Material != null ? journals[i].Material.Name : "<не указано>");
+                                row.Cells[2].Range.Text = journals[i].Size + ", " + (journals[i].Material != null ? journals[i].Material.Name : "<не указано>");
                                 row.Cells[3].Range.Text = res.Welder;
                                 row.Cells[4].Range.Text = res.Number.ToString();
                                 row.Cells[5].Range.Text = res.DefectDescription;

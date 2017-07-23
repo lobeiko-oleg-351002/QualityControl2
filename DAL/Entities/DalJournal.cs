@@ -13,13 +13,15 @@ namespace DAL
 
         public DateTime? ControlDate { get; set; }
 
+        public DateTime? RequestDate { get; set; }
+
         public int? RequestNumber { get; set; }
 
         public int? IndustrialObject_id { get; set; }
 
         public int? Amount { get; set; }
 
-        public string Weight { get; set; }
+        public string Size { get; set; }
 
         public int? Material_id { get; set; }
 
@@ -40,5 +42,9 @@ namespace DAL
         public DateTime? ModifiedDate { get; set; }
 
         public int? Contract_id { get; set; }
+
+        public int? WeldJoint_id { get; set; }
+
+        public string WeldingType { get; set; }
     }
 }

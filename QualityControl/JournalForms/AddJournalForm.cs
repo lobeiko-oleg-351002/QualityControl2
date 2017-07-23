@@ -48,6 +48,7 @@ namespace QualityControl_Server
             Journal = new BllJournal
             {
                 ControlDate = DateTime.Now,
+                RequestDate = DateTime.Now,
                 RequestNumber = 0,
                 Amount = 0,
 
@@ -146,11 +147,16 @@ namespace QualityControl_Server
                     ClearEmployees();
                 }
 
-
-                for (int i = 0; i < Journal.ControlMethodsLib.Entities.Count; i++)
+                foreach (var control in Journal.ControlMethodsLib.Entities)
                 {
-                    var control = Journal.ControlMethodsLib.Entities[i];
-                    ControlMethodTabForms[i].SetCurrentControlAndJournal(control, Journal, true);
+                    for (int i = 0; i < ControlMethodTabForms.Count; i++)
+                    {
+                        if (ControlMethodTabForms[i].currentControl.ControlName.Name.Equals(control.ControlName.Name))
+                        {
+                            ControlMethodTabForms[i].SetCurrentControlAndJournal(control, Journal, true);
+
+                        }
+                    }
                 }
                 isClosed = false;
             }
@@ -239,7 +245,10 @@ namespace QualityControl_Server
             target.IndustrialObject = source.IndustrialObject;
             target.Material = source.Material;
             target.RequestNumber = source.RequestNumber;
-            target.Weight = source.Weight;
+            target.Size = source.Size;
+            target.RequestDate = source.RequestDate;
+            target.WeldingType = source.WeldingType;
+            target.WeldJoint = source.WeldJoint;
             target.ScheduleOrganization = source.ScheduleOrganization;
             target.ControlMethodsLib = new BllControlMethodsLib();
             return target;
@@ -257,9 +266,9 @@ namespace QualityControl_Server
             {
                 unfilledInfo += "\n Материал";
             }
-            if (Journal.Weight == "")
+            if (Journal.Size == "")
             {
-                unfilledInfo += "\n Масса";
+                unfilledInfo += "\n Размер";
             }
             if (Journal.ScheduleOrganization == null)
             {
@@ -276,6 +285,14 @@ namespace QualityControl_Server
             if (Journal.Contract == null)
             {
                 unfilledInfo += "\n Основание/договор";
+            }
+            if (Journal.WeldJoint == null)
+            {
+                unfilledInfo += "\n Тип св. соединения";
+            }
+            if (Journal.WeldingType == "")
+            {
+                unfilledInfo += "\n Способ сварки";
             }
 
             if (unfilledInfo != "")

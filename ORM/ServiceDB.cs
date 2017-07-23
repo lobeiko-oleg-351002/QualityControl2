@@ -299,6 +299,18 @@ namespace ORM
                 .HasMany(e => e.Journal)
                 .WithOptional(e => e.User)
                 .HasForeignKey(e => e.userOwner_id);
+
+            modelBuilder.Entity<WeldJoint>()
+                .HasMany(e => e.Journal)
+                .WithOptional(e => e.WeldJoint)
+                .HasForeignKey(e => e.weldJoint_id)
+                .WillCascadeOnDelete();
+
+            modelBuilder.Entity<WeldJoint>()
+                .HasMany(e => e.Template)
+                .WithOptional(e => e.WeldJoint)
+                .HasForeignKey(e => e.weldJoint_id)
+                .WillCascadeOnDelete();
         }
     }
 }

@@ -27,6 +27,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
         BllMaterial material;
         BllScheduleOrganization scheduleOrganization;
         BllCustomer customer;
+        BllWeldJoint weldJoint;
         BllIndustrialObject industrialObject;
         BllControlMethodsLib controlMethodsLib;
         List<ControlMethodTabForm> ControlMethodTabForms;
@@ -56,9 +57,11 @@ namespace QualityControl_Server.Forms.TemplateDirectory
             controlMethodsLib = new BllControlMethodsLib();
 
             textBox1.Text = oldTemplate.Name;
-            textBox3.Text = oldTemplate.Weight;
+            textBox3.Text = oldTemplate.Size;
             textBox4.Text = oldTemplate.Material != null ? oldTemplate.Material.Name : "";
-            textBox5.Text = oldTemplate.WeldJoint != null ? oldTemplate.WeldJoint.Name : "";
+            textBox5.Text = oldTemplate.ScheduleOrganization != null ? oldTemplate.ScheduleOrganization.Name : "";
+            textBox6.Text = oldTemplate.WeldJoint != null ? oldTemplate.WeldJoint.Name : "";
+            textBox7.Text = oldTemplate.WeldingType;
 
             IndustrialObjects = new List<BllIndustrialObject>();
             IIndustrialObjectService industrialObjectService = new IndustrialObjectService(uow);
@@ -92,6 +95,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
             material = oldTemplate.Material;
             scheduleOrganization = oldTemplate.ScheduleOrganization;
             customer = oldTemplate.Customer;
+            weldJoint = oldTemplate.WeldJoint;
             contract = oldTemplate.Contract;
             if (customer != null)
             {
@@ -183,15 +187,17 @@ namespace QualityControl_Server.Forms.TemplateDirectory
                 RemoveUncontrolledMethods();
                 BllTemplate template = new BllTemplate
                 {
+                    Id = oldTemplate.Id,
                     Contract = comboBox3.SelectedIndex != -1 ? Customers[comboBox2.SelectedIndex].ContractLib.Entities[comboBox3.SelectedIndex] : null,
                     ControlMethodsLib = controlMethodsLib,
                     Customer = comboBox2.SelectedIndex != -1 ? Customers[comboBox2.SelectedIndex] : null,
                     Description = richTextBox2.Text,
                     IndustrialObject = comboBox1.SelectedIndex != -1 ? IndustrialObjects[comboBox1.SelectedIndex] : null,
                     Material = material,
-                    Weight = textBox3.Text,
+                    Size = textBox3.Text,
                     Name = textBox1.Text,
- 
+                    WeldingType = textBox7.Text,
+                    WeldJoint = weldJoint,
                     ScheduleOrganization = scheduleOrganization
                 };
                 ITemplateService Service = new TemplateService(uow);
@@ -235,6 +241,17 @@ namespace QualityControl_Server.Forms.TemplateDirectory
             {
                 comboBox3.Items.Add(item.Name);
                 comboBox3.SelectedIndex = 0;
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            ChooseWeldJointForm chooseWeldJointForm = new ChooseWeldJointForm(uow);
+            chooseWeldJointForm.ShowDialog(this);
+            weldJoint = chooseWeldJointForm.GetChosenWeldJoint();
+            if (weldJoint != null)
+            {
+                textBox6.Text = weldJoint.Name;
             }
         }
     }

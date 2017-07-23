@@ -91,10 +91,14 @@ namespace QualityControl_Server
                 comboBox2.SelectedItem = Journal.Customer != null ? Journal.Customer.Organization + " " + Journal.Customer.Address + " " + Journal.Customer.Phone : "";
             }
 
+            dateTimePicker1.Value = Journal.RequestDate.Value;
             dateTimePicker2.Value = Journal.ControlDate.Value;
             numericUpDown2.Value = Journal.RequestNumber.Value;
             numericUpDown1.Value = Journal.Amount.Value < 100 ? Journal.Amount.Value : 0;
-            textBox3.Text = Journal.Weight;
+            textBox1.Text = Journal.IndustrialObject != null ? Journal.IndustrialObject.Name : "";
+            textBox7.Text = Journal.WeldingType;
+            textBox6.Text = Journal.WeldJoint != null ? Journal.WeldJoint.Name : "";
+            textBox3.Text = Journal.Size;
             textBox2.Text = Journal.Component != null ? Journal.Component.Name : "";
             textBox4.Text = Journal.Material != null ? Journal.Material.Name : "";
             textBox5.Text = Journal.ScheduleOrganization != null ? Journal.ScheduleOrganization.Name : "";

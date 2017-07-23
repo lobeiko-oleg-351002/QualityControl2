@@ -25,11 +25,14 @@ namespace DAL.Mapping
                 Material_id = entity.material_id,
                 ModifiedDate = entity.modifiedDate,
                 RequestNumber = entity.requestNumber,
-                Weight = entity.weight,
+                Size = entity.size,
                 UserModifierLogin = entity.userModifierLogin,
                 UserOwner_id = entity.userOwner_id,
                 ScheduleOrganization_id = entity.scheduleOrganization_id,
-                Contract_id = entity.contract_id                
+                Contract_id = entity.contract_id,
+                RequestDate = entity.requestDate,
+                WeldJoint_id = entity.weldJoint_id,
+                WeldingType = entity.weldingType
             };
         }
 
@@ -48,11 +51,14 @@ namespace DAL.Mapping
                 material_id = entity.Material_id,
                 modifiedDate = entity.ModifiedDate,
                 requestNumber = entity.RequestNumber,
-                weight = entity.Weight,
+                size = entity.Size,
                 userModifierLogin = entity.UserModifierLogin,
                 userOwner_id = entity.UserOwner_id,
                 scheduleOrganization_id = entity.ScheduleOrganization_id,
-                contract_id = entity.Contract_id
+                contract_id = entity.Contract_id,
+                weldJoint_id = entity.WeldJoint_id,
+                requestDate = entity.RequestDate,
+                weldingType = entity.WeldingType
             };
         }
     }

@@ -27,6 +27,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
         BllMaterial material;
         BllScheduleOrganization scheduleOrganization;
         BllControlMethodsLib controlMethodsLib;
+        BllWeldJoint weldJoint;
         List<ControlMethodTabForm> ControlMethodTabForms;
         List<BllIndustrialObject> IndustrialObjects;
         List<BllControlName> ControlNames;
@@ -159,9 +160,12 @@ namespace QualityControl_Server.Forms.TemplateDirectory
                     Description = richTextBox2.Text,
                     IndustrialObject = comboBox1.SelectedIndex != -1 ? IndustrialObjects[comboBox1.SelectedIndex] : null,
                     Material = material,
-                    Weight = textBox3.Text,
+                    Size = textBox3.Text,
                     Name = textBox1.Text,
-                    ScheduleOrganization = scheduleOrganization
+                    ScheduleOrganization = scheduleOrganization,
+                    WeldingType = textBox7.Text,
+                    WeldJoint = weldJoint
+                    
                 };
 
                 ITemplateService service = new TemplateService(uow);
@@ -177,6 +181,17 @@ namespace QualityControl_Server.Forms.TemplateDirectory
             {
                 comboBox3.Items.Add(item.Name);
                 comboBox3.SelectedIndex = 0;
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            ChooseWeldJointForm chooseWeldJointForm = new ChooseWeldJointForm(uow);
+            chooseWeldJointForm.ShowDialog(this);
+            weldJoint = chooseWeldJointForm.GetChosenWeldJoint();
+            if (weldJoint != null)
+            {
+                textBox6.Text = weldJoint.Name;
             }
         }
     }

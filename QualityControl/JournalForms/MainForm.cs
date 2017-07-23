@@ -189,6 +189,8 @@ namespace QualityControl
                         if (isActivatedLicense)
                         {
                             controlNameService.Create(new BllControlName { Name = "УЗК" });
+                            controlNameService.Create(new BllControlName { Name = "РГК" });
+                            controlNameService.Create(new BllControlName { Name = "ПВК" });
                             controlNames = controlNameService.GetAll();
                         }
                     }
@@ -268,16 +270,18 @@ namespace QualityControl
                 row.CreateCells(dataGridView1);
                 row.Cells[0].Value = dataGridView1.Rows.Count + 1;
             }
-            
-            row.Cells[1].Value = journal.ControlDate;
-            row.Cells[2].Value = journal.RequestNumber;
-            row.Cells[3].Value = journal.Component != null ? journal.Component.Pressmark : null;
-            row.Cells[4].Value = journal.Amount;
-            row.Cells[5].Value = journal.Weight;
-            row.Cells[6].Value = journal.Material != null ? journal.Material.Name : null;
-            row.Cells[7].Value = journal.ScheduleOrganization != null ? journal.ScheduleOrganization.Name : null;
-            const int numCell = 8;
-            const int controlsCount = 2;
+            row.Cells[1].Value = journal.RequestDate;
+            row.Cells[2].Value = journal.ControlDate;
+            row.Cells[3].Value = journal.RequestNumber;
+            row.Cells[4].Value = journal.Component != null ? journal.Component.Pressmark : null;
+            row.Cells[5].Value = journal.Amount;
+            row.Cells[6].Value = journal.Size;
+            row.Cells[7].Value = journal.WeldJoint != null ? journal.WeldJoint.Name : null;
+            row.Cells[8].Value = journal.WeldingType;
+            row.Cells[9].Value = journal.Material != null ? journal.Material.Name : null;
+            row.Cells[10].Value = journal.ScheduleOrganization != null ? journal.ScheduleOrganization.Name : null;
+            const int numCell = 11;
+            const int controlsCount = 4;
             for(int i = numCell; i < numCell + controlsCount; i++)
             {
                 row.Cells[i].Value = "";
@@ -857,7 +861,7 @@ namespace QualityControl
             CenterToScreen();
             tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
             dataGridView1.Columns[1].DefaultCellStyle.Format = "dd.MM.yyyy";
-            //dataGridView1.Columns[2].DefaultCellStyle.Format = "dd.MM.yyyy";
+            dataGridView1.Columns[2].DefaultCellStyle.Format = "dd.MM.yyyy";
             ConnectToServer();
             if (isConnectedToServer)
             {

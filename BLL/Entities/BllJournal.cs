@@ -13,13 +13,17 @@ namespace BLL.Entities
 
         public DateTime? ControlDate { get; set; }
 
+        public DateTime? RequestDate { get; set; }
+
         public int? RequestNumber { get; set; }
 
         public BllIndustrialObject IndustrialObject { get; set; }
 
         public int? Amount { get; set; }
 
-        public string Weight { get; set; }
+        public string Size { get; set; }
+
+        public string WeldingType { get; set; }
 
         public BllMaterial Material { get; set; }
 
@@ -40,5 +44,7 @@ namespace BLL.Entities
         public DateTime? ModifiedDate { get; set; }
 
         public BllContract Contract { get; set; }
+
+        public BllWeldJoint WeldJoint { get; set; }
     }
 }

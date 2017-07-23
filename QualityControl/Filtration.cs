@@ -1,4 +1,6 @@
-﻿using QualityControl_Server.Forms.ComponentDirectory;
+﻿using BLL.Entities;
+
+using QualityControl_Server.Forms.ComponentDirectory;
 using QualityControl_Server.Forms.IndustrialObjectDirectory;
 using QualityControl_Server.Forms.MaterialDirectory;
 using QualityControl_Server.Forms.WeldJointDirectory;
@@ -14,25 +16,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BLL.Entities;
 using DAL.Repositories.Interface;
-using QualityControl_Server.DirectoryForms.ScheduleOrganizationDirectory;
 
 namespace QualityControl_Server
 {
     public partial class Filtration : Form
     {
-        DateTime controlDateLeft = DateTime.Now, controlDateRight = DateTime.Now;
+        DateTime requestDateLeft = DateTime.Now, requestDateRight = DateTime.Now, controlDateLeft = DateTime.Now, controlDateRight = DateTime.Now;
         int amountLeft, amountRight;
         int requestNumber;
         BllComponent component;
         BllMaterial material;
-        BllScheduleOrganization scheduleOrganization;
+        BllWeldJoint weldJoint;
         BllIndustrialObject industrialObject;
         BllCustomer customer;
+        string contract;
         string size;
         IUnitOfWork uow;
         List<Func<BllJournal, bool>> filters = new List<Func<BllJournal, bool>>();
 
-        bool fit_vik, fit_uzk, unfit_vik, unfit_uzk;
+        bool fit_vik, fit_uzk, fit_pvk, fit_rgk, unfit_vik, unfit_uzk, unfit_pvk, unfit_rgk;
 
         public Filtration()
         {
@@ -45,11 +47,28 @@ namespace QualityControl_Server
         {
             InitializeComponent();
             this.RefreshDataGrid = RefreshDataGrid;
+            dateTimePicker1.Value = DateTime.Now;
+            dateTimePicker2.Value = DateTime.Now;
             dateTimePicker3.Value = DateTime.Now;
             dateTimePicker4.Value = DateTime.Now;
             this.uow = uow;
         }
 
+        private void checkBox9_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox9.Checked)
+            {
+                dateTimePicker1.Enabled = true;
+                dateTimePicker2.Enabled = true;
+                filters.Add(RequestDateFiltration);
+            }
+            else
+            {
+                filters.Remove(RequestDateFiltration);
+                dateTimePicker1.Enabled = false;
+                dateTimePicker2.Enabled = false;
+            }
+        }
 
         private void checkBox10_CheckedChanged(object sender, EventArgs e)
         {
@@ -133,13 +152,13 @@ namespace QualityControl_Server
         {
             if (checkBox15.Checked)
             {
-                filters.Add(ScheduleOrganizationFiltration);
+                filters.Add(WeldJointFiltration);
                 textBox3.Enabled = true;
                 button3.Enabled = true;
             }
             else
             {
-                filters.Remove(ScheduleOrganizationFiltration);
+                filters.Remove(WeldJointFiltration);
                 textBox3.Enabled = false;
                 button3.Enabled = false;
             }
@@ -223,7 +242,53 @@ namespace QualityControl_Server
             }
         }
 
-       
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox6.Checked)
+            {
+                fit_pvk = true;
+            }
+            else
+            {
+                fit_pvk = false;
+            }
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox5.Checked)
+            {
+                unfit_pvk = true;
+            }
+            else
+            {
+                unfit_pvk = false;
+            }
+        }
+
+        private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox8.Checked)
+            {
+                fit_rgk = true;
+            }
+            else
+            {
+                fit_rgk = false;
+            }
+        }
+
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox7.Checked)
+            {
+                unfit_rgk = true;
+            }
+            else
+            {
+                unfit_rgk = false;
+            }
+        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -270,7 +335,6 @@ namespace QualityControl_Server
             }
         }
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             ChooseComponentForm form = new ChooseComponentForm(uow);
@@ -295,12 +359,12 @@ namespace QualityControl_Server
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ChooseScheduleOrganizationForm form = new ChooseScheduleOrganizationForm(uow);
+            ChooseWeldJointForm form = new ChooseWeldJointForm(uow);
             form.ShowDialog();
-            scheduleOrganization = form.GetChosenScheduleOrganization();
-            if (scheduleOrganization != null)
+            weldJoint = form.GetChosenWeldJoint();
+            if (weldJoint != null)
             {
-                textBox3.Text = scheduleOrganization.Name;
+                textBox3.Text = weldJoint.Name;
             }
         }
 
@@ -358,11 +422,50 @@ namespace QualityControl_Server
             }
         }
 
-      
+        private void checkBox21_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox21.Checked)
+            {
+                filters.Add(PvkFiltration);
+                checkBox5.Enabled = true;
+                checkBox6.Enabled = true;
+            }
+            else
+            {
+                filters.Remove(PvkFiltration);
+                checkBox5.Enabled = false;
+                checkBox6.Enabled = false;
+            }
+        }
+
+        private void checkBox18_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox18.Checked)
+            {
+                filters.Add(RgkFiltration);
+                checkBox7.Enabled = true;
+                checkBox8.Enabled = true;
+            }
+            else
+            {
+                filters.Remove(RgkFiltration);
+                checkBox7.Enabled = false;
+                checkBox8.Enabled = false;
+            }
+        }
 
 
 
         //FILTRATION____________________________________________
+
+        private bool RequestDateFiltration(BllJournal journal)
+        {
+            if (journal.RequestDate.Value.Date.CompareTo(requestDateLeft.Date) >= 0 && journal.RequestDate.Value.Date.CompareTo(requestDateRight.Date) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
 
         private bool ControlDateFiltration(BllJournal journal)
         {
@@ -401,6 +504,15 @@ namespace QualityControl_Server
             amountRight = (int)numericUpDown2.Value;
         }
 
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            requestDateLeft = dateTimePicker1.Value;
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            requestDateRight = dateTimePicker2.Value;
+        }
 
         private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
         {
@@ -422,7 +534,6 @@ namespace QualityControl_Server
             size = textBox4.Text;
         }
 
- 
 
         private bool ComponentFiltration(BllJournal journal)
         {
@@ -448,11 +559,11 @@ namespace QualityControl_Server
             return false;
         }
 
-        private bool ScheduleOrganizationFiltration(BllJournal journal)
+        private bool WeldJointFiltration(BllJournal journal)
         {
-            if (journal.ScheduleOrganization != null && scheduleOrganization != null)
+            if (journal.WeldJoint != null && weldJoint != null)
             {
-                if (journal.ScheduleOrganization.Id == scheduleOrganization.Id)
+                if (journal.WeldJoint.Id == weldJoint.Id)
                 {
                     return true;
                 }
@@ -462,16 +573,11 @@ namespace QualityControl_Server
 
         private bool SizeFiltration(BllJournal journal)
         {
-            if (journal.Weight == size)
+            if (journal.Size == size)
             {
                 return true;
             }
             return false;
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-
         }
 
         private bool IndustrialObjectFiltration(BllJournal journal)
@@ -499,10 +605,11 @@ namespace QualityControl_Server
         }
 
 
+
         private bool VikFiltration(BllJournal journal)
         {
             var controls = journal.ControlMethodsLib.Entities;
-            foreach(var control in controls)
+            foreach (var control in controls)
             {
                 if (control.ControlName.Name == "ВИК")
                 {
@@ -528,6 +635,38 @@ namespace QualityControl_Server
                 }
             }
             if (!fit_uzk && !unfit_uzk) return true;
+            return false;
+        }
+
+        private bool PvkFiltration(BllJournal journal)
+        {
+            var controls = journal.ControlMethodsLib.Entities;
+            foreach (var control in controls)
+            {
+                if (control.ControlName.Name == "ПВК")
+                {
+                    if (fit_pvk && control.IsControlled.Value) return true;
+                    if (unfit_pvk && !control.IsControlled.Value) return true;
+                    break;
+                }
+            }
+            if (!fit_pvk && !unfit_pvk) return true;
+            return false;
+        }
+
+        private bool RgkFiltration(BllJournal journal)
+        {
+            var controls = journal.ControlMethodsLib.Entities;
+            foreach (var control in controls)
+            {
+                if (control.ControlName.Name == "РГК")
+                {
+                    if (fit_rgk && control.IsControlled.Value) return true;
+                    if (unfit_rgk && !control.IsControlled.Value) return true;
+                    break;
+                }
+            }
+            if (!fit_rgk && !unfit_rgk) return true;
             return false;
         }
     }

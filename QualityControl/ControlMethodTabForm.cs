@@ -34,20 +34,6 @@ namespace QualityControl_Server
             InitializeComponent();
 
         }
-
-        private void HideControlsForVIK()
-        {
-            if (controlName == "ВИК")
-            {
-                groupBox2.Visible = false;
-                button14.Visible = false;
-                button15.Visible = false;
-                label15.Visible = false;
-                textBox2.Visible = false;
-                groupBox4.Location = new Point(13, 67);
-                groupBox3.Location = new Point(13, 170);
-            }
-        }
         string controlName;
         public ControlMethodTabForm(string controlName, IUnitOfWork uow, AddJournalForm parent)
         {
@@ -57,7 +43,6 @@ namespace QualityControl_Server
             panel = panel1;
             label1.Text = controlName;
             this.controlName = controlName;
-            HideControlsForVIK();
             DisableFormControls();
             
         }
@@ -73,7 +58,6 @@ namespace QualityControl_Server
             SetCurrentControlAndJournal(control, journal, false);
             controlName = control.ControlName.Name;
             isEditing = true;
-            HideControlsForVIK();
             DisableFormControls();
         }
 
@@ -547,10 +531,6 @@ namespace QualityControl_Server
             if (currentControl != null)
             {
                 ResultDirectoryForm resultDirectoryForm = new ResultDirectoryForm(currentControl.ResultLib, isEditing);
-                if (controlName == "ВИК")
-                {
-                    resultDirectoryForm.RenameColumnsForVIK();
-                }
                 resultDirectoryForm.ShowDialog(this);
 
             }
@@ -652,7 +632,6 @@ namespace QualityControl_Server
             textBox3.ReadOnly = false;
             textBox4.ReadOnly = false;
             //ClearProtocolNumber();
-            HideControlsForVIK();
         }
 
         public void ClearProtocolNumber()

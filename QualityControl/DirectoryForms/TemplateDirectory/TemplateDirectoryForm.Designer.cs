@@ -76,7 +76,7 @@
             // Column4
             // 
             this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column4.HeaderText = "Организация, вып. чертежи";
+            this.Column4.HeaderText = "Орг., вып. чертежи";
             this.Column4.Name = "Column4";
             // 
             // Column7
@@ -110,7 +110,7 @@
             // Column8
             // 
             this.Column8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column8.HeaderText = "Масса";
+            this.Column8.HeaderText = "Размер";
             this.Column8.Name = "Column8";
             this.Column8.ReadOnly = true;
             // 

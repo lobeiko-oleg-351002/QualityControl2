@@ -152,32 +152,17 @@ namespace QualityControl_Server
             var worksheet = workbook.Worksheets.Add();
             worksheet.Name = controlName;
             ExcelApp.Columns.ColumnWidth = 20;
-            if (controlName != "ВИК")
-            {
-                ExcelApp.Cells[1, 1] = "№ п/п";
-                ExcelApp.Cells[1, 2] = "Объект";
-                ExcelApp.Cells[1, 3] = "Код объекта";
-                ExcelApp.Cells[1, 4] = "Исполнитель";
-                ExcelApp.Cells[1, 5] = "Дата контроля";
-                ExcelApp.Cells[1, 6] = "Номер соединения";
-                ExcelApp.Cells[1, 7] = "Дефект";
-                ExcelApp.Cells[1, 8] = "Оценка качества";
-                ExcelApp.Cells[1, 9] = "Тип соединения";
-                ExcelApp.Cells[1, 10] = "Контроль провёл, ФИО, подпись";
-            }
-            else
-            {
-                ExcelApp.Cells[1, 1] = "№ п/п";
-                ExcelApp.Cells[1, 2] = "Объект";
-                ExcelApp.Cells[1, 3] = "Код объекта";
-                ExcelApp.Cells[1, 4] = "Исполнитель";
-                ExcelApp.Cells[1, 5] = "Дата контроля";
-                ExcelApp.Cells[1, 6] = "Стадия контроля";
-                ExcelApp.Cells[1, 7] = "Особые отметки";
-                ExcelApp.Cells[1, 8] = "Приёмочный контроль, дата";
-                ExcelApp.Cells[1, 9] = "Результат приёмки";
-                ExcelApp.Cells[1, 10] = "Контроль провёл, ФИО, подпись";
-            }
+            ExcelApp.Cells[1, 1] = "№ п/п";
+            ExcelApp.Cells[1, 2] = "Объект";
+            ExcelApp.Cells[1, 3] = "Код объекта";
+            ExcelApp.Cells[1, 4] = "Исполнитель";
+            ExcelApp.Cells[1, 5] = "Дата контроля";
+            ExcelApp.Cells[1, 6] = "Номер соединения";
+            ExcelApp.Cells[1, 7] = "Дефект";
+            ExcelApp.Cells[1, 8] = "Оценка качества";
+            ExcelApp.Cells[1, 9] = "Тип соединения";
+            ExcelApp.Cells[1, 10] = "Контроль провёл, ФИО, подпись";
+            
 
             return workbook;
         }
@@ -349,8 +334,8 @@ namespace QualityControl_Server
             var workbook = ExcelApp.Application.Workbooks.Add(Type.Missing);
             int journalNum = 0;
             int rowNumber = 0;
-           // workbook = InitResultExcelTable(workbook, ExcelApp, "ПВК");
-            //workbook = InitResultExcelTable(workbook, ExcelApp, "РГК");
+            workbook = InitResultExcelTable(workbook, ExcelApp, "ПВК");
+            workbook = InitResultExcelTable(workbook, ExcelApp, "РГК");
             workbook = InitResultExcelTable(workbook, ExcelApp, "УЗК");
             workbook = InitResultExcelTable(workbook, ExcelApp, "ВИК");
             List<int> objectNumbers = new List<int>();

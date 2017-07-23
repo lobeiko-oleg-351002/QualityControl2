@@ -20,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerWcfService", "ServerW
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Управление качеством", "Управление качеством\Управление качеством.vdproj", "{69854654-1F68-4544-AC28-9A6D001942E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORM", "ORM\ORM.csproj", "{C99FE4A4-C020-4E30-BCAF-24C140CCF98F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORM", "ORM\ORM.csproj", "{5860C5B0-D901-45C9-ACF8-02EDBBC2AB00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,10 +56,10 @@ Global
 		{69854654-1F68-4544-AC28-9A6D001942E4}.Debug|Any CPU.Build.0 = Debug
 		{69854654-1F68-4544-AC28-9A6D001942E4}.Release|Any CPU.ActiveCfg = Release
 		{69854654-1F68-4544-AC28-9A6D001942E4}.Release|Any CPU.Build.0 = Release
-		{C99FE4A4-C020-4E30-BCAF-24C140CCF98F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C99FE4A4-C020-4E30-BCAF-24C140CCF98F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C99FE4A4-C020-4E30-BCAF-24C140CCF98F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C99FE4A4-C020-4E30-BCAF-24C140CCF98F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5860C5B0-D901-45C9-ACF8-02EDBBC2AB00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5860C5B0-D901-45C9-ACF8-02EDBBC2AB00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5860C5B0-D901-45C9-ACF8-02EDBBC2AB00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5860C5B0-D901-45C9-ACF8-02EDBBC2AB00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

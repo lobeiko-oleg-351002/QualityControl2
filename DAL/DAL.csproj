@@ -180,7 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ORM\ORM.csproj">
-      <Project>{c99fe4a4-c020-4e30-bcaf-24c140ccf98f}</Project>
+      <Project>{5860c5b0-d901-45c9-acf8-02edbbc2ab00}</Project>
       <Name>ORM</Name>
     </ProjectReference>
   </ItemGroup>

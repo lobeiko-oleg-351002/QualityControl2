@@ -22,8 +22,9 @@ namespace BLL.Mapping
         IIndustrialObjectService industrialObjectService;
         IMaterialService materialService;
         IUserService userService;
-        IScheduleOrganizationService weldJointService;
+        IScheduleOrganizationService scheduleOrganizationService;
         IContractService contractService;
+        IWeldJointService weldJointService;
 
         public JournalMapper(IUnitOfWork uow)
         {
@@ -34,8 +35,9 @@ namespace BLL.Mapping
             industrialObjectService = new IndustrialObjectService(uow);
             materialService = new MaterialService(uow);
             userService = new UserService(uow);
-            weldJointService = new ScheduleOrganizationService(uow);
+            scheduleOrganizationService = new ScheduleOrganizationService(uow);
             contractService = new ContractService(uow);
+            weldJointService = new WeldJointService(uow);
         }
 
         public JournalMapper() { }
@@ -51,7 +53,7 @@ namespace BLL.Mapping
                 Description = entity.Description,
                 ModifiedDate = entity.ModifiedDate,
                 RequestNumber = entity.RequestNumber,
-                Weight = entity.Weight,
+                Size = entity.Size,
                 UserModifierLogin = entity.UserModifierLogin,
                 Component_id = entity.Component != null ? entity.Component.Id : (int?)null,
                 ControlMethodsLib_id = entity.ControlMethodsLib != null ? entity.ControlMethodsLib.Id : (int?)null,
@@ -60,6 +62,9 @@ namespace BLL.Mapping
                 Material_id = entity.Material != null ? entity.Material.Id : (int?)null,
                 UserOwner_id = entity.UserOwner != null ? entity.UserOwner.Id : (int?)null,
                 ScheduleOrganization_id = entity.ScheduleOrganization != null ? entity.ScheduleOrganization.Id : (int?)null,
+                RequestDate = entity.RequestDate,
+                WeldingType = entity.WeldingType,
+                WeldJoint_id = entity.WeldJoint != null ? entity.WeldJoint.Id : (int?)null,
             };
 
             return dalEntity;
@@ -77,7 +82,7 @@ namespace BLL.Mapping
                 Description = entity.Description,
                 ModifiedDate = entity.ModifiedDate,
                 RequestNumber = entity.RequestNumber,
-                Weight = entity.Weight,
+                Size = entity.Size,
                 UserModifierLogin = entity.UserModifierLogin,
                 Component = entity.Component_id != null ? componentService.Get((int)entity.Component_id) : null,
                 ControlMethodsLib = entity.ControlMethodsLib_id != null ? controlMethodsLibService.Get((int)entity.ControlMethodsLib_id) : null,
@@ -85,7 +90,10 @@ namespace BLL.Mapping
                 IndustrialObject = entity.IndustrialObject_id != null ? industrialObjectService.Get((int)entity.IndustrialObject_id) : null,
                 Material = entity.Material_id != null ? materialService.Get((int)entity.Material_id) : null,
                 UserOwner = entity.UserOwner_id != null ? userService.Get((int)entity.UserOwner_id) : null,
-                ScheduleOrganization = entity.ScheduleOrganization_id != null ? weldJointService.Get((int)entity.ScheduleOrganization_id) : null,
+                ScheduleOrganization = entity.ScheduleOrganization_id != null ? scheduleOrganizationService.Get((int)entity.ScheduleOrganization_id) : null,
+                WeldJoint = entity.WeldJoint_id != null ? weldJointService.Get((int)entity.WeldJoint_id) : null,
+                WeldingType = entity.WeldingType,
+                RequestDate = entity.RequestDate
             };
 
             return bllEntity;

@@ -42,7 +42,7 @@ namespace BLL.Mapping
                 ControlMethodsLib_id = entity.ControlMethodsLib.Id,
                 Customer_id = entity.Customer != null ? entity.Customer.Id : (int?)null,
                 IndustrialObject_id = entity.IndustrialObject != null ? entity.IndustrialObject.Id : (int?)null,
-                Weight = entity.Weight,
+                Size = entity.Size,
                 WeldingType = entity.WeldingType,
                 ScheduleOrganization_id = entity.ScheduleOrganization != null ? entity.ScheduleOrganization.Id : (int?)null,
             };
@@ -71,7 +71,7 @@ namespace BLL.Mapping
                 Contract = entity.Contract_id != null ? contractService.Get((int)entity.Contract_id) : null,
                 ControlMethodsLib = entity.ControlMethodsLib_id != null ? controlMethodsLibService.Get((int)entity.ControlMethodsLib_id) : null,
                 IndustrialObject = entity.IndustrialObject_id != null ? industrialObjectService.Get((int)entity.IndustrialObject_id) : null,
-                Weight = entity.Weight,
+                Size = entity.Size,
                 WeldingType = entity.WeldingType,
                 ScheduleOrganization = entity.ScheduleOrganization_id != null ? scheduleOrganizationService.Get((int)entity.ScheduleOrganization_id) : null,
             };

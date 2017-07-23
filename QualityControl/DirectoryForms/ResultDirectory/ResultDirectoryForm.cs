@@ -48,27 +48,7 @@ namespace QualityControl_Server.Forms.ResultDirectory
 
         BllResultLib resultLib;
         
-        public void RenameColumnsForVIK()
-        {
-            dataGridView1.Columns[0].HeaderText = "Стадия контроля";
-            dataGridView1.Columns[1].HeaderText = "Исполнитель";
-            dataGridView1.Columns[2].HeaderText = "Результат приёмки";
-            dataGridView1.Columns[3].HeaderText = "Особые отметки";
-            dataGridView1.Columns[4].HeaderText = "Примечание";
-            dataGridView1.Columns[5].HeaderText = "Дата контроля";
 
-            if (weldingTypeHistory.Count() == 0)
-            {
-                weldingTypeHistory.Add("Принят");
-                weldingTypeHistory.Add("Не принят");
-            }
-            if (numberHistory.Count() == 0)
-            {
-                numberHistory.Add("Сборка");
-                numberHistory.Add("Сварка");
-                numberHistory.Add("Приёмочный");
-            }
-        }
         private bool isEditing;
         public ResultDirectoryForm(BllResultLib lib, bool isEditing)
         {

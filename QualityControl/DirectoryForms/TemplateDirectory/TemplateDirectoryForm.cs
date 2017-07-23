@@ -61,7 +61,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
                 row.Cells[4].Value = Template.Description;
                 row.Cells[5].Value = Template.IndustrialObject != null ? Template.IndustrialObject.Name : "";
                 row.Cells[6].Value = Template.Customer != null ? Template.Customer.Organization : "";
-                row.Cells[7].Value = Template.Weight;
+                row.Cells[7].Value = Template.Size;
 
                 dataGridView1.Rows.Add(row);
             }
