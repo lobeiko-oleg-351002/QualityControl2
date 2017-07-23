@@ -72,7 +72,7 @@ namespace QualityControl_Server
             controlName = control.ControlName.Name;
             isEditing = true;
             HideControlsForVIK();
-            DisableFormControls();
+            //DisableFormControls();
         }
 
 
@@ -92,8 +92,9 @@ namespace QualityControl_Server
             if (control.IsControlled != null)
             {
                 checkBox1.Checked = true;
-                CheckedChanged();
+                SetControlCheck(control.IsControlled.Value);
             }
+            CheckedChanged();
 
             SetEquipment(control.EquipmentLib);
             SetImages(control.ImageLib);
@@ -155,7 +156,7 @@ namespace QualityControl_Server
 
         public void SetControlCheck(bool isControlled)
         {
-            
+            //checkBox1.Checked = true;
             if (isControlled)
             {
                 currentControl.IsControlled = true;
@@ -658,13 +659,14 @@ namespace QualityControl_Server
             if (checkBox1.Checked)
             {
                 EnableFormControls();
-                if (currentControl.IsControlled == true)
+               // SetControlCheck(true);
+               if (currentControl.IsControlled == null)
                 {
-                    radioButton2.Checked = true;
+                    SetControlCheck(true);
                 }
-                if (currentControl.IsControlled == false)
+               else
                 {
-                    radioButton1.Checked = true;
+                    SetControlCheck(currentControl.IsControlled.Value);
                 }
             }
             else
@@ -731,7 +733,11 @@ namespace QualityControl_Server
 
         public bool? IsControlled()
         {
-            return currentControl.IsControlled;
+            if (currentControl != null)
+            {
+                return currentControl.IsControlled;
+            }
+            return null;
         }
     }
 }

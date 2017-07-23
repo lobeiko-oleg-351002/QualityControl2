@@ -273,7 +273,17 @@ namespace QualityControl_Server
                     Journal.Material = template.Material;
                     Journal.ScheduleOrganization = template.ScheduleOrganization;
                     Journal.Contract = template.Contract;
-                    Journal.ControlMethodsLib = template.ControlMethodsLib;
+                    //Journal.ControlMethodsLib = template.ControlMethodsLib;
+                    foreach(var control in template.ControlMethodsLib.Entities)
+                    {
+                        for(int i = 0; i < Journal.ControlMethodsLib.Entities.Count; i++)
+                        {
+                            if (control.ControlName.Id == Journal.ControlMethodsLib.Entities[i].ControlName.Id)
+                            {
+                                Journal.ControlMethodsLib.Entities[i] = control;
+                            }
+                        }
+                    }
                     Journal.Customer = template.Customer;
                     Journal.Description = template.Description;
                     Journal.IndustrialObject = template.IndustrialObject;
