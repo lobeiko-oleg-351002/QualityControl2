@@ -583,11 +583,11 @@ namespace QualityControl
 
             var form = ControlMethodTabForms[e.Index];
 
-            if (form.isRejected == true)
+            if (form.IsControlled() == false)
             {
                 sb.Color = Color.LightPink;
             }
-            if (form.isRejected == false)
+            if (form.IsControlled() == true)
             {
                 sb.Color = Color.LightGreen;
             }

@@ -161,7 +161,8 @@ namespace QualityControl_Server.Forms.TemplateDirectory
                     Material = material,
                     Weight = textBox3.Text,
                     Name = textBox1.Text,
-                    ScheduleOrganization = scheduleOrganization
+                    ScheduleOrganization = scheduleOrganization,
+                    //WeldingType = 
                 };
 
                 ITemplateService service = new TemplateService(uow);

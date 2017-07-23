@@ -146,11 +146,16 @@ namespace QualityControl_Server
                     ClearEmployees();
                 }
 
-
-                for (int i = 0; i < Journal.ControlMethodsLib.Entities.Count; i++)
+                foreach (var control in Journal.ControlMethodsLib.Entities)
                 {
-                    var control = Journal.ControlMethodsLib.Entities[i];
-                    ControlMethodTabForms[i].SetCurrentControlAndJournal(control, Journal, true);
+                    for (int i = 0; i < ControlMethodTabForms.Count; i++)
+                    {
+                        if (ControlMethodTabForms[i].currentControl.ControlName.Name.Equals(control.ControlName.Name))
+                        {
+                            ControlMethodTabForms[i].SetCurrentControl(control);
+
+                        }
+                    }
                 }
                 isClosed = false;
             }

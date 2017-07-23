@@ -64,7 +64,7 @@ namespace BLL.Services
                     currentControl = service.Create(Control);
                     var dal = controlMapper.MapToDal(currentControl);
                     dal.Lib_id = entity.Id;
-                    var ormControl = uow.Controls.Create(dal);
+                    var ormControl = uow.Controls.Create(dal, false);
                     uow.Commit();
                     Control.Id = ormControl.id;
                     Control.ProtocolNumber = ormControl.protocolNumber;

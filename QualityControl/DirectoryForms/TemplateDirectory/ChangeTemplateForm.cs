@@ -58,7 +58,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
             textBox1.Text = oldTemplate.Name;
             textBox3.Text = oldTemplate.Weight;
             textBox4.Text = oldTemplate.Material != null ? oldTemplate.Material.Name : "";
-            textBox5.Text = oldTemplate.WeldJoint != null ? oldTemplate.WeldJoint.Name : "";
+            textBox5.Text = oldTemplate.ScheduleOrganization!= null ? oldTemplate.ScheduleOrganization.Name : "";
 
             IndustrialObjects = new List<BllIndustrialObject>();
             IIndustrialObjectService industrialObjectService = new IndustrialObjectService(uow);
@@ -93,17 +93,6 @@ namespace QualityControl_Server.Forms.TemplateDirectory
             scheduleOrganization = oldTemplate.ScheduleOrganization;
             customer = oldTemplate.Customer;
             contract = oldTemplate.Contract;
-            if (customer != null)
-            {
-                foreach(var item in customer.ContractLib.Entities)
-                {
-                    comboBox3.Items.Add(item.Name);
-                }
-                if (comboBox3.Items.Count > 0)
-                {
-                    comboBox3.SelectedItem = oldTemplate.Contract;
-                }
-            }
             industrialObject = oldTemplate.IndustrialObject;
             controlMethodsLib = oldTemplate.ControlMethodsLib;
 
@@ -139,10 +128,10 @@ namespace QualityControl_Server.Forms.TemplateDirectory
 
 
                 var tabForm = new ControlMethodTabForm(control, null, uow, null);
-                if (control.IsControlled != null)
-                {
-                    tabForm.EnableFormControls();
-                }
+                //if (control.IsControlled != null)
+                //{
+                //    tabForm.EnableFormControls();
+                //}
                 tabForm.EnableValidateCheckBox();
                 //tabForm.AddEmployee(user);
                 ControlMethodTabForms.Add(tabForm);
@@ -183,6 +172,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
                 RemoveUncontrolledMethods();
                 BllTemplate template = new BllTemplate
                 {
+                    Id = oldTemplate.Id,
                     Contract = comboBox3.SelectedIndex != -1 ? Customers[comboBox2.SelectedIndex].ContractLib.Entities[comboBox3.SelectedIndex] : null,
                     ControlMethodsLib = controlMethodsLib,
                     Customer = comboBox2.SelectedIndex != -1 ? Customers[comboBox2.SelectedIndex] : null,

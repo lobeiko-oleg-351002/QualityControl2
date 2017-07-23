@@ -50,7 +50,7 @@ namespace QualityControl_Server
             foreach (var controlName in controlNames)
             {
                 bool isExistControl = false;
-                
+
                 foreach (var currentControl in oldJournal.ControlMethodsLib.Entities)
                 {
                     if (currentControl.ControlName.Name == controlName.Name)
@@ -108,6 +108,7 @@ namespace QualityControl_Server
             dateTimePicker2.Value = Journal.ControlDate.Value;
             numericUpDown2.Value = Journal.RequestNumber.Value;
             numericUpDown1.Value = Journal.Amount.Value < 100 ? Journal.Amount.Value : 0;
+            textBox1.Text = Journal.IndustrialObject != null ? Journal.IndustrialObject.Name : "";
             textBox3.Text = Journal.Weight;
             textBox2.Text = Journal.Component != null ? Journal.Component.Name : "";
             textBox4.Text = Journal.Material != null ? Journal.Material.Name : "";
@@ -188,10 +189,10 @@ namespace QualityControl_Server
                 {
                     controlsForRemoving.Add(controls[i]);
                 }
-                
+
             }
 
-            foreach(var control in controlsForRemoving)
+            foreach (var control in controlsForRemoving)
             {
                 controls.Remove(control);
             }
@@ -282,7 +283,7 @@ namespace QualityControl_Server
                     {
                         if (Journal.Component.IndustrialObject != null)
                         {
-                            Journal.IndustrialObject = Journal.Component.IndustrialObject;                           
+                            Journal.IndustrialObject = Journal.Component.IndustrialObject;
                         }
                     }
 
@@ -291,10 +292,9 @@ namespace QualityControl_Server
 
                     foreach (var control in template.ControlMethodsLib.Entities)
                     {
-                        for (int i = 0; i < Journal.ControlMethodsLib.Entities.Count; i++)
+                        for (int i = 0; i < ControlMethodTabForms.Count; i++)
                         {
-                            var controls = Journal.ControlMethodsLib.Entities;
-                            if (control.ControlName.Name.Equals(controls[i].ControlName.Name))
+                            if (ControlMethodTabForms[i].currentControl.ControlName.Name.Equals(control.ControlName.Name))
                             {
                                 ControlMethodTabForms[i].SetCurrentControl(control);
 
