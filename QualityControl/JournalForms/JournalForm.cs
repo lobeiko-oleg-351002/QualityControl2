@@ -274,6 +274,7 @@ namespace QualityControl_Server
                     Journal.ScheduleOrganization = template.ScheduleOrganization;
                     Journal.Contract = template.Contract;
                     //Journal.ControlMethodsLib = template.ControlMethodsLib;
+                    UncheckAllMethods();
                     foreach(var control in template.ControlMethodsLib.Entities)
                     {
                         for(int i = 0; i < Journal.ControlMethodsLib.Entities.Count; i++)
@@ -322,6 +323,14 @@ namespace QualityControl_Server
             else
             {
                 MessageBox.Show("Выберите объект контроля", "Оповещение");
+            }
+        }
+
+        private void UncheckAllMethods()
+        {
+            foreach (var control in ControlMethodTabForms)
+            {
+                control.SetControlCheck(null);
             }
         }
 

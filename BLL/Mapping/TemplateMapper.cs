@@ -60,23 +60,27 @@ namespace BLL.Mapping
 
         public BllTemplate MapToBll(DalTemplate entity)
         {
-            BllTemplate bllEntity = new BllTemplate
+            if (entity != null)
             {
-                Id = entity.Id,
-                Description = entity.Description,
-                Name = entity.Name,
-                WeldJoint = entity.WeldJoint_id != null ? weldJointService.Get((int)entity.WeldJoint_id) : null,
-                Material = entity.Material_id != null ? materialService.Get((int)entity.Material_id) : null,
-                Customer = entity.Customer_id != null ? customerService.Get((int)entity.Customer_id) : null,
-                Contract = entity.Contract_id != null ? contractService.Get((int)entity.Contract_id) : null,
-                ControlMethodsLib = entity.ControlMethodsLib_id != null ? controlMethodsLibService.Get((int)entity.ControlMethodsLib_id) : null,
-                IndustrialObject = entity.IndustrialObject_id != null ? industrialObjectService.Get((int)entity.IndustrialObject_id) : null,
-                Weight = entity.Weight,
-                WeldingType = entity.WeldingType,
-                ScheduleOrganization = entity.ScheduleOrganization_id != null ? scheduleOrganizationService.Get((int)entity.ScheduleOrganization_id) : null,
-            };
+                BllTemplate bllEntity = new BllTemplate
+                {
+                    Id = entity.Id,
+                    Description = entity.Description,
+                    Name = entity.Name,
+                    WeldJoint = entity.WeldJoint_id != null ? weldJointService.Get((int)entity.WeldJoint_id) : null,
+                    Material = entity.Material_id != null ? materialService.Get((int)entity.Material_id) : null,
+                    Customer = entity.Customer_id != null ? customerService.Get((int)entity.Customer_id) : null,
+                    Contract = entity.Contract_id != null ? contractService.Get((int)entity.Contract_id) : null,
+                    ControlMethodsLib = entity.ControlMethodsLib_id != null ? controlMethodsLibService.Get((int)entity.ControlMethodsLib_id) : null,
+                    IndustrialObject = entity.IndustrialObject_id != null ? industrialObjectService.Get((int)entity.IndustrialObject_id) : null,
+                    Weight = entity.Weight,
+                    WeldingType = entity.WeldingType,
+                    ScheduleOrganization = entity.ScheduleOrganization_id != null ? scheduleOrganizationService.Get((int)entity.ScheduleOrganization_id) : null,
+                };
 
-            return bllEntity;
+                return bllEntity;
+            }
+            return null;
         }
     }
 }

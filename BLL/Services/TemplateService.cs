@@ -39,7 +39,7 @@ namespace BLL.Services
         public override void Update(BllTemplate entity)
         {
             ControlMethodsLibService controlMethodsLibService = new ControlMethodsLibService(uow);
-            controlMethodsLibService.Update(entity.ControlMethodsLib);
+            controlMethodsLibService.Update(entity.ControlMethodsLib, true);
             uow.Templates.Update(mapper.MapToDal(entity));
             uow.Commit();
         }

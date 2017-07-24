@@ -52,7 +52,7 @@ namespace BLL.Services
         //    return retElement;
         //}
 
-        public new BllControlMethodsLib Update(BllControlMethodsLib entity)
+        public new BllControlMethodsLib Update(BllControlMethodsLib entity, bool isTemplate)
         {
             IControlMapper controlMapper = new ControlMapper(uow);
             foreach (var Control in entity.Entities)
@@ -64,7 +64,7 @@ namespace BLL.Services
                     currentControl = service.Create(Control);
                     var dal = controlMapper.MapToDal(currentControl);
                     dal.Lib_id = entity.Id;
-                    var ormControl = uow.Controls.Create(dal, false);
+                    var ormControl = uow.Controls.Create(dal, isTemplate);
                     uow.Commit();
                     Control.Id = ormControl.id;
                     Control.ProtocolNumber = ormControl.protocolNumber;

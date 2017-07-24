@@ -154,10 +154,15 @@ namespace QualityControl_Server
             }
         }
 
-        public void SetControlCheck(bool isControlled)
+        public void SetControlCheck(bool? isControlled)
         {
             //checkBox1.Checked = true;
-            if (isControlled)
+            if (isControlled == null)
+            {
+                currentControl.IsControlled = null;
+                return;
+            }
+            if (isControlled.Value)
             {
                 currentControl.IsControlled = true;
                 radioButton2.Checked = true;                
