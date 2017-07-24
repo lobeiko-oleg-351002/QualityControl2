@@ -42,7 +42,7 @@ namespace BLL.Services
         public new BllJournal Update(BllJournal entity)
         {
             ControlMethodsLibService controlMethodsLibService = new ControlMethodsLibService(uow);
-            entity.ControlMethodsLib = controlMethodsLibService.Update(entity.ControlMethodsLib);
+            entity.ControlMethodsLib = controlMethodsLibService.Update(entity.ControlMethodsLib, false);
             uow.Journals.Update(mapper.MapToDal(entity));
             uow.Commit();
 
