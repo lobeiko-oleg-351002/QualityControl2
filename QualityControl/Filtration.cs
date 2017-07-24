@@ -194,29 +194,7 @@ namespace QualityControl_Server
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-            {
-                fit_vik = true;
-            }
-            else
-            {
-                fit_vik = false;
-            }
-        }
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox2.Checked)
-            {
-                unfit_vik = true;
-            }
-            else
-            {
-                unfit_vik = false;
-            }
-        }
 
         private void checkBox4_CheckedChanged(object sender, EventArgs e)
         {
@@ -242,53 +220,9 @@ namespace QualityControl_Server
             }
         }
 
-        private void checkBox6_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox6.Checked)
-            {
-                fit_pvk = true;
-            }
-            else
-            {
-                fit_pvk = false;
-            }
-        }
 
-        private void checkBox5_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox5.Checked)
-            {
-                unfit_pvk = true;
-            }
-            else
-            {
-                unfit_pvk = false;
-            }
-        }
 
-        private void checkBox8_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox8.Checked)
-            {
-                fit_rgk = true;
-            }
-            else
-            {
-                fit_rgk = false;
-            }
-        }
 
-        private void checkBox7_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox7.Checked)
-            {
-                unfit_rgk = true;
-            }
-            else
-            {
-                unfit_rgk = false;
-            }
-        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -390,21 +324,7 @@ namespace QualityControl_Server
             }
         }
 
-        private void checkBox23_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox23.Checked)
-            {
-                filters.Add(VikFiltration);
-                checkBox1.Enabled = true;
-                checkBox2.Enabled = true;
-            }
-            else
-            {
-                filters.Remove(VikFiltration);
-                checkBox1.Enabled = false;
-                checkBox2.Enabled = false;
-            }
-        }
+
 
         private void checkBox22_CheckedChanged(object sender, EventArgs e)
         {
@@ -422,37 +342,6 @@ namespace QualityControl_Server
             }
         }
 
-        private void checkBox21_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox21.Checked)
-            {
-                filters.Add(PvkFiltration);
-                checkBox5.Enabled = true;
-                checkBox6.Enabled = true;
-            }
-            else
-            {
-                filters.Remove(PvkFiltration);
-                checkBox5.Enabled = false;
-                checkBox6.Enabled = false;
-            }
-        }
-
-        private void checkBox18_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox18.Checked)
-            {
-                filters.Add(RgkFiltration);
-                checkBox7.Enabled = true;
-                checkBox8.Enabled = true;
-            }
-            else
-            {
-                filters.Remove(RgkFiltration);
-                checkBox7.Enabled = false;
-                checkBox8.Enabled = false;
-            }
-        }
 
 
 

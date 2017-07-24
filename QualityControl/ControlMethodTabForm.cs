@@ -518,6 +518,7 @@ namespace QualityControl_Server
             listBox4.Items.Clear();
             ClearProtocolNumber();
             currentControl = null;
+            textBox2.Clear();
         }
 
         private void button12_Click(object sender, EventArgs e)

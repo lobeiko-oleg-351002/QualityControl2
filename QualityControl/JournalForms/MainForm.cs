@@ -176,24 +176,24 @@ namespace QualityControl
                     var controlNames = controlNameService.GetAll();
                     if (controlNames.Count() == 0)
                     {
-                        controlNameService.Create(new BllControlName { Name = "ВИК" });
+                        controlNameService.Create(new BllControlName { Name = "УЗК" });
                         controlNames = controlNameService.GetAll();
                     }
-                    if (controlNames.Count() < 2)
-                    {
-                        if (isFirstStart)
-                        {
-                            ShowLicenseActivationForm();
-                        }
+                    //if (controlNames.Count() < 2)
+                    //{
+                    //    if (isFirstStart)
+                    //    {
+                    //        ShowLicenseActivationForm();
+                    //    }
 
-                        if (isActivatedLicense)
-                        {
-                            controlNameService.Create(new BllControlName { Name = "УЗК" });
-                            controlNameService.Create(new BllControlName { Name = "РГК" });
-                            controlNameService.Create(new BllControlName { Name = "ПВК" });
-                            controlNames = controlNameService.GetAll();
-                        }
-                    }
+                    //    if (isActivatedLicense)
+                    //    {
+                    //        controlNameService.Create(new BllControlName { Name = "УЗК" });
+                    //        controlNameService.Create(new BllControlName { Name = "РГК" });
+                    //        controlNameService.Create(new BllControlName { Name = "ПВК" });
+                    //        controlNames = controlNameService.GetAll();
+                    //    }
+                    //}
 
                     InitAdminAndRoles();
 
@@ -281,7 +281,7 @@ namespace QualityControl
             row.Cells[9].Value = journal.Material != null ? journal.Material.Name : null;
             row.Cells[10].Value = journal.ScheduleOrganization != null ? journal.ScheduleOrganization.Name : null;
             const int numCell = 11;
-            const int controlsCount = 4;
+            const int controlsCount = 1;
             for(int i = numCell; i < numCell + controlsCount; i++)
             {
                 row.Cells[i].Value = "";

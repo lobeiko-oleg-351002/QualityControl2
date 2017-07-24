@@ -22,13 +22,13 @@
         "Entry"
         {
         "MsmKey" = "8:_1999E1A0C1D7F5A2C595A19AAB5DEE77"
-        "OwnerKey" = "8:_0F1206B85CDE4960A32E3EB57A13832D"
+        "OwnerKey" = "8:_F25E46D7CEC050EF893E594DFC6D7D8C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_1999E1A0C1D7F5A2C595A19AAB5DEE77"
-        "OwnerKey" = "8:_F25E46D7CEC050EF893E594DFC6D7D8C"
+        "OwnerKey" = "8:_0F1206B85CDE4960A32E3EB57A13832D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -41,6 +41,12 @@
         {
         "MsmKey" = "8:_3D5B8B8A8FF73D0DAB2EFF1059561ADA"
         "OwnerKey" = "8:_0F1206B85CDE4960A32E3EB57A13832D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3FC925492C5746C19F8595B8211B1136"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -112,13 +118,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0F1206B85CDE4960A32E3EB57A13832D"
+        "OwnerKey" = "8:_A8750FD1E1DE04CC1976323DF0CDED50"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1999E1A0C1D7F5A2C595A19AAB5DEE77"
+        "OwnerKey" = "8:_0F1206B85CDE4960A32E3EB57A13832D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -148,7 +154,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A8750FD1E1DE04CC1976323DF0CDED50"
+        "OwnerKey" = "8:_1999E1A0C1D7F5A2C595A19AAB5DEE77"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -301,6 +307,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3FC925492C5746C19F8595B8211B1136"
+            {
+            "SourcePath" = "8:C:\\Users\\Олег\\Desktop\\disclaimer.png"
+            "TargetName" = "8:disclaimer.png"
+            "Tag" = "8:"
+            "Folder" = "8:_0338BF100FDD442887B4568A418835DA"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5F3EE57658491FB4BE6BA4034CD33F8C"
@@ -566,7 +592,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Управление качеством"
         "ProductCode" = "8:{A7007386-2C3A-4CA8-A6C9-E5A6A20BB958}"
-        "PackageCode" = "8:{2ED37916-7209-47F8-A35C-3E3BB639A57E}"
+        "PackageCode" = "8:{28EA6BB7-AC42-4DF3-8489-4B1FF4D0A8B0}"
         "UpgradeCode" = "8:{AFE65DB0-DB72-4DF1-89BB-A3FA2E087FBF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

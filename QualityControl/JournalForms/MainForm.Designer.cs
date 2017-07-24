@@ -82,10 +82,7 @@
             this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -352,10 +349,7 @@
             this.Column16,
             this.Column7,
             this.Column8,
-            this.Column11,
-            this.Column12,
-            this.Column14,
-            this.Column15});
+            this.Column12});
             this.dataGridView1.GridColor = System.Drawing.Color.RoyalBlue;
             this.dataGridView1.Location = new System.Drawing.Point(0, 50);
             this.dataGridView1.Name = "dataGridView1";
@@ -616,33 +610,12 @@
             this.Column8.ReadOnly = true;
             this.Column8.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "ВИК";
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            this.Column11.Width = 25;
-            // 
             // Column12
             // 
             this.Column12.HeaderText = "УЗК";
             this.Column12.Name = "Column12";
             this.Column12.ReadOnly = true;
             this.Column12.Width = 25;
-            // 
-            // Column14
-            // 
-            this.Column14.HeaderText = "РГК";
-            this.Column14.Name = "Column14";
-            this.Column14.ReadOnly = true;
-            this.Column14.Width = 25;
-            // 
-            // Column15
-            // 
-            this.Column15.HeaderText = "ПВК";
-            this.Column15.Name = "Column15";
-            this.Column15.ReadOnly = true;
-            this.Column15.Width = 25;
             // 
             // MainForm
             // 
@@ -727,10 +700,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
     }
 }
 

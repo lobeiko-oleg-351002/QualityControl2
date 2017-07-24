@@ -12,6 +12,8 @@ using BLL.Entities;
 using DAL.Repositories.Interface;
 using BLL.Services.Interface;
 using BLL.Services;
+using System.Drawing;
+using QualityControl_Server.Properties;
 
 namespace QualityControl_Server
 {
@@ -222,7 +224,7 @@ namespace QualityControl_Server
                         BllControl vik = null;
                         foreach(var control in journals[i].ControlMethodsLib.Entities)
                         {
-                            if (control.ControlName.Name == "ВИК")
+                            if (control.ControlName.Name == "УЗК")
                             {
                                 vik = control;
                                 break;
@@ -266,6 +268,7 @@ namespace QualityControl_Server
                                 // row.Cells[j].Range.Underline = WdUnderline.wdUnderlineNone;
                                 // row.Cells[j].Range.Bold = 0;
                             }
+                            MakeFooter(aDoc);
                         }
                         
                     }
@@ -321,6 +324,16 @@ namespace QualityControl_Server
 
         }
 
+        private void MakeFooter(Document doc)
+        {
+            string executableLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string logo = "\\disclaimer.png";
+            string location = executableLocation + logo;
+
+            var pic = doc.InlineShapes.AddPicture(location);
+            pic.ScaleWidth = 50;
+            pic.ScaleHeight = 50;
+        }
 
         public List<int> getRunningProcesses()
         {

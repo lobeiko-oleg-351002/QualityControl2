@@ -334,10 +334,10 @@ namespace QualityControl_Server
             var workbook = ExcelApp.Application.Workbooks.Add(Type.Missing);
             int journalNum = 0;
             int rowNumber = 0;
-            workbook = InitResultExcelTable(workbook, ExcelApp, "ПВК");
-            workbook = InitResultExcelTable(workbook, ExcelApp, "РГК");
+            //workbook = InitResultExcelTable(workbook, ExcelApp, "ПВК");
+            //workbook = InitResultExcelTable(workbook, ExcelApp, "РГК");
             workbook = InitResultExcelTable(workbook, ExcelApp, "УЗК");
-            workbook = InitResultExcelTable(workbook, ExcelApp, "ВИК");
+            //workbook = InitResultExcelTable(workbook, ExcelApp, "ВИК");
             List<int> objectNumbers = new List<int>();
             objectNumbers.Add(0);
             objectNumbers.Add(0);
