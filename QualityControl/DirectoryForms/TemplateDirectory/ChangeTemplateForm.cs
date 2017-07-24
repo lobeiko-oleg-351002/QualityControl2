@@ -97,17 +97,6 @@ namespace QualityControl_Server.Forms.TemplateDirectory
             customer = oldTemplate.Customer;
             weldJoint = oldTemplate.WeldJoint;
             contract = oldTemplate.Contract;
-            if (customer != null)
-            {
-                foreach(var item in customer.ContractLib.Entities)
-                {
-                    comboBox3.Items.Add(item.Name);
-                }
-                if (comboBox3.Items.Count > 0)
-                {
-                    comboBox3.SelectedItem = oldTemplate.Contract;
-                }
-            }
             industrialObject = oldTemplate.IndustrialObject;
             controlMethodsLib = oldTemplate.ControlMethodsLib;
 
@@ -143,10 +132,6 @@ namespace QualityControl_Server.Forms.TemplateDirectory
 
 
                 var tabForm = new ControlMethodTabForm(control, null, uow, null);
-                if (control.IsControlled != null)
-                {
-                    tabForm.EnableFormControls();
-                }
                 tabForm.EnableValidateCheckBox();
                 //tabForm.AddEmployee(user);
                 ControlMethodTabForms.Add(tabForm);

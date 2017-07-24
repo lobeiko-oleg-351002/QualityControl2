@@ -80,7 +80,6 @@
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -351,7 +350,6 @@
             this.Column9,
             this.Column13,
             this.Column16,
-            this.Column6,
             this.Column7,
             this.Column8,
             this.Column11,
@@ -602,13 +600,6 @@
             this.Column16.Name = "Column16";
             this.Column16.ReadOnly = true;
             // 
-            // Column6
-            // 
-            this.Column6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column6.HeaderText = "Размер";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            // 
             // Column7
             // 
             this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -630,28 +621,28 @@
             this.Column11.HeaderText = "ВИК";
             this.Column11.Name = "Column11";
             this.Column11.ReadOnly = true;
-            this.Column11.Width = 20;
+            this.Column11.Width = 25;
             // 
             // Column12
             // 
             this.Column12.HeaderText = "УЗК";
             this.Column12.Name = "Column12";
             this.Column12.ReadOnly = true;
-            this.Column12.Width = 20;
+            this.Column12.Width = 25;
             // 
             // Column14
             // 
             this.Column14.HeaderText = "РГК";
             this.Column14.Name = "Column14";
             this.Column14.ReadOnly = true;
-            this.Column14.Width = 20;
+            this.Column14.Width = 25;
             // 
             // Column15
             // 
             this.Column15.HeaderText = "ПВК";
             this.Column15.Name = "Column15";
             this.Column15.ReadOnly = true;
-            this.Column15.Width = 20;
+            this.Column15.Width = 25;
             // 
             // MainForm
             // 
@@ -734,7 +725,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;

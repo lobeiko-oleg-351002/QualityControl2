@@ -27,8 +27,7 @@ namespace QualityControl_Server
         public Panel panel;
         public BllControl currentControl { get; private set; }
         private BllJournal currentJournal;
-        public bool isControlled = false; // проведено ли
-        public bool? isRejected = null;
+
         public ControlMethodTabForm()
         {
             InitializeComponent();
@@ -55,10 +54,10 @@ namespace QualityControl_Server
             addJournalForm = parent;
             this.uow = uow;
             panel = panel1;
-            SetCurrentControlAndJournal(control, journal, false);
+            SetCurrentControlAndJournal(control, journal, true);
             controlName = control.ControlName.Name;
             isEditing = true;
-            DisableFormControls();
+            //DisableFormControls();
         }
 
 
@@ -77,17 +76,10 @@ namespace QualityControl_Server
             imagesForPicturebox.Clear();
             if (control.IsControlled != null)
             {
-                if (control.IsControlled.Value)
-                {
-                    checkBox1.Checked = true;
-                    CheckedChanged();
-                }
-                isControlled = true;
+                checkBox1.Checked = true;
+                SetControlCheck(control.IsControlled.Value);                
             }
-            else
-            {
-                isControlled = false;
-            }
+            CheckedChanged();
             SetEquipment(control.EquipmentLib);
             SetImages(control.ImageLib);
             SetRequirementDocumentation(control.RequirementDocumentationLib);
@@ -146,20 +138,23 @@ namespace QualityControl_Server
             }
         }
 
-        public void SetControlCheck(bool isControlled)
-        {
-            
-            if (isControlled)
+        public void SetControlCheck(bool? isControlled)
+        {          
+            if (isControlled == null)
+            {
+                checkBox1.Checked = false;
+                currentControl.IsControlled = null;
+                return;
+            }
+            if (isControlled.Value)
             {
                 currentControl.IsControlled = true;
-                radioButton2.Checked = true;
-                isRejected = false;                
+                radioButton2.Checked = true;             
             }
             else
             {
                 currentControl.IsControlled = false;
                 radioButton1.Checked = true;
-                isRejected = true;
             }
         }
 
@@ -521,7 +516,6 @@ namespace QualityControl_Server
             listBox1.Items.Clear();
             pictureBox1.Image = null;
             listBox4.Items.Clear();
-            isRejected = null;
             ClearProtocolNumber();
             currentControl = null;
         }
@@ -649,14 +643,18 @@ namespace QualityControl_Server
             if (checkBox1.Checked)
             {
                 EnableFormControls();
-                isControlled = true;
-                radioButton2.Checked = true;
-                currentControl.IsControlled = true;
+                if (currentControl.IsControlled == null)
+                {
+                    SetControlCheck(true);
+                }
+                else
+                {
+                    SetControlCheck(currentControl.IsControlled.Value);
+                }
             }
             else
             {
                 DisableFormControls();
-                isControlled = false;
                 currentControl.IsControlled = null;
                 radioButton1.Checked = false;
                 radioButton1.Checked = false;
@@ -714,6 +712,16 @@ namespace QualityControl_Server
         {
             textBox2.Text = "";
             currentControl.ChiefEmployee = null;
+        }
+
+        public bool? IsControlled()
+        {
+            if (currentControl != null)
+            {
+                return currentControl.IsControlled;
+               
+            }
+            return null;
         }
     }
 }
