@@ -72,7 +72,7 @@ namespace QualityControl_Server.Forms.CustomerDirectory
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(Customers[row.Index]);
+                Service.Delete(Customers[row.Index].Id);
             }
             RefreshData();
         }

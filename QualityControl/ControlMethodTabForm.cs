@@ -444,7 +444,7 @@ namespace QualityControl_Server
                 ImageService imageService = new ImageService(uow);
                 if (currentControl.ImageLib.Entities[currentPositionInImages].Id != 0)
                 {
-                    imageService.Delete(currentControl.ImageLib.Entities[currentPositionInImages]);
+                    imageService.Delete(currentControl.ImageLib.Entities[currentPositionInImages].Id);
                 }
                 imagesForPicturebox.RemoveAt(currentPositionInImages);
                 currentControl.ImageLib.Entities.RemoveAt(currentPositionInImages);

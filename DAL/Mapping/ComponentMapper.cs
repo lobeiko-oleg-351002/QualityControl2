@@ -38,5 +38,19 @@ namespace DAL.Mapping
                 Description = entity.Description
             };
         }
+
+        public DalComponent MapToDalWithoutEntityFields(Component entity)
+        {
+            return new DalComponent
+            {
+                Id = entity.id,
+                Name = entity.name,
+                Pressmark = entity.pressmark,
+                Template_id = null,
+                IndustrialObject_id = null,
+                Count = entity.Count,
+                Description = entity.Description
+            };
+        }
     }
 }

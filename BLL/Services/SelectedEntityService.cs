@@ -41,9 +41,9 @@ namespace BLL.Services
             uow.Commit();
         }
 
-        public void Delete(IBllSelectedEntity<UEntity> entity)
+        public void Delete(int id)
         {
-            repository.Delete(bllMapper.MapToDal(entity));
+            repository.Delete(id);
             uow.Commit();
         }
 

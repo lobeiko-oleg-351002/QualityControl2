@@ -14,7 +14,7 @@ namespace DAL.Repositories.Interface
 
         TEntity Get(int id);
 
-        void Delete(TEntity entity);
+        void Delete(int id);
 
         void Update(TEntity entity);
     }

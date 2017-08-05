@@ -1,6 +1,8 @@
 ﻿using BLL.Entities;
 using BLL.Services;
 using BLL.Services.Interface;
+using DAL.Entities;
+using DAL.Repositories;
 using DAL.Repositories.Interface;
 using System;
 using System.Collections.Generic;
@@ -17,7 +19,7 @@ namespace QualityControl_Server.Forms.ComponentDirectory
 {
     public partial class ComponentDirectoryForm : DirectoryForm
     {
-        List<BllComponent> Components;
+        IEnumerable<DalComponent> Components;
 
         public ComponentDirectoryForm(IUnitOfWork uow) : base()
         {
@@ -31,16 +33,37 @@ namespace QualityControl_Server.Forms.ComponentDirectory
         public override void RefreshData()
         {
             dataGridView1.Rows.Clear();
-            IComponentService Service = new ComponentService(uow);
-            Components = Service.GetAll().ToList();
+            Components = uow.Components.GetAll();
+            Dictionary<int, DalTemplate> templates = new Dictionary<int, DalTemplate>();
+            Dictionary<int, DalIndustrialObject> industrialObjects = new Dictionary<int, DalIndustrialObject>();
             foreach (var Component in Components)
             {
+                DalTemplate t = null;
+                if (Component.Template_id != null)
+                {
+                    if (!templates.ContainsKey(Component.Template_id.Value))
+                    {
+                        templates.Add(Component.Template_id.Value, uow.Templates.Get(Component.Template_id.Value));
+                    }
+                    t = templates[Component.Template_id.Value];
+                }
+
+                DalIndustrialObject io = null;
+                if (Component.IndustrialObject_id != null)
+                {
+                    if (!industrialObjects.ContainsKey(Component.IndustrialObject_id.Value))
+                    {
+                        industrialObjects.Add(Component.IndustrialObject_id.Value, uow.IndustrialObjects.Get(Component.IndustrialObject_id.Value));
+                    }
+                    io = industrialObjects[Component.IndustrialObject_id.Value];
+                }
+
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dataGridView1);
                 row.Cells[0].Value = Component.Name;
                 row.Cells[1].Value = Component.Pressmark;
-                row.Cells[2].Value = Component.Template != null ? Component.Template.Name : "<отсутствует>";
-                row.Cells[3].Value = Component.IndustrialObject != null ? Component.IndustrialObject.Name : "<не указан>";
+                row.Cells[2].Value = t != null ? t.Name : "<отсутствует>";
+                row.Cells[3].Value = io != null ? io.Name : "<не указан>";
                 row.Cells[4].Value = Component.Count;
                 row.Cells[5].Value = Component.Description;
                 dataGridView1.Rows.Add(row);
@@ -59,7 +82,7 @@ namespace QualityControl_Server.Forms.ComponentDirectory
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(Components[row.Index]);
+                Service.Delete(Components.ElementAt(row.Index).Id);
             }
             RefreshData();
         }
@@ -75,7 +98,7 @@ namespace QualityControl_Server.Forms.ComponentDirectory
             }
             for (int i = rowsList.Count - 1; i >= 0; i--)
             {
-                ChangeComponentForm changeComponentForm = new ChangeComponentForm(this, Components[rowsList[i].Index], uow);
+                ChangeComponentForm changeComponentForm = new ChangeComponentForm(this, Service.Get(Components.ElementAt(rowsList[i].Index).Id), uow);
                 changeComponentForm.ShowDialog(this);
             }
             RefreshData();
@@ -101,9 +124,9 @@ namespace QualityControl_Server.Forms.ComponentDirectory
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < Components.Count; i++)
+            for (int i = 0; i < Components.Count(); i++)
             {
-                var item = Components[i].Pressmark;
+                var item = Components.ElementAt(i).Pressmark;
                 if (item.IndexOf(textBox1.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     dataGridView1.Rows[i].Visible = true;

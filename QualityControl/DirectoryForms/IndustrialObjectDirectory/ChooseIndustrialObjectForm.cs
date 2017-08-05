@@ -1,6 +1,7 @@
 ﻿using BLL.Entities;
 using BLL.Services;
 using BLL.Services.Interface;
+using DAL.Entities;
 using DAL.Repositories.Interface;
 
 using System;
@@ -17,8 +18,8 @@ namespace QualityControl_Server.Forms.IndustrialObjectDirectory
 {
     public partial class ChooseIndustrialObjectForm : DirectoryForm
     {
-        List<BllIndustrialObject> IndustrialObjects;
-        BllIndustrialObject industrialObject;
+        IEnumerable<DalIndustrialObject> IndustrialObjects;
+        DalIndustrialObject industrialObject;
 
         public ChooseIndustrialObjectForm() : base()
         {
@@ -34,20 +35,20 @@ namespace QualityControl_Server.Forms.IndustrialObjectDirectory
         public override void RefreshData()
         {
             dataGridView1.Rows.Clear();
-            IIndustrialObjectService Service = new IndustrialObjectService(uow);
-            IndustrialObjects = Service.GetAll().ToList();
-            IComponentService componentService = new ComponentService(uow);
+            //IIndustrialObjectService Service = new IndustrialObjectService(uow);
+            IndustrialObjects = uow.IndustrialObjects.GetAll();
+            //IComponentService componentService = new ComponentService(uow);
             foreach (var IndustrialObject in IndustrialObjects)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dataGridView1);
                 row.Cells[0].Value = IndustrialObject.Name;
-                var components = componentService.GetComponentsByIndustrialObject(IndustrialObject.Id);
+                var components = uow.Components.GetComponentsByIndustrialObject(IndustrialObject.Id);
                 foreach (var component in components)
                 {
                     ((DataGridViewComboBoxCell)row.Cells[1]).Items.Add(component.Name);
                 }
-                if (components.Count != 0)
+                if (components.Count() != 0)
                 {
                     ((DataGridViewComboBoxCell)row.Cells[1]).Value = ((DataGridViewComboBoxCell)row.Cells[1]).Items[0];
                 }
@@ -68,7 +69,7 @@ namespace QualityControl_Server.Forms.IndustrialObjectDirectory
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(IndustrialObjects[row.Index]);
+                Service.Delete(IndustrialObjects.ElementAt(row.Index).Id);
             }
             RefreshData();
         }
@@ -84,7 +85,7 @@ namespace QualityControl_Server.Forms.IndustrialObjectDirectory
             }
             for (int i = rowsList.Count - 1; i >= 0; i--)
             {
-                ChangeIndustrialObjectForm changeIndustrialObjectForm = new ChangeIndustrialObjectForm(this, IndustrialObjects[rowsList[i].Index], uow);
+                ChangeIndustrialObjectForm changeIndustrialObjectForm = new ChangeIndustrialObjectForm(this, Service.Get(IndustrialObjects.ElementAt(rowsList[i].Index).Id), uow);
                 changeIndustrialObjectForm.ShowDialog(this);
             }
             RefreshData();
@@ -99,20 +100,21 @@ namespace QualityControl_Server.Forms.IndustrialObjectDirectory
             }
             else
             {
-                industrialObject = IndustrialObjects[rows[0].Index];
+                industrialObject = IndustrialObjects.ElementAt(rows[0].Index);
                 this.Close();
             }
         }
 
         public BllIndustrialObject GetChosenIndustrialObject()
         {
-            return industrialObject;
+            IIndustrialObjectService Service = new IndustrialObjectService(uow);
+            return Service.Get(industrialObject.Id);
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var rows = dataGridView1.SelectedRows;
-            industrialObject = IndustrialObjects[rows[0].Index];
+            industrialObject = IndustrialObjects.ElementAt(rows[0].Index);
             this.Close();
         }
     }

@@ -68,7 +68,7 @@ namespace QualityControl_Server.Forms.EquipmentDirectory
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(Equipments[row.Index]);
+                Service.Delete(Equipments[row.Index].Id);
             }
             RefreshData();
         }

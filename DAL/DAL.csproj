@@ -120,6 +120,7 @@
     <Compile Include="Mapping\Interfaces\IIndustrialObjectMapper.cs" />
     <Compile Include="Mapping\Interfaces\IJournalMapper.cs" />
     <Compile Include="Mapping\Interfaces\IMapper.cs" />
+    <Compile Include="Mapping\Interfaces\IMapperLight.cs" />
     <Compile Include="Mapping\Interfaces\IMaterialMapper.cs" />
     <Compile Include="Mapping\Interfaces\IRawMapper.cs" />
     <Compile Include="Mapping\Interfaces\IRequirementDocumentationMapper.cs" />

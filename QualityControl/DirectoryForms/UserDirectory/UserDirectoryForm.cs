@@ -64,7 +64,7 @@ namespace QualityControl_Server.Forms.UserDirectory
             {
                 if (Users[row.Index].Role.Name != "Администратор")
                 {
-                    Service.Delete(Users[row.Index]);
+                    Service.Delete(Users[row.Index].Id);
                 }
                 else
                 {

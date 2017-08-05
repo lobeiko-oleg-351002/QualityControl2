@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Mapping.Interfaces
 {
-    public interface IComponentMapper : IMapper<DalComponent, Component>
+    public interface IComponentMapper : IMapper<DalComponent, Component>, IMapperLight<DalComponent, Component>
     {
 
     }

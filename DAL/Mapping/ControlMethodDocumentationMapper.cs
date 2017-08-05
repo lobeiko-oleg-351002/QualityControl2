@@ -22,6 +22,7 @@ namespace DAL.Mapping
             };
         }
 
+
         public ControlMethodDocumentation MapToOrm(DalControlMethodDocumentation entity)
         {
             return new ControlMethodDocumentation

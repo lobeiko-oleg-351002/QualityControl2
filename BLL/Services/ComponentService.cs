@@ -43,6 +43,17 @@ namespace BLL.Services
         {
             return uow.Components.GetCountOfRows();
         }
+
+        public List<BllComponent> GetAllLight()
+        {
+            var elements = ((IComponentRepository)repository).GetAllLight();
+            var retElemets = new List<BllComponent>();
+            foreach (var element in elements)
+            {
+                retElemets.Add(mapper.MapToBll(element));
+            }
+            return retElemets;
+        }
     }
 
 }

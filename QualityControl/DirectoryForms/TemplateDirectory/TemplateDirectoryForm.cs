@@ -79,7 +79,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(Templates[row.Index]);
+                Service.Delete(Templates[row.Index].Id);
             }
             RefreshData();
         }

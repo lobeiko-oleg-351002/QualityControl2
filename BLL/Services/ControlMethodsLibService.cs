@@ -105,7 +105,7 @@ namespace BLL.Services
                 }
                 if (isTrashControl == true)
                 {
-                    uow.Controls.Delete(Control);
+                    uow.Controls.Delete(Control.Id);
                 }
             }
             

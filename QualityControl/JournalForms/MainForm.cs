@@ -763,7 +763,7 @@ namespace QualityControl
                     if (Journals[row.Index].UserOwner == null || Journals[row.Index].UserOwner.Id == User.Id)
                     {
                         journalsForRemoving.Add(Journals[row.Index]);
-                        Service.Delete(Journals[row.Index]);
+                        Service.Delete(Journals[row.Index].Id);
                         dataGridView1.Rows.Remove(row);
                     }
                     else

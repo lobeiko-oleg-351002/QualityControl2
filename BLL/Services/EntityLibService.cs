@@ -96,7 +96,7 @@ namespace BLL.Services
                 }
                 if (isTrashEntity == true)
                 {
-                    selectedEntityRepository.Delete(Entity);
+                    selectedEntityRepository.Delete(Entity.Id);
                 }
             }
             uow.Commit();

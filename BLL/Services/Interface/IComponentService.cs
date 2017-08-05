@@ -12,5 +12,6 @@ namespace BLL.Services.Interface
         List<BllComponent> GetComponentsByIndustrialObject(int id);
         // IEnumerable<BllComponent> GetComponentsByTemplateId(int id);
         int GetCountOfRows();
+        List<BllComponent> GetAllLight();
     }
 }

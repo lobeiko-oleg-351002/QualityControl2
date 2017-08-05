@@ -37,5 +37,20 @@ namespace DAL.Repositories
         {
             return context.Components.Count();
         }
+
+        public List<DalComponent> GetAllLight()
+        {
+            var elements = context.Set<Component>().Select(e => e);
+            var retElemets = new List<DalComponent>();
+            if (elements.Any())
+            {
+                foreach (var element in elements)
+                {
+                    retElemets.Add(mapper.MapToDalWithoutEntityFields(element));
+                }
+            }
+
+            return retElemets;
+        }
     }
 }

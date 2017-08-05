@@ -74,7 +74,7 @@ namespace QualityControl_Server.Forms.EmployeeDirectory
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(Employees[row.Index]);
+                Service.Delete(Employees[row.Index].Id);
             }
             RefreshData();
         }

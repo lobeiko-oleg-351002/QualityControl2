@@ -12,6 +12,7 @@ namespace DAL.Repositories.Interface
     {
         IEnumerable<DalComponent> GetComponentsByIndustrialObject(int id);
         int GetCountOfRows();
+        List<DalComponent> GetAllLight();
 
     }
 }
