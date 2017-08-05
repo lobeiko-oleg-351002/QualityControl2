@@ -22,7 +22,12 @@ namespace ORM
         [StringLength(50)]
         public string name { get; set; }
 
+        [StringLength(50)]
+        public string Description{ get; set; }
+
         public int? template_id { get; set; }
+
+        public int? Count { get; set; }
 
         [StringLength(50)]
         public string pressmark { get; set; }

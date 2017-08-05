@@ -49,5 +49,10 @@ namespace BLL.Services
             return entity;
         }
 
+        public int GetCountOfRows()
+        {
+            return uow.Journals.GetCountOfRows();
+        }
+
     }
 }

@@ -1,0 +1,10 @@
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\ORM\bin\x86\Debug\ORM.dll.config
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\ORM\bin\x86\Debug\ORM.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\ORM\bin\x86\Debug\ORM.pdb
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\ORM\bin\x86\Debug\EntityFramework.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\ORM\bin\x86\Debug\EntityFramework.SqlServer.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\ORM\bin\x86\Debug\EntityFramework.xml
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\ORM\bin\x86\Debug\EntityFramework.SqlServer.xml
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\ORM\obj\x86\Debug\ORM.csprojResolveAssemblyReference.cache
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\ORM\obj\x86\Debug\ORM.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\ORM\obj\x86\Debug\ORM.pdb

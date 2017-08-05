@@ -129,6 +129,14 @@ namespace QualityControl_Server
                 {
                     SetIndustrialObject(Component.IndustrialObject);
                 }
+                if (Component.Count != null)
+                {
+                    numericUpDown1.Value = Component.Count.Value;
+                }
+                if (Component.Description != null)
+                {
+                    textBox3.Text = Component.Description;
+                }
             }
         }
 
@@ -241,6 +249,7 @@ namespace QualityControl_Server
             Journal.Amount = (int)numericUpDown1.Value;
             Journal.Weight = textBox3.Text;
             Journal.Description = richTextBox2.Text;
+           
 
         }
 

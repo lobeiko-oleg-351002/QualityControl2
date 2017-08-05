@@ -20,5 +20,9 @@ namespace BLL.Entities
         public string Pressmark { get; set; }
 
         public BllIndustrialObject IndustrialObject { get; set; }
+
+        public string Description { get; set; }
+
+        public int? Count { get; set; }
     }
 }

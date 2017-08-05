@@ -285,7 +285,14 @@ namespace QualityControl
             foreach (var control in journal.ControlMethodsLib.Entities)
             {
                 var control_id = control.ControlName.Id;
-                row.Cells[numCell - 1 + control_id].Value = "  +";   
+                if (control.IsControlled.Value)
+                {
+                    row.Cells[numCell - 1 + control_id].Value = "  +";
+                }
+                else
+                {
+                    row.Cells[numCell - 1 + control_id].Value = "  -";
+                }
             }
 
         }
@@ -982,6 +989,46 @@ namespace QualityControl
         {
             ScheduleOrganizationDirectoryForm form = new ScheduleOrganizationDirectoryForm(uow);
             form.ShowDialog();
+        }
+
+        bool isSearchUsing = false;
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            if (isSearchUsing)
+            {
+                for (int i = 0; i < Journals.Count; i++)
+                {
+                    string item = "";
+                    if (Journals[i].Component != null)
+                    {
+                        item = Journals[i].Component.Pressmark;
+                    }
+                    if (item.IndexOf(textBox4.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        dataGridView1.Rows[i].Visible = true;
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[i].Visible = false;
+                    }
+                }
+            }
+        }
+
+        private void textBox4_Click(object sender, EventArgs e)
+        {
+            textBox4.Text = "";
+            isSearchUsing = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            isSearchUsing = false;
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                dataGridView1.Rows[i].Visible = true;
+            }
+            textBox4.Text = "Поиск по коду объекта...";
         }
     }
 }

@@ -19,7 +19,9 @@ namespace DAL.Mapping
                 Name = entity.name,
                 Pressmark = entity.pressmark,
                 Template_id = entity.template_id,
-                IndustrialObject_id = entity.industrialObject_id
+                IndustrialObject_id = entity.industrialObject_id,
+                Count = entity.Count,
+                Description = entity.Description
             };
         }
 
@@ -31,7 +33,9 @@ namespace DAL.Mapping
                 name = entity.Name,
                 pressmark = entity.Pressmark,
                 template_id = entity.Template_id,
-                industrialObject_id = entity.IndustrialObject_id
+                industrialObject_id = entity.IndustrialObject_id,
+                Count = entity.Count,
+                Description = entity.Description
             };
         }
     }

@@ -48,12 +48,15 @@ namespace QualityControl_Server.Forms.ComponentDirectory
             Components = Service.GetAll().ToList();
             foreach (var Component in Components)
             {
+
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dataGridView1);
                 row.Cells[0].Value = Component.Name;
                 row.Cells[1].Value = Component.Pressmark;
                 row.Cells[2].Value = Component.Template != null ? Component.Template.Name : "<отсутствует>";
                 row.Cells[3].Value = Component.IndustrialObject != null ? Component.IndustrialObject.Name : "<не указан>";
+                row.Cells[4].Value = Component.Count;
+                row.Cells[5].Value = Component.Description;
                 dataGridView1.Rows.Add(row);
             }
         }
@@ -102,6 +105,22 @@ namespace QualityControl_Server.Forms.ComponentDirectory
             var rows = dataGridView1.SelectedRows;
             Component = Components[rows[0].Index];
             this.Close();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < Components.Count; i++)
+            {
+                var item = Components[i].Pressmark;
+                if (item.IndexOf(textBox1.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    dataGridView1.Rows[i].Visible = true;
+                }
+                else
+                {
+                    dataGridView1.Rows[i].Visible = false;
+                }
+            }
         }
     }
 }

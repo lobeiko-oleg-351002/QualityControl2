@@ -728,3 +728,4 @@ E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\QualityControl\obj\Deb
 E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\QualityControl\obj\Debug\QualityControl_Server.DirectoryForms.ScheduleOrganizationDirectory.ChooseScheduleOrganizationForm.resources
 E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\QualityControl\obj\Debug\QualityControl_Server.DirectoryForms.ScheduleOrganizationDirectory.ScheduleOrganizationDirectoryForm.resources
 E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\QualityControl\obj\Debug\Interop.InteropExtensionLib.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\QualityControl\obj\Debug\QualityControl_Server.ProgressForm.resources

@@ -10,6 +10,7 @@ namespace BLL.Services.Interface
     public interface IComponentService : IService<BllComponent>
     {
         List<BllComponent> GetComponentsByIndustrialObject(int id);
-       // IEnumerable<BllComponent> GetComponentsByTemplateId(int id);
+        // IEnumerable<BllComponent> GetComponentsByTemplateId(int id);
+        int GetCountOfRows();
     }
 }

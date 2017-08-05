@@ -1,0 +1,15 @@
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\BLL\bin\x86\Debug\BLL.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\BLL\bin\x86\Debug\BLL.pdb
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\BLL\bin\x86\Debug\AutoMapper.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\BLL\bin\x86\Debug\DAL.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\BLL\bin\x86\Debug\ORM.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\BLL\bin\x86\Debug\EntityFramework.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\BLL\bin\x86\Debug\DAL.pdb
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\BLL\bin\x86\Debug\DAL.dll.config
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\BLL\bin\x86\Debug\ORM.pdb
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\BLL\bin\x86\Debug\ORM.dll.config
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\BLL\bin\x86\Debug\AutoMapper.xml
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\BLL\bin\x86\Debug\EntityFramework.xml
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\BLL\obj\x86\Debug\BLL.csprojResolveAssemblyReference.cache
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\BLL\obj\x86\Debug\BLL.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\BLL\obj\x86\Debug\BLL.pdb

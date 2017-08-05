@@ -11,6 +11,7 @@ namespace DAL.Repositories.Interface
     public interface IComponentRepository : IRepository<DalComponent, Component>
     {
         IEnumerable<DalComponent> GetComponentsByIndustrialObject(int id);
+        int GetCountOfRows();
 
     }
 }

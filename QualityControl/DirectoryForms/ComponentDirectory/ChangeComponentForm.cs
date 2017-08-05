@@ -33,6 +33,8 @@ namespace QualityControl_Server.Forms.ComponentDirectory
             textBox2.Text = oldComponent.Pressmark;
             maskedTextBox1.Text = oldComponent.Template != null ? oldComponent.Template.Name : "<отсутствует>";
             maskedTextBox2.Text = oldComponent.IndustrialObject != null ? oldComponent.IndustrialObject.Name : "<не указан>";
+            textBox5.Text = oldComponent.Description;
+            numericUpDown1.Value = oldComponent.Count.Value;
         }
 
         protected override void button2_Click(object sender, EventArgs e)
@@ -45,6 +47,8 @@ namespace QualityControl_Server.Forms.ComponentDirectory
             {
                 oldComponent.Name = textBox1.Text;
                 oldComponent.Pressmark = textBox2.Text;
+                oldComponent.Description = textBox5.Text;
+                oldComponent.Count = (int)numericUpDown1.Value;
                 IComponentService Service = new ComponentService(uow);
                 Service.Update(oldComponent);
                 base.button2_Click(sender, e);

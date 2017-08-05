@@ -38,6 +38,11 @@ namespace BLL.Services
             }
             return res;
         }
+
+        public int GetCountOfRows()
+        {
+            return uow.Components.GetCountOfRows();
+        }
     }
 
 }

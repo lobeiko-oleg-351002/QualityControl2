@@ -20,5 +20,9 @@ namespace DAL.Entities
         public string Pressmark { get; set; }
 
         public int ? IndustrialObject_id { get; set; }
+
+        public string Description { get; set; }
+
+        public int? Count { get; set; }
     }
 }

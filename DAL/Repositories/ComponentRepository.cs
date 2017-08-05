@@ -33,6 +33,9 @@ namespace DAL.Repositories
             return res;
         }
 
-
+        public int GetCountOfRows()
+        {
+            return context.Components.Count();
+        }
     }
 }

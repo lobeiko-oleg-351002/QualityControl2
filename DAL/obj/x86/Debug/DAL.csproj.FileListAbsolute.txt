@@ -1,0 +1,15 @@
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\DAL\bin\x86\Debug\DAL.dll.config
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\DAL\bin\x86\Debug\DAL.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\DAL\bin\x86\Debug\DAL.pdb
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\DAL\bin\x86\Debug\AutoMapper.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\DAL\bin\x86\Debug\EntityFramework.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\DAL\bin\x86\Debug\EntityFramework.SqlServer.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\DAL\bin\x86\Debug\ORM.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\DAL\bin\x86\Debug\ORM.pdb
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\DAL\bin\x86\Debug\ORM.dll.config
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\DAL\bin\x86\Debug\AutoMapper.xml
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\DAL\bin\x86\Debug\EntityFramework.xml
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\DAL\bin\x86\Debug\EntityFramework.SqlServer.xml
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\DAL\obj\x86\Debug\DAL.csprojResolveAssemblyReference.cache
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\DAL\obj\x86\Debug\DAL.dll
+E:\Projects\VisualStudioProjects\QC_07.07\QualityControl2\DAL\obj\x86\Debug\DAL.pdb

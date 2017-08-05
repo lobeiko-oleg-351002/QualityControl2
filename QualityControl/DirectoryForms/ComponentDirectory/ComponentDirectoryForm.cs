@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -40,6 +41,8 @@ namespace QualityControl_Server.Forms.ComponentDirectory
                 row.Cells[1].Value = Component.Pressmark;
                 row.Cells[2].Value = Component.Template != null ? Component.Template.Name : "<отсутствует>";
                 row.Cells[3].Value = Component.IndustrialObject != null ? Component.IndustrialObject.Name : "<не указан>";
+                row.Cells[4].Value = Component.Count;
+                row.Cells[5].Value = Component.Description;
                 dataGridView1.Rows.Add(row);
             }
         }
@@ -93,6 +96,22 @@ namespace QualityControl_Server.Forms.ComponentDirectory
             if (DialogResult.OK == saveFileDialog2.ShowDialog())
             {                
                 ConvertManager.ConvertDataGridToExcel(dataGridView1, saveFileDialog2.FileName);
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < Components.Count; i++)
+            {
+                var item = Components[i].Pressmark;
+                if (item.IndexOf(textBox1.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    dataGridView1.Rows[i].Visible = true;
+                }
+                else
+                {
+                    dataGridView1.Rows[i].Visible = false;
+                }
             }
         }
     }

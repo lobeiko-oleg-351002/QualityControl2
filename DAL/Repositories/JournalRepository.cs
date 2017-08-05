@@ -18,6 +18,9 @@ namespace DAL.Repositories
             this.context = context;
         }
 
-
+        public int GetCountOfRows()
+        {
+            return context.Journals.Count();
+        }
     }
 }
