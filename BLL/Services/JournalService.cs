@@ -54,5 +54,16 @@ namespace BLL.Services
             return uow.Journals.GetCountOfRows();
         }
 
+        public List<BllJournal> GetAllWithoutControlMethodsLibs()
+        {
+            var elements = uow.Journals.GetAll();
+            var retElemets = new List<BllJournal>();
+            foreach (var element in elements)
+            {
+                retElemets.Add(mapper.MapToBllWithoutControlMethodsLib(element));
+            }
+            return retElemets;
+        }
+
     }
 }

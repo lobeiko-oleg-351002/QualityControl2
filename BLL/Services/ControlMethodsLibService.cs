@@ -52,7 +52,7 @@ namespace BLL.Services
         //    return retElement;
         //}
 
-        public new BllControlMethodsLib Update(BllControlMethodsLib entity, bool isTemplate)
+        public BllControlMethodsLib Update(BllControlMethodsLib entity, bool isTemplate)
         {
             IControlMapper controlMapper = new ControlMapper(uow);
             foreach (var Control in entity.Entities)

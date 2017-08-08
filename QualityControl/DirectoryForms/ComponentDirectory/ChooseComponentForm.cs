@@ -118,8 +118,12 @@ namespace QualityControl_Server.Forms.ComponentDirectory
 
         public BllComponent GetChosenComponent()
         {
-            IComponentService Service = new ComponentService(uow);
-            return Service.Get(Component.Id);
+            if (Component != null)
+            {
+                IComponentService Service = new ComponentService(uow);
+                return Service.Get(Component.Id);
+            }
+            return null;
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

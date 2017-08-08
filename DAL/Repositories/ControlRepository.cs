@@ -71,7 +71,5 @@ namespace DAL.Repositories
             }
             return retElemets;
         }
-
-    
     }
 }

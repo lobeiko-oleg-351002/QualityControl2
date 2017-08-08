@@ -34,6 +34,7 @@ using DAL.Repositories;
 using System.Configuration;
 using QualityControl_Server.DirectoryForms.RawDirectory;
 using QualityControl_Server.DirectoryForms.ScheduleOrganizationDirectory;
+using DAL.Entities;
 
 namespace QualityControl
 {
@@ -282,16 +283,17 @@ namespace QualityControl
             {
                 row.Cells[i].Value = "";
             }
-            foreach (var control in journal.ControlMethodsLib.Entities)
+            var methods = ((IGetterByLibId<DalControl>)uow.Controls).GetEntitiesByLibId(journal.ControlMethodsLib.Id);
+            foreach (var control in methods)
             {
-                var control_id = control.ControlName.Id;
+                var control_id = control.ControlName_id;
                 if (control.IsControlled.Value)
                 {
-                    row.Cells[numCell - 1 + control_id].Value = "  +";
+                    row.Cells[numCell - 1 + control_id.Value].Value = "  +";
                 }
                 else
                 {
-                    row.Cells[numCell - 1 + control_id].Value = "  -";
+                    row.Cells[numCell - 1 + control_id.Value].Value = "  -";
                 }
             }
 
@@ -323,7 +325,7 @@ namespace QualityControl
            // StartDiagnostics();
 
             IJournalService journalService = new JournalService(uow);
-            var journals = journalService.GetAll().ToList();
+            var journals = journalService.GetAllWithoutControlMethodsLibs().ToList();
             Journals = new List<BllJournal>();
 
            // FinishDiagnostics("Get all journals");
@@ -474,8 +476,9 @@ namespace QualityControl
                 tabControl1.Enabled = false;
                 return;
             }
-
+            ControlMethodsLibService cmls = new ControlMethodsLibService(uow);
             var currentJournal = Journals[dataGridView1.SelectedRows[0].Index];
+            currentJournal.ControlMethodsLib = cmls.Get(currentJournal.ControlMethodsLib.Id);
 
             if (currentJournal.IndustrialObject != null)
             {

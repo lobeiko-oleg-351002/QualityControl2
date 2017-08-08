@@ -90,5 +90,30 @@ namespace BLL.Mapping
 
             return bllEntity;
         }
+
+        public BllJournal MapToBllWithoutControlMethodsLib(DalJournal entity)
+        {
+            BllJournal bllEntity = new BllJournal
+            {
+                Id = entity.Id,
+                Amount = entity.Amount,
+                Contract = entity.Contract_id != null ? contractService.Get((int)entity.Contract_id) : null,
+                ControlDate = entity.ControlDate,
+                Description = entity.Description,
+                ModifiedDate = entity.ModifiedDate,
+                RequestNumber = entity.RequestNumber,
+                Weight = entity.Weight,
+                UserModifierLogin = entity.UserModifierLogin,
+                Component = entity.Component_id != null ? componentService.Get((int)entity.Component_id) : null,
+                ControlMethodsLib = new BllControlMethodsLib { Id = entity.ControlMethodsLib_id.Value },
+                Customer = entity.Customer_id != null ? customerService.Get((int)entity.Customer_id) : null,
+                IndustrialObject = entity.IndustrialObject_id != null ? industrialObjectService.Get((int)entity.IndustrialObject_id) : null,
+                Material = entity.Material_id != null ? materialService.Get((int)entity.Material_id) : null,
+                UserOwner = entity.UserOwner_id != null ? userService.Get((int)entity.UserOwner_id) : null,
+                ScheduleOrganization = entity.ScheduleOrganization_id != null ? weldJointService.Get((int)entity.ScheduleOrganization_id) : null,
+            };
+
+            return bllEntity;
+        }
     }
 }

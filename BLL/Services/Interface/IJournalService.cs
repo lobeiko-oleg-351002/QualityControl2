@@ -12,5 +12,6 @@ namespace BLL.Services.Interface
         new BllJournal Create(BllJournal entity);
         new BllJournal Update(BllJournal entity);
         int GetCountOfRows();
+        List<BllJournal> GetAllWithoutControlMethodsLibs();
     }
 }
