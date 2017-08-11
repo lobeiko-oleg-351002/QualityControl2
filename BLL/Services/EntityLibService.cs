@@ -75,11 +75,15 @@ namespace BLL.Services
             var lib = (IBllEntityLib<UEntity>)entity;
             foreach (var Entity in lib.SelectedEntities)
             {
+                var dalEntity = selectedEntityMapper.MapToDal(Entity);
+                dalEntity.Lib_id = entity.Id;
                 if (Entity.Id == 0)
                 {
-                    var dalEntity = selectedEntityMapper.MapToDal(Entity);
-                    dalEntity.Lib_id = entity.Id;
                     selectedEntityRepository.Create(dalEntity);
+                }
+                else
+                {
+                    selectedEntityRepository.Update(dalEntity);
                 }
             }
             var EntitysWithLibId = ((IGetterByLibId<IDalSelectedEntity>)selectedEntityRepository).GetEntitiesByLibId(entity.Id);
