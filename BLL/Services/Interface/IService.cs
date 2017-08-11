@@ -16,7 +16,7 @@ namespace BLL.Services.Interface
 
         void Create(TEntity entity);
 
-        void Delete(TEntity entity);
+        void Delete(int id);
 
         void Update(TEntity entity);
 

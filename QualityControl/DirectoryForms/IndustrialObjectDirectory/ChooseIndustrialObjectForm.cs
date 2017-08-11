@@ -68,7 +68,7 @@ namespace QualityControl_Server.Forms.IndustrialObjectDirectory
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(IndustrialObjects[row.Index]);
+                Service.Delete(IndustrialObjects[row.Index].Id);
             }
             RefreshData();
         }

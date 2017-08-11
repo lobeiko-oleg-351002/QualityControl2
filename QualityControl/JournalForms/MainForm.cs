@@ -39,13 +39,12 @@ namespace QualityControl
 {
     public partial class MainForm : Form
     {
-        List<BllJournal> Journals;
+        List<LiteJournal> Journals;
         List<BllControlName> ControlNames;
         List<ControlMethodTabForm> ControlMethodTabForms;
-        //DebugForm debugForm;
-
+        IJournalService journalService;
         BllUser User = null;
-
+        BllJournal selectedJournal = null;
         Func<BllJournal, bool> filtration = (BllJournal journal) => { return true; };
 
         bool isActivatedLicense = false;
@@ -215,14 +214,14 @@ namespace QualityControl
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Сервер не найден " + ex.Message, "Ошибка подключения");
+                MessageBox.Show("Ошибка: " + ex.Message, "Ошибка");
             }
 
 
         }
 
         private void SetCurrentControlsInControlMethodTabs(BllControlMethodsLib lib, BllJournal currentJournal)
-        {
+        { 
             for (int i = 0; i < ControlNames.Count; i++)
             {
                 foreach (var control in lib.Entities)
@@ -263,7 +262,7 @@ namespace QualityControl
             sw.Reset();
         }
 
-        private void FillRowUsingJournal(DataGridViewRow row, BllJournal journal)
+        private void FillRowUsingJournal(DataGridViewRow row, LiteJournal journal)
         {
             if (dataGridView1.Rows.IndexOf(row) == -1)
             {
@@ -273,28 +272,39 @@ namespace QualityControl
             row.Cells[1].Value = journal.RequestDate;
             row.Cells[2].Value = journal.ControlDate;
             row.Cells[3].Value = journal.RequestNumber;
-            row.Cells[4].Value = journal.Component != null ? journal.Component.Pressmark : null;
+            row.Cells[4].Value = journal.ComponentName != null ? journal.ComponentName : null;
             row.Cells[5].Value = journal.Amount;
             row.Cells[6].Value = journal.Size;
-            row.Cells[7].Value = journal.WeldJoint != null ? journal.WeldJoint.Name : null;
+            row.Cells[7].Value = journal.WeldJointName != null ? journal.WeldJointName : null;
             row.Cells[8].Value = journal.WeldingType;
-            row.Cells[9].Value = journal.Material != null ? journal.Material.Name : null;
-            row.Cells[10].Value = journal.ScheduleOrganization != null ? journal.ScheduleOrganization.Name : null;
+            row.Cells[9].Value = journal.MaterialName != null ? journal.MaterialName : null;
+            row.Cells[10].Value = journal.ScheduleOrganizationName != null ? journal.ScheduleOrganizationName : null;
             const int numCell = 11;
             const int controlsCount = 4;
             for(int i = numCell; i < numCell + controlsCount; i++)
             {
                 row.Cells[i].Value = "";
             }
-            foreach (var control in journal.ControlMethodsLib.Entities)
+
+            foreach (var control in journal.ControlMethods)
             {
-                var control_id = control.ControlName.Id;
-                row.Cells[numCell - 1 + control_id].Value = "  +";   
+                if (control.IsControlled != null)
+                {
+                    var control_id = control.Id;
+                    if (control.IsControlled.Value)
+                    {
+                        row.Cells[numCell - 1 + control_id].Value = "  +";
+                    }
+                    else
+                    {
+                        row.Cells[numCell - 1 + control_id].Value = "  -";
+                    }
+                }
             }
 
         }
 
-        public void AddRowToDataGrid(BllJournal journal)
+        public void AddRowToDataGrid(LiteJournal journal)
         {
             DataGridViewRow row = new DataGridViewRow();
             FillRowUsingJournal(row, journal);
@@ -302,7 +312,7 @@ namespace QualityControl
             PutScrollBarDown();
         }
 
-        public void AddNewJournal(BllJournal journal)
+        public void AddNewJournal(LiteJournal journal)
         {
             Journals.Add(journal);
             AddRowToDataGrid(journal);
@@ -310,9 +320,10 @@ namespace QualityControl
 
         public void UpdateRowInDataGrid(BllJournal journal, int rowNumber)
         {
-            Journals[rowNumber] = journal;
+            var j = journalService.GetLiteJournal(journal);
+            Journals[rowNumber] = j;
             DataGridViewRow row = dataGridView1.Rows[rowNumber];
-            FillRowUsingJournal(row, journal);
+            FillRowUsingJournal(row, j);
         }
 
         private void RefreshDataGridUsingServer()
@@ -320,8 +331,8 @@ namespace QualityControl
            // StartDiagnostics();
 
             IJournalService journalService = new JournalService(uow);
-            var journals = journalService.GetAll().ToList();
-            Journals = new List<BllJournal>();
+            var journals = journalService.GetAllLite().ToList();
+            Journals = new List<LiteJournal>();
 
            // FinishDiagnostics("Get all journals");
 
@@ -329,6 +340,7 @@ namespace QualityControl
             {
                 AddNewJournal(journal);
             }
+            SetFirstRowSelected();
         }
 
         private void RefreshDataGrid()
@@ -344,7 +356,7 @@ namespace QualityControl
             }
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                if (filtration(Journals[row.Index]))
+                if (filtration(journalService.Get(Journals[row.Index].Id)))
                 {
                     row.Visible = true;
                 }
@@ -353,6 +365,11 @@ namespace QualityControl
                     row.Visible = false;
                 }
             }
+            SetFirstRowSelected();
+        }
+
+        private void SetFirstRowSelected()
+        {
             if (dataGridView1.Rows.Count > 0)
             {
                 if (dataGridView1.Rows[0].Visible)
@@ -472,41 +489,41 @@ namespace QualityControl
                 return;
             }
 
-            var currentJournal = Journals[dataGridView1.SelectedRows[0].Index];
+            var selectedJournal = journalService.Get(Journals[dataGridView1.SelectedRows[0].Index].Id);
 
-            if (currentJournal.IndustrialObject != null)
+            if (selectedJournal.IndustrialObject != null)
             {
-                textBox1.Text = currentJournal.IndustrialObject.Name;
+                textBox1.Text = selectedJournal.IndustrialObject.Name;
             }
 
-            if (currentJournal.Customer != null)
+            if (selectedJournal.Customer != null)
             {
-                textBox2.Text = currentJournal.Customer.Organization + " " + currentJournal.Customer.Address + " " + currentJournal.Customer.Phone;
+                textBox2.Text = selectedJournal.Customer.Organization + " " + selectedJournal.Customer.Address + " " + selectedJournal.Customer.Phone;
             }
 
-            FillContract(currentJournal.Contract);
-            richTextBox2.Text = currentJournal.Description;
+            FillContract(selectedJournal.Contract);
+            richTextBox2.Text = selectedJournal.Description;
 
-            SetCurrentControlsInControlMethodTabs(currentJournal.ControlMethodsLib, currentJournal);
+            SetCurrentControlsInControlMethodTabs(selectedJournal.ControlMethodsLib, selectedJournal);
 
             tabControl1.Enabled = true;
 
             tabControl1.Invalidate();
 
-            if (currentJournal.UserOwner != null)
+            if (selectedJournal.UserOwner != null)
             {
-                label2.Text = currentJournal.UserOwner.Login;
+                label2.Text = selectedJournal.UserOwner.Login;
             }
             else
             {
                 label2.Text = "-";
             }
 
-            if (currentJournal.UserModifierLogin != null)
+            if (selectedJournal.UserModifierLogin != null)
             {
                 label3.Visible = true;
                 label4.Visible = true;
-                label3.Text = currentJournal.UserModifierLogin + " " + currentJournal.ModifiedDate.Value.Date.ToString("dd.MM.yyyy");
+                label3.Text = selectedJournal.UserModifierLogin + " " + selectedJournal.ModifiedDate.Value.Date.ToString("dd.MM.yyyy");
             }
             else
             {
@@ -732,15 +749,16 @@ namespace QualityControl
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                if (Journals[row.Index].UserOwner == null || Journals[row.Index].UserOwner.Id == User.Id || User.Role.Name == "Администратор")
+                var j = journalService.Get(Journals[row.Index].Id);
+                if (j.UserOwner == null || j.UserOwner.Id == User.Id || User.Role.Name == "Администратор")
                 {
-                    JournalForm changeJournalForm = new JournalForm(Journals[row.Index], User, uow);
+                    JournalForm changeJournalForm = new JournalForm(j, User, uow);
                     changeJournalForm.ShowDialog(this);
                     UpdateRowInDataGrid(changeJournalForm.Journal, row.Index);
                 }
                 else
                 {
-                    MessageBox.Show("Невозможно редактировать запись по объекту " + (Journals[row.Index].Component != null ? Journals[row.Index].Component.Name : "<не указан>")  + ". Доступ запрещён.", "Оповещение");
+                    MessageBox.Show("Невозможно редактировать запись по объекту " + (Journals[row.Index].ComponentName != null ? Journals[row.Index].ComponentName : "<не указан>")  + ". Доступ запрещён.", "Оповещение");
                 }
             }
 
@@ -752,20 +770,20 @@ namespace QualityControl
             form.ShowDialog();
             if (form.IsContinue)
             {
-                IJournalService Service = new JournalService(uow);
                 var rows = dataGridView1.SelectedRows;
-                List<BllJournal> journalsForRemoving = new List<BllJournal>();
+                List<LiteJournal> journalsForRemoving = new List<LiteJournal>();
                 foreach (DataGridViewRow row in rows)
                 {
-                    if (Journals[row.Index].UserOwner == null || Journals[row.Index].UserOwner.Id == User.Id)
+                    var j = journalService.Get(Journals[row.Index].Id);
+                    if (j.UserOwner == null || j.UserOwner.Id == User.Id)
                     {
                         journalsForRemoving.Add(Journals[row.Index]);
-                        Service.Delete(Journals[row.Index]);
+                        journalService.Delete(Journals[row.Index].Id);
                         dataGridView1.Rows.Remove(row);
                     }
                     else
                     {
-                        MessageBox.Show("Невозможно удалить запись по объекту " + (Journals[row.Index].Component != null ? Journals[row.Index].Component.Name : "<не указан>") + ". Доступ запрещён.", "Оповещение");
+                        MessageBox.Show("Невозможно удалить запись по объекту " + (selectedJournal.Component != null ? selectedJournal.Component.Name : "<не указан>") + ". Доступ запрещён.", "Оповещение");
                     }
                 }
                 foreach (var journal in journalsForRemoving)
@@ -800,7 +818,7 @@ namespace QualityControl
                 {
                     if (row.Visible)
                     {
-                        SelectedJournals.Add(Journals[row.Index]);
+                        SelectedJournals.Add(journalService.Get(Journals[row.Index].Id));
                     }
                 }
                
@@ -857,6 +875,7 @@ namespace QualityControl
             AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
             serviceDB = new ServiceDB();
             uow = new UnitOfWork(serviceDB);
+            journalService = new JournalService(uow);
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             CenterToScreen();
             tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
@@ -949,7 +968,7 @@ namespace QualityControl
                 {
                     if (journal.ControlDate.Value.Date.CompareTo(left) >= 0 && journal.ControlDate.Value.Date.CompareTo(right) <= 0)
                     {
-                        selectedJournal.Add(journal);
+                        selectedJournal.Add(journalService.Get(journal.Id));
                     }
                 }
                 saveFileDialog1.Filter = "Excel files (*.xls)|*.xls";

@@ -16,7 +16,7 @@ namespace QualityControl_Server.Forms.ComponentDirectory
 {
     public partial class ComponentDirectoryForm : DirectoryForm
     {
-        List<BllComponent> Components;
+        List<LiteComponent> Components;
 
         public ComponentDirectoryForm(IUnitOfWork uow) : base()
         {
@@ -31,15 +31,15 @@ namespace QualityControl_Server.Forms.ComponentDirectory
         {
             dataGridView1.Rows.Clear();
             IComponentService Service = new ComponentService(uow);
-            Components = Service.GetAll().ToList();
+            Components = Service.GetAllLite();
             foreach (var Component in Components)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dataGridView1);
                 row.Cells[0].Value = Component.Name;
                 row.Cells[1].Value = Component.Pressmark;
-                row.Cells[2].Value = Component.Template != null ? Component.Template.Name : "<отсутствует>";
-                row.Cells[3].Value = Component.IndustrialObject != null ? Component.IndustrialObject.Name : "<не указан>";
+                row.Cells[2].Value = Component.TemplateName != null ? Component.TemplateName : "<отсутствует>";
+                row.Cells[3].Value = Component.IndustrialObjectName != null ? Component.IndustrialObjectName : "<не указан>";
                 dataGridView1.Rows.Add(row);
             }
         }
@@ -56,7 +56,7 @@ namespace QualityControl_Server.Forms.ComponentDirectory
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(Components[row.Index]);
+                Service.Delete(Components[row.Index].Id);
             }
             RefreshData();
         }
@@ -72,7 +72,7 @@ namespace QualityControl_Server.Forms.ComponentDirectory
             }
             for (int i = rowsList.Count - 1; i >= 0; i--)
             {
-                ChangeComponentForm changeComponentForm = new ChangeComponentForm(this, Components[rowsList[i].Index], uow);
+                ChangeComponentForm changeComponentForm = new ChangeComponentForm(this, Service.Get(Components[rowsList[i].Index].Id), uow);
                 changeComponentForm.ShowDialog(this);
             }
             RefreshData();

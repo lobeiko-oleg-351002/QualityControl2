@@ -80,7 +80,13 @@
     <Compile Include="Entities\Interface\IBllEntityLib.cs" />
     <Compile Include="Entities\Interface\IBllEntitySimpleLib.cs" />
     <Compile Include="Entities\Interface\IBllSelectedEntity.cs" />
+    <Compile Include="Entities\LiteEntities\LiteControl.cs" />
+    <Compile Include="Entities\LiteEntities\LiteJournal.cs" />
+    <Compile Include="Entities\LiteEntities\LiteTemplate.cs" />
+    <Compile Include="Entities\LiteEntities\LiteCertificate.cs" />
+    <Compile Include="Entities\LiteEntities\LiteComponent.cs" />
     <Compile Include="Mapping\CertificateMapper.cs" />
+    <Compile Include="Mapping\Interfaces\ILiteMapper.cs" />
     <Compile Include="Mapping\ScheduleOrganizationMapper.cs" />
     <Compile Include="Mapping\ComponentMapper.cs" />
     <Compile Include="Mapping\ContractMapper.cs" />
@@ -167,6 +173,7 @@
     <Compile Include="Services\Interface\IImageLibService.cs" />
     <Compile Include="Services\Interface\IIndustrialObjectService.cs" />
     <Compile Include="Services\Interface\IJournalService.cs" />
+    <Compile Include="Services\Interface\ILiteGetter.cs" />
     <Compile Include="Services\Interface\IMaterialService.cs" />
     <Compile Include="Services\Interface\IRawService.cs" />
     <Compile Include="Services\Interface\IRequirementDocumentationService.cs" />
@@ -207,6 +214,7 @@
       <Name>ORM</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

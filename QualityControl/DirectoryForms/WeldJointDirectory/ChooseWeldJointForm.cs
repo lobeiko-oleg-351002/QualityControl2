@@ -61,7 +61,7 @@ namespace QualityControl_Server.Forms.WeldJointDirectory
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(WeldJoints[row.Index]);
+                Service.Delete(WeldJoints[row.Index].Id);
             }
             RefreshData();
         }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BLL.Services.Interface
 {
-    public interface IComponentService : IService<BllComponent>
+    public interface IComponentService : IService<BllComponent>, ILiteGetter<LiteComponent>
     {
         List<BllComponent> GetComponentsByIndustrialObject(int id);
-       // IEnumerable<BllComponent> GetComponentsByTemplateId(int id);
+        // IEnumerable<BllComponent> GetComponentsByTemplateId(int id);
     }
 }

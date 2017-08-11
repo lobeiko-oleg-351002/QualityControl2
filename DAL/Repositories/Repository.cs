@@ -28,9 +28,9 @@ namespace DAL.Repositories
             return res;
         }
 
-        public void Delete(TEntity entity)
+        public void Delete(int id)
         {
-            var ormEntity = context.Set<UEntity>().Single(e => e.id == entity.Id);
+            var ormEntity = context.Set<UEntity>().Single(e => e.id == id);
             context.Set<UEntity>().Remove(ormEntity);
         }
 

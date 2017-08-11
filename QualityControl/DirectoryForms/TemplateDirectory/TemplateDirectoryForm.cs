@@ -19,7 +19,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
 {
     public partial class TemplateDirectoryForm : DirectoryForm
     {
-        List<BllTemplate> Templates;
+        List<LiteTemplate> Templates;
 
         public TemplateDirectoryForm(IUnitOfWork uow) : base()
         {
@@ -36,31 +36,28 @@ namespace QualityControl_Server.Forms.TemplateDirectory
         {
             dataGridView1.Rows.Clear();
             ITemplateService Service = new TemplateService(uow);
-            Templates = Service.GetAll().ToList();
+            Templates = Service.GetAllLite().ToList();
             foreach (var Template in Templates)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dataGridView1);
                 row.Cells[0].Value = Template.Name;
-                row.Cells[1].Value = Template.Material != null ? Template.Material.Name : "";
-                row.Cells[2].Value = Template.ScheduleOrganization != null ? Template.ScheduleOrganization.Name : "";
+                row.Cells[1].Value = Template.MaterialName != null ? Template.MaterialName : "";
+                row.Cells[2].Value = Template.ScheduleOrganizationName != null ? Template.ScheduleOrganizationName : "";
 
                 DataGridViewComboBoxCell comboBoxCell = (DataGridViewComboBoxCell)row.Cells[3];
-                if (Template.ControlMethodsLib != null)
+                foreach (string name in Template.ControlMethods)
                 {
-                    foreach (BllControl control in Template.ControlMethodsLib.Entities)
-                    {
-                        comboBoxCell.Items.Add(control.ControlName.Name);
-                    }
-                    if (comboBoxCell.Items.Count > 0)
-                    {
-                        comboBoxCell.Value = comboBoxCell.Items[0];
-                    }
+                    comboBoxCell.Items.Add(name);
+                }
+                if (comboBoxCell.Items.Count > 0)
+                {
+                    comboBoxCell.Value = comboBoxCell.Items[0];
                 }
 
                 row.Cells[4].Value = Template.Description;
-                row.Cells[5].Value = Template.IndustrialObject != null ? Template.IndustrialObject.Name : "";
-                row.Cells[6].Value = Template.Customer != null ? Template.Customer.Organization : "";
+                row.Cells[5].Value = Template.IndustrialObjectName != null ? Template.IndustrialObjectName : "";
+                row.Cells[6].Value = Template.CustomerName != null ? Template.CustomerName : "";
                 row.Cells[7].Value = Template.Size;
 
                 dataGridView1.Rows.Add(row);
@@ -79,7 +76,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(Templates[row.Index]);
+                Service.Delete(Templates[row.Index].Id);
             }
             RefreshData();
         }
@@ -95,7 +92,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
             }
             for (int i = rowsList.Count - 1; i >= 0; i--)
             {
-                ChangeTemplateForm changeTemplateForm = new ChangeTemplateForm(this, Templates[rowsList[i].Index], uow);
+                ChangeTemplateForm changeTemplateForm = new ChangeTemplateForm(this, Service.Get(Templates[rowsList[i].Index].Id), uow);
                 changeTemplateForm.ShowDialog(this);
             }
             RefreshData();

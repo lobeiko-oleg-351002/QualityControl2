@@ -17,6 +17,7 @@ namespace QualityControl_Server.Forms.ComponentDirectory
 {
     public partial class ChooseComponentForm : DirectoryForm
     {
+        IComponentService Service;
         private void button5_Click(object sender, EventArgs e)
         {
             var rows = dataGridView1.SelectedRows;
@@ -32,28 +33,30 @@ namespace QualityControl_Server.Forms.ComponentDirectory
 
         }
 
-        List<BllComponent> Components;
-        BllComponent Component;
+        List<LiteComponent> Components;
+        LiteComponent Component;
+        
         public ChooseComponentForm(IUnitOfWork uow) : base()
         {
             InitializeComponent();
             this.uow = uow;
+            Service = new ComponentService(uow);
             RefreshData();
+
         }
 
         public override void RefreshData()
         {
             dataGridView1.Rows.Clear();
-            IComponentService Service = new ComponentService(uow);
-            Components = Service.GetAll().ToList();
+            Components = Service.GetAllLite().ToList();
             foreach (var Component in Components)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dataGridView1);
                 row.Cells[0].Value = Component.Name;
                 row.Cells[1].Value = Component.Pressmark;
-                row.Cells[2].Value = Component.Template != null ? Component.Template.Name : "<отсутствует>";
-                row.Cells[3].Value = Component.IndustrialObject != null ? Component.IndustrialObject.Name : "<не указан>";
+                row.Cells[2].Value = Component.TemplateName != null ? Component.TemplateName : "<отсутствует>";
+                row.Cells[3].Value = Component.IndustrialObjectName != null ? Component.IndustrialObjectName : "<не указан>";
                 dataGridView1.Rows.Add(row);
             }
         }
@@ -66,18 +69,16 @@ namespace QualityControl_Server.Forms.ComponentDirectory
 
         protected override void button2_Click(object sender, EventArgs e)
         {
-            IComponentService Service = new ComponentService(uow);
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(Components[row.Index]);
+                Service.Delete(Components[row.Index].Id);
             }
             RefreshData();
         }
 
         protected override void button3_Click(object sender, EventArgs e)
         {
-            IComponentService Service = new ComponentService(uow);
             var rows = dataGridView1.SelectedRows;
             List<DataGridViewRow> rowsList = new List<DataGridViewRow>();
             foreach (DataGridViewRow row in rows)
@@ -86,7 +87,7 @@ namespace QualityControl_Server.Forms.ComponentDirectory
             }
             for (int i = rowsList.Count - 1; i >= 0; i--)
             {
-                ChangeComponentForm changeComponentForm = new ChangeComponentForm(this, Components[rowsList[i].Index], uow);
+                ChangeComponentForm changeComponentForm = new ChangeComponentForm(this, Service.Get(Components[rowsList[i].Index].Id), uow);
                 changeComponentForm.ShowDialog(this);
             }
             RefreshData();
@@ -94,11 +95,17 @@ namespace QualityControl_Server.Forms.ComponentDirectory
 
         public BllComponent GetChosenComponent()
         {
-            return Component;
+            if (Component != null)
+            {
+                return Service.Get(Component.Id);
+            }
+            return null; 
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            IComponentService Service = new ComponentService(uow);
+
             var rows = dataGridView1.SelectedRows;
             Component = Components[rows[0].Index];
             this.Close();

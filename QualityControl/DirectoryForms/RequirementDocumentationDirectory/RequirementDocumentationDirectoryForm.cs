@@ -60,7 +60,7 @@ namespace QualityControl_Server.Forms.RequirementDocumentationDirectory
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(RequirementDocumentations[row.Index]);
+                Service.Delete(RequirementDocumentations[row.Index].Id);
             }
             RefreshData();
         }

@@ -32,5 +32,7 @@ namespace BLL.Entities
         public BllContract Contract { get; set; }
 
         public BllScheduleOrganization ScheduleOrganization { get; set; }
+
+
     }
 }

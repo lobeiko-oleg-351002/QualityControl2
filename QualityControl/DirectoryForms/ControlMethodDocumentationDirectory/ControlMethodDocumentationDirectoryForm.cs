@@ -55,7 +55,7 @@ namespace QualityControl_Server.Forms.ControlMethodDocumentationDirectory
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(controlMethodDocumentations[row.Index]);
+                Service.Delete(controlMethodDocumentations[row.Index].Id);
             }
             RefreshData();
         }

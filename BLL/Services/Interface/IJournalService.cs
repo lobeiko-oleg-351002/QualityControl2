@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace BLL.Services.Interface
 {
-    public interface IJournalService : IService<BllJournal>
+    public interface IJournalService : IService<BllJournal>, ILiteGetter<LiteJournal>
     {
         new BllJournal Create(BllJournal entity);
         new BllJournal Update(BllJournal entity);
+        LiteJournal GetLiteJournal(BllJournal entity);
     }
 }

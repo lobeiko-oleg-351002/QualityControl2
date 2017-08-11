@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Mapping.Interfaces
 {
-    public interface IJournalMapper : IMapper<BllJournal, DalJournal>
+    public interface IJournalMapper : IMapper<BllJournal, DalJournal>, ILiteMapper<LiteJournal, DalJournal>
     {
 
     }

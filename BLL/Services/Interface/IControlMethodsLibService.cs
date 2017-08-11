@@ -12,5 +12,7 @@ namespace BLL.Services.Interface
     {
         BllControlMethodsLib Create(BllControlMethodsLib entity, bool isTemplate);
         new BllControlMethodsLib Update(BllControlMethodsLib entity, bool isTemplate);
+        List<string> GetControlNamesById(int id);
+        List<LiteControl> GetLiteControlsFromLib(int id);
     }
 }

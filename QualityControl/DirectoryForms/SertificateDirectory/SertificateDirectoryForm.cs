@@ -65,7 +65,7 @@ namespace QualityControl_Server.Forms
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(certificates[row.Index]);
+                Service.Delete(certificates[row.Index].Id);
             }
             RefreshData();
         }

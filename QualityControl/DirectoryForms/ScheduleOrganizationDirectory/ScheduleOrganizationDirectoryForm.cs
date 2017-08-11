@@ -55,7 +55,7 @@ namespace QualityControl_Server.DirectoryForms.ScheduleOrganizationDirectory
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(ScheduleOrganizations[row.Index]);
+                Service.Delete(ScheduleOrganizations[row.Index].Id);
             }
             RefreshData();
         }

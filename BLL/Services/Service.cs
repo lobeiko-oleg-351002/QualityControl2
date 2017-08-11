@@ -36,9 +36,9 @@ namespace BLL.Services
             uow.Commit();
         }
 
-        public virtual void Delete(T entity)
+        public virtual void Delete(int id)
         {
-            repository.Delete(mapper.MapToDal(entity));
+            repository.Delete(id);
             uow.Commit();
         }
 

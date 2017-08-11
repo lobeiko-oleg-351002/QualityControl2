@@ -98,5 +98,55 @@ namespace BLL.Mapping
 
             return bllEntity;
         }
+
+        public LiteJournal MapDalToLiteBll(DalJournal entity)
+        {
+            List<LiteControl> controls = controlMethodsLibService.GetLiteControlsFromLib(entity.ControlMethodsLib_id.Value);
+            LiteJournal bllEntity = new LiteJournal
+            {
+                Id = entity.Id,
+                Amount = entity.Amount,
+                ContractName = entity.Contract_id != null ? uow.Contracts.Get(entity.Contract_id.Value).Name : null,
+                ControlDate = entity.ControlDate,
+                Description = entity.Description,
+                ModifiedDate = entity.ModifiedDate,
+                RequestNumber = entity.RequestNumber,
+                Size = entity.Size,
+                ComponentName = entity.Component_id != null ? uow.Components.Get(entity.Component_id.Value).Name : null,
+                MaterialName = entity.Material_id != null ? uow.Materials.Get(entity.Material_id.Value).Name : null,
+                ScheduleOrganizationName = entity.ScheduleOrganization_id != null ?uow.ScheduleOrganizations.Get(entity.ScheduleOrganization_id.Value).Name : null,
+                WeldJointName = entity.WeldJoint_id != null ? uow.WeldJoints.Get(entity.WeldJoint_id.Value).Name : null,
+                WeldingType = entity.WeldingType,
+                RequestDate = entity.RequestDate,
+                ControlMethods = controls
+            };
+
+            return bllEntity;
+        }
+
+        public LiteJournal MapBllToLiteBll(BllJournal entity)
+        {
+            List<LiteControl> controls = controlMethodsLibService.GetLiteControlsFromLib(entity.ControlMethodsLib.Id);
+            LiteJournal bllEntity = new LiteJournal
+            {
+                Id = entity.Id,
+                Amount = entity.Amount,
+                ContractName = entity.Contract != null ? entity.Contract.Name : null,
+                ControlDate = entity.ControlDate,
+                Description = entity.Description,
+                ModifiedDate = entity.ModifiedDate,
+                RequestNumber = entity.RequestNumber,
+                Size = entity.Size,
+                ComponentName = entity.Component != null ? entity.Component.Name : null,
+                MaterialName = entity.Material != null ? entity.Material.Name : null,
+                ScheduleOrganizationName = entity.ScheduleOrganization != null ? entity.ScheduleOrganization.Name : null,
+                WeldJointName = entity.WeldJoint != null ? entity.WeldJoint.Name : null,
+                WeldingType = entity.WeldingType,
+                RequestDate = entity.RequestDate,
+                ControlMethods = controls
+            };
+
+            return bllEntity;
+        }
     }
 }

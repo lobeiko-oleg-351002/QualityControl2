@@ -25,7 +25,7 @@ namespace QualityControl_Server
 
         List<BllControlName> ControlNames;
 
-        public delegate void AddRowToDataGrid(BllJournal journal);
+        public delegate void AddRowToDataGrid(LiteJournal journal);
 
         private AddRowToDataGrid AddRowToDataGridDelegate;
 
@@ -117,7 +117,7 @@ namespace QualityControl_Server
 
                 Journal = Service.Create(Journal);
                 MessageBox.Show("Информация добавлена.", "Оповещение");
-                AddRowToDataGridDelegate(Journal);
+                AddRowToDataGridDelegate(Service.GetLiteJournal(Journal));
 
                 for (int i = 0; i < temp.Count; i++)
                 {

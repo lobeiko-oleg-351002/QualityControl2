@@ -81,7 +81,7 @@ namespace BLL.Services
                 }
                 if (isTrashEntity == true)
                 {
-                    entityRepository.Delete(Entity);
+                    entityRepository.Delete(Entity.Id);
                 }
             }
             uow.Commit();

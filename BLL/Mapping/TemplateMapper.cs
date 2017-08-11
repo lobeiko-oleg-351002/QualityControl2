@@ -82,5 +82,28 @@ namespace BLL.Mapping
             }
             return null;
         }
+
+        public LiteTemplate MapDalToLiteBll(DalTemplate entity)
+        {
+            if (entity != null)
+            {
+                LiteTemplate bllEntity = new LiteTemplate
+                {
+                    Id = entity.Id,
+                    Description = entity.Description,
+                    Name = entity.Name,
+                    MaterialName = entity.Material_id != null ? uow.Materials.Get(entity.Material_id.Value).Name : null,
+                    CustomerName = entity.Customer_id != null ? uow.Customers.Get(entity.Customer_id.Value).Organization : null,
+                    IndustrialObjectName = entity.IndustrialObject_id != null ? uow.IndustrialObjects.Get(entity.IndustrialObject_id.Value).Name : null,
+                    Size = entity.Size,
+                    ControlMethods = controlMethodsLibService.GetControlNamesById(entity.Id),
+                    WeldingType = entity.WeldingType,
+                    ScheduleOrganizationName = entity.ScheduleOrganization_id != null ? uow.ScheduleOrganizations.Get(entity.ScheduleOrganization_id.Value).Name : null,
+                };
+
+                return bllEntity;
+            }
+            return null;
+        }
     }
 }

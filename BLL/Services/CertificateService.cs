@@ -36,5 +36,16 @@ namespace BLL.Services
         {
             return mapper.MapToBll(uow.Certificates.GetCertificateByEmployeeIdAndControlId(employee.Id, name.Id));
         }
+
+        public List<LiteCertificate> GetAllLite()
+        {
+            var elements = repository.GetAll();
+            var retElemets = new List<LiteCertificate>();
+            foreach (var element in elements)
+            {
+                retElemets.Add(mapper.MapDalToLiteBll(element));
+            }
+            return retElemets;
+        }
     }
 }

@@ -72,7 +72,7 @@ namespace QualityControl_Server.Forms.MaterialDirectory
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                Service.Delete(Materials[row.Index]);
+                Service.Delete(Materials[row.Index].Id);
             }
             RefreshData();
         }
