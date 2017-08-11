@@ -151,7 +151,24 @@ namespace QualityControl_Server
 
             var worksheet = workbook.Worksheets.Add();
             worksheet.Name = controlName;
-            ExcelApp.Columns.ColumnWidth = 20;
+            for(int i = 1; i <= 10; i++)
+            {
+                ExcelApp.Cells[1, i].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.DarkBlue);
+                ExcelApp.Cells[1, i].Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.White);
+            }
+
+            worksheet.Range("A1:J1").WrapText = true;
+            ExcelApp.Columns[1].ColumnWidth = 6;
+            ExcelApp.Columns[2].ColumnWidth = 15;
+            ExcelApp.Columns[3].ColumnWidth = 12;
+            ExcelApp.Columns[4].ColumnWidth = 15;
+            ExcelApp.Columns[5].ColumnWidth = 13;
+            ExcelApp.Columns[6].ColumnWidth = 15;
+            ExcelApp.Columns[7].ColumnWidth = 20;
+            ExcelApp.Columns[8].ColumnWidth = 15;
+            ExcelApp.Columns[9].ColumnWidth = 15;
+            ExcelApp.Columns[10].ColumnWidth = 20;
+            
             ExcelApp.Cells[1, 1] = "№ п/п";
             ExcelApp.Cells[1, 2] = "Объект";
             ExcelApp.Cells[1, 3] = "Код объекта";
@@ -181,6 +198,14 @@ namespace QualityControl_Server
             ExcelApp.Cells[row, 9] = result.WeldingType;
             ExcelApp.Cells[row, 10] = employee != null ? employee.Sirname : "";
 
+            for (int i = 1; i <= 10; i++)
+            {
+                if (row % 2 == 0)
+                {
+                    ExcelApp.Cells[row, i].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightBlue);
+                }
+                ExcelApp.Cells[row, i].Borders.LineStyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous;
+            }
 
             return ExcelApp;
         }
