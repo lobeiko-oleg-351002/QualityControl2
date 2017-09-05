@@ -84,6 +84,7 @@
             // 
             // button6
             // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.Location = new System.Drawing.Point(298, 118);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(182, 25);
@@ -94,6 +95,8 @@
             // 
             // numericUpDown2
             // 
+            this.numericUpDown2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.numericUpDown2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.numericUpDown2.Location = new System.Drawing.Point(217, 64);
             this.numericUpDown2.Maximum = new decimal(new int[] {
@@ -102,14 +105,14 @@
             0,
             0});
             this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(164, 20);
+            this.numericUpDown2.Size = new System.Drawing.Size(263, 20);
             this.numericUpDown2.TabIndex = 79;
             // 
             // button5
             // 
             this.button5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button5.Location = new System.Drawing.Point(318, 591);
+            this.button5.Location = new System.Drawing.Point(326, 625);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(103, 30);
             this.button5.TabIndex = 78;
@@ -121,7 +124,7 @@
             // 
             this.button4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button4.Location = new System.Drawing.Point(116, 591);
+            this.button4.Location = new System.Drawing.Point(124, 625);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(103, 30);
             this.button4.TabIndex = 77;
@@ -131,6 +134,8 @@
             // 
             // richTextBox2
             // 
+            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.richTextBox2.Location = new System.Drawing.Point(217, 386);
             this.richTextBox2.Name = "richTextBox2";
@@ -140,6 +145,8 @@
             // 
             // comboBox2
             // 
+            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(217, 332);
@@ -190,6 +197,7 @@
             // 
             // button3
             // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button3.Location = new System.Drawing.Point(450, 228);
             this.button3.Name = "button3";
@@ -201,6 +209,8 @@
             // 
             // textBox5
             // 
+            this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.textBox5.Location = new System.Drawing.Point(217, 228);
             this.textBox5.Name = "textBox5";
@@ -220,6 +230,7 @@
             // 
             // button2
             // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button2.Location = new System.Drawing.Point(450, 202);
             this.button2.Name = "button2";
@@ -231,6 +242,8 @@
             // 
             // textBox4
             // 
+            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.textBox4.Location = new System.Drawing.Point(217, 202);
             this.textBox4.Name = "textBox4";
@@ -250,6 +263,8 @@
             // 
             // textBox3
             // 
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.textBox3.Location = new System.Drawing.Point(217, 175);
             this.textBox3.Name = "textBox3";
@@ -268,10 +283,12 @@
             // 
             // numericUpDown1
             // 
+            this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.numericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.numericUpDown1.Location = new System.Drawing.Point(217, 149);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(159, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(263, 20);
             this.numericUpDown1.TabIndex = 58;
             // 
             // label5
@@ -297,6 +314,8 @@
             // 
             // textBox2
             // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.textBox2.Location = new System.Drawing.Point(217, 92);
             this.textBox2.Name = "textBox2";
@@ -326,6 +345,8 @@
             // 
             // dateTimePicker2
             // 
+            this.dateTimePicker2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.dateTimePicker2.Location = new System.Drawing.Point(217, 12);
             this.dateTimePicker2.Name = "dateTimePicker2";
@@ -344,7 +365,8 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.tabControl1.Location = new System.Drawing.Point(534, 0);
             this.tabControl1.Name = "tabControl1";
@@ -354,6 +376,7 @@
             // 
             // button8
             // 
+            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button8.Location = new System.Drawing.Point(450, 306);
             this.button8.Name = "button8";
@@ -365,6 +388,8 @@
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.textBox1.Location = new System.Drawing.Point(217, 306);
             this.textBox1.Name = "textBox1";
@@ -374,6 +399,8 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(217, 359);
@@ -384,6 +411,8 @@
             // 
             // textBox6
             // 
+            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.textBox6.Location = new System.Drawing.Point(217, 254);
             this.textBox6.Name = "textBox6";
@@ -393,6 +422,7 @@
             // 
             // button9
             // 
+            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button9.Location = new System.Drawing.Point(450, 254);
             this.button9.Name = "button9";
@@ -414,6 +444,8 @@
             // 
             // dateTimePicker1
             // 
+            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.dateTimePicker1.Location = new System.Drawing.Point(217, 38);
             this.dateTimePicker1.Name = "dateTimePicker1";
@@ -432,6 +464,8 @@
             // 
             // textBox7
             // 
+            this.textBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.textBox7.Location = new System.Drawing.Point(217, 280);
             this.textBox7.Name = "textBox7";
@@ -454,7 +488,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(882, 667);
-            this.ControlBox = false;
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.dateTimePicker1);
@@ -494,7 +527,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(898, 706);
             this.MinimumSize = new System.Drawing.Size(898, 706);
             this.Name = "JournalForm";
             this.Text = "Изменить объект контроля";
