@@ -1006,5 +1006,93 @@ namespace QualityControl
             ScheduleOrganizationDirectoryForm form = new ScheduleOrganizationDirectoryForm(uow);
             form.ShowDialog();
         }
+
+        bool isSearchUsing = false;
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            List<string> fields = new List<string>();
+            if (isSearchUsing)
+            {
+                for (int i = 0; i < Journals.Count; i++)
+                {
+                    var j = Journals.ElementAt(i);
+                    if (j.ComponentName != null)
+                    {
+                        fields.Add(j.ComponentName);
+                    }
+                    if (j.Amount != null)
+                    {
+                        fields.Add(j.Amount.ToString());
+                    }
+                    if (j.ContractName != null)
+                    {
+                        fields.Add(j.ContractName);
+                    }
+                    if (j.ControlDate != null)
+                    {
+                        fields.Add(j.ControlDate.Value.ToString(dateFormat));
+                    }
+                    if (j.MaterialName != null)
+                    {
+                        fields.Add(j.MaterialName);
+                    }
+                    if (j.RequestDate != null)
+                    {
+                        fields.Add(j.RequestDate.Value.ToString(dateFormat));
+                    }
+                    if (j.RequestNumber != null)
+                    {
+                        fields.Add(j.RequestNumber.ToString());
+                    }
+                    if (j.ScheduleOrganizationName != null)
+                    {
+                        fields.Add(j.ScheduleOrganizationName);
+                    }
+                    if (j.Size != null)
+                    {
+                        fields.Add(j.Size);
+                    }
+                    if (j.WeldingType != null)
+                    {
+                        fields.Add(j.WeldingType);
+                    }
+                    if (j.WeldJointName != null)
+                    {
+                        fields.Add(j.WeldJointName);
+                    }
+                    bool isFound = false;
+                    foreach(var item in fields)
+                    {
+                        if (item.IndexOf(textBox4.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                        {
+                            dataGridView1.Rows[i].Visible = true;
+                            isFound = true;
+                            break;
+                        }
+                    }
+                    if (isFound == false)
+                    {
+                        dataGridView1.Rows[i].Visible = false;
+                    }
+
+                }
+            }
+        }
+
+        private void textBox4_Click(object sender, EventArgs e)
+        {
+            textBox4.Text = "";
+            isSearchUsing = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            isSearchUsing = false;
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+               dataGridView1.Rows[i].Visible = true;
+            }
+            textBox4.Text = "Поиск...";
+        }
     }
 }
