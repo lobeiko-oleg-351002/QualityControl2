@@ -51,7 +51,6 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
@@ -67,6 +66,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
@@ -312,17 +312,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox2
-            // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.textBox2.Location = new System.Drawing.Point(217, 92);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(263, 20);
-            this.textBox2.TabIndex = 55;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -482,12 +471,22 @@
             this.label10.TabIndex = 110;
             this.label10.Text = "Способ сварки";
             // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(217, 92);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(263, 21);
+            this.comboBox3.TabIndex = 112;
+            this.comboBox3.Leave += new System.EventHandler(this.comboBox3_Leave);
+            // 
             // JournalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(882, 667);
+            this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.dateTimePicker1);
@@ -520,7 +519,6 @@
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dateTimePicker2);
@@ -561,7 +559,6 @@
         protected System.Windows.Forms.NumericUpDown numericUpDown1;
         protected System.Windows.Forms.Label label5;
         protected System.Windows.Forms.Button button1;
-        protected System.Windows.Forms.TextBox textBox2;
         protected System.Windows.Forms.Label label4;
         protected System.Windows.Forms.Label label3;
         protected System.Windows.Forms.DateTimePicker dateTimePicker2;
@@ -577,5 +574,6 @@
         protected System.Windows.Forms.Label label9;
         protected System.Windows.Forms.TextBox textBox7;
         protected System.Windows.Forms.Label label10;
+        protected System.Windows.Forms.ComboBox comboBox3;
     }
 }

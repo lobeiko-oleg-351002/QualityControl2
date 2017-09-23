@@ -47,7 +47,7 @@ namespace QualityControl_Server.Forms.ResultDirectory
         }
 
         BllResultLib resultLib;
-        
+
 
         private bool isEditing;
         public ResultDirectoryForm(BllResultLib lib, bool isEditing)
@@ -72,7 +72,7 @@ namespace QualityControl_Server.Forms.ResultDirectory
         private List<string> ParseString(string items)
         {
             var list = new List<string>(items.Split(','));
-            for(int i = 0; i < list.Count;)
+            for (int i = 0; i < list.Count;)
             {
                 if (list[i] == "")
                 {
@@ -186,11 +186,11 @@ namespace QualityControl_Server.Forms.ResultDirectory
 
         private void button5_Click(object sender, EventArgs e)
         {
-            foreach(DataGridViewRow row in dataGridView1.SelectedRows)
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
                 DataGridViewRow temp = new DataGridViewRow();
                 temp.CreateCells(dataGridView1);
-                for(int i = 0; i < row.Cells.Count; i++)
+                for (int i = 0; i < row.Cells.Count; i++)
                 {
                     temp.Cells[i].Value = row.Cells[i].Value;
                 }
@@ -230,7 +230,7 @@ namespace QualityControl_Server.Forms.ResultDirectory
 
         private void TransformHistoryToCollection(AutoCompleteStringCollection collection, List<string> history)
         {
-            foreach(var item in history)
+            foreach (var item in history)
             {
                 collection.Add(item);
             }

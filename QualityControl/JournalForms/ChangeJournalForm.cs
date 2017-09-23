@@ -99,7 +99,7 @@ namespace QualityControl_Server
             textBox7.Text = Journal.WeldingType;
             textBox6.Text = Journal.WeldJoint != null ? Journal.WeldJoint.Name : "";
             textBox3.Text = Journal.Size;
-            textBox2.Text = Journal.Component != null ? Journal.Component.Name : "";
+            comboBox3.Text = Journal.Component != null ? Journal.Component.Name : "";
             textBox4.Text = Journal.Material != null ? Journal.Material.Name : "";
             textBox5.Text = Journal.ScheduleOrganization != null ? Journal.ScheduleOrganization.Name : "";
             FillContracts(Journal.Customer);

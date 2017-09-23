@@ -38,8 +38,6 @@ namespace QualityControl_Server
         {
             InitializeComponent();
             this.uow = uow;
-
-
             User = user;
             dateTimePicker2.Focus();
             this.AddRowToDataGridDelegate = AddRowToDataGridDelegate;
@@ -54,7 +52,7 @@ namespace QualityControl_Server
 
             };
             Journal.ControlMethodsLib = new BllControlMethodsLib();
-
+            InitializeComponentComboBox();
             IControlNameService controlNameService = new ControlNameService(uow);
             var controlNames = controlNameService.GetAll();
             ControlNames = new List<BllControlName>();
@@ -260,44 +258,44 @@ namespace QualityControl_Server
             string unfilledInfo = "";
             if (Journal.Component == null)
             {
-                unfilledInfo += "\n Объект контроля";
+                unfilledInfo += "\n    Объект контроля";
             }
             if (Journal.Material == null)
             {
-                unfilledInfo += "\n Материал";
+                unfilledInfo += "\n    Материал";
             }
             if (Journal.Size == "")
             {
-                unfilledInfo += "\n Размер";
+                unfilledInfo += "\n    Размер";
             }
             if (Journal.ScheduleOrganization == null)
             {
-                unfilledInfo += "\n Организация, вып. чертежи";
+                unfilledInfo += "\n    Организация, вып. чертежи";
             }
             if (Journal.IndustrialObject == null)
             {
-                unfilledInfo += "\n Промышленный объект";
+                unfilledInfo += "\n    Промышленный объект";
             }
             if (Journal.Customer == null)
             {
-                unfilledInfo += "\n Заказчик";
+                unfilledInfo += "\n    Заказчик";
             }
             if (Journal.Contract == null)
             {
-                unfilledInfo += "\n Основание/договор";
+                unfilledInfo += "\n    Основание/договор";
             }
             if (Journal.WeldJoint == null)
             {
-                unfilledInfo += "\n Тип св. соединения";
-            }
+                unfilledInfo += "\n    Тип св. соединения";
+            } 
             if (Journal.WeldingType == "")
             {
-                unfilledInfo += "\n Способ сварки";
+                unfilledInfo += "\n    Способ сварки";
             }
 
             if (unfilledInfo != "")
             {
-                ContinueChoiceForm form = new ContinueChoiceForm("Не заполнены поля: " + unfilledInfo + "\nЖелаете продолжить?");
+                ContinueChoiceForm form = new ContinueChoiceForm("Не заполнены поля: " + unfilledInfo + "\n\nЖелаете продолжить?");
                 form.ShowDialog();
                 return form.IsContinue;
             }

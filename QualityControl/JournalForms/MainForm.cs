@@ -208,7 +208,7 @@ namespace QualityControl
                     }
 
                     isConnectedToServer = true;
-                    RefreshDataGridUsingServer();
+                    //RefreshDataGridUsingServer();
                     //Authorization();
                 }
             }
@@ -885,6 +885,7 @@ namespace QualityControl
             if (isConnectedToServer)
             {
                 Authorization();
+                RefreshDataGridUsingServer();
                 EventForm eventForm = new EventForm(uow);
                 eventForm.Show();
             }
