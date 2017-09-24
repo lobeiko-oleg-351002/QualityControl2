@@ -40,13 +40,13 @@ namespace QualityControl
 {
     public partial class MainForm : Form
     {
-        List<BllJournal> Journals;
+        List<LiteJournal> Journals;
         List<BllControlName> ControlNames;
         List<ControlMethodTabForm> ControlMethodTabForms;
-        //DebugForm debugForm;
+        IJournalService journalService;
 
         BllUser User = null;
-
+        BllJournal selectedJournal = null;
         Func<BllJournal, bool> filtration = (BllJournal journal) => { return true; };
 
         bool isActivatedLicense = false;
@@ -208,13 +208,13 @@ namespace QualityControl
                     }
 
                     isConnectedToServer = true;
-                    RefreshDataGridUsingServer();
+                    //RefreshDataGridUsingServer();
                     //Authorization();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Сервер не найден " + ex.Message, "Ошибка подключения");
+                MessageBox.Show("Ошибка: " + ex.Message, "Ошибка подключения");
             }
 
 
@@ -262,7 +262,7 @@ namespace QualityControl
             sw.Reset();
         }
 
-        private void FillRowUsingJournal(DataGridViewRow row, BllJournal journal)
+        private void FillRowUsingJournal(DataGridViewRow row, LiteJournal journal)
         {
             if (dataGridView1.Rows.IndexOf(row) == -1)
             {
@@ -272,34 +272,33 @@ namespace QualityControl
             
             row.Cells[1].Value = journal.ControlDate;
             row.Cells[2].Value = journal.RequestNumber;
-            row.Cells[3].Value = journal.Component != null ? journal.Component.Pressmark : null;
+            row.Cells[3].Value = journal.ComponentPressmark != null ? journal.ComponentPressmark : null;
             row.Cells[4].Value = journal.Amount;
             row.Cells[5].Value = journal.Weight;
-            row.Cells[6].Value = journal.Material != null ? journal.Material.Name : null;
-            row.Cells[7].Value = journal.ScheduleOrganization != null ? journal.ScheduleOrganization.Name : null;
+            row.Cells[6].Value = journal.MaterialName != null ? journal.MaterialName : null;
+            row.Cells[7].Value = journal.ScheduleOrganizationName != null ? journal.ScheduleOrganizationName : null;
             const int numCell = 8;
             const int controlsCount = 2;
             for(int i = numCell; i < numCell + controlsCount; i++)
             {
                 row.Cells[i].Value = "";
             }
-            var methods = ((IGetterByLibId<DalControl>)uow.Controls).GetEntitiesByLibId(journal.ControlMethodsLib.Id);
-            foreach (var control in methods)
+            foreach (var control in journal.ControlMethods)
             {
-                var control_id = control.ControlName_id;
+                var control_id = control.Id;
                 if (control.IsControlled.Value)
                 {
-                    row.Cells[numCell - 1 + control_id.Value].Value = "  +";
+                    row.Cells[numCell - 1 + control_id].Value = "  +";
                 }
                 else
                 {
-                    row.Cells[numCell - 1 + control_id.Value].Value = "  -";
+                    row.Cells[numCell - 1 + control_id].Value = "  -";
                 }
             }
 
         }
 
-        public void AddRowToDataGrid(BllJournal journal)
+        public void AddRowToDataGrid(LiteJournal journal)
         {
             DataGridViewRow row = new DataGridViewRow();
             FillRowUsingJournal(row, journal);
@@ -307,7 +306,7 @@ namespace QualityControl
             PutScrollBarDown();
         }
 
-        public void AddNewJournal(BllJournal journal)
+        public void AddNewJournal(LiteJournal journal)
         {
             Journals.Add(journal);
             AddRowToDataGrid(journal);
@@ -315,9 +314,10 @@ namespace QualityControl
 
         public void UpdateRowInDataGrid(BllJournal journal, int rowNumber)
         {
-            Journals[rowNumber] = journal;
-            DataGridViewRow row = dataGridView1.Rows[rowNumber];
-            FillRowUsingJournal(row, journal);
+            var j = journalService.GetLiteJournal(journal);
+            Journals[rowNumber] = j;
+            DataGridViewRow row = dataGridView1.Rows[rowNumber]; 
+            FillRowUsingJournal(row, j);
         }
 
         private void RefreshDataGridUsingServer()
@@ -325,15 +325,16 @@ namespace QualityControl
            // StartDiagnostics();
 
             IJournalService journalService = new JournalService(uow);
-            var journals = journalService.GetAllWithoutControlMethodsLibs().ToList();
-            Journals = new List<BllJournal>();
+            var journals = journalService.GetAllLite().ToList();
+            Journals = new List<LiteJournal>();
 
-           // FinishDiagnostics("Get all journals");
+            // FinishDiagnostics("Get all journals");
 
             foreach (var journal in journals)
             {
                 AddNewJournal(journal);
             }
+            SetFirstRowSelected();
         }
 
         private void RefreshDataGrid()
@@ -349,7 +350,7 @@ namespace QualityControl
             }
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
-                if (filtration(Journals[row.Index]))
+                if (filtration(journalService.Get(Journals[row.Index].Id)))
                 {
                     row.Visible = true;
                 }
@@ -358,6 +359,11 @@ namespace QualityControl
                     row.Visible = false;
                 }
             }
+            SetFirstRowSelected();
+        }
+
+        private void SetFirstRowSelected()
+        {
             if (dataGridView1.Rows.Count > 0)
             {
                 if (dataGridView1.Rows[0].Visible)
@@ -368,7 +374,7 @@ namespace QualityControl
             }
         }
 
-        
+
         private void сертификатыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SertificateDirectoryForm sertificateForm = new SertificateDirectoryForm(uow);
@@ -477,42 +483,42 @@ namespace QualityControl
                 return;
             }
             ControlMethodsLibService cmls = new ControlMethodsLibService(uow);
-            var currentJournal = Journals[dataGridView1.SelectedRows[0].Index];
-            currentJournal.ControlMethodsLib = cmls.Get(currentJournal.ControlMethodsLib.Id);
+            var selectedJournal = journalService.Get(Journals[dataGridView1.SelectedRows[0].Index].Id);
+            //currentJournal.ControlMethodsLib = cmls.Get(currentJournal.ControlMethodsLib.Id);
 
-            if (currentJournal.IndustrialObject != null)
+            if (selectedJournal.IndustrialObject != null)
             {
-                textBox1.Text = currentJournal.IndustrialObject.Name;
+                textBox1.Text = selectedJournal.IndustrialObject.Name;
             }
 
-            if (currentJournal.Customer != null)
+            if (selectedJournal.Customer != null)
             {
-                textBox2.Text = currentJournal.Customer.Organization + " " + currentJournal.Customer.Address + " " + currentJournal.Customer.Phone;
+                textBox2.Text = selectedJournal.Customer.Organization + " " + selectedJournal.Customer.Address + " " + selectedJournal.Customer.Phone;
             }
 
-            FillContract(currentJournal.Contract);
-            richTextBox2.Text = currentJournal.Description;
+            FillContract(selectedJournal.Contract);
+            richTextBox2.Text = selectedJournal.Description;
 
-            SetCurrentControlsInControlMethodTabs(currentJournal.ControlMethodsLib, currentJournal);
+            SetCurrentControlsInControlMethodTabs(selectedJournal.ControlMethodsLib, selectedJournal);
 
             tabControl1.Enabled = true;
 
             tabControl1.Invalidate();
 
-            if (currentJournal.UserOwner != null)
+            if (selectedJournal.UserOwner != null)
             {
-                label2.Text = currentJournal.UserOwner.Login;
+                label2.Text = selectedJournal.UserOwner.Login;
             }
             else
             {
                 label2.Text = "-";
             }
 
-            if (currentJournal.UserModifierLogin != null)
+            if (selectedJournal.UserModifierLogin != null)
             {
                 label3.Visible = true;
                 label4.Visible = true;
-                label3.Text = currentJournal.UserModifierLogin + " " + currentJournal.ModifiedDate.Value.Date.ToString("dd.MM.yyyy");
+                label3.Text = selectedJournal.UserModifierLogin + " " + selectedJournal.ModifiedDate.Value.Date.ToString("dd.MM.yyyy");
             }
             else
             {
@@ -738,15 +744,19 @@ namespace QualityControl
             var rows = dataGridView1.SelectedRows;
             foreach (DataGridViewRow row in rows)
             {
-                if (Journals[row.Index].UserOwner == null || Journals[row.Index].UserOwner.Id == User.Id || User.Role.Name == "Администратор")
+                var j = journalService.Get(Journals[row.Index].Id);
+                if (j.UserOwner == null || j.UserOwner.Id == User.Id || User.Role.Name == "Администратор")
                 {
-                    JournalForm changeJournalForm = new JournalForm(Journals[row.Index], User, uow);
-                    changeJournalForm.ShowDialog(this);
-                    UpdateRowInDataGrid(changeJournalForm.Journal, row.Index);
+                    {
+                        JournalForm changeJournalForm = new JournalForm(j, User, uow);
+                        changeJournalForm.ShowDialog(this);
+                        UpdateRowInDataGrid(changeJournalForm.Journal, row.Index); UpdateRowInDataGrid(changeJournalForm.Journal, row.Index);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Невозможно редактировать запись по объекту " + (Journals[row.Index].Component != null ? Journals[row.Index].Component.Name : "<не указан>")  + ". Доступ запрещён.", "Оповещение");
+
+                    MessageBox.Show("Невозможно редактировать запись по объекту " + (Journals[row.Index].ComponentPressmark != null ? Journals[row.Index].ComponentPressmark : "<не указан>") + ". Доступ запрещён.", "Оповещение");
                 }
             }
 
@@ -758,20 +768,20 @@ namespace QualityControl
             form.ShowDialog();
             if (form.IsContinue)
             {
-                IJournalService Service = new JournalService(uow);
                 var rows = dataGridView1.SelectedRows;
-                List<BllJournal> journalsForRemoving = new List<BllJournal>();
+                List<LiteJournal> journalsForRemoving = new List<LiteJournal>();
                 foreach (DataGridViewRow row in rows)
                 {
-                    if (Journals[row.Index].UserOwner == null || Journals[row.Index].UserOwner.Id == User.Id)
+                    var j = journalService.Get(Journals[row.Index].Id);
+                    if (j.UserOwner == null || j.UserOwner.Id == User.Id)
                     {
                         journalsForRemoving.Add(Journals[row.Index]);
-                        Service.Delete(Journals[row.Index].Id);
+                        journalService.Delete(Journals[row.Index].Id);
                         dataGridView1.Rows.Remove(row);
                     }
                     else
                     {
-                        MessageBox.Show("Невозможно удалить запись по объекту " + (Journals[row.Index].Component != null ? Journals[row.Index].Component.Name : "<не указан>") + ". Доступ запрещён.", "Оповещение");
+                        MessageBox.Show("Невозможно удалить запись по объекту " + (selectedJournal.Component != null ? selectedJournal.Component.Name : "<не указан>") + ". Доступ запрещён.", "Оповещение");
                     }
                 }
                 foreach (var journal in journalsForRemoving)
@@ -806,7 +816,7 @@ namespace QualityControl
                 {
                     if (row.Visible)
                     {
-                        SelectedJournals.Add(Journals[row.Index]);
+                        SelectedJournals.Add(journalService.Get(Journals[row.Index].Id));
                     }
                 }
                
@@ -863,6 +873,7 @@ namespace QualityControl
             AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
             serviceDB = new ServiceDB();
             uow = new UnitOfWork(serviceDB);
+            journalService = new JournalService(uow);
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             CenterToScreen();
             tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
@@ -872,6 +883,7 @@ namespace QualityControl
             if (isConnectedToServer)
             {
                 Authorization();
+                RefreshDataGridUsingServer();
                 EventForm eventForm = new EventForm(uow);
                 eventForm.Show();
             }
@@ -955,7 +967,7 @@ namespace QualityControl
                 {
                     if (journal.ControlDate.Value.Date.CompareTo(left) >= 0 && journal.ControlDate.Value.Date.CompareTo(right) <= 0)
                     {
-                        selectedJournal.Add(journal);
+                        selectedJournal.Add(journalService.Get(journal.Id));
                     }
                 }
                 saveFileDialog1.Filter = "Excel files (*.xls)|*.xls";
@@ -997,23 +1009,68 @@ namespace QualityControl
         bool isSearchUsing = false;
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
+            List<string> fields = new List<string>();
             if (isSearchUsing)
             {
                 for (int i = 0; i < Journals.Count; i++)
                 {
-                    string item = "";
-                    if (Journals[i].Component != null)
+                    fields.Clear();
+                    var j = Journals.ElementAt(i);
+                    if (j.ComponentPressmark != null)
                     {
-                        item = Journals[i].Component.Pressmark;
+                        fields.Add(j.ComponentPressmark);
                     }
-                    if (item.IndexOf(textBox4.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                    if (j.Amount != null)
                     {
-                        dataGridView1.Rows[i].Visible = true;
+                        fields.Add(j.Amount.ToString());
                     }
-                    else
+                    if (j.ContractName != null)
+                    {
+                        fields.Add(j.ContractName);
+                    }
+                    if (j.ControlDate != null)
+                    {
+                        fields.Add(j.ControlDate.Value.ToString(dateFormat));
+                    }
+                    if (j.MaterialName != null)
+                    {
+                        fields.Add(j.MaterialName);
+                    }
+                    if (j.RequestNumber != null)
+                    {
+                        fields.Add(j.RequestNumber.ToString());
+                    }
+                    if (j.ScheduleOrganizationName != null)
+                    {
+                        fields.Add(j.ScheduleOrganizationName);
+                    }
+                    if (j.Weight != null)
+                    {
+                        fields.Add(j.Weight);
+                    }
+                    if (j.IndustrialObjectName != null)
+                    {
+                        fields.Add(j.IndustrialObjectName);
+                    }
+                    if (j.ComponentName != null)
+                    {
+                        fields.Add(j.ComponentName);
+                    }
+                    bool isFound = false;
+                    foreach (var item in fields)
+                    {
+                        if (item.IndexOf(textBox4.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                        {
+                            dataGridView1.Rows[i].Visible = true;
+                            isFound = true;
+                            break;
+                        }
+                    }
+                    if (isFound == false)
                     {
                         dataGridView1.Rows[i].Visible = false;
                     }
+
                 }
             }
         }

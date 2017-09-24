@@ -125,7 +125,6 @@ namespace QualityControl_Server.Forms.TemplateDirectory
         private void RemoveUncontrolledMethods()
         {
             var controls = controlMethodsLib.Entities;
-            int j = 0;
             List<BllControl> controlsForRemoving = new List<BllControl>();
             for (int i = 0; i < controls.Count; i++)
             {

@@ -108,9 +108,7 @@ namespace QualityControl_Server.Forms.ComponentDirectory
 
         String filename = "";
         private void button5_Click(object sender, EventArgs e)
-        {
-            String name = "Sheet1";
-            
+        {            
             openFileDialog1.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
             if (DialogResult.OK == openFileDialog1.ShowDialog())
             {

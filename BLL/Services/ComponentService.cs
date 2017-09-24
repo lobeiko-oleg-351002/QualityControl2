@@ -54,6 +54,17 @@ namespace BLL.Services
             }
             return retElemets;
         }
+
+        public List<LiteComponent> GetAllLite()
+        {
+            var elements = repository.GetAll();
+            var retElemets = new List<LiteComponent>();
+            foreach (var element in elements)
+            {
+                retElemets.Add(mapper.MapDalToLiteBll(element));
+            }
+            return retElemets;
+        }
     }
 
 }

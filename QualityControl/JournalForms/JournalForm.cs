@@ -26,9 +26,10 @@ namespace QualityControl_Server
         protected List<BllCustomer> Customers;
         protected List<BllContract> Contracts;
         protected BllUser User;
+        List<LiteComponent> Components = new List<LiteComponent>();
         //protected BllIndustrialObject IndustrialObject;
 
-        public BllJournal Journal { get; protected set; }
+        public BllJournal Journal = new BllJournal();
 
         public JournalForm()
         {
@@ -39,6 +40,7 @@ namespace QualityControl_Server
         {
             InitializeComponent();
             this.uow = uow;
+            InitializeComponentComboBox();
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             CenterToScreen();
             Journal = oldJournal;
@@ -110,17 +112,37 @@ namespace QualityControl_Server
             numericUpDown1.Value = Journal.Amount.Value < 100 ? Journal.Amount.Value : 0;
             textBox1.Text = Journal.IndustrialObject != null ? Journal.IndustrialObject.Name : "";
             textBox3.Text = Journal.Weight;
-            textBox2.Text = Journal.Component != null ? Journal.Component.Name : "";
+            comboBox3.Text = Journal.Component != null ? Journal.Component.Name : "";
             textBox4.Text = Journal.Material != null ? Journal.Material.Name : "";
             textBox5.Text = Journal.ScheduleOrganization != null ? Journal.ScheduleOrganization.Name : "";
             FillContracts(Journal.Customer);
             richTextBox2.Text = Journal.Description;
         }
 
+        protected void InitializeComponentComboBox()
+        {
+            Components.Clear();
+
+            comboBox3.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox3.AutoCompleteSource = AutoCompleteSource.ListItems;
+
+            IComponentService Service = new ComponentService(uow);
+            Components = Service.GetAllLite();
+
+            comboBox3.DataSource = Components;
+            comboBox3.ValueMember = "Name";
+            comboBox3.DisplayMember = "Name";
+            if (Components.Count != 0)
+            {
+                SetComponent(Service.Get(Components[0].Id));
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             ChooseComponentForm ComponentForm = new ChooseComponentForm(uow);
             ComponentForm.ShowDialog(this);
+            InitializeComponentComboBox();
             BllComponent Component = ComponentForm.GetChosenComponent();
             if (Component != null)
             {
@@ -143,7 +165,7 @@ namespace QualityControl_Server
         private void SetComponent(BllComponent entity)
         {
             Journal.Component = entity;
-            textBox2.Text = entity.Name;
+            comboBox3.Text = entity.Name;
         }
 
         private void SetIndustrialObject(BllIndustrialObject entity)
@@ -189,7 +211,6 @@ namespace QualityControl_Server
         protected void RemoveUncontrolledMethods()
         {
             var controls = Journal.ControlMethodsLib.Entities;
-            int j = 0;
             List<BllControl> controlsForRemoving = new List<BllControl>();
             for (int i = 0; i < controls.Count; i++)
             {
@@ -249,7 +270,7 @@ namespace QualityControl_Server
             Journal.Amount = (int)numericUpDown1.Value;
             Journal.Weight = textBox3.Text;
             Journal.Description = richTextBox2.Text;
-           
+            Journal.UserOwner = User;
 
         }
 
@@ -265,7 +286,7 @@ namespace QualityControl_Server
             numericUpDown2.Value = Journal.RequestNumber.Value;
             numericUpDown1.Value = Journal.Amount.Value;
             textBox3.Text = Journal.Weight;
-            textBox2.Text = Journal.Component != null ? Journal.Component.Name : "";
+            comboBox3.Text = Journal.Component != null ? Journal.Component.Name : "";
             textBox4.Text = Journal.Material != null ? Journal.Material.Name : "";
             textBox5.Text = Journal.ScheduleOrganization != null ? Journal.ScheduleOrganization.Name : "";
             textBox1.Text = Journal.IndustrialObject != null ? Journal.IndustrialObject.Name : "";
@@ -398,6 +419,17 @@ namespace QualityControl_Server
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             Journal.Contract = comboBox1.SelectedIndex != -1 ? Contracts[comboBox1.SelectedIndex] : null;
+        }
+
+        private void comboBox3_Leave(object sender, EventArgs e)
+        {
+            comboBox3.Text = "";
+            Journal.Component = null;
+            if (comboBox3.SelectedIndex != -1)
+            {
+                ComponentService Service = new ComponentService(uow);
+                SetComponent(Service.Get(Components[comboBox3.SelectedIndex].Id));
+            }
         }
     }
 }

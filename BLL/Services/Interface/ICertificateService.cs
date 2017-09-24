@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services.Interface
 {
-    public interface ICertificateService : IService<BllCertificate>
+    public interface ICertificateService : IService<BllCertificate>, ILiteGetter<LiteCertificate>
     {
         BllCertificate GetCertificateByTitle(string title);
         BllCertificate GetCertificateByEmployeeAndControlName(BllEmployee employee, BllControlName name);

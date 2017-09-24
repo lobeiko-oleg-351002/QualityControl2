@@ -18,6 +18,7 @@ namespace QualityControl_Server.Forms.ComponentDirectory
 {
     public partial class ChooseComponentForm : DirectoryForm
     {
+        IComponentService Service;
         private void button5_Click(object sender, EventArgs e)
         {
             var rows = dataGridView1.SelectedRows;
@@ -33,49 +34,28 @@ namespace QualityControl_Server.Forms.ComponentDirectory
 
         }
 
-        IEnumerable<DalComponent> Components;
-        DalComponent Component;
+        List<LiteComponent> Components;
+        LiteComponent Component;
         public ChooseComponentForm(IUnitOfWork uow) : base()
         {
             InitializeComponent();
             this.uow = uow;
+            Service = new ComponentService(uow);
             RefreshData();
         }
 
         public override void RefreshData()
         {
             dataGridView1.Rows.Clear();
-            Components = uow.Components.GetAll();
-            Dictionary<int, DalTemplate> templates = new Dictionary<int, DalTemplate>();
-            Dictionary<int, DalIndustrialObject> industrialObjects = new Dictionary<int, DalIndustrialObject>();
+            Components = Service.GetAllLite().ToList();
             foreach (var Component in Components)
             {
-                DalTemplate t = null;
-                if (Component.Template_id != null)
-                {
-                    if (!templates.ContainsKey(Component.Template_id.Value))
-                    {
-                        templates.Add(Component.Template_id.Value, uow.Templates.Get(Component.Template_id.Value));
-                    }
-                    t = templates[Component.Template_id.Value];
-                }
-
-                DalIndustrialObject io = null;
-                if (Component.IndustrialObject_id != null)
-                {
-                    if (!industrialObjects.ContainsKey(Component.IndustrialObject_id.Value))
-                    {
-                        industrialObjects.Add(Component.IndustrialObject_id.Value, uow.IndustrialObjects.Get(Component.IndustrialObject_id.Value));
-                    }
-                    io = industrialObjects[Component.IndustrialObject_id.Value];
-                }
-
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(dataGridView1);
                 row.Cells[0].Value = Component.Name;
                 row.Cells[1].Value = Component.Pressmark;
-                row.Cells[2].Value = t != null ? t.Name : "<отсутствует>";
-                row.Cells[3].Value = io != null ? io.Name : "<не указан>";
+                row.Cells[2].Value = Component.TemplateName != null ? Component.TemplateName : "<отсутствует>";
+                row.Cells[3].Value = Component.IndustrialObjectName != null ? Component.IndustrialObjectName : "<не указан>";
                 row.Cells[4].Value = Component.Count;
                 row.Cells[5].Value = Component.Description;
                 dataGridView1.Rows.Add(row);
@@ -120,9 +100,8 @@ namespace QualityControl_Server.Forms.ComponentDirectory
         {
             if (Component != null)
             {
-                IComponentService Service = new ComponentService(uow);
                 return Service.Get(Component.Id);
-            }
+            }      
             return null;
         }
 

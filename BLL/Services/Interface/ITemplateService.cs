@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services.Interface
 {
-    public interface ITemplateService : IService<BllTemplate>
+    public interface ITemplateService : IService<BllTemplate>, ILiteGetter<LiteTemplate>
     {
         BllTemplate GetTemplateByName(string name);
     }

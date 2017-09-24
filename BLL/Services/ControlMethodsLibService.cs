@@ -114,5 +114,31 @@ namespace BLL.Services
             return entity;
         }
 
+        public List<LiteControl> GetLiteControlsFromLib(int id)
+        {
+            List<LiteControl> res = new List<LiteControl>();
+            var controls = ((IGetterByLibId<DalControl>)uow.Controls).GetEntitiesByLibId(id);
+            foreach (var control in controls)
+            {
+                res.Add(new LiteControl
+                {
+                    Id = control.ControlName_id.Value,
+                    IsControlled = control.IsControlled
+                });
+            }
+            return res;
+        }
+
+        public List<string> GetControlNamesById(int id)
+        {
+            List<string> names = new List<string>();
+            var controls = ((IGetterByLibId<DalControl>)uow.Controls).GetEntitiesByLibId(id);
+            foreach (var control in controls)
+            {
+                names.Add(uow.ControlNames.Get(control.ControlName_id.Value).Name);
+            }
+            return names;
+        }
+
     }
 }

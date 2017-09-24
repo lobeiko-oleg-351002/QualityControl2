@@ -3,6 +3,7 @@ using BLL.Mapping.Interfaces;
 using BLL.Services;
 using BLL.Services.Interface;
 using DAL;
+using DAL.Entities;
 using DAL.Repositories.Interface;
 using System;
 using System.Collections.Generic;
@@ -111,6 +112,65 @@ namespace BLL.Mapping
                 Material = entity.Material_id != null ? materialService.Get((int)entity.Material_id) : null,
                 UserOwner = entity.UserOwner_id != null ? userService.Get((int)entity.UserOwner_id) : null,
                 ScheduleOrganization = entity.ScheduleOrganization_id != null ? weldJointService.Get((int)entity.ScheduleOrganization_id) : null,
+            };
+
+            return bllEntity;
+        }
+
+        public LiteJournal MapDalToLiteBll(DalJournal entity)
+        {
+            List<LiteControl> controls = controlMethodsLibService.GetLiteControlsFromLib(entity.ControlMethodsLib_id.Value);
+            DalComponent component = entity.Component_id != null ? uow.Components.Get(entity.Component_id.Value) : null;
+            string industrialObject = "";
+            if (component != null)
+            {
+                industrialObject = component.IndustrialObject_id != null ? uow.IndustrialObjects.Get(component.IndustrialObject_id.Value).Name : "";
+            }
+
+            LiteJournal bllEntity = new LiteJournal
+            {
+                Id = entity.Id,
+                Amount = entity.Amount,
+                ContractName = entity.Contract_id != null ? uow.Contracts.Get(entity.Contract_id.Value).Name : null,
+                ControlDate = entity.ControlDate,
+                Description = entity.Description,
+                ModifiedDate = entity.ModifiedDate,
+                RequestNumber = entity.RequestNumber,
+                Weight = entity.Weight,
+                ComponentPressmark = component != null ? component.Pressmark : null,
+                ComponentName = component != null ? component.Name : null,
+                IndustrialObjectName = industrialObject,
+                MaterialName = entity.Material_id != null ? uow.Materials.Get(entity.Material_id.Value).Name : null,
+                ScheduleOrganizationName = entity.ScheduleOrganization_id != null ? uow.ScheduleOrganizations.Get(entity.ScheduleOrganization_id.Value).Name : null,
+                //WeldJointName = entity.WeldJoint_id != null ? uow.WeldJoints.Get(entity.WeldJoint_id.Value).Name : null,
+                //WeldingType = entity.WeldingType,
+                //RequestDate = entity.RequestDate,
+                ControlMethods = controls
+            };
+
+            return bllEntity;
+        }
+
+        public LiteJournal MapBllToLiteBll(BllJournal entity)
+        {
+            List<LiteControl> controls = controlMethodsLibService.GetLiteControlsFromLib(entity.ControlMethodsLib.Id);
+            LiteJournal bllEntity = new LiteJournal
+            {
+                Id = entity.Id,
+                Amount = entity.Amount,
+                ContractName = entity.Contract != null ? entity.Contract.Name : null,
+                ControlDate = entity.ControlDate,
+                Description = entity.Description,
+                ModifiedDate = entity.ModifiedDate,
+                RequestNumber = entity.RequestNumber,
+                Weight = entity.Weight,
+                ComponentPressmark = entity.Component != null ? entity.Component.Pressmark : null,
+                MaterialName = entity.Material != null ? entity.Material.Name : null,
+                ScheduleOrganizationName = entity.ScheduleOrganization != null ? entity.ScheduleOrganization.Name : null,
+                //WeldJointName = entity.WeldJoint != null ? entity.WeldJoint.Name : null,
+                //WeldingType = entity.WeldingType,
+                //RequestDate = entity.RequestDate,
+                ControlMethods = controls
             };
 
             return bllEntity;

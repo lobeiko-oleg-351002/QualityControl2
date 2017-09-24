@@ -51,12 +51,12 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(187, 304);
-            this.button1.TabIndex = 7;
+            this.button1.TabIndex = 9;
             // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(88, 304);
-            this.button2.TabIndex = 6;
+            this.button2.TabIndex = 8;
             // 
             // label1
             // 
@@ -151,7 +151,7 @@
             this.button5.Location = new System.Drawing.Point(25, 248);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(80, 23);
-            this.button5.TabIndex = 5;
+            this.button5.TabIndex = 7;
             this.button5.Text = "Ведомость";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
@@ -178,7 +178,7 @@
             this.textBox5.Location = new System.Drawing.Point(141, 202);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 15;
+            this.textBox5.TabIndex = 6;
             // 
             // label6
             // 
@@ -199,7 +199,7 @@
             0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(100, 20);
-            this.numericUpDown1.TabIndex = 17;
+            this.numericUpDown1.TabIndex = 5;
             // 
             // AddComponentForm
             // 

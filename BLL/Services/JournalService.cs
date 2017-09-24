@@ -65,5 +65,21 @@ namespace BLL.Services
             return retElemets;
         }
 
+        public List<LiteJournal> GetAllLite()
+        {
+            var elements = repository.GetAll();
+            var retElemets = new List<LiteJournal>();
+            foreach (var element in elements)
+            {
+                retElemets.Add(mapper.MapDalToLiteBll(element));
+            }
+            return retElemets;
+        }
+
+        public LiteJournal GetLiteJournal(BllJournal entity)
+        {
+            return mapper.MapBllToLiteBll(entity);
+        }
+
     }
 }

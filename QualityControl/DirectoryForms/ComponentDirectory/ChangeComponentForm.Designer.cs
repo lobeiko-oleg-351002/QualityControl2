@@ -48,17 +48,19 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(174, 275);
+            this.button1.TabIndex = 8;
             // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(78, 275);
+            this.button2.TabIndex = 7;
             // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(247, 57);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 11;
+            this.button3.TabIndex = 2;
             this.button3.Text = "Выбрать";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -85,7 +87,7 @@
             this.textBox1.Location = new System.Drawing.Point(131, 19);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 8;
+            this.textBox1.TabIndex = 1;
             // 
             // label1
             // 
@@ -101,7 +103,7 @@
             this.textBox2.Location = new System.Drawing.Point(131, 93);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 13;
+            this.textBox2.TabIndex = 3;
             // 
             // label3
             // 
@@ -117,7 +119,7 @@
             this.button4.Location = new System.Drawing.Point(247, 130);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 16;
+            this.button4.TabIndex = 4;
             this.button4.Text = "Выбрать";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -149,14 +151,14 @@
             0});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(100, 20);
-            this.numericUpDown1.TabIndex = 21;
+            this.numericUpDown1.TabIndex = 5;
             // 
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(131, 207);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 19;
+            this.textBox5.TabIndex = 6;
             // 
             // label6
             // 

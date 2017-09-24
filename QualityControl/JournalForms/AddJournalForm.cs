@@ -25,7 +25,7 @@ namespace QualityControl_Server
 
         List<BllControlName> ControlNames;
 
-        public delegate void AddRowToDataGrid(BllJournal journal);
+        public delegate void AddRowToDataGrid(LiteJournal journal);
 
         private AddRowToDataGrid AddRowToDataGridDelegate;
 
@@ -53,7 +53,7 @@ namespace QualityControl_Server
 
             };
             Journal.ControlMethodsLib = new BllControlMethodsLib();
-
+            InitializeComponentComboBox();
             IControlNameService controlNameService = new ControlNameService(uow);
             var controlNames = controlNameService.GetAll();
             ControlNames = new List<BllControlName>();
@@ -116,7 +116,7 @@ namespace QualityControl_Server
 
                 Journal = Service.Create(Journal);
                 MessageBox.Show("Информация добавлена.", "Оповещение");
-                AddRowToDataGridDelegate(Journal);
+                AddRowToDataGridDelegate(Service.GetLiteJournal(Journal));
 
                 for (int i = 0; i < temp.Count; i++)
                 {
@@ -256,36 +256,36 @@ namespace QualityControl_Server
             string unfilledInfo = "";
             if (Journal.Component == null)
             {
-                unfilledInfo += "\n Объект контроля";
+                unfilledInfo += "\n    Объект контроля";
             }
             if (Journal.Material == null)
             {
-                unfilledInfo += "\n Материал";
+                unfilledInfo += "\n    Материал";
             }
             if (Journal.Weight == "")
             {
-                unfilledInfo += "\n Масса";
+                unfilledInfo += "\n    Масса";
             }
             if (Journal.ScheduleOrganization == null)
             {
-                unfilledInfo += "\n Организация, вып. чертежи";
+                unfilledInfo += "\n    Организация, вып. чертежи";
             }
             if (Journal.IndustrialObject == null)
             {
-                unfilledInfo += "\n Промышленный объект";
+                unfilledInfo += "\n    Промышленный объект";
             }
             if (Journal.Customer == null)
             {
-                unfilledInfo += "\n Заказчик";
+                unfilledInfo += "\n    Заказчик";
             }
             if (Journal.Contract == null)
             {
-                unfilledInfo += "\n Основание/договор";
+                unfilledInfo += "\n    Основание/договор";
             }
 
             if (unfilledInfo != "")
             {
-                ContinueChoiceForm form = new ContinueChoiceForm("Не заполнены поля: " + unfilledInfo + "\nЖелаете продолжить?");
+                ContinueChoiceForm form = new ContinueChoiceForm("Не заполнены поля: " + unfilledInfo + "\n\nЖелаете продолжить?");
                 form.ShowDialog();
                 return form.IsContinue;
             }

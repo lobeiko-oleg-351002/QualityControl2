@@ -57,5 +57,19 @@ namespace BLL.Mapping
 
             return bllEntity;
         }
+
+        public LiteComponent MapDalToLiteBll(DalComponent entity)
+        {
+            LiteComponent bllEntity = new LiteComponent
+            {
+                Id = entity.Id,
+                Name = entity.Name,
+                Pressmark = entity.Pressmark,
+                TemplateName = entity.Template_id != null ? uow.Templates.Get(entity.Template_id.Value).Name : null,
+                IndustrialObjectName = entity.IndustrialObject_id != null ? uow.IndustrialObjects.Get(entity.IndustrialObject_id.Value).Name : null
+            };
+
+            return bllEntity;
+        }
     }
 }

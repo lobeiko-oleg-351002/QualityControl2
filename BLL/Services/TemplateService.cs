@@ -49,5 +49,16 @@ namespace BLL.Services
             DalTemplate dalEntity = uow.Templates.GetTemplateByName(name);
             return mapper.MapToBll(dalEntity);
         }
+
+        public List<LiteTemplate> GetAllLite()
+        {
+            var elements = repository.GetAll();
+            var retElemets = new List<LiteTemplate>();
+            foreach (var element in elements)
+            {
+                retElemets.Add(mapper.MapDalToLiteBll(element));
+            }
+            return retElemets;
+        }
     }
 }

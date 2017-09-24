@@ -62,5 +62,24 @@ namespace BLL.Mapping
             }
             return null;
         }
+
+        public LiteCertificate MapDalToLiteBll(DalCertificate entity)
+        {
+            if (entity != null)
+            {
+                LiteCertificate bllEntity = new LiteCertificate
+                {
+                    Id = entity.Id,
+                    CheckDate = entity.CheckDate,
+                    Duration = entity.Duration,
+                    Title = entity.Title,
+                    ControlName = entity.ControlName_id != null ? uow.ControlNames.Get(entity.ControlName_id.Value).Name : null,
+                    EmployeeName = entity.Employee_id != null ? uow.Employees.Get(entity.Employee_id.Value).Name : null
+                };
+
+                return bllEntity;
+            }
+            return null;
+        }
     }
 }

@@ -95,7 +95,7 @@ namespace QualityControl_Server
             numericUpDown2.Value = Journal.RequestNumber.Value;
             numericUpDown1.Value = Journal.Amount.Value < 100 ? Journal.Amount.Value : 0;
             textBox3.Text = Journal.Weight;
-            textBox2.Text = Journal.Component != null ? Journal.Component.Name : "";
+            comboBox3.Text = Journal.Component != null ? Journal.Component.Name : "";
             textBox4.Text = Journal.Material != null ? Journal.Material.Name : "";
             textBox5.Text = Journal.ScheduleOrganization != null ? Journal.ScheduleOrganization.Name : "";
             FillContracts(Journal.Customer);

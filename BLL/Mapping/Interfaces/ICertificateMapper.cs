@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Mapping.Interfaces
 {
-    public interface ICertificateMapper : IMapper<BllCertificate, DalCertificate>
+    public interface ICertificateMapper : IMapper<BllCertificate, DalCertificate>, ILiteMapper<LiteCertificate, DalCertificate>
     {
 
     }

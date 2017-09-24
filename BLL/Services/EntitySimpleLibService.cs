@@ -56,13 +56,17 @@ namespace BLL.Services
             EntityMapper EntityMapper = new EntityMapper();
             foreach (var Entity in entity.Entities)
             {
+                var dalEntity = EntityMapper.MapToDal(Entity);
+                dalEntity.Lib_id = entity.Id;
                 if (Entity.Id == 0)
                 {
-                    var dalEntity = EntityMapper.MapToDal(Entity);
-                    dalEntity.Lib_id = entity.Id;
                     var ormEntity = entityRepository.Create(dalEntity);
                     uow.Commit();
                     Entity.Id = ormEntity.id;
+                }
+                else
+                {
+                    entityRepository.Update(dalEntity);
                 }
 
             }
