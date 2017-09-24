@@ -22,5 +22,7 @@ namespace BLL.Entities
         public int Count { get; set; }
 
         public string Description { get; set; }
+
+        public string NameAndPressmark { get; set; }
     }
 }

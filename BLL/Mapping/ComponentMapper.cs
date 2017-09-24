@@ -52,7 +52,8 @@ namespace BLL.Mapping
                 Template = entity.Template_id != null ? templateService.Get((int)entity.Template_id) : null,
                 IndustrialObject = entity.IndustrialObject_id != null ? industrialObjectService.Get((int)entity.IndustrialObject_id) : null,
                 Count = entity.Count,
-                Description = entity.Description
+                Description = entity.Description,
+
             };
 
             return bllEntity;
@@ -66,7 +67,10 @@ namespace BLL.Mapping
                 Name = entity.Name,
                 Pressmark = entity.Pressmark,
                 TemplateName = entity.Template_id != null ? uow.Templates.Get(entity.Template_id.Value).Name : null,
-                IndustrialObjectName = entity.IndustrialObject_id != null ? uow.IndustrialObjects.Get(entity.IndustrialObject_id.Value).Name : null
+                IndustrialObjectName = entity.IndustrialObject_id != null ? uow.IndustrialObjects.Get(entity.IndustrialObject_id.Value).Name : null,
+                NameAndPressmark = entity.Name + " " + entity.Pressmark,
+                Description = entity.Description,
+                Count = entity.Count.Value
             };
 
             return bllEntity;

@@ -1088,7 +1088,7 @@ namespace QualityControl
             {
                 dataGridView1.Rows[i].Visible = true;
             }
-            textBox4.Text = "Поиск по коду объекта...";
+            textBox4.Text = "Поиск...";
         }
     }
 }

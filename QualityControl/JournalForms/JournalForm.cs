@@ -112,7 +112,7 @@ namespace QualityControl_Server
             numericUpDown1.Value = Journal.Amount.Value < 100 ? Journal.Amount.Value : 0;
             textBox1.Text = Journal.IndustrialObject != null ? Journal.IndustrialObject.Name : "";
             textBox3.Text = Journal.Weight;
-            comboBox3.Text = Journal.Component != null ? Journal.Component.Name : "";
+            comboBox3.Text = Journal.Component != null ? Journal.Component.Name + " " + Journal.Component.Pressmark : "";
             textBox4.Text = Journal.Material != null ? Journal.Material.Name : "";
             textBox5.Text = Journal.ScheduleOrganization != null ? Journal.ScheduleOrganization.Name : "";
             FillContracts(Journal.Customer);
@@ -130,8 +130,8 @@ namespace QualityControl_Server
             Components = Service.GetAllLite();
 
             comboBox3.DataSource = Components;
-            comboBox3.ValueMember = "Name";
-            comboBox3.DisplayMember = "Name";
+            comboBox3.ValueMember = "NameAndPressmark";
+            comboBox3.DisplayMember = "NameAndPressmark";
             if (Components.Count != 0)
             {
                 SetComponent(Service.Get(Components[0].Id));
@@ -165,7 +165,7 @@ namespace QualityControl_Server
         private void SetComponent(BllComponent entity)
         {
             Journal.Component = entity;
-            comboBox3.Text = entity.Name;
+            comboBox3.Text = entity.Name + " " + entity.Pressmark;
         }
 
         private void SetIndustrialObject(BllIndustrialObject entity)
@@ -286,7 +286,7 @@ namespace QualityControl_Server
             numericUpDown2.Value = Journal.RequestNumber.Value;
             numericUpDown1.Value = Journal.Amount.Value;
             textBox3.Text = Journal.Weight;
-            comboBox3.Text = Journal.Component != null ? Journal.Component.Name : "";
+            comboBox3.Text = Journal.Component != null ? Journal.Component.Name + " " + Journal.Component.Pressmark : "";
             textBox4.Text = Journal.Material != null ? Journal.Material.Name : "";
             textBox5.Text = Journal.ScheduleOrganization != null ? Journal.ScheduleOrganization.Name : "";
             textBox1.Text = Journal.IndustrialObject != null ? Journal.IndustrialObject.Name : "";
