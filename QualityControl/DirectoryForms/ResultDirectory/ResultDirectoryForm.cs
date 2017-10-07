@@ -133,8 +133,10 @@ namespace QualityControl_Server.Forms.ResultDirectory
 
         protected override void button1_Click(object sender, EventArgs e)
         {
-            resultLib.Entities.Add(new BllResult());
+            var date = DateTime.Now.Date.ToShortDateString();
+            resultLib.Entities.Add(new BllResult {Quality = date });
             dataGridView1.Rows.Add(new DataGridViewRow());
+            dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[5].Value = date;
             base.button1_Click(sender, e);
         }
 

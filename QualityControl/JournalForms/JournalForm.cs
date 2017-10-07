@@ -26,7 +26,8 @@ namespace QualityControl_Server
         protected List<BllCustomer> Customers;
         protected List<BllContract> Contracts;
         protected BllUser User;
-        List<LiteComponent> Components = new List<LiteComponent>();
+        protected IComponentService componentService;
+        protected List<LiteComponent> Components = new List<LiteComponent>();
         //protected BllIndustrialObject IndustrialObject;
 
         public BllJournal Journal = new BllJournal();
@@ -40,6 +41,8 @@ namespace QualityControl_Server
         {
             InitializeComponent();
             this.uow = uow;
+
+ 
             InitializeComponentComboBox();
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             CenterToScreen();
@@ -121,20 +124,14 @@ namespace QualityControl_Server
 
         protected void InitializeComponentComboBox()
         {
-            Components.Clear();
-
-            comboBox3.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            comboBox3.AutoCompleteSource = AutoCompleteSource.ListItems;
-
-            IComponentService Service = new ComponentService(uow);
-            Components = Service.GetAllLite();
-
-            comboBox3.DataSource = Components;
-            comboBox3.ValueMember = "NameAndPressmark";
-            comboBox3.DisplayMember = "NameAndPressmark";
-            if (Components.Count != 0)
+            comboBox3.Items.Clear();
+            componentService = new ComponentService(uow);
+            Components = componentService.GetAllLite();
+            comboBox3.AutoCompleteMode = AutoCompleteMode.Suggest;
+          //  comboBox3.AutoCompleteSource = AutoCompleteSource.ListItems;
+            foreach(var item in Components)
             {
-                SetComponent(Service.Get(Components[0].Id));
+                comboBox3.Items.Add(item.NameAndPressmark);
             }
         }
 
@@ -147,18 +144,7 @@ namespace QualityControl_Server
             if (Component != null)
             {
                 SetComponent(Component);
-                if (Component.IndustrialObject != null)
-                {
-                    SetIndustrialObject(Component.IndustrialObject);
-                }
-                if (Component.Count != null)
-                {
-                    numericUpDown1.Value = Component.Count.Value;
-                }
-                if (Component.Description != null)
-                {
-                    textBox3.Text = Component.Description;
-                }
+
             }
         }
 
@@ -166,6 +152,18 @@ namespace QualityControl_Server
         {
             Journal.Component = entity;
             comboBox3.Text = entity.Name + " " + entity.Pressmark;
+            if (entity.IndustrialObject != null)
+            {
+                SetIndustrialObject(entity.IndustrialObject);
+            }
+            if (entity.Count != null)
+            {
+                numericUpDown1.Value = entity.Count.Value;
+            }
+            if (entity.Description != null)
+            {
+                textBox3.Text = entity.Description;
+            }
         }
 
         private void SetIndustrialObject(BllIndustrialObject entity)
@@ -423,12 +421,54 @@ namespace QualityControl_Server
 
         private void comboBox3_Leave(object sender, EventArgs e)
         {
-            comboBox3.Text = "";
-            Journal.Component = null;
+
+
+        }
+
+        private void comboBox3_TextChanged(object sender, EventArgs e)
+        {
+            comboBox3.Items.Clear();
+            foreach(var item in Components)
+            {
+                if(item.NameAndPressmark.IndexOf(comboBox3.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    comboBox3.Items.Add(item.NameAndPressmark);
+                }
+            }
+            if (comboBox3.Items.Count > 1 && comboBox3.Text != "")
+            {
+                comboBox3.DroppedDown = true;
+                Cursor.Current = Cursors.Default;
+            }
+            if (comboBox3.Text.Length > 0)
+            {
+                comboBox3.SelectionStart = comboBox3.Text.Length; // add some logic if length is 0
+                comboBox3.SelectionLength = 0;
+            }
+            
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            Journal.Amount = (int?)numericUpDown1.Value;
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
             if (comboBox3.SelectedIndex != -1)
             {
-                ComponentService Service = new ComponentService(uow);
-                SetComponent(Service.Get(Components[comboBox3.SelectedIndex].Id));
+                foreach (var item in Components)
+                {
+                    if (item.NameAndPressmark == (string)comboBox3.SelectedItem)
+                    {
+                        SetComponent(componentService.Get(item.Id));
+                    }
+                }
+            }
+            else
+            {
+                comboBox3.Text = "";
+                Journal.Component = null;
             }
         }
     }

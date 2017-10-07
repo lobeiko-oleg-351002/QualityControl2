@@ -285,6 +285,7 @@
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(263, 20);
             this.numericUpDown1.TabIndex = 58;
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // label5
             // 
@@ -400,6 +401,8 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(263, 21);
             this.comboBox3.TabIndex = 105;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            this.comboBox3.TextChanged += new System.EventHandler(this.comboBox3_TextChanged);
             this.comboBox3.Leave += new System.EventHandler(this.comboBox3_Leave);
             // 
             // JournalForm
