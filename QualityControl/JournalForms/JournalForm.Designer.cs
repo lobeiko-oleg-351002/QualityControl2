@@ -60,6 +60,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
@@ -283,7 +285,7 @@
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(263, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(130, 20);
             this.numericUpDown1.TabIndex = 58;
             this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
@@ -405,12 +407,36 @@
             this.comboBox3.TextChanged += new System.EventHandler(this.comboBox3_TextChanged);
             this.comboBox3.Leave += new System.EventHandler(this.comboBox3_Leave);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label1.Location = new System.Drawing.Point(353, 150);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(19, 13);
+            this.label1.TabIndex = 106;
+            this.label1.Text = "из";
+            this.label1.Visible = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label9.Location = new System.Drawing.Point(378, 150);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(66, 13);
+            this.label9.TabIndex = 107;
+            this.label9.Text = "Количество";
+            this.label9.Visible = false;
+            // 
             // JournalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(882, 667);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.textBox1);
@@ -486,5 +512,7 @@
         protected System.Windows.Forms.TextBox textBox1;
         protected System.Windows.Forms.ComboBox comboBox1;
         protected System.Windows.Forms.ComboBox comboBox3;
+        protected System.Windows.Forms.Label label1;
+        protected System.Windows.Forms.Label label9;
     }
 }

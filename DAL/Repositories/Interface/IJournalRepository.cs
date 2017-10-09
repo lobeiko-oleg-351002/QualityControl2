@@ -10,5 +10,6 @@ namespace DAL.Repositories.Interface
     public interface IJournalRepository : IRepository<DalJournal, Journal>
     {
         int GetCountOfRows();
+        int GetControlledCount(int componentId);
     }
 }

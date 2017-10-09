@@ -18,6 +18,20 @@ namespace DAL.Repositories
             this.context = context;
         }
 
+        public int GetControlledCount(int componentId)
+        {
+            int res = 0;
+            var ormJournals = context.Set<Journal>().Where(entity => entity.component_id == componentId);
+            if (ormJournals.Any())
+            {
+                foreach (var item in ormJournals)
+                {
+                    res += item.amount.Value;
+                }
+            }
+            return res;
+        }
+
         public int GetCountOfRows()
         {
             return context.Journals.Count();

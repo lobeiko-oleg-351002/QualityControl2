@@ -158,7 +158,21 @@ namespace QualityControl_Server
             }
             if (entity.Count != null)
             {
-                numericUpDown1.Value = entity.Count.Value;
+
+                label1.Visible = true;
+                label9.Visible = true;
+                int controlledCount = uow.Journals.GetControlledCount(entity.Id);
+                int count = entity.Count.Value - controlledCount;
+                if (count > 0)
+                {
+                    label9.Text = count.ToString();
+                    numericUpDown1.Value = count;
+                }
+                else
+                {
+                    label9.Text = entity.Count.Value.ToString() + " - " + controlledCount.ToString() + " (пересорт)";
+                    numericUpDown1.Value = 1;
+                }
             }
             if (entity.Description != null)
             {
