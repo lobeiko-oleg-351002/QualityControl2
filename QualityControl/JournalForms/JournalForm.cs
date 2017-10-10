@@ -116,6 +116,7 @@ namespace QualityControl_Server
             textBox1.Text = Journal.IndustrialObject != null ? Journal.IndustrialObject.Name : "";
             textBox3.Text = Journal.Weight;
             comboBox3.Text = Journal.Component != null ? Journal.Component.Name + " " + Journal.Component.Pressmark : "";
+
             textBox4.Text = Journal.Material != null ? Journal.Material.Name : "";
             textBox5.Text = Journal.ScheduleOrganization != null ? Journal.ScheduleOrganization.Name : "";
             FillContracts(Journal.Customer);
@@ -148,7 +149,7 @@ namespace QualityControl_Server
             }
         }
 
-        private void SetComponent(BllComponent entity)
+        protected virtual void SetComponent(BllComponent entity)
         {
             Journal.Component = entity;
             comboBox3.Text = entity.Name + " " + entity.Pressmark;
@@ -180,7 +181,7 @@ namespace QualityControl_Server
             }
         }
 
-        private void SetIndustrialObject(BllIndustrialObject entity)
+        protected void SetIndustrialObject(BllIndustrialObject entity)
         {
             Journal.IndustrialObject = entity;
             textBox1.Text = entity.Name;
@@ -464,7 +465,7 @@ namespace QualityControl_Server
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            Journal.Amount = (int?)numericUpDown1.Value;
+            //Journal.Amount = (int?)numericUpDown1.Value;
         }
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)

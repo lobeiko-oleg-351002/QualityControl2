@@ -748,7 +748,7 @@ namespace QualityControl
                 if (j.UserOwner == null || j.UserOwner.Id == User.Id || User.Role.Name == "Администратор")
                 {
                     {
-                        JournalForm changeJournalForm = new JournalForm(j, User, uow);
+                        ChangeJournalForm changeJournalForm = new ChangeJournalForm(j, User, uow);
                         changeJournalForm.ShowDialog(this);
                         UpdateRowInDataGrid(changeJournalForm.Journal, row.Index); UpdateRowInDataGrid(changeJournalForm.Journal, row.Index);
                     }

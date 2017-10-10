@@ -21,85 +21,40 @@ namespace QualityControl_Server
             InitializeComponent();
         }
 
-        public ChangeJournalForm(BllJournal oldJournal, BllUser user, IUnitOfWork uow)
+        public ChangeJournalForm(BllJournal oldJournal, BllUser user, IUnitOfWork uow) : base(oldJournal, user, uow)
         {
             InitializeComponent();
-            this.uow = uow;
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            CenterToScreen();
-            Journal = oldJournal;
-            User = user;
-            IControlNameService controlNameService = new ControlNameService(uow);
-            var controlNames = controlNameService.GetAll();
-            ControlMethodTabForms = new List<ControlMethodTabForm>();
-            BllControl control = null;
-            foreach (var controlName in controlNames)
+        }
+
+        protected override void SetComponent(BllComponent entity)
+        {
+            Journal.Component = entity;
+            comboBox3.Text = entity.Name + " " + entity.Pressmark;
+            if (entity.IndustrialObject != null)
             {
-                bool isExistControl = false;
-
-                foreach (var currentControl in oldJournal.ControlMethodsLib.Entities)
-                {
-                    if (currentControl.ControlName.Name == controlName.Name)
-                    {
-                        control = currentControl;
-                        isExistControl = true;
-                        break;
-                    }
-
-                }
-                if (isExistControl == false)
-                {
-                    control = new BllControl
-                    {
-                        ImageLib = new BllImageLib(),
-                        EquipmentLib = new BllEquipmentLib(),
-                        ResultLib = new BllResultLib(),
-                        ControlMethodDocumentationLib = new BllControlMethodDocumentationLib(),
-                        RequirementDocumentationLib = new BllRequirementDocumentationLib(),
-                        EmployeeLib = new BllEmployeeLib()
-                    };
-                    control.ControlName = controlName;
-                    Journal.ControlMethodsLib.Entities.Add(control);
-                }
-
-
-                var tabForm = new ControlMethodTabForm(control, oldJournal, uow, null);
-                if (control.IsControlled != null)
-                {
-                    tabForm.EnableFormControls();
-                }
-                tabForm.EnableValidateCheckBox();
-                //tabForm.AddEmployee(user);
-                ControlMethodTabForms.Add(tabForm);
-                tabForm.FillComponents();
-                tabControl1.TabPages.Add(new ControlMethodTab(tabForm, controlName));
+                SetIndustrialObject(entity.IndustrialObject);
             }
-
-
-
-            Customers = new List<BllCustomer>();
-            ICustomerService CustomerService = new CustomerService(uow);
-            var customers = CustomerService.GetAll();
-            foreach (var element in customers)
+            if (entity.Count != null)
             {
-                Customers.Add(element);
-                comboBox2.Items.Add(element.Organization + " " + element.Address + " " + element.Phone);
 
+                label1.Visible = true;
+                label9.Visible = true;
+                numericUpDown1.Value = Journal.Amount.Value;
+                int controlledCount = uow.Journals.GetControlledCount(entity.Id);
+                int count = entity.Count.Value - controlledCount + Journal.Amount.Value;
+                if (count >= 0)
+                {
+                    label9.Text = count.ToString();
+                }
+                else
+                {
+                    label9.Text = entity.Count.Value.ToString() + " - " + (controlledCount - Journal.Amount.Value).ToString() + " (пересорт)";
+                }
             }
-            if (Customers.Count > 0)
+            if (entity.Description != null)
             {
-                comboBox2.SelectedItem = Journal.Customer != null ? Journal.Customer.Organization + " " + Journal.Customer.Address + " " + Journal.Customer.Phone : "";
+                textBox3.Text = entity.Description;
             }
-
-            dateTimePicker2.Value = Journal.ControlDate.Value;
-            numericUpDown2.Value = Journal.RequestNumber.Value;
-            numericUpDown1.Value = Journal.Amount.Value < 100 ? Journal.Amount.Value : 0;
-            textBox3.Text = Journal.Weight;
-            comboBox3.Text = Journal.Component != null ? Journal.Component.Name : "";
-            textBox4.Text = Journal.Material != null ? Journal.Material.Name : "";
-            textBox5.Text = Journal.ScheduleOrganization != null ? Journal.ScheduleOrganization.Name : "";
-            FillContracts(Journal.Customer);
-            richTextBox2.Text = Journal.Description;
         }
     }
 }
