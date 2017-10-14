@@ -61,6 +61,7 @@ namespace BLL.Mapping
 
         public LiteComponent MapDalToLiteBll(DalComponent entity)
         {
+            var templateName = entity.Template_id != null ? uow.Templates.Get(entity.Template_id.Value).Name : "";
             LiteComponent bllEntity = new LiteComponent
             {
                 Id = entity.Id,
@@ -68,7 +69,7 @@ namespace BLL.Mapping
                 Pressmark = entity.Pressmark,
                 TemplateName = entity.Template_id != null ? uow.Templates.Get(entity.Template_id.Value).Name : null,
                 IndustrialObjectName = entity.IndustrialObject_id != null ? uow.IndustrialObjects.Get(entity.IndustrialObject_id.Value).Name : null,
-                NameAndPressmark = entity.Name + " " + entity.Pressmark,
+                NameAndPressmarkAndTemplate = entity.Name + " " + entity.Pressmark + " " + templateName,
                 Description = entity.Description,
                 Count = entity.Count.Value
             };

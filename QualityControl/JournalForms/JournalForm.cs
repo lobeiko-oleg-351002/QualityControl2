@@ -115,7 +115,7 @@ namespace QualityControl_Server
             numericUpDown1.Value = Journal.Amount.Value < 100 ? Journal.Amount.Value : 0;
             textBox1.Text = Journal.IndustrialObject != null ? Journal.IndustrialObject.Name : "";
             textBox3.Text = Journal.Weight;
-            comboBox3.Text = Journal.Component != null ? Journal.Component.Name + " " + Journal.Component.Pressmark : "";
+            comboBox3.Text = Journal.Component != null ? Journal.Component.Name + " " + Journal.Component.Pressmark + " " + (Journal.Component.Template != null ? Journal.Component.Template.Name : "") : "";
 
             textBox4.Text = Journal.Material != null ? Journal.Material.Name : "";
             textBox5.Text = Journal.ScheduleOrganization != null ? Journal.ScheduleOrganization.Name : "";
@@ -132,7 +132,7 @@ namespace QualityControl_Server
           //  comboBox3.AutoCompleteSource = AutoCompleteSource.ListItems;
             foreach(var item in Components)
             {
-                comboBox3.Items.Add(item.NameAndPressmark);
+                comboBox3.Items.Add(item.NameAndPressmarkAndTemplate);
             }
         }
 
@@ -152,7 +152,7 @@ namespace QualityControl_Server
         protected virtual void SetComponent(BllComponent entity)
         {
             Journal.Component = entity;
-            comboBox3.Text = entity.Name + " " + entity.Pressmark;
+            comboBox3.Text = entity.Name + " " + entity.Pressmark + " " + (entity.Template != null ? entity.Template.Name : "");
             if (entity.IndustrialObject != null)
             {
                 SetIndustrialObject(entity.IndustrialObject);
@@ -299,7 +299,7 @@ namespace QualityControl_Server
             numericUpDown2.Value = Journal.RequestNumber.Value;
             numericUpDown1.Value = Journal.Amount.Value;
             textBox3.Text = Journal.Weight;
-            comboBox3.Text = Journal.Component != null ? Journal.Component.Name + " " + Journal.Component.Pressmark : "";
+            comboBox3.Text = Journal.Component != null ? Journal.Component.Name + " " + Journal.Component.Pressmark  + " " + (Journal.Component.Template != null ? Journal.Component.Template.Name : "") : "";
             textBox4.Text = Journal.Material != null ? Journal.Material.Name : "";
             textBox5.Text = Journal.ScheduleOrganization != null ? Journal.ScheduleOrganization.Name : "";
             textBox1.Text = Journal.IndustrialObject != null ? Journal.IndustrialObject.Name : "";
@@ -445,9 +445,9 @@ namespace QualityControl_Server
             comboBox3.Items.Clear();
             foreach(var item in Components)
             {
-                if(item.NameAndPressmark.IndexOf(comboBox3.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                if(item.NameAndPressmarkAndTemplate.IndexOf(comboBox3.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                 {
-                    comboBox3.Items.Add(item.NameAndPressmark);
+                    comboBox3.Items.Add(item.NameAndPressmarkAndTemplate);
                 }
             }
             if (comboBox3.Items.Count > 1 && comboBox3.Text != "")
@@ -474,7 +474,7 @@ namespace QualityControl_Server
             {
                 foreach (var item in Components)
                 {
-                    if (item.NameAndPressmark == (string)comboBox3.SelectedItem)
+                    if (item.NameAndPressmarkAndTemplate == (string)comboBox3.SelectedItem)
                     {
                         SetComponent(componentService.Get(item.Id));
                     }

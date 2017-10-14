@@ -23,6 +23,6 @@ namespace BLL.Entities
 
         public string Description { get; set; }
 
-        public string NameAndPressmark { get; set; }
+        public string NameAndPressmarkAndTemplate { get; set; }
     }
 }
