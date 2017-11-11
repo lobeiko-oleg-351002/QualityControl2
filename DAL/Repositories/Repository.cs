@@ -55,6 +55,11 @@ namespace DAL.Repositories
             return retElemets;
         }
 
+        public IEnumerable<UEntity> GetAllOrm()
+        {
+            return context.Set<UEntity>().Select(e => e);
+        }
+
         public void Update(TEntity entity)
         {
             var ormEntity = context.Set<UEntity>().Find(entity.Id);
@@ -62,6 +67,12 @@ namespace DAL.Repositories
             {
                 context.Entry(ormEntity).CurrentValues.SetValues(mapper.MapToOrm(entity));
             }
+        }
+
+
+        public UEntity Create(UEntity entity)
+        {
+            return context.Set<UEntity>().Add(entity);
         }
     }
 }

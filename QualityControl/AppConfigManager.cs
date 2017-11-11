@@ -12,7 +12,7 @@ namespace QualityControl_Server
 {
     class AppConfigManager
     {
-        private const string connectionStringName = "ServiceDB";
+        public const string connectionStringName = "ServiceDB";
         public string outputLocationTag = "OutputLocation";
         public string clearEquipmentAfterAdding = "clearEquipmentAfterAdding";
         public string clearDefectsAfterAdding = "clearDefectsAfterAdding";
@@ -31,41 +31,31 @@ namespace QualityControl_Server
         public string quality = "_Quality";
         public string welder = "_Welder";
 
+        string configPath;
+        ExeConfigurationFileMap fileMap;
+
+        private string conStr;
+
         public AppConfigManager()
         {
-
+            string mydoc = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            configPath = mydoc + "\\Управление качеством\\settings.config";
+            conStr = "data source=(LocalDB)\\MSSQLLocalDB;attachdbfilename=" + mydoc + "\\Управление качеством\\Data\\ServiceDB.mdf;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework";
+            fileMap = new ExeConfigurationFileMap();
+            fileMap.ExeConfigFilename = configPath;
         }
 
         public bool ChangeConnectionString(string newValue)
         {
             try
             {
-                //CreateXDocument and load configuration file
-                XDocument doc = XDocument.Load(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+                Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
 
-                //Find all connection strings
-                var query1 = from p in doc.Descendants("connectionStrings").Descendants()
-                             select p;
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(GetTagValue("connectionString"));
+                //
+                builder.ConnectionString = newValue;
+                ChangeTagValue("connectionString", builder.ConnectionString);
 
-                //Go through each connection string elements find atribute specified by argument and replace its value with newVAlue
-                foreach (var child in query1)
-                {
-                    foreach (var atr in child.Attributes())
-                    {
-                        if (atr.Name.LocalName == "name" && atr.Value == connectionStringName)
-                            if (atr.NextAttribute != null && atr.NextAttribute.Name == "connectionString")
-                            {
-                                // Create the EF connection string from existing
-                                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(atr.NextAttribute.Value);
-                                //
-                                builder.ConnectionString = newValue;
-                                //back the modified connection string to the configuration file
-                                atr.NextAttribute.Value = builder.ToString();
-                            }
-                    }
-                }
-
-                doc.Save(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
 
                 return true;
             }
@@ -77,14 +67,19 @@ namespace QualityControl_Server
 
         public string GetConnectionString()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
-
-            return connectionString;
+            Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
+            var tag = "connectionString";
+            if (configuration.AppSettings.Settings[tag] == null)
+            {
+                CreateTag(tag, conStr);
+                return conStr;
+            }
+            return configuration.AppSettings.Settings[tag].Value;
         }
 
         public string GetAttachDbFileName()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+            string connectionString = GetConnectionString();
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connectionString);
 
             return builder.AttachDBFilename;
@@ -92,13 +87,13 @@ namespace QualityControl_Server
 
         public string GetFilePath()
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(System.Windows.Forms.Application.ExecutablePath);
+            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
             return config.FilePath;
         }
 
         public void ChangeOutputLocation(string path)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(System.Windows.Forms.Application.ExecutablePath);
+            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
             //config.AppSettings.Settings.Add("OutputLocation", "C:\\");
             //config.Save(ConfigurationSaveMode.Minimal);
             config.AppSettings.Settings[outputLocationTag].Value = path;
@@ -108,13 +103,13 @@ namespace QualityControl_Server
 
         public string GetOutputLocation()
         {
-            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
             return configuration.AppSettings.Settings["OutputLocation"]?.Value;
         }
 
         public string GetTagValue(string tag)
         {
-            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
             if (configuration.AppSettings.Settings[tag] == null)
             {
                 if (tag == daysBeforeDeadline)
@@ -145,7 +140,7 @@ namespace QualityControl_Server
 
         public void ChangeTagValue(string tag, string value)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(System.Windows.Forms.Application.ExecutablePath);
+            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
             config.AppSettings.Settings[tag].Value = value;
             config.Save(ConfigurationSaveMode.Full, true);
             ConfigurationManager.RefreshSection("appSettings");
@@ -153,7 +148,7 @@ namespace QualityControl_Server
 
         public void CreateTag(string tag, string value)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(System.Windows.Forms.Application.ExecutablePath);
+            Configuration config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
             config.AppSettings.Settings.Add(tag, value);
             config.Save(ConfigurationSaveMode.Minimal);
         }
@@ -165,7 +160,7 @@ namespace QualityControl_Server
 
         public void SetTagValue(string tag, string value)
         {
-            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
             if (configuration.AppSettings.Settings[tag] == null)
             {
                 CreateTag(tag, value);

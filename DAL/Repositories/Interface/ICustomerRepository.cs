@@ -13,7 +13,7 @@ namespace DAL.Repositories.Interface
         DalCustomer GetCustomerByOrganization(string organization);
         DalCustomer GetCustomerByAddress(string address);
         DalCustomer GetCustomerByPhone(string phone);
-
+        Customer GetOrmCustomerByName(string organization);
 
     }
 }

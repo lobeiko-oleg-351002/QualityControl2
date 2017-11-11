@@ -25,6 +25,9 @@ namespace DAL.Repositories
             return mapper.MapToDal(ormEntity);
         }
 
-
+        public IndustrialObject GetOrmIndustrialObjectByName(string name)
+        {
+            return context.Set<IndustrialObject>().FirstOrDefault(e => e.name == name);
+        }
     }
 }

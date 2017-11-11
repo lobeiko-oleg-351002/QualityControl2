@@ -106,6 +106,7 @@
     <Compile Include="SelectedEmployee.cs" />
     <Compile Include="SelectedEquipment.cs" />
     <Compile Include="SelectedRequirementDocumentation.cs" />
+    <Compile Include="ServiceDB_Integration.cs" />
     <Compile Include="ServiceDB.cs" />
     <Compile Include="Template.cs" />
     <Compile Include="User.cs" />

@@ -19,6 +19,11 @@ namespace DAL.Repositories
             this.context = context;
         }
 
+        public Employee GetOrmEmployeeByFio(string sirname, string name, string fathername)
+        {
+            return context.Set<Employee>().FirstOrDefault(e => (e.name == name) && (e.sirname == sirname) && (e.fathername == fathername));
+        }
+
         public IEnumerable<DalEmployee> GetEmployeesByFatherName(string name)
         {
             EmployeeMapper mapper = new EmployeeMapper();

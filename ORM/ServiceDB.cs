@@ -4,11 +4,12 @@ namespace ORM
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using System.Text;
 
     public partial class ServiceDB : DbContext
     {
-        public ServiceDB()
-            : base("name=ServiceDB")
+        public ServiceDB(string name)
+            : base(name)
         {
         }
 

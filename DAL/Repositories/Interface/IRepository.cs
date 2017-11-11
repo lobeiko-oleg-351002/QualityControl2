@@ -12,10 +12,15 @@ namespace DAL.Repositories.Interface
 
         IEnumerable<TEntity> GetAll();
 
+        IEnumerable<UEntity> GetAllOrm();
+
         TEntity Get(int id);
 
         void Delete(int id);
 
         void Update(TEntity entity);
+
+        UEntity Create(UEntity entity);
+
     }
 }

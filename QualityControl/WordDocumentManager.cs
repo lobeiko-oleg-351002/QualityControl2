@@ -107,7 +107,7 @@ namespace QualityControl_Server
                     journals[0].ControlMethodsLib.Entities[0].EmployeeLib.SelectedEntities[0].Entity.Fathername[0] + "." : "<не указано>");
             }
 
-            this.FindAndReplace(wordApp, "Light", journals[0].ControlMethodsLib.Entities[0].Light.Value.ToString());
+            this.FindAndReplace(wordApp, "Light", journals[0].ControlMethodsLib.Entities[0].Light != null ? journals[0].ControlMethodsLib.Entities[0].Light.Value.ToString() : "-");
 
             BllCertificate certificate = null;
             if (journals[0].ControlMethodsLib.Entities[0].EmployeeLib.SelectedEntities.Count != 0)
@@ -158,8 +158,8 @@ namespace QualityControl_Server
             List<int> processesbeforegen = getRunningProcesses();
             object missing = Missing.Value;
 
-            string vikPath = "\\Template\\vik.docx";
-            string executableLocation = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string vikPath = "\\Управление качеством\\Template\\vik.docx";
+            string executableLocation = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); 
             object docLocation = executableLocation + vikPath;
 
             Application wordApp = new Application();
@@ -302,7 +302,7 @@ namespace QualityControl_Server
             }
 
             //Save as: filename
-            aDoc.SaveAs2(ref savaAs, ref missing, ref missing, ref missing,
+            aDoc.SaveAs(ref savaAs, ref missing, ref missing, ref missing,
                     ref missing, ref missing, ref missing,
                     ref missing, ref missing, ref missing,
                     ref missing, ref missing, ref missing,

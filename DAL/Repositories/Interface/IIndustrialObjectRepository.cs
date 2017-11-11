@@ -11,6 +11,7 @@ namespace DAL.Repositories.Interface
     public interface IIndustrialObjectRepository : IRepository<DalIndustrialObject, IndustrialObject>
     {
         DalIndustrialObject GetIndustrialObjectByName(string name);
+        IndustrialObject GetOrmIndustrialObjectByName(string name);
 
     }
 }

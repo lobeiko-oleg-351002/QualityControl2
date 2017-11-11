@@ -17,5 +17,10 @@ namespace DAL.Repositories
         {
             this.context = context;
         }
+
+        public ScheduleOrganization GetOrmScheduleOrganizationByName(string name)
+        {
+            return context.Set<ScheduleOrganization>().FirstOrDefault(e => e.name == name);
+        }
     }
 }

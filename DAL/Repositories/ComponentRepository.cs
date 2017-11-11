@@ -19,6 +19,7 @@ namespace DAL.Repositories
             this.context = context;
         }
 
+
         public IEnumerable<DalComponent> GetComponentsByIndustrialObject(int id)
         {
             var ormComponents = context.Set<Component>().Where(entity => entity.industrialObject_id == id);
@@ -51,6 +52,11 @@ namespace DAL.Repositories
             }
 
             return retElemets;
+        }
+
+        public Component GetOrmComponentByNameAndPressmark(string name, string pressmark)
+        {
+            return context.Set<Component>().FirstOrDefault(e => (e.name == name) && (e.pressmark == pressmark));
         }
     }
 }

@@ -37,6 +37,9 @@ namespace DAL.Repositories
             return mapper.MapToDal(ormEntity);
         }
 
-    
+        public Customer GetOrmCustomerByName(string organization)
+        {
+            return context.Set<Customer>().FirstOrDefault(e => e.organization == organization);
+        }
     }
 }

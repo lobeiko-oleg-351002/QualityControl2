@@ -10,6 +10,6 @@ namespace DAL.Repositories.Interface
 {
     public interface IContractRepository : IRepository<DalContract, Contract>
     {
-
+        Contract GetOrmContractByName(string name);
     }
 }

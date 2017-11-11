@@ -25,6 +25,9 @@ namespace DAL.Repositories
             return mapper.MapToDal(ormEntity);
         }
 
-
+        public Material GetOrmMaterialByName(string name)
+        {
+            return context.Set<Material>().FirstOrDefault(e => e.name == name);
+        }
     }
 }

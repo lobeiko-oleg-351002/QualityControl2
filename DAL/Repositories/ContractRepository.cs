@@ -30,6 +30,9 @@ namespace DAL.Repositories
             return retElemets;
         }
 
-    
+        public Contract GetOrmContractByName(string name)
+        {
+            return context.Set<Contract>().FirstOrDefault(e => e.name == name);
+        }
     }
 }

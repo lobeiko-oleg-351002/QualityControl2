@@ -32,7 +32,8 @@ namespace QualityControl_Server.Forms
             
         }
 
-        public virtual void RefreshData() { }
+        public virtual void RefreshData() {
+        }
 
         protected virtual void button2_Click(object sender, EventArgs e)
         {
@@ -48,5 +49,25 @@ namespace QualityControl_Server.Forms
         {
 
         }
+
+        protected void StartProgressBar(int max, int step)
+        {
+            progressBar1.Visible = true;
+            progressBar1.Maximum = max;
+            progressBar1.Step = step;
+            progressBar1.Value = 0;
+        }
+
+        protected void StopProgressBar()
+        {
+            progressBar1.Visible = false;
+        }
+
+        protected void ProgressBarStep()
+        {
+            progressBar1.PerformStep();
+        }
+
+
     }
 }

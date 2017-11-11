@@ -14,7 +14,7 @@ namespace DAL.Repositories.Interface
         IEnumerable<DalEmployee> GetEmployeesByFatherName(string name);
         IEnumerable<DalEmployee> GetEmployeesBySirname(string name);
         IEnumerable<DalEmployee> GetEmployeesByFunction(string function);
-
+        Employee GetOrmEmployeeByFio(string sirname, string name, string fathername);
 
     }
 }

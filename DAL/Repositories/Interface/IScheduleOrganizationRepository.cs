@@ -10,5 +10,6 @@ namespace DAL.Repositories.Interface
 {
     public interface IScheduleOrganizationRepository : IRepository<DalScheduleOrganization, ScheduleOrganization>
     {
+        ScheduleOrganization GetOrmScheduleOrganizationByName(string name);
     }
 }

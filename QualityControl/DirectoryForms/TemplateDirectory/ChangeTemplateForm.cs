@@ -93,6 +93,7 @@ namespace QualityControl_Server.Forms.TemplateDirectory
             scheduleOrganization = oldTemplate.ScheduleOrganization;
             customer = oldTemplate.Customer;
             contract = oldTemplate.Contract;
+            comboBox3.SelectedItem = contract.Name;
             industrialObject = oldTemplate.IndustrialObject;
             controlMethodsLib = oldTemplate.ControlMethodsLib;
 

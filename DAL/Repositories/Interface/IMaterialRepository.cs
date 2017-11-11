@@ -11,6 +11,6 @@ namespace DAL.Repositories.Interface
     public interface IMaterialRepository : IRepository<DalMaterial, Material>
     {
         DalMaterial GetMaterialByName(string name);
-
+        Material GetOrmMaterialByName(string name);
     }
 }

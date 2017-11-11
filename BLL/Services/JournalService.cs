@@ -81,5 +81,9 @@ namespace BLL.Services
             return mapper.MapBllToLiteBll(entity);
         }
 
+        public LiteJournal GetLiteJournal(int id)
+        {
+            return mapper.MapDalToLiteBll(uow.Journals.Get(id));
+        }
     }
 }

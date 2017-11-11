@@ -14,5 +14,6 @@ namespace BLL.Services.Interface
         int GetCountOfRows();
         //List<BllJournal> GetAllWithoutControlMethodsLibs();
         LiteJournal GetLiteJournal(BllJournal entity);
+        LiteJournal GetLiteJournal(int id);
     }
 }

@@ -17,6 +17,7 @@ namespace ORM
 
         public int id { get; set; }
 
+
         [Required]
         [StringLength(50)]
         public string title { get; set; }

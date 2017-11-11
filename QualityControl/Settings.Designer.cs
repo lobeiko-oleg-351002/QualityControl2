@@ -47,6 +47,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,7 +111,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(15, 85);
+            this.checkBox1.Location = new System.Drawing.Point(13, 102);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(258, 17);
             this.checkBox1.TabIndex = 7;
@@ -117,7 +121,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(15, 108);
+            this.checkBox2.Location = new System.Drawing.Point(13, 125);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(274, 17);
             this.checkBox2.TabIndex = 8;
@@ -127,7 +131,7 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(15, 131);
+            this.checkBox3.Location = new System.Drawing.Point(13, 148);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(290, 17);
             this.checkBox3.TabIndex = 9;
@@ -137,7 +141,7 @@
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(15, 154);
+            this.checkBox4.Location = new System.Drawing.Point(13, 171);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(322, 17);
             this.checkBox4.TabIndex = 10;
@@ -147,7 +151,7 @@
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(15, 177);
+            this.checkBox5.Location = new System.Drawing.Point(13, 194);
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(219, 17);
             this.checkBox5.TabIndex = 11;
@@ -157,7 +161,7 @@
             // checkBox6
             // 
             this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(15, 200);
+            this.checkBox6.Location = new System.Drawing.Point(13, 217);
             this.checkBox6.Name = "checkBox6";
             this.checkBox6.Size = new System.Drawing.Size(199, 17);
             this.checkBox6.TabIndex = 12;
@@ -166,7 +170,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(150, 267);
+            this.button3.Location = new System.Drawing.Point(147, 346);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 15;
@@ -176,7 +180,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(231, 267);
+            this.button4.Location = new System.Drawing.Point(228, 346);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 16;
@@ -187,7 +191,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 226);
+            this.label3.Location = new System.Drawing.Point(10, 243);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(260, 13);
             this.label3.TabIndex = 17;
@@ -196,7 +200,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(339, 226);
+            this.label4.Location = new System.Drawing.Point(337, 243);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(31, 13);
             this.label4.TabIndex = 19;
@@ -204,7 +208,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(278, 224);
+            this.numericUpDown1.Location = new System.Drawing.Point(276, 241);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             730,
             0,
@@ -214,13 +218,54 @@
             this.numericUpDown1.Size = new System.Drawing.Size(54, 20);
             this.numericUpDown1.TabIndex = 20;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 74);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(136, 13);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Интеграция базы данных";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(188, 69);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(265, 23);
+            this.button5.TabIndex = 22;
+            this.button5.Text = "Обзор";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(12, 303);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(443, 23);
+            this.progressBar1.TabIndex = 23;
+            this.progressBar1.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(15, 284);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 24;
+            this.label6.Text = "label6";
+            this.label6.Visible = false;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(465, 294);
+            this.ClientSize = new System.Drawing.Size(465, 381);
             this.ControlBox = false;
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -268,5 +313,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label6;
     }
 }

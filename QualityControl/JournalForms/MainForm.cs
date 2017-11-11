@@ -52,6 +52,7 @@ namespace QualityControl
         bool isActivatedLicense = false;
         bool isConnectedToServer = false;
         bool isFirstStart = true;
+        bool isClosing = false;
 
         ServiceDB serviceDB;
         IUnitOfWork uow;
@@ -106,6 +107,7 @@ namespace QualityControl
             }
             else
             {
+                isClosing = true;
                 Close();
             }
         }
@@ -268,6 +270,7 @@ namespace QualityControl
             {
                 row.CreateCells(dataGridView1);
                 row.Cells[0].Value = dataGridView1.Rows.Count + 1;
+                
             }
             
             row.Cells[1].Value = journal.ControlDate;
@@ -865,13 +868,24 @@ namespace QualityControl
             }
         }
 
+        private string GetUnicodeString(string inputString)
+        {
+            byte[] stringBytes = Encoding.Unicode.GetBytes(inputString);
+            char[] stringChars = Encoding.Unicode.GetChars(stringBytes);
+            StringBuilder builder = new StringBuilder();
+            Array.ForEach<char>(stringChars, c => builder.AppendFormat("\\u{0:X}", (int)c));
+            return builder.ToString();
+        }
+
 
         private void MainForm_Load(object sender, EventArgs e)
         {
 
             //CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
-            AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
-            serviceDB = new ServiceDB();
+            AppConfigManager cfg = new AppConfigManager();
+            //string mydoc = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            //AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", "\\" + mydoc + "QualityControl\\settings.config");
+            serviceDB = new ServiceDB(cfg.GetConnectionString());
             uow = new UnitOfWork(serviceDB);
             journalService = new JournalService(uow);
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -883,9 +897,12 @@ namespace QualityControl
             if (isConnectedToServer)
             {
                 Authorization();
-                RefreshDataGridUsingServer();
-                EventForm eventForm = new EventForm(uow);
-                eventForm.Show();
+                if (!isClosing)
+                {
+                    RefreshDataGridUsingServer();
+                    EventForm eventForm = new EventForm(uow);
+                    eventForm.Show();
+                }
             }
             isFirstStart = false;
             DataGridViewCellStyle style = new DataGridViewCellStyle();
@@ -981,7 +998,7 @@ namespace QualityControl
 
         private void toolStripMenuItem1_Click_1(object sender, EventArgs e)
         {
-            Settings form = new Settings(this);
+            Settings form = new Settings(this, uow);
             form.ShowDialog();
         }
 

@@ -36,7 +36,7 @@ namespace QualityControl_Server.Forms.ComponentDirectory
         {
             dataGridView1.Rows.Clear();
             Components = Service.GetAllLite();
-
+            StartProgressBar(Components.Count, 1);
             foreach (var Component in Components)
             {
                 DataGridViewRow row = new DataGridViewRow();
@@ -48,7 +48,9 @@ namespace QualityControl_Server.Forms.ComponentDirectory
                 row.Cells[4].Value = Component.Count;
                 row.Cells[5].Value = Component.Description;
                 dataGridView1.Rows.Add(row);
+                ProgressBarStep();
             }
+            StopProgressBar();
         }
 
         override protected void button1_Click(object sender, EventArgs e)
